@@ -1,0 +1,416 @@
+<mockup version="1.0" skin="sketch" measuredW="1357" measuredH="541" mockupW="1334" mockupH="531">
+  <controls>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::iPhone" x="716" y="0" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1"/>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="750" y="130" w="-1" h="-1" measuredW="215" measuredH="213" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <text>7%u2660%20Spades%2C%20140%20pts%0A7%u2663%20Clubs%2C%20160%20pts%0A7%u2666%20Diamonds%2C%20180%20pts%0A*%207%u2665%20Hearts%2C%20200%20pts%0A7%20No%20Trumps%20%28NT%29%2C%20220%20pts%20%28%3E%29%0AClosed%20Mis%E9re%20%28CM%29%2C%20250%20pts%20%28%3E%29%0A8%u2660%20Spades%2C%20240%20pts</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Label" x="753" y="342" w="194" h="19" measuredW="181" measuredH="23" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Actual%20number%20of%20tricks%20won%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::ButtonBar" x="760" y="391" w="-1" h="-1" measuredW="194" measuredH="29" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>2</selectedIndex>
+        <text>6%2C7%2C8%2C9%2C10</text>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::PointyButton" x="748" y="101" w="-1" h="-1" measuredW="60" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cancel</text>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::ButtonBar" x="744" y="361" w="-1" h="-1" measuredW="225" measuredH="29" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>-1</selectedIndex>
+        <text>0%2C1%2C2%2C3%2C4%2C5</text>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::PointyButton" x="917" y="101" w="-1" h="-1" measuredW="49" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Save</text>
+        <bold>true</bold>
+        <direction>center</direction>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Arrow" x="956" y="169" w="116" h="128" measuredW="150" measuredH="100" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <leftArrow>false</leftArrow>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <color>2848996</color>
+        <direction>bottom</direction>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::iPhone" x="1065" y="0" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="7" locked="false" isInGroup="-1"/>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::TextArea" x="1105" y="130" w="-1" h="-1" measuredW="200" measuredH="140" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>The%20Closed%20Mis%E9re%20bid%20is%20to%20lose%20all%20ten%20tricks.%20The%20bidder%27s%20partner%20doesn%27t%20play%20the%20round.%20The%20first%20card%20is%20lead%20as%20usual%20by%20the%20winning%20bidder.</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::MenuBar" x="1163" y="100" w="127" h="29" measuredW="159" measuredH="29" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Closed%20Mis%E9re</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::PointyButton" x="1105" y="100" w="-1" h="-1" measuredW="48" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Back</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::StickyNote" x="772" y="0" w="169" h="73" measuredW="109" measuredH="123" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Round%20%28Scoring%29%20View</text>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::StickyNote" x="1124" y="4" w="169" h="73" measuredW="109" measuredH="123" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Rules%20View</text>
+      </controlProperties>
+    </control>
+    <control controlID="37" controlTypeID="com.balsamiq.mockups::Arrow" x="587" y="38" w="339" h="70" measuredW="150" measuredH="100" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <leftArrow>true</leftArrow>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <color>2848996</color>
+        <rightArrow>false</rightArrow>
+        <direction>top</direction>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Arrow" x="689" y="49" w="61" h="72" measuredW="150" measuredH="100" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <leftArrow>false</leftArrow>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <color>2848996</color>
+        <rightArrow>false</rightArrow>
+        <direction>top</direction>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::iPhone" x="377" y="0" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="14" locked="false" isInGroup="-1"/>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::StickyNote" x="433" y="0" w="169" h="73" measuredW="109" measuredH="123" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Game%20View</text>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::PointyButton" x="405" y="103" w="-1" h="-1" measuredW="81" measuredH="27" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Game%20List</text>
+      </controlProperties>
+    </control>
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::PointyButton" x="602" y="103" w="-1" h="-1" measuredW="28" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>+</text>
+        <bold>true</bold>
+        <direction>center</direction>
+      </controlProperties>
+    </control>
+    <control controlID="48" controlTypeID="com.balsamiq.mockups::MultilineButton" x="402" y="144" w="47" h="33" measuredW="54" measuredH="58" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Bid</text>
+      </controlProperties>
+    </control>
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::Label" x="405" y="127" w="126" h="21" measuredW="97" measuredH="21" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Team%20Long%20Name</text>
+        <size>12</size>
+      </controlProperties>
+    </control>
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::Label" x="456" y="145" w="-1" h="-1" measuredW="60" measuredH="27" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>550%20pts</text>
+        <size>16</size>
+      </controlProperties>
+    </control>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::Label" x="517" y="147" w="-1" h="-1" measuredW="68" measuredH="27" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>-220%20pts</text>
+        <size>16</size>
+      </controlProperties>
+    </control>
+    <control controlID="54" controlTypeID="com.balsamiq.mockups::MultilineButton" x="582" y="145" w="47" h="33" measuredW="54" measuredH="58" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Bid</text>
+      </controlProperties>
+    </control>
+    <control controlID="55" controlTypeID="com.balsamiq.mockups::VRule" x="515" y="130" w="-1" h="304" measuredW="5" measuredH="100" zOrder="61" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::iPhone" x="13" y="1" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="23" locked="false" isInGroup="-1"/>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::StickyNote" x="390" y="441" w="256" h="90" measuredW="109" measuredH="123" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Team%20names%20are%20textboxes%20when%20the%20game%20starts</text>
+      </controlProperties>
+    </control>
+    <control controlID="61" controlTypeID="com.balsamiq.mockups::Arrow" x="418" y="157" w="304" h="81" measuredW="150" measuredH="100" zOrder="62" locked="false" isInGroup="-1">
+      <controlProperties>
+        <leftArrow>false</leftArrow>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <text/>
+        <color>2848996</color>
+        <rightArrow>true</rightArrow>
+        <direction>top</direction>
+      </controlProperties>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::Arrow" x="622" y="149" w="88" h="79" measuredW="150" measuredH="100" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <leftArrow>false</leftArrow>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <color>2848996</color>
+        <rightArrow>false</rightArrow>
+        <direction>top</direction>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::Arrow" x="295" y="72" w="130" h="42" measuredW="150" measuredH="100" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <leftArrow>true</leftArrow>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <color>2848996</color>
+        <rightArrow>false</rightArrow>
+        <direction>top</direction>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::Arrow" x="553" y="53" w="64" h="55" measuredW="150" measuredH="100" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <leftArrow>true</leftArrow>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <color>2848996</color>
+        <rightArrow>false</rightArrow>
+        <direction>top</direction>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::Arrow" x="926" y="38" w="188" h="82" measuredW="150" measuredH="100" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <leftArrow>true</leftArrow>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <color>2848996</color>
+        <rightArrow>false</rightArrow>
+        <direction>top</direction>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::StickyNote" x="69" y="0" w="169" h="73" measuredW="109" measuredH="123" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Game%20List%20View</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::TextInput" x="486" y="101" w="116" h="-1" measuredW="46" measuredH="27" zOrder="32" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Game</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::TextInput" x="808" y="101" w="109" h="-1" measuredW="85" measuredH="27" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Team%201%27s%20Bid</text>
+      </controlProperties>
+    </control>
+    <control controlID="69" controlTypeID="com.balsamiq.mockups::PointyButton" x="236" y="105" w="-1" h="-1" measuredW="28" measuredH="27" zOrder="34" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>+</text>
+        <bold>true</bold>
+        <direction>center</direction>
+      </controlProperties>
+    </control>
+    <control controlID="70" controlTypeID="com.balsamiq.mockups::TextInput" x="103" y="103" w="133" h="-1" measuredW="73" measuredH="27" zOrder="35" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Game%20List</text>
+      </controlProperties>
+    </control>
+    <control controlID="77" controlTypeID="com.balsamiq.mockups::MultilineButton" x="405" y="173" w="224" h="54" measuredW="33" measuredH="35" zOrder="36" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="78" controlTypeID="com.balsamiq.mockups::Label" x="410" y="178" w="-1" h="-1" measuredW="37" measuredH="32" zOrder="37" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>6%u2665</text>
+        <color>16711680</color>
+        <size>20</size>
+      </controlProperties>
+    </control>
+    <control controlID="79" controlTypeID="com.balsamiq.mockups::Paragraph" x="451" y="175" w="129" h="28" measuredW="200" measuredH="140" zOrder="38" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%20%20100%20%20%2020</text>
+        <size>24</size>
+      </controlProperties>
+    </control>
+    <control controlID="80" controlTypeID="com.balsamiq.mockups::Paragraph" x="439" y="206" w="163" h="20" measuredW="200" measuredH="140" zOrder="39" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%20Won%208%2C%20+100%20%20Won%202%2C%20+20%20%20</text>
+        <color>8421504</color>
+        <size>12</size>
+      </controlProperties>
+    </control>
+    <control controlID="81" controlTypeID="com.balsamiq.mockups::MultilineButton" x="405" y="224" w="224" h="54" measuredW="33" measuredH="35" zOrder="40" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="82" controlTypeID="com.balsamiq.mockups::Label" x="410" y="228" w="-1" h="-1" measuredW="36" measuredH="32" zOrder="41" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>7%u2666</text>
+        <color>16711680</color>
+        <size>20</size>
+      </controlProperties>
+    </control>
+    <control controlID="83" controlTypeID="com.balsamiq.mockups::Paragraph" x="451" y="229" w="129" h="34" measuredW="200" measuredH="140" zOrder="42" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%20%20350%20%20%2020</text>
+        <size>24</size>
+      </controlProperties>
+    </control>
+    <control controlID="84" controlTypeID="com.balsamiq.mockups::Paragraph" x="439" y="257" w="163" h="20" measuredW="200" measuredH="140" zOrder="43" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Won%2010%2C%20+250%20%20Won%200%2C%20-%20%20</text>
+        <color>8421504</color>
+        <size>12</size>
+      </controlProperties>
+    </control>
+    <control controlID="85" controlTypeID="com.balsamiq.mockups::MultilineButton" x="405" y="276" w="224" h="54" measuredW="33" measuredH="35" zOrder="44" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="86" controlTypeID="com.balsamiq.mockups::Label" x="582" y="280" w="-1" h="-1" measuredW="40" measuredH="32" zOrder="45" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>7NT</text>
+        <color>5263440</color>
+        <size>20</size>
+      </controlProperties>
+    </control>
+    <control controlID="87" controlTypeID="com.balsamiq.mockups::Paragraph" x="451" y="281" w="136" h="34" measuredW="200" measuredH="140" zOrder="46" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%20%20390%20-200</text>
+        <size>24</size>
+      </controlProperties>
+    </control>
+    <control controlID="88" controlTypeID="com.balsamiq.mockups::Paragraph" x="439" y="309" w="163" h="20" measuredW="200" measuredH="140" zOrder="47" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%20Won%204%2C%20+40%20%20Won%206%2C%20-220%20%20</text>
+        <color>8421504</color>
+        <size>12</size>
+      </controlProperties>
+    </control>
+    <control controlID="89" controlTypeID="com.balsamiq.mockups::Icon" x="595" y="307" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="48" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>13576743</color>
+        <icon>XIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="90" controlTypeID="com.balsamiq.mockups::Icon" x="416" y="254" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="49" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <icon>CheckMarkIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="91" controlTypeID="com.balsamiq.mockups::Icon" x="418" y="204" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="50" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <icon>CheckMarkIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="92" controlTypeID="com.balsamiq.mockups::MultilineButton" x="405" y="380" w="224" h="54" measuredW="33" measuredH="35" zOrder="51" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="93" controlTypeID="com.balsamiq.mockups::Label" x="594" y="384" w="-1" h="-1" measuredW="34" measuredH="32" zOrder="52" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>CM</text>
+        <color>5263440</color>
+        <size>20</size>
+      </controlProperties>
+    </control>
+    <control controlID="94" controlTypeID="com.balsamiq.mockups::Paragraph" x="451" y="385" w="129" h="34" measuredW="200" measuredH="140" zOrder="53" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%20%20430%20%20110</text>
+        <size>24</size>
+      </controlProperties>
+    </control>
+    <control controlID="95" controlTypeID="com.balsamiq.mockups::Paragraph" x="439" y="413" w="163" h="20" measuredW="200" measuredH="140" zOrder="54" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%20%20%20%20Won%2010%2C%20-%20%20Won%200%2C%20+250%20%20</text>
+        <color>8421504</color>
+        <size>12</size>
+      </controlProperties>
+    </control>
+    <control controlID="96" controlTypeID="com.balsamiq.mockups::Icon" x="602" y="411" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="55" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <icon>CheckMarkIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="97" controlTypeID="com.balsamiq.mockups::MultilineButton" x="405" y="328" w="224" h="54" measuredW="33" measuredH="35" zOrder="56" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="98" controlTypeID="com.balsamiq.mockups::Label" x="588" y="332" w="-1" h="-1" measuredW="37" measuredH="32" zOrder="57" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>6%u2663</text>
+        <color>0</color>
+        <size>20</size>
+      </controlProperties>
+    </control>
+    <control controlID="99" controlTypeID="com.balsamiq.mockups::Paragraph" x="451" y="333" w="136" h="34" measuredW="200" measuredH="140" zOrder="58" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%20%20430%20-140</text>
+        <size>24</size>
+      </controlProperties>
+    </control>
+    <control controlID="100" controlTypeID="com.balsamiq.mockups::Paragraph" x="439" y="361" w="163" h="20" measuredW="200" measuredH="140" zOrder="59" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%20Won%204%2C%20+40%20%20Won%206%2C%20+60</text>
+        <color>8421504</color>
+        <size>12</size>
+      </controlProperties>
+    </control>
+    <control controlID="101" controlTypeID="com.balsamiq.mockups::Icon" x="595" y="359" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="60" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <icon>CheckMarkIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="107" controlTypeID="com.balsamiq.mockups::Arrow" x="257" y="115" w="120" h="63" measuredW="150" measuredH="100" zOrder="63" locked="false" isInGroup="-1">
+      <controlProperties>
+        <leftArrow>false</leftArrow>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <text/>
+        <color>2848996</color>
+        <rightArrow>true</rightArrow>
+        <direction>top</direction>
+      </controlProperties>
+    </control>
+    <control controlID="108" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="44" y="135" w="-1" h="-1" measuredW="215" measuredH="262" zOrder="64" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Team%201%20vs%20Team%202%5Cr%20%20%20%20400%20%20%20%20200%2C%2021%20Nov%20%28%3E%29%0A%u2714Team%201%20vs%20Team%203%5Cr%20%20%20%20640%20%20%20-300%2C%2012%20Nov%20%3E%0ATeam%201%20vs%20%u2714Team%204%5Cr%20%20%20%20490%20%20%20%20510%2C%2019%20Oct%20%3E%0ATeam%202%20vs%20Team%204%5Cr%20%20-200%20%20%20%20200%2C%2030%20Sep%20%28%3E%29%0ATeam%20Silly%20vs%20%u2714Team%20Longest%20Name%5Cr%20-550%20%20%20400%2C%206%20Jan%20%3E%0A-%20Super%20Silly%20vs%20Deletionists%5Cr%20400%20%20%200%2C%2010%20Dec%202008</text>
+      </controlProperties>
+    </control>
+    <control controlID="113" controlTypeID="com.balsamiq.mockups::PointyButton" x="42" y="102" w="-1" h="-1" measuredW="61" measuredH="27" zOrder="65" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Delete</text>
+        <bold>true</bold>
+        <direction>center</direction>
+      </controlProperties>
+    </control>
+    <control controlID="114" controlTypeID="com.balsamiq.mockups::Arrow" x="40" y="108" w="25" h="256" measuredW="150" measuredH="100" zOrder="66" locked="false" isInGroup="-1">
+      <controlProperties>
+        <rightArrow>true</rightArrow>
+        <curvature>-1</curvature>
+        <direction>top</direction>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <text/>
+        <color>2848996</color>
+        <leftArrow>false</leftArrow>
+      </controlProperties>
+    </control>
+    <control controlID="115" controlTypeID="com.balsamiq.mockups::Label" x="520" y="126" w="126" h="21" measuredW="72" measuredH="21" zOrder="67" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Super%20Sillies</text>
+        <size>12</size>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
