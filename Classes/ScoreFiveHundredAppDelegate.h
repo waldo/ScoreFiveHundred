@@ -11,33 +11,29 @@
 @interface ScoreFiveHundredAppDelegate : NSObject <UIApplicationDelegate> {
   UIWindow *window;
   
-  UINavigationController *navigationController;
+  IBOutlet UINavigationController *navigationController;
   
-  UIViewController *gameListController;
-  UIViewController *gameController;
-  UIViewController *roundController;
+  // Game list view
+  IBOutlet UIViewController *gameListController;
   
-  UIBarButtonItem *newGameButton;
-  UIButton *roundScoreButton;
-  UIBarButtonItem *cancelScoreButton;
-  UIButton *saveScoreButton;
+  // Game view
+  IBOutlet UIViewController *gameController;
+  IBOutlet UILabel *teamOneScoreLabel;
+  IBOutlet UILabel *teamTwoScoreLabel;
+  
+  // Round view
+  IBOutlet UIViewController *roundController;  
+  
+  NSMutableArray *bidTypes;
+  
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
-@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
-
-@property (nonatomic, retain) IBOutlet UIViewController *gameListController;
-@property (nonatomic, retain) IBOutlet UIViewController *gameController;
-@property (nonatomic, retain) IBOutlet UIViewController *roundController;
-
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *newGameButton;
-@property (nonatomic, retain) IBOutlet UIButton *roundScoreButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *cancelScoreButton;
-@property (nonatomic, retain) IBOutlet UIButton *saveScoreButton;
+@property (nonatomic, retain) NSMutableArray *bidTypes;
 
 - (IBAction)newGame;
-- (IBAction)roundScore;
+- (IBAction)teamBid;
 - (IBAction)cancelScore;
 - (IBAction)saveScore;
 
