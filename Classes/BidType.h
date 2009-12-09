@@ -12,9 +12,11 @@
 
 }
 
-+ (NSString *)bidDescription:(NSString *)key;
 + (NSArray *)orderedKeys;
 + (NSDictionary *)allTypes;
-+ (NSString *)anyFormattedString:(NSString *)key;
++ (NSString *)suitColourForKey:(NSString *)key;
++ (NSString *)tricksAndSymbolForKey:(NSString *)key;
++ (NSString *)descriptionForKey:(NSString *)key;
++ (NSString *)pointsForKey:(NSString *)key;
 
 @end

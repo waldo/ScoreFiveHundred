@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BidType.h"
+#import "CellWrapper.h"
+#import "CellBidType.h"
 
 @interface ScoreFiveHundredAppDelegate : NSObject <UIApplicationDelegate> {
   UIWindow *window;
+  CellWrapper *cellWrapper;
   
   IBOutlet UINavigationController *navigationController;
   
@@ -24,13 +28,14 @@
   // Round view
   IBOutlet UIViewController *roundController;  
   
-  NSMutableArray *bidTypes;
+  NSArray *bidTypeKeys;
   
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet CellWrapper *cellWrapper;
 
-@property (nonatomic, retain) NSMutableArray *bidTypes;
+@property (nonatomic, retain) NSArray *bidTypeKeys;
 
 - (IBAction)newGame;
 - (IBAction)teamBid;

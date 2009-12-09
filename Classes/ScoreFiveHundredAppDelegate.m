@@ -7,13 +7,13 @@
 //
 
 #import "ScoreFiveHundredAppDelegate.h"
-#import "BidType.h"
 
 @implementation ScoreFiveHundredAppDelegate
 
 @synthesize window;
+@synthesize cellWrapper;
 
-@synthesize bidTypes;
+@synthesize bidTypeKeys;
 
 - (IBAction)newGame {
   if ([[navigationController viewControllers] containsObject:gameController]) {
@@ -54,18 +54,9 @@
 }
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-  NSArray *ordered = [BidType orderedKeys];
-//  NSDictionary *allTypes = [BidType allTypes];
-  
-  self.bidTypes = [[NSMutableArray alloc] init];
-  
-  for (NSString *key in ordered) {
-    [self.bidTypes addObject:[NSString stringWithFormat:[BidType anyFormattedString:key]]];
-  }
-  
-  NSLog(@"%@", self.bidTypes);
-  
-  [self.bidTypes release];
+  self.bidTypeKeys = [BidType orderedKeys];
+
+  NSLog(@"%@", self.bidTypeKeys);
 
   [window addSubview:[navigationController view]];
   [window makeKeyAndVisible];
@@ -75,25 +66,49 @@
 // UITableView delegate methods
 //
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [self.bidTypes count];
+  return [self.bidTypeKeys count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *CellIdentifier = @"BidTypeCell";
+  static NSString *CellIdentifier = @"CellBidType";
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+  CellBidType *cellBidType = (CellBidType *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  
+  if (cellBidType == nil) {
+    [cellWrapper loadMyNibFile:CellIdentifier];
+    cellBidType = (CellBidType *)cellWrapper.cell;
   }
   
-  cell.textLabel.text = [self.bidTypes objectAtIndex:indexPath.row];
+  NSString *key = [self.bidTypeKeys objectAtIndex:indexPath.row];
   
-  return cell;  
+  cellBidType.symbolLabel.text = [BidType tricksAndSymbolForKey:key];
+
+  if ([[BidType suitColourForKey:key] isEqual:@"red" ]) {
+    cellBidType.symbolLabel.textColor = [UIColor redColor];
+    cellBidType.symbolLabel.highlightedTextColor = [UIColor redColor];
+  }
+  else if ([[BidType suitColourForKey:key] isEqual:@"black" ]) {
+    cellBidType.symbolLabel.textColor = [UIColor blackColor];
+    cellBidType.symbolLabel.highlightedTextColor = [UIColor blackColor];
+  }
+  
+  cellBidType.descriptionLabel.text = [BidType descriptionForKey:key];
+  cellBidType.pointsLabel.text = [BidType pointsForKey:key];
+
+  return cellBidType;
 }
 
 - (void)dealloc {
-  [window release];
   //HACK dealloc all other instance variables?
+  [cellWrapper release];
+  [navigationController release];
+  [gameListController release];
+  [gameController release];
+  [teamOneScoreLabel release];
+  [teamTwoScoreLabel release];
+  [roundController release];
+  [bidTypeKeys release];
+  [window release];
   [super dealloc];
 }
 @end
