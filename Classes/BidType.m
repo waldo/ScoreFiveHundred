@@ -20,6 +20,8 @@ static NSString *suitSymbolString = @"suitSymbol";
 static NSString *suitColourString = @"suitColour";
 static NSString *pointString = @"points";
 static NSString *variationString = @"variation";
+static NSString *variationRegularString = @"regular";
+static NSString *variationMisereString = @"misére";
 
 + (void)initialize {
   if (!allTypes) {
@@ -58,7 +60,7 @@ static NSString *variationString = @"variation";
                                   [aSuit objectAtIndex:2], suitSymbolString,
                                   [aSuit objectAtIndex:3], suitColourString,
                                   [NSNumber numberWithInt:(40 + (i * 20))], pointString,
-                                  @"None", variationString,
+                                  variationRegularString, variationString,
                                   nil
                                   ];
         
@@ -72,6 +74,7 @@ static NSString *variationString = @"variation";
       @"Closed Misére", suitString,
       @"CM", suitSymbolString,
       [NSNumber numberWithInt:250], pointString,
+      variationMisereString, variationString,
       nil
       ]
                 forKey:@"CM"
@@ -82,6 +85,7 @@ static NSString *variationString = @"variation";
       @"Open Misére", suitString,
       @"OM", suitSymbolString,
       [NSNumber numberWithInt:500], pointString,
+      variationMisereString, variationString,
       nil
       ]
                 forKey:@"OM"
@@ -154,11 +158,58 @@ static NSString *variationString = @"variation";
   return desc;
 }
 
-+ (NSString *)pointsForKey:(NSString *)key {
++ (NSString *)pointsStringForKey:(NSString *)key {
   NSDictionary *aBidType = [allTypes objectForKey:key];
   NSString *pts = [NSString stringWithFormat:@"%@ pts", [aBidType objectForKey:pointString]];
   
   return pts;
+}
+
++ (NSNumber *)biddersPointsForKey:(NSString *)key AndBiddersTricksWon:(NSNumber *)tricksWon {
+  NSDictionary *aBidType = [allTypes objectForKey:key];
+  
+  NSString *variation = [aBidType objectForKey:variationString];
+    
+  int bidTricks = [[aBidType objectForKey:trickString] intValue];
+  int bidPoints = [[aBidType objectForKey:pointString] intValue];
+
+  // default to giving the points
+  int biddersPoints = bidPoints;
+
+  // if regular bid and didn't win enough, or
+  // misére bid and won any
+  // => subtract the bid points
+  if (
+      ([variation isEqual:variationRegularString] && tricksWon.intValue < bidTricks) ||
+      ([variation isEqual:variationMisereString]  && tricksWon.intValue > 0)
+  ) {
+    biddersPoints = -bidPoints;
+  }
+  
+  // if won 10 and bid points worth less than a slam (250 pts)
+  // => award a slam
+  if ([variation isEqual:variationRegularString] && tricksWon.intValue == 10 && bidPoints < 250) {
+    biddersPoints = 250;
+  }
+
+  return [NSNumber numberWithInt:biddersPoints];
+}
+
++ (NSNumber *)nonBiddersPointsForKey:(NSString *)key AndBiddersTricksWon:(NSNumber *)tricksWon {
+  NSDictionary *aBidType = [allTypes objectForKey:key];
+  
+  NSString *variation = [aBidType objectForKey:variationString];
+
+  // default to zero points
+  int nonBiddersPoints = 0;
+  
+  // if regular bid and bidders won less than ten
+  // => award 10 points x number of tricks (won by the non-bidders)
+  if ([variation isEqual:variationRegularString]) {
+    nonBiddersPoints = 10 * (10 - tricksWon.intValue);
+  }
+  
+  return [NSNumber numberWithInt:nonBiddersPoints];
 }
 
 @end

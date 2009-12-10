@@ -26,7 +26,9 @@
   IBOutlet UILabel *teamTwoScoreLabel;
   
   // Round view
-  IBOutlet UIViewController *roundController;  
+  IBOutlet UIViewController *roundController;
+  IBOutlet UITableView *bidSelectionTableView;
+  IBOutlet UISegmentedControl *tricksWonSegmentedControl;
   
   NSArray *bidTypeKeys;
   
@@ -34,6 +36,9 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet CellWrapper *cellWrapper;
+
+@property (nonatomic, retain) IBOutlet UITableView *bidSelectionTableView;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *tricksWonSegmentedControl;
 
 @property (nonatomic, retain) NSArray *bidTypeKeys;
 

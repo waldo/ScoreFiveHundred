@@ -13,6 +13,9 @@
 @synthesize window;
 @synthesize cellWrapper;
 
+@synthesize bidSelectionTableView;
+@synthesize tricksWonSegmentedControl;
+
 @synthesize bidTypeKeys;
 
 - (IBAction)newGame {
@@ -33,24 +36,20 @@
 }
 
 - (IBAction)saveScore {
-  [navigationController popViewControllerAnimated:YES];
-  
+  // assumes case 815 protects this function until tricks won and bid are both selected
   // work out what was clicked
+  NSNumber *tricksWon = [NSNumber numberWithLong:tricksWonSegmentedControl.selectedSegmentIndex];
+  NSString *key = [self.bidTypeKeys objectAtIndex:[[self.bidSelectionTableView indexPathForSelectedRow] row]];
+
+  // scoring
+  NSNumber *biddersChange = [BidType biddersPointsForKey:key AndBiddersTricksWon:tricksWon];
+  NSNumber *nonBiddersChange = [BidType nonBiddersPointsForKey:key AndBiddersTricksWon:tricksWon];
+    
   // work out team score + update label (+ update round?)
-    // if normal
-     // if tricksWon >= bid.numberOfTricks
-          // team 1 gets bid.Points
-     // else
-          // team 1 gets -bid.points
-     // team 2 gets (10 - tricksWon) x 10
-    // if misere
-     // if tricksWon = 0
-          // team 1 gets bid.Points
-     // else
-          // team 1 gets -bid.Points
-     // team 2 gets 0
+  NSLog(@"bidders points: %@", biddersChange);
+  NSLog(@"non-bidders points: %@", nonBiddersChange);
   
-      // NOTE: write some tests!
+  [navigationController popViewControllerAnimated:YES];
 }
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
@@ -93,7 +92,7 @@
   }
   
   cellBidType.descriptionLabel.text = [BidType descriptionForKey:key];
-  cellBidType.pointsLabel.text = [BidType pointsForKey:key];
+  cellBidType.pointsLabel.text = [BidType pointsStringForKey:key];
 
   return cellBidType;
 }
