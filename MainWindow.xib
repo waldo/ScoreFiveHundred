@@ -12,9 +12,9 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="27"/>
 			<integer value="29"/>
 			<integer value="28"/>
-			<integer value="27"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -271,6 +271,7 @@
 							<bool key="IBUIOpaque">NO</bool>
 							<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 							<int key="IBNumberOfSegments">11</int>
+							<int key="IBSelectedSegmentIndex">5</int>
 							<object class="NSArray" key="IBSegmentTitles">
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<string>0</string>
