@@ -12,8 +12,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="27"/>
-			<integer value="29"/>
+			<integer value="24"/>
+			<integer value="17"/>
 			<integer value="28"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -98,7 +98,7 @@
 						<object class="IBUIButton" id="893783076">
 							<reference key="NSNextResponder" ref="153948265"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{20, 49}, {42, 37}}</string>
+							<string key="NSFrame">{{5, 5}, {35, 37}}</string>
 							<reference key="NSSuperview" ref="153948265"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -127,7 +127,7 @@
 						<object class="IBUITableView" id="717231216">
 							<reference key="NSNextResponder" ref="153948265"/>
 							<int key="NSvFlags">274</int>
-							<string key="NSFrame">{{20, 106}, {280, 310}}</string>
+							<string key="NSFrame">{{0, 46}, {320, 370}}</string>
 							<reference key="NSSuperview" ref="153948265"/>
 							<reference key="IBUIBackgroundColor" ref="422987874"/>
 							<bool key="IBUIOpaque">NO</bool>
@@ -143,13 +143,18 @@
 						</object>
 						<object class="IBUILabel" id="158537959">
 							<reference key="NSNextResponder" ref="153948265"/>
-							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{20, 20}, {128, 21}}</string>
+							<int key="NSvFlags">318</int>
+							<string key="NSFrame">{{49, 8}, {101, 30}}</string>
 							<reference key="NSSuperview" ref="153948265"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<bool key="IBUIClipsSubviews">YES</bool>
 							<bool key="IBUIUserInteractionEnabled">NO</bool>
 							<string key="IBUIText">Team 1</string>
+							<object class="NSFont" key="IBUIFont" id="744244822">
+								<string key="NSName">Helvetica</string>
+								<double key="NSSize">24</double>
+								<int key="NSfFlags">16</int>
+							</object>
 							<object class="NSColor" key="IBUITextColor" id="925356362">
 								<int key="NSColorSpace">1</int>
 								<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -157,27 +162,27 @@
 							<nil key="IBUIHighlightedColor"/>
 							<int key="IBUIBaselineAdjustment">1</int>
 							<float key="IBUIMinimumFontSize">10</float>
-							<int key="IBUITextAlignment">1</int>
+							<int key="IBUITextAlignment">2</int>
 						</object>
 						<object class="IBUILabel" id="557336747">
 							<reference key="NSNextResponder" ref="153948265"/>
-							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{176, 20}, {124, 21}}</string>
+							<int key="NSvFlags">318</int>
+							<string key="NSFrame">{{170, 8}, {101, 30}}</string>
 							<reference key="NSSuperview" ref="153948265"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<bool key="IBUIClipsSubviews">YES</bool>
 							<bool key="IBUIUserInteractionEnabled">NO</bool>
 							<string key="IBUIText">Team 2</string>
+							<reference key="IBUIFont" ref="744244822"/>
 							<reference key="IBUITextColor" ref="925356362"/>
 							<nil key="IBUIHighlightedColor"/>
 							<int key="IBUIBaselineAdjustment">1</int>
 							<float key="IBUIMinimumFontSize">10</float>
-							<int key="IBUITextAlignment">1</int>
 						</object>
 						<object class="IBUIButton" id="506744938">
 							<reference key="NSNextResponder" ref="153948265"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{258, 49}, {42, 37}}</string>
+							<string key="NSFrame">{{280, 5}, {35, 37}}</string>
 							<reference key="NSSuperview" ref="153948265"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -193,33 +198,20 @@
 							</object>
 							<reference key="IBUINormalTitleShadowColor" ref="902949606"/>
 						</object>
-						<object class="IBUILabel" id="153446903">
+						<object class="IBUILabel" id="242751913">
 							<reference key="NSNextResponder" ref="153948265"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{70, 56}, {66, 21}}</string>
+							<string key="NSFrame">{{139, 14}, {42, 21}}</string>
 							<reference key="NSSuperview" ref="153948265"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<bool key="IBUIClipsSubviews">YES</bool>
 							<bool key="IBUIUserInteractionEnabled">NO</bool>
-							<string key="IBUIText">0000 pts</string>
+							<string key="IBUIText">v</string>
 							<reference key="IBUITextColor" ref="925356362"/>
 							<nil key="IBUIHighlightedColor"/>
 							<int key="IBUIBaselineAdjustment">1</int>
 							<float key="IBUIMinimumFontSize">10</float>
-						</object>
-						<object class="IBUILabel" id="648264142">
-							<reference key="NSNextResponder" ref="153948265"/>
-							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{176, 57}, {66, 21}}</string>
-							<reference key="NSSuperview" ref="153948265"/>
-							<bool key="IBUIOpaque">NO</bool>
-							<bool key="IBUIClipsSubviews">YES</bool>
-							<bool key="IBUIUserInteractionEnabled">NO</bool>
-							<string key="IBUIText">0000 pts</string>
-							<reference key="IBUITextColor" ref="925356362"/>
-							<nil key="IBUIHighlightedColor"/>
-							<int key="IBUIBaselineAdjustment">1</int>
-							<float key="IBUIMinimumFontSize">10</float>
+							<int key="IBUITextAlignment">1</int>
 						</object>
 					</object>
 					<string key="NSFrameSize">{320, 416}</string>
@@ -230,9 +222,9 @@
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="536531313">
 					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Game</string>
-					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="555788556">
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="843753065">
+						<string key="IBUITitle">Edit Teams</string>
 						<int key="IBUIStyle">1</int>
-						<int key="IBUISystemItemIdentifier">4</int>
 					</object>
 				</object>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
@@ -396,7 +388,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="713902297">
 					<reference key="IBUINavigationBar"/>
-					<string key="IBUITitle">Team 1's Bid</string>
+					<string key="IBUITitle">Team X Bid</string>
 					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="296877557">
 						<int key="IBUIStyle">1</int>
 						<int key="IBUISystemItemIdentifier">1</int>
@@ -482,14 +474,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">newGame</string>
-						<reference key="source" ref="555788556"/>
-						<reference key="destination" ref="664661524"/>
-					</object>
-					<int key="connectionID">45</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">saveScore</string>
 						<reference key="source" ref="390834696"/>
 						<reference key="destination" ref="664661524"/>
@@ -511,31 +495,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="destination" ref="664661524"/>
 					</object>
 					<int key="connectionID">71</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">teamBid</string>
-						<reference key="source" ref="893783076"/>
-						<reference key="destination" ref="664661524"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">78</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">teamOneScoreLabel</string>
-						<reference key="source" ref="664661524"/>
-						<reference key="destination" ref="153446903"/>
-					</object>
-					<int key="connectionID">79</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">teamTwoScoreLabel</string>
-						<reference key="source" ref="664661524"/>
-						<reference key="destination" ref="648264142"/>
-					</object>
-					<int key="connectionID">80</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -560,6 +519,72 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="destination" ref="850816403"/>
 					</object>
 					<int key="connectionID">84</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="717231216"/>
+						<reference key="destination" ref="914022305"/>
+					</object>
+					<int key="connectionID">85</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">dataSource</string>
+						<reference key="source" ref="717231216"/>
+						<reference key="destination" ref="914022305"/>
+					</object>
+					<int key="connectionID">86</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">teamOneBid</string>
+						<reference key="source" ref="893783076"/>
+						<reference key="destination" ref="664661524"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">89</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">teamTwoBid</string>
+						<reference key="source" ref="506744938"/>
+						<reference key="destination" ref="664661524"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">90</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">teamTwoName</string>
+						<reference key="source" ref="914022305"/>
+						<reference key="destination" ref="557336747"/>
+					</object>
+					<int key="connectionID">91</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">teamOneName</string>
+						<reference key="source" ref="914022305"/>
+						<reference key="destination" ref="158537959"/>
+					</object>
+					<int key="connectionID">92</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">roundsTableView</string>
+						<reference key="source" ref="914022305"/>
+						<reference key="destination" ref="717231216"/>
+					</object>
+					<int key="connectionID">93</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cellWrapper</string>
+						<reference key="source" ref="914022305"/>
+						<reference key="destination" ref="520246066"/>
+					</object>
+					<int key="connectionID">94</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -641,7 +666,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="object" ref="536531313"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="555788556"/>
+							<reference ref="843753065"/>
 						</object>
 						<reference key="parent" ref="914022305"/>
 					</object>
@@ -680,11 +705,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="158537959"/>
 							<reference ref="557336747"/>
-							<reference ref="506744938"/>
-							<reference ref="893783076"/>
-							<reference ref="153446903"/>
-							<reference ref="648264142"/>
 							<reference ref="717231216"/>
+							<reference ref="893783076"/>
+							<reference ref="506744938"/>
+							<reference ref="242751913"/>
 						</object>
 						<reference key="parent" ref="914022305"/>
 					</object>
@@ -718,11 +742,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<int key="objectID">42</int>
 						<reference key="object" ref="850816403"/>
 						<reference key="parent" ref="1016183748"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">44</int>
-						<reference key="object" ref="555788556"/>
-						<reference key="parent" ref="536531313"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">52</int>
@@ -760,19 +779,19 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="parent" ref="153948265"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">76</int>
-						<reference key="object" ref="153446903"/>
-						<reference key="parent" ref="153948265"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">77</int>
-						<reference key="object" ref="648264142"/>
-						<reference key="parent" ref="153948265"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">81</int>
 						<reference key="object" ref="520246066"/>
 						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">87</int>
+						<reference key="object" ref="242751913"/>
+						<reference key="parent" ref="153948265"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">88</int>
+						<reference key="object" ref="843753065"/>
+						<reference key="parent" ref="536531313"/>
 					</object>
 				</object>
 			</object>
@@ -790,6 +809,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>15.IBPluginDependency</string>
 					<string>16.IBPluginDependency</string>
 					<string>17.IBPluginDependency</string>
+					<string>19.CustomClassName</string>
 					<string>19.IBEditorWindowLastContentRect</string>
 					<string>19.IBPluginDependency</string>
 					<string>21.IBPluginDependency</string>
@@ -803,7 +823,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>33.IBPluginDependency</string>
 					<string>37.IBPluginDependency</string>
 					<string>42.IBPluginDependency</string>
-					<string>44.IBPluginDependency</string>
 					<string>52.IBPluginDependency</string>
 					<string>68.IBPluginDependency</string>
 					<string>69.IBPluginDependency</string>
@@ -811,10 +830,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>73.IBPluginDependency</string>
 					<string>74.IBPluginDependency</string>
 					<string>75.IBPluginDependency</string>
-					<string>76.IBPluginDependency</string>
-					<string>77.IBPluginDependency</string>
 					<string>81.CustomClassName</string>
 					<string>81.IBPluginDependency</string>
+					<string>87.IBPluginDependency</string>
+					<string>88.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -823,18 +842,16 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>ScoreFiveHundredAppDelegate</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{650, 229}, {320, 480}}</string>
+					<string>{{650, 262}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{569, 149}, {320, 480}}</string>
+					<string>GameViewController</string>
+					<string>{{620, 231}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{632, 128}, {320, 480}}</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>{{632, 262}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -852,6 +869,8 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>CellWrapper</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
@@ -871,7 +890,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">84</int>
+			<int key="maxID">94</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -889,6 +908,31 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">GameViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>cellWrapper</string>
+							<string>roundsTableView</string>
+							<string>teamOneName</string>
+							<string>teamTwoName</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>CellWrapper</string>
+							<string>UITableView</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/GameViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">ScoreFiveHundredAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="actions">
@@ -898,10 +942,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>cancelScore</string>
 							<string>newGame</string>
 							<string>saveScore</string>
-							<string>teamBid</string>
+							<string>teamOneBid</string>
+							<string>teamTwoBid</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -918,8 +964,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>gameListController</string>
 							<string>navigationController</string>
 							<string>roundController</string>
-							<string>teamOneScoreLabel</string>
-							<string>teamTwoScoreLabel</string>
 							<string>tricksWonSegmentedControl</string>
 							<string>window</string>
 						</object>
@@ -927,12 +971,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UITableView</string>
 							<string>CellWrapper</string>
-							<string>UIViewController</string>
+							<string>GameViewController</string>
 							<string>UIViewController</string>
 							<string>UINavigationController</string>
 							<string>UIViewController</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
 							<string>UISegmentedControl</string>
 							<string>UIWindow</string>
 						</object>

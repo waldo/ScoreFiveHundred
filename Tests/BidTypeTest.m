@@ -26,8 +26,8 @@
   NSNumber *bidderPoints = [NSNumber numberWithInt:bidderExpectedPoints];
   NSNumber *nonBidderPoints = [NSNumber numberWithInt:nonBidderExpectedPoints];
   
-  NSNumber *bidderResult = [BidType biddersPointsForKey:hand AndBiddersTricksWon:tricksWon];
-  NSNumber *nonBidderResult = [BidType nonBiddersPointsForKey:hand AndBiddersTricksWon:tricksWon];
+  NSNumber *bidderResult = [BidType biddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
+  NSNumber *nonBidderResult = [BidType nonBiddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
   
   STAssertTrue(
                [bidderPoints isEqual:bidderResult],

@@ -10,10 +10,10 @@
 #import "BidType.h"
 #import "CellWrapper.h"
 #import "CellBidType.h"
+#import "GameViewController.h"
 
 @interface ScoreFiveHundredAppDelegate : NSObject <UIApplicationDelegate> {
   UIWindow *window;
-  CellWrapper *cellWrapper;
   
   IBOutlet UINavigationController *navigationController;
   
@@ -21,31 +21,35 @@
   IBOutlet UIViewController *gameListController;
   
   // Game view
-  IBOutlet UIViewController *gameController;
-  IBOutlet UILabel *teamOneScoreLabel;
-  IBOutlet UILabel *teamTwoScoreLabel;
+  IBOutlet GameViewController *gameController;
   
   // Round view
   IBOutlet UIViewController *roundController;
   IBOutlet UITableView *bidSelectionTableView;
+  CellWrapper *cellWrapper;
   IBOutlet UISegmentedControl *tricksWonSegmentedControl;
   
-  NSArray *bidTypeKeys;
-  
+  NSArray *bidTypeHands;
+  NSNumber *currentBidIsWithTeamSlot;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet CellWrapper *cellWrapper;
 
 @property (nonatomic, retain) IBOutlet UITableView *bidSelectionTableView;
+@property (nonatomic, retain) IBOutlet CellWrapper *cellWrapper;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *tricksWonSegmentedControl;
 
-@property (nonatomic, retain) NSArray *bidTypeKeys;
+@property (nonatomic, retain) NSArray *bidTypeHands;
+@property (nonatomic, retain) NSNumber *currentBidIsWithTeamSlot;
 
-- (IBAction)newGame;
-- (IBAction)teamBid;
-- (IBAction)cancelScore;
-- (IBAction)saveScore;
+
+- (IBAction) newGame;
+- (IBAction) teamOneBid;
+- (IBAction) teamTwoBid;
+- (IBAction) cancelScore;
+- (IBAction) saveScore;
+
+- (void) teamBid:(int)teamSlot;
 
 @end
 

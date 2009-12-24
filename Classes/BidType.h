@@ -12,13 +12,14 @@
 
 }
 
-+ (NSArray *)orderedKeys;
-+ (NSDictionary *)allTypes;
-+ (NSString *)suitColourForKey:(NSString *)key;
-+ (NSString *)tricksAndSymbolForKey:(NSString *)key;
-+ (NSString *)descriptionForKey:(NSString *)key;
-+ (NSString *)pointsStringForKey:(NSString *)key;
-+ (NSNumber *)biddersPointsForKey:(NSString *)key AndBiddersTricksWon:(NSNumber *)tricksWon;
-+ (NSNumber *)nonBiddersPointsForKey:(NSString *)key AndBiddersTricksWon:(NSNumber *)tricksWon;
++ (NSArray *) orderedHands;
++ (NSDictionary *) allTypes;
++ (NSString *) suitColourForHand:(NSString *)hand;
++ (NSString *) tricksAndSymbolForHand:(NSString *)hand;
++ (NSString *) descriptionForHand:(NSString *)hand;
++ (NSString *) pointsStringForHand:(NSString *)hand;
++ (NSNumber *) biddersPointsForHand:(NSString *)hand AndBiddersTricksWon:(NSNumber *)tricksWon;
++ (NSNumber *) nonBiddersPointsForHand:(NSString *)hand AndBiddersTricksWon:(NSNumber *)tricksWon;
++ (BOOL) bidderWonHand:(NSString *)hand WithTricksWon:(NSNumber *)tricksWon;
 
 @end
