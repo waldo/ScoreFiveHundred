@@ -17,13 +17,27 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
 
 @synthesize roundsTableView;
 @synthesize cellWrapper;
+@synthesize editButton;
 @synthesize teamOneName;
 @synthesize teamTwoName;
+@synthesize teamOneBid;
+@synthesize teamTwoBid;
 
 @synthesize rounds;
 @synthesize teamOneSlot;
 @synthesize teamTwoSlot;
+@synthesize teamOneOldName;
+@synthesize teamTwoOldName;
 
+- (IBAction) edit:(id)sender {
+  [self setEditing:!self.editing animated:YES];
+}
+
+- (void) cancelEdit {
+  self.teamOneName.text = self.teamOneOldName;
+  self.teamTwoName.text = self.teamTwoOldName;
+  [self setEditing:NO animated:YES];
+}
 
 - (void) updateRound:(BOOL)updateRound ForTeamSlot:(NSNumber *)teamSlot ForHand:(NSString *) hand AndTricksWon:(NSNumber *)tricksWon {
   // TODO: update if this is an existing round
@@ -75,6 +89,80 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
   self.teamTwoSlot = [NSNumber numberWithInt:1];
 }
 
+- (void) setEditing:(BOOL)editing animated:(BOOL)animated {
+  [super setEditing:editing animated:animated];
+  
+  int growTextFieldsBy = 44;
+  double growTextFieldDuration = 0.1;
+  
+  CGRect rectOne = self.teamOneName.frame;
+  CGRect rectTwo = self.teamTwoName.frame;
+  if (self.editing) {
+    self.editButton.title = @"Done";
+    self.teamOneName.enabled = YES;
+    self.teamTwoName.enabled = YES;
+    self.teamOneBid.hidden = YES;
+    self.teamTwoBid.hidden = YES;
+    
+    self.teamOneName.borderStyle = UITextBorderStyleRoundedRect;
+    self.teamTwoName.borderStyle = UITextBorderStyleRoundedRect;
+
+    rectOne.origin.x -= growTextFieldsBy;
+    rectOne.size.width += growTextFieldsBy;
+    rectTwo.size.width += growTextFieldsBy;
+
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelEdit)] autorelease];
+    
+    self.teamOneOldName = self.teamOneName.text;
+    self.teamTwoOldName = self.teamTwoName.text;
+    
+    [self.teamOneName becomeFirstResponder];
+  }
+  else {
+    editButton.title = @"Edit";
+    self.teamOneName.enabled = NO;
+    self.teamTwoName.enabled = NO;
+    self.teamOneBid.hidden = NO;
+    self.teamTwoBid.hidden = NO;
+    self.teamOneName.borderStyle = UITextBorderStyleNone;
+    self.teamTwoName.borderStyle = UITextBorderStyleNone;
+
+    rectOne.size.width -= growTextFieldsBy;
+    rectOne.origin.x += growTextFieldsBy;
+    rectTwo.size.width -= growTextFieldsBy;
+    self.navigationItem.leftBarButtonItem = nil;
+  }
+
+  [UIView beginAnimations:@"Resize on edit" context:nil];
+  [UIView setAnimationDuration:growTextFieldDuration];
+  self.teamOneName.frame = rectOne;
+  self.teamTwoName.frame = rectTwo;
+  [UIView commitAnimations];
+}
+
+- (void) dealloc {
+  [roundsTableView release];
+  [cellWrapper release];
+  [rounds release];
+  
+  [super dealloc];
+}
+
+//
+// TextField delegate methods
+//
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+  if ([self.teamOneName isEqual:textField]) {
+    [self.teamTwoName becomeFirstResponder];
+  }
+  else {
+    [self.teamOneName becomeFirstResponder];
+    [self setEditing:NO animated:YES];
+  }
+  
+  return YES;
+}
+
 //
 // UITableView delegate methods
 //
@@ -120,12 +208,9 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
   }
 }
 
-- (void) dealloc {
-  [roundsTableView release];
-  [cellWrapper release];
-  [rounds release];
-  
-  [super dealloc];
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  // never selectable
+  return nil;
 }
 
 @end

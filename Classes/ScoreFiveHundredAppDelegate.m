@@ -21,6 +21,7 @@
 
 - (IBAction) newGame {
   [navigationController pushViewController:gameController animated:YES];
+  [gameController setEditing:YES animated:YES];
 }
 
 - (IBAction) teamOneBid {
