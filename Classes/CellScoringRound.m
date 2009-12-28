@@ -61,9 +61,6 @@ static NSString *ssSymbolForBidLost = @"✘";
   NSDictionary *bidderLabels = [self.labels objectAtIndex:[bidderSlot intValue]];
   NSDictionary *nonBidderLabels = [self.labels objectAtIndex:[nonBidderSlot intValue]];
   
-  NSLog(@"%@", bidderLabels);
-  NSLog(@"%@", nonBidderLabels);
-  
   NSString *bidderScorePrefix = @"";
   // blank non-bidder's bid attempt labels (since they didn't attempt a bid)
   [[nonBidderLabels valueForKey:ssBidWonOrLostLabel] setText:@""];

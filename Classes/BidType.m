@@ -90,7 +90,6 @@ static NSString *ssVariationMisere = @"misére";
       ]
                 forKey:@"OM"
      ];    
-    NSLog(@"%@, count: %d", allTypes, [allTypes count]);
     
     orderedHands = [NSArray arrayWithObjects:
                    @"6S",

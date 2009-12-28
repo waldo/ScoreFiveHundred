@@ -19,12 +19,15 @@
   IBOutlet UITextField *teamTwoName;
   IBOutlet UIButton *teamOneBid;
   IBOutlet UIButton *teamTwoBid;
+  IBOutlet UILabel *teamOneResult;
+  IBOutlet UILabel *teamTwoResult;
   
   NSMutableArray *rounds;
   NSNumber *teamOneSlot;
   NSNumber *teamTwoSlot;
   NSString *teamOneOldName;
   NSString *teamTwoOldName;
+  NSNumber *winningSlot;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *roundsTableView;
@@ -34,12 +37,15 @@
 @property (nonatomic, retain) IBOutlet UITextField *teamTwoName;
 @property (nonatomic, retain) IBOutlet UIButton *teamOneBid;
 @property (nonatomic, retain) IBOutlet UIButton *teamTwoBid;
+@property (nonatomic, retain) IBOutlet UILabel *teamOneResult;
+@property (nonatomic, retain) IBOutlet UILabel *teamTwoResult;
 
 @property (nonatomic, retain) NSMutableArray *rounds;
 @property (nonatomic, retain) NSNumber *teamOneSlot;
 @property (nonatomic, retain) NSNumber *teamTwoSlot;
 @property (nonatomic, retain) NSString *teamOneOldName;
 @property (nonatomic, retain) NSString *teamTwoOldName;
+@property (nonatomic, retain) NSNumber *winningSlot;
 
 
 - (IBAction) edit:(id)sender;

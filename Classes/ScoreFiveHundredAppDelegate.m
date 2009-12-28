@@ -65,8 +65,6 @@
 - (void) applicationDidFinishLaunching:(UIApplication *)application {
   self.bidTypeHands = [BidType orderedHands];
 
-  NSLog(@"%@", self.bidTypeHands);
-
   [window addSubview:[navigationController view]];
   [window makeKeyAndVisible];
 }

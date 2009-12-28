@@ -7,6 +7,15 @@
 
 #import "GameViewController.h"
 
+@interface GameViewController()
+
+- (void) gameComplete;
+- (void) undoGameComplete;
+- (void) checkGameCompleteOnBidBySlot:(int)teamSlot AndBidSuccessful:(BOOL)bidSuccessful TeamOneScore:(int)teamOneScore TeamTwoScore:(int)teamTwoScore;
+
+@end
+
+
 @implementation GameViewController
 
 static NSString *ssBiddingTeam = @"Bidding Team";
@@ -15,6 +24,9 @@ static NSString *ssTricksWon = @"Tricks Won";
 static NSString *ssTeamOneScore = @"Team One Score";
 static NSString *ssTeamTwoScore = @"Team Two Score";
 
+static NSString *ssStoreRounds = @"Rounds";
+static NSString *ssStoreWinningSlot = @"Winning Slot";
+
 @synthesize roundsTableView;
 @synthesize cellWrapper;
 @synthesize editButton;
@@ -22,12 +34,16 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
 @synthesize teamTwoName;
 @synthesize teamOneBid;
 @synthesize teamTwoBid;
+@synthesize teamOneResult;
+@synthesize teamTwoResult;
 
 @synthesize rounds;
 @synthesize teamOneSlot;
 @synthesize teamTwoSlot;
 @synthesize teamOneOldName;
 @synthesize teamTwoOldName;
+@synthesize winningSlot;
+
 
 - (IBAction) edit:(id)sender {
   [self setEditing:!self.editing animated:YES];
@@ -37,6 +53,44 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
   self.teamOneName.text = self.teamOneOldName;
   self.teamTwoName.text = self.teamTwoOldName;
   [self setEditing:NO animated:YES];
+}
+
+- (void) gameComplete {
+  if (self.winningSlot) {
+    self.teamOneBid.hidden = YES;
+    self.teamTwoBid.hidden = YES;
+    
+    if ([self.winningSlot isEqualToNumber:self.teamOneSlot]) {
+      self.teamOneResult.hidden = NO;
+    }
+    else {
+      self.teamTwoResult.hidden = NO;
+    }
+  }
+  else {
+    self.teamOneBid.hidden = NO;
+    self.teamTwoBid.hidden = NO;
+    self.teamOneResult.hidden = YES;
+    self.teamTwoResult.hidden = YES;
+  }
+}
+
+- (void) undoGameComplete {
+  self.winningSlot = nil;
+}
+
+- (void) checkGameCompleteOnBidBySlot:(int)teamSlot AndBidSuccessful:(BOOL)bidSuccessful TeamOneScore:(int)teamOneScore TeamTwoScore:(int)teamTwoScore {
+  int winningScore = 500;
+  int losingScore = -500;
+  
+  if ((bidSuccessful && teamOneScore >= winningScore && teamSlot == 0) || (teamTwoScore <= losingScore)) {
+    self.winningSlot = [NSNumber numberWithInt:0];
+  }
+  else if ((teamTwoScore > winningScore && teamSlot == 1) || (teamOneScore <= losingScore)) {
+    self.winningSlot = [NSNumber numberWithInt:1];
+  }
+  
+  [self gameComplete];
 }
 
 - (void) updateRound:(BOOL)updateRound ForTeamSlot:(NSNumber *)teamSlot ForHand:(NSString *) hand AndTricksWon:(NSNumber *)tricksWon {
@@ -73,22 +127,40 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
   
   [self.rounds insertObject:dict atIndex:0];
   
-  NSLog(@"%@", self.rounds);
-  
   [self.roundsTableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+  
+  [self checkGameCompleteOnBidBySlot:[teamSlot intValue] AndBidSuccessful:[BidType bidderWonHand:hand WithTricksWon:tricksWon] TeamOneScore:teamOneScore TeamTwoScore:teamTwoScore];
 
   [dict release];
+  
+  NSLog(@"%@", self.rounds);
 }
 
 - (void) viewDidLoad {
   [super viewDidLoad];
-  self.rounds = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"rounds"]];
+
+  NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
+
+  NSLog(@"%@", self.rounds);
+  
+  self.rounds = [NSMutableArray arrayWithArray:[store arrayForKey:ssStoreRounds]];
+  self.winningSlot = [store valueForKey:ssStoreWinningSlot];
   self.teamOneSlot = [NSNumber numberWithInt:0];
   self.teamTwoSlot = [NSNumber numberWithInt:1];
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  
+  NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
+  
+  [store setObject:self.rounds forKey:ssStoreRounds];
+  [store setObject:self.winningSlot forKey:ssStoreWinningSlot];
+}
+
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated {
   [super setEditing:editing animated:animated];
+
   [self.roundsTableView setEditing:editing animated:animated];
   
   int growTextFieldsBy = 44;
@@ -102,6 +174,8 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
     self.teamTwoName.enabled = YES;
     self.teamOneBid.hidden = YES;
     self.teamTwoBid.hidden = YES;
+    self.teamOneResult.hidden = YES;
+    self.teamTwoResult.hidden = YES;
     
     self.teamOneName.borderStyle = UITextBorderStyleRoundedRect;
     self.teamTwoName.borderStyle = UITextBorderStyleRoundedRect;
@@ -121,8 +195,7 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
     editButton.title = @"Edit";
     self.teamOneName.enabled = NO;
     self.teamTwoName.enabled = NO;
-    self.teamOneBid.hidden = NO;
-    self.teamTwoBid.hidden = NO;
+    [self gameComplete];
     self.teamOneName.borderStyle = UITextBorderStyleNone;
     self.teamTwoName.borderStyle = UITextBorderStyleNone;
 
@@ -139,10 +212,23 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
   [UIView commitAnimations];
 }
 
-- (void) dealloc {
+- (void) dealloc {  
   [roundsTableView release];
   [cellWrapper release];
+  [editButton release];
+  [teamOneName release];
+  [teamTwoName release];
+  [teamOneBid release];
+  [teamTwoBid release];
+  [teamOneResult release];
+  [teamOneResult release];
+  
   [rounds release];
+  [teamOneSlot release];
+  [teamTwoSlot release];
+  [teamOneOldName release];
+  [teamTwoOldName release];
+  [winningSlot release];
   
   [super dealloc];
 }
@@ -178,8 +264,6 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
     [cellWrapper loadMyNibFile:CellIdentifier];
     cellScoringRound = (CellScoringRound *)cellWrapper.cell;
   }
-  
-  NSLog(@"%@", indexPath);
   
   NSDictionary *round = [self.rounds objectAtIndex:indexPath.row];
   NSString *hand = [round valueForKey:ssBidAttempted];
@@ -228,6 +312,7 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
     [self.rounds removeObjectAtIndex:indexPath.row];
+    [self undoGameComplete];
 
     // reload table view
     [self.roundsTableView reloadData];
