@@ -40,8 +40,6 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
 }
 
 - (void) updateRound:(BOOL)updateRound ForTeamSlot:(NSNumber *)teamSlot ForHand:(NSString *) hand AndTricksWon:(NSNumber *)tricksWon {
-  // TODO: update if this is an existing round
-  
   // create a new round
   NSNumber *bidderPoints = [BidType biddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
   NSNumber *nonBidderPoints = [BidType nonBiddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
@@ -91,6 +89,7 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
 
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated {
   [super setEditing:editing animated:animated];
+  [self.roundsTableView setEditing:editing animated:animated];
   
   int growTextFieldsBy = 44;
   double growTextFieldDuration = 0.1;
@@ -211,6 +210,28 @@ static NSString *ssTeamTwoScore = @"Team Two Score";
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   // never selectable
   return nil;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+  BOOL canEdit = NO;
+
+  if (0 == indexPath.row) {
+    canEdit = YES;
+  }
+  return canEdit;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (editingStyle == UITableViewCellEditingStyleDelete) {
+    [self.rounds removeObjectAtIndex:indexPath.row];
+
+    // reload table view
+    [self.roundsTableView reloadData];
+  }
 }
 
 @end

@@ -47,7 +47,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUILabel" id="1045202809">
 								<reference key="NSNextResponder" ref="573700076"/>
-								<int key="NSvFlags">318</int>
+								<int key="NSvFlags">319</int>
 								<string key="NSFrame">{{5, 2}, {45, 28}}</string>
 								<reference key="NSSuperview" ref="573700076"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -82,7 +82,7 @@
 							</object>
 							<object class="IBUILabel" id="395631204">
 								<reference key="NSNextResponder" ref="573700076"/>
-								<int key="NSvFlags">318</int>
+								<int key="NSvFlags">319</int>
 								<string key="NSFrame">{{5, 26}, {45, 29}}</string>
 								<reference key="NSSuperview" ref="573700076"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -105,7 +105,7 @@
 							</object>
 							<object class="IBUILabel" id="77224705">
 								<reference key="NSNextResponder" ref="573700076"/>
-								<int key="NSvFlags">318</int>
+								<int key="NSvFlags">319</int>
 								<string key="NSFrame">{{60, 2}, {90, 30}}</string>
 								<reference key="NSSuperview" ref="573700076"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -129,7 +129,7 @@
 							</object>
 							<object class="IBUILabel" id="404435591">
 								<reference key="NSNextResponder" ref="573700076"/>
-								<int key="NSvFlags">318</int>
+								<int key="NSvFlags">319</int>
 								<string key="NSFrame">{{40, 32}, {110, 18}}</string>
 								<reference key="NSSuperview" ref="573700076"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="417291180">
@@ -164,7 +164,7 @@
 							</object>
 							<object class="IBUILabel" id="891302279">
 								<reference key="NSNextResponder" ref="573700076"/>
-								<int key="NSvFlags">315</int>
+								<int key="NSvFlags">319</int>
 								<string key="NSFrame">{{270, 2}, {45, 28}}</string>
 								<reference key="NSSuperview" ref="573700076"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -184,7 +184,7 @@
 							</object>
 							<object class="IBUILabel" id="958576592">
 								<reference key="NSNextResponder" ref="573700076"/>
-								<int key="NSvFlags">315</int>
+								<int key="NSvFlags">319</int>
 								<string key="NSFrame">{{270, 26}, {45, 29}}</string>
 								<reference key="NSSuperview" ref="573700076"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -207,7 +207,7 @@
 							</object>
 							<object class="IBUILabel" id="336973121">
 								<reference key="NSNextResponder" ref="573700076"/>
-								<int key="NSvFlags">315</int>
+								<int key="NSvFlags">319</int>
 								<string key="NSFrame">{{170, 2}, {96, 30}}</string>
 								<reference key="NSSuperview" ref="573700076"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -226,7 +226,7 @@
 							</object>
 							<object class="IBUILabel" id="219915380">
 								<reference key="NSNextResponder" ref="573700076"/>
-								<int key="NSvFlags">315</int>
+								<int key="NSvFlags">319</int>
 								<string key="NSFrame">{{170, 32}, {110, 18}}</string>
 								<reference key="NSSuperview" ref="573700076"/>
 								<reference key="IBUIBackgroundColor" ref="417291180"/>
