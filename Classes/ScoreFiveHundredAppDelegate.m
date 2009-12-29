@@ -20,8 +20,8 @@
 @synthesize bidTypeHands;
 
 - (IBAction) newGame {
+  [gameController openGameForKey:@"dummy_game_key" AndIsNewGame:YES];
   [navigationController pushViewController:gameController animated:YES];
-  [gameController setEditing:YES animated:YES];
 }
 
 - (IBAction) teamOneBid {
@@ -35,6 +35,8 @@
 - (void) teamBid:(int)teamSlot {
   self.currentBidIsWithTeamSlot = [NSNumber numberWithInt:teamSlot];
   roundController.title = [NSString stringWithFormat:@"%@ Bid", [gameController teamNameForSlot:self.currentBidIsWithTeamSlot]];
+  [self.bidSelectionTableView deselectRowAtIndexPath:[self.bidSelectionTableView indexPathForSelectedRow] animated:NO];
+  [self.tricksWonSegmentedControl setSelectedSegmentIndex:5];
   [navigationController pushViewController:roundController animated:YES];
 }
 

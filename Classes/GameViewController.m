@@ -43,6 +43,7 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
 @synthesize teamOneOldName;
 @synthesize teamTwoOldName;
 @synthesize winningSlot;
+@synthesize newGame;
 
 
 - (IBAction) edit:(id)sender {
@@ -93,6 +94,15 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
   [self gameComplete];
 }
 
+- (void) openGameForKey:(NSString *)gameKey AndIsNewGame:(BOOL)isNewGame {
+  self.newGame = isNewGame;
+  
+  NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
+  
+  self.rounds = [NSMutableArray arrayWithArray:[store arrayForKey:ssStoreRounds]];
+  self.winningSlot = [store valueForKey:ssStoreWinningSlot];
+}
+
 - (void) updateRound:(BOOL)updateRound ForTeamSlot:(NSNumber *)teamSlot ForHand:(NSString *) hand AndTricksWon:(NSNumber *)tricksWon {
   // create a new round
   NSNumber *bidderPoints = [BidType biddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
@@ -139,14 +149,18 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
 - (void) viewDidLoad {
   [super viewDidLoad];
 
-  NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
-
-  NSLog(@"%@", self.rounds);
-  
-  self.rounds = [NSMutableArray arrayWithArray:[store arrayForKey:ssStoreRounds]];
-  self.winningSlot = [store valueForKey:ssStoreWinningSlot];
   self.teamOneSlot = [NSNumber numberWithInt:0];
   self.teamTwoSlot = [NSNumber numberWithInt:1];
+ }
+
+- (void) viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  
+  if (self.isNewGame) {
+    // if edit gets called before the view is loaded then the placeholder text position gets screwed up
+    [self edit:self];
+    self.newGame = NO;
+  }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

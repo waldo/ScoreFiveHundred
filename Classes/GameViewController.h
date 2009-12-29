@@ -28,6 +28,7 @@
   NSString *teamOneOldName;
   NSString *teamTwoOldName;
   NSNumber *winningSlot;
+  BOOL newGame;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *roundsTableView;
@@ -46,10 +47,12 @@
 @property (nonatomic, retain) NSString *teamOneOldName;
 @property (nonatomic, retain) NSString *teamTwoOldName;
 @property (nonatomic, retain) NSNumber *winningSlot;
+@property (nonatomic, getter=isNewGame) BOOL newGame;
 
 
 - (IBAction) edit:(id)sender;
 
+- (void) openGameForKey:(NSString *)gameKey AndIsNewGame:(BOOL)isNewGame;
 - (void) updateRound:(BOOL)updateRound ForTeamSlot:(NSNumber *)teamOneOrTwo ForHand:(NSString *) hand AndTricksWon:(NSNumber *)tricksWon;
 
 - (NSString *) teamNameForSlot:(NSNumber *)slot;
