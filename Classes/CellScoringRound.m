@@ -11,13 +11,10 @@
 
 @implementation CellScoringRound
 
-static NSString *ssBidAttemptedLabel = @"Bid Attempted";
-static NSString *ssBidWonOrLostLabel = @"Bid Won or Lost";
-static NSString *ssScoreSummaryLabel = @"Score Summary";
-static NSString *ssRunningTotalScoreLabel = @"Running Total Score";
-
-static NSString *ssSymbolForBidWon = @"✔";
+static NSString *ssSymbolForBidWon  = @"✔";
 static NSString *ssSymbolForBidLost = @"✘";
+static int siSlotTeamOne            = 0;
+static int siSlotTeamTwo            = 1;
 
 @synthesize bidAttemptedTeamOneLabel;
 @synthesize bidAttemptedTeamTwoLabel;
@@ -28,61 +25,64 @@ static NSString *ssSymbolForBidLost = @"✘";
 @synthesize scoreSummaryTeamOneLabel;
 @synthesize scoreSummaryTeamTwoLabel;
 
-@synthesize labels;
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
     }
     return self;
 }
 
-- (void) setStyleForBidderSlot:(NSNumber *)bidderSlot NonBidderSlot:(NSNumber *)nonBidderSlot WhenBidderWon:(BOOL)didBidderWin AndHandText:(NSString *)handText WithBidderTricksWon:(NSNumber *)bidderTricksWon AndNonBidderTricksWon:(NSNumber *)nonBidderTricksWon AndBidderPoints:(NSNumber *)bidderPoints AndNonBidderPoints:(NSNumber *)nonBidderPoints {
+- (void) setStyleForTeamOneBidAttempted:(NSString*)teamOneBidAttempted AndTeamOneBidAchieved:(BOOL)teamOneBidAchieved WithTeamTwoBidAttempted:(NSString*)teamTwoBidAttempted AndTeamTwoBidAchieved:(BOOL)teamTwoBidAchieved {
+  
+  BOOL teamOneWasBidder = !(teamOneBidAttempted == nil);
+  BOOL teamTwoWasBidder = !(teamTwoBidAttempted == nil);
 
-  if (self.labels == nil) {
-    self.labels = [NSArray arrayWithObjects:
-                   [NSDictionary dictionaryWithObjectsAndKeys:
-                    bidAttemptedTeamOneLabel,    ssBidAttemptedLabel,
-                    symbolBidResultTeamOneLabel, ssBidWonOrLostLabel,
-                    scoreSummaryTeamOneLabel,    ssScoreSummaryLabel,
-                    pointsTeamOneLabel,          ssRunningTotalScoreLabel,
-                    nil
-                    ],
-                   [NSDictionary dictionaryWithObjectsAndKeys:
-                    bidAttemptedTeamTwoLabel,    ssBidAttemptedLabel,
-                    symbolBidResultTeamTwoLabel, ssBidWonOrLostLabel,
-                    scoreSummaryTeamTwoLabel,    ssScoreSummaryLabel,
-                    pointsTeamTwoLabel,          ssRunningTotalScoreLabel,
-                    nil
-                    ],
-                   nil
-                   ];
+  if (teamOneWasBidder) {
+    // hide team two's bid labels
+    self.bidAttemptedTeamTwoLabel.hidden = YES;
+    self.symbolBidResultTeamTwoLabel.hidden = YES;
+
+    self.bidAttemptedTeamOneLabel.text = [self prettyStringForHand:teamOneBidAttempted];
+    if (teamOneBidAchieved) {
+      self.symbolBidResultTeamOneLabel.text = ssSymbolForBidWon;
+      self.symbolBidResultTeamOneLabel.textColor = [UIColor greenColor];
+    }
+    else {
+      self.symbolBidResultTeamOneLabel.text = ssSymbolForBidLost;
+      self.symbolBidResultTeamOneLabel.textColor = [UIColor redColor];
+    }
   }
-  
-  NSDictionary *bidderLabels = [self.labels objectAtIndex:[bidderSlot intValue]];
-  NSDictionary *nonBidderLabels = [self.labels objectAtIndex:[nonBidderSlot intValue]];
-  
-  NSString *bidderScorePrefix = @"";
-  // blank non-bidder's bid attempt labels (since they didn't attempt a bid)
-  [[nonBidderLabels valueForKey:ssBidWonOrLostLabel] setText:@""];
-  [[nonBidderLabels valueForKey:ssBidAttemptedLabel] setText:@""];
-  // show bidding team's bid
-  [[bidderLabels valueForKey:ssBidAttemptedLabel] setText:handText];
-  
-  if (didBidderWin) {
-    bidderScorePrefix = @"+";
-    [[bidderLabels valueForKey:ssBidWonOrLostLabel] setText:ssSymbolForBidWon];
-    [[bidderLabels valueForKey:ssBidWonOrLostLabel] setColor:[UIColor greenColor]];
-  }
-  else {
-    [[bidderLabels valueForKey:ssBidWonOrLostLabel] setText:ssSymbolForBidLost];
-    [[bidderLabels valueForKey:ssBidWonOrLostLabel] setColor:[UIColor redColor]];
-  }
-  
-  [[bidderLabels valueForKey:ssScoreSummaryLabel] setText:[NSString stringWithFormat:@"Won %@, %@%@ pts", bidderTricksWon, bidderScorePrefix, bidderPoints]];
-  
-  [[nonBidderLabels valueForKey:ssScoreSummaryLabel] setText:[NSString stringWithFormat:@"Won %@, %@%@ pts", nonBidderTricksWon, nonBidderPoints < 0 ? @"" : @"+", nonBidderPoints]];
+  else if (teamTwoWasBidder) {
+    // hide team one's bid labels
+    self.bidAttemptedTeamOneLabel.hidden = YES;
+    self.symbolBidResultTeamOneLabel.hidden = YES;
+    
+    self.bidAttemptedTeamTwoLabel.text = [self prettyStringForHand:teamTwoBidAttempted];
+    if (teamTwoBidAchieved) {
+      self.symbolBidResultTeamTwoLabel.text = ssSymbolForBidWon;
+      self.symbolBidResultTeamTwoLabel.textColor = [UIColor greenColor];
+    }
+    else {
+      self.symbolBidResultTeamTwoLabel.text = ssSymbolForBidLost;
+      self.symbolBidResultTeamTwoLabel.textColor = [UIColor redColor];
+    }
+  }  
 }
 
+- (void) descriptionForTeamSlot:(NSNumber*)teamSlot FromTricksWon:(NSNumber*)tricksWon AndPoints:(NSNumber*)points {
+  NSString* pointsPrefix = (points > 0 ? @"+" : @"");
+  NSString* summary = [NSString stringWithFormat:@"Won %@, %@%@ pts", tricksWon, pointsPrefix, points];
+  
+  if ([teamSlot intValue] == siSlotTeamOne) {
+    self.scoreSummaryTeamOneLabel.text = summary;
+  }
+  else if ([teamSlot intValue] == siSlotTeamTwo) {
+    self.scoreSummaryTeamTwoLabel.text = summary;
+  }
+}
+
+- (NSString*) prettyStringForHand:(NSString*)hand {
+  return [BidType tricksAndSymbolForHand:hand];
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
 

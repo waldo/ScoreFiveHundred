@@ -11,22 +11,37 @@
 
 - (void) gameComplete;
 - (void) undoGameComplete;
-- (void) checkGameCompleteOnBidBySlot:(int)teamSlot AndBidSuccessful:(BOOL)bidSuccessful TeamOneScore:(int)teamOneScore TeamTwoScore:(int)teamTwoScore;
+- (void) checkForGameOver;
 
 @end
 
 
 @implementation GameViewController
 
-static NSString *ssBiddingTeam = @"Bidding Team";
-static NSString *ssBidAttempted = @"Bid Attempted";
-static NSString *ssTricksWon = @"Tricks Won";
-static NSString *ssTeamOneScore = @"Team One Score";
-static NSString *ssTeamTwoScore = @"Team Two Score";
+// MARK: static
+static NSString *ssBidTeamOne             = @"team one bid";
+static NSString *ssBidTeamTwo             = @"team two bid";
+static NSString *ssBidAchievedTeamOne     = @"team one bid achieved";
+static NSString *ssBidAchievedTeamTwo     = @"team two bid achieved";
+static NSString *ssTricksWonTeamOne       = @"team one tricks won";
+static NSString *ssTricksWonTeamTwo       = @"team two tricks won";
+static NSString *ssPointsForRoundTeamOne  = @"team one points for round";
+static NSString *ssPointsForRoundTeamTwo  = @"team two points for round";
+static NSString *ssSubTotalTeamOne        = @"team one sub total";
+static NSString *ssSubTotalTeamTwo        = @"team two sub total";
 
-static NSString *ssStoreRounds = @"Rounds";
-static NSString *ssStoreWinningSlot = @"Winning Slot";
+static NSString *ssStoreGames = @"five hundred games";
+static NSString *ssStoreRounds = @"rounds";
+static NSString *ssStoreNameTeamOne = @"team one name";
+static NSString *ssStoreNameTeamTwo = @"team two name";
+static NSString *ssStoreWinningSlot = @"winning slot";
+static NSString *ssStoreLastPlayed = @"last played";
 
+static int siMaximumTricks = 10;
+static int siWinningScore = 500;
+static int siLosingScore = -500;
+
+// MARK: synthesize
 @synthesize roundsTableView;
 @synthesize cellWrapper;
 @synthesize editButton;
@@ -37,12 +52,15 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
 @synthesize teamOneResult;
 @synthesize teamTwoResult;
 
+@synthesize game;
+@synthesize gameKey;
 @synthesize rounds;
-@synthesize teamOneSlot;
-@synthesize teamTwoSlot;
-@synthesize teamOneOldName;
-@synthesize teamTwoOldName;
+@synthesize slotTeamOne;
+@synthesize slotTeamTwo;
+@synthesize oldNameTeamOne;
+@synthesize oldNameTeamTwo;
 @synthesize winningSlot;
+@synthesize lastPlayed;
 @synthesize newGame;
 
 
@@ -51,8 +69,8 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
 }
 
 - (void) cancelEdit {
-  self.teamOneName.text = self.teamOneOldName;
-  self.teamTwoName.text = self.teamTwoOldName;
+  self.teamOneName.text = self.oldNameTeamOne;
+  self.teamTwoName.text = self.oldNameTeamTwo;
   [self setEditing:NO animated:YES];
 }
 
@@ -61,7 +79,7 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
     self.teamOneBid.hidden = YES;
     self.teamTwoBid.hidden = YES;
     
-    if ([self.winningSlot isEqualToNumber:self.teamOneSlot]) {
+    if ([self.winningSlot isEqualToNumber:self.slotTeamOne]) {
       self.teamOneResult.hidden = NO;
     }
     else {
@@ -80,27 +98,39 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
   self.winningSlot = nil;
 }
 
-- (void) checkGameCompleteOnBidBySlot:(int)teamSlot AndBidSuccessful:(BOOL)bidSuccessful TeamOneScore:(int)teamOneScore TeamTwoScore:(int)teamTwoScore {
-  int winningScore = 500;
-  int losingScore = -500;
+- (void) checkForGameOver {
+  NSDictionary *r = [self.rounds objectAtIndex:0];
   
-  if ((bidSuccessful && teamOneScore >= winningScore && teamSlot == 0) || (teamTwoScore <= losingScore)) {
+  BOOL teamOneBidAchieved = [[r valueForKey:ssBidAchievedTeamOne] boolValue];
+  BOOL teamTwoBidAchieved = [[r valueForKey:ssBidAchievedTeamTwo] boolValue];
+  int teamOneScore        = [[r valueForKey:ssSubTotalTeamOne] intValue];
+  int teamTwoScore        = [[r valueForKey:ssSubTotalTeamTwo] intValue];
+
+  if ((teamOneBidAchieved && teamOneScore >= siWinningScore) || (teamTwoScore <= siLosingScore)) {
     self.winningSlot = [NSNumber numberWithInt:0];
   }
-  else if ((teamTwoScore > winningScore && teamSlot == 1) || (teamOneScore <= losingScore)) {
+  else if ((teamTwoBidAchieved && teamTwoScore >= siWinningScore) || (teamOneScore <= siLosingScore)) {
     self.winningSlot = [NSNumber numberWithInt:1];
   }
   
   [self gameComplete];
 }
 
-- (void) openGameForKey:(NSString *)gameKey AndIsNewGame:(BOOL)isNewGame {
+- (void) openGameForKey:(NSString *)key AndIsNewGame:(BOOL)isNewGame {
   self.newGame = isNewGame;
-  
+
   NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
   
-  self.rounds = [NSMutableArray arrayWithArray:[store arrayForKey:ssStoreRounds]];
-  self.winningSlot = [store valueForKey:ssStoreWinningSlot];
+  self.gameKey = key;
+  self.game = [NSMutableDictionary dictionaryWithDictionary:[[store dictionaryForKey:ssStoreGames] objectForKey:self.gameKey]];
+  self.rounds = [NSMutableArray arrayWithArray:[self.game objectForKey:ssStoreRounds]];
+  self.teamOneName.text = [self.game valueForKey:ssStoreNameTeamOne];
+  self.teamTwoName.text = [self.game valueForKey:ssStoreNameTeamTwo];
+  self.winningSlot = [self.game valueForKey:ssStoreWinningSlot];
+  self.lastPlayed = [self.game valueForKey:ssStoreLastPlayed];
+  
+  NSLog(@"self.gameKey: %@", self.gameKey);
+  NSLog(@"self.game: %@", self.game);
 }
 
 - (void) updateRound:(BOOL)updateRound ForTeamSlot:(NSNumber *)teamSlot ForHand:(NSString *) hand AndTricksWon:(NSNumber *)tricksWon {
@@ -108,38 +138,64 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
   NSNumber *bidderPoints = [BidType biddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
   NSNumber *nonBidderPoints = [BidType nonBiddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
 
+  NSString *teamOneBidAttempted = nil;
+  NSString *teamTwoBidAttempted = nil;
+  NSNumber *teamOneBidAchieved = nil;
+  NSNumber *teamTwoBidAchieved = nil;
+  int teamOneTricksWon = 0;
+  int teamTwoTricksWon = 0;
+  int teamOnePointsForRound = 0;
+  int teamTwoPointsForRound = 0;
   int teamOneScore = 0;
   int teamTwoScore = 0;
   
-  if ([self.rounds count] > 0) {
-    // old total
-    teamOneScore = [[[self.rounds objectAtIndex:0] valueForKey:ssTeamOneScore] intValue];
-    teamTwoScore = [[[self.rounds objectAtIndex:0] valueForKey:ssTeamTwoScore] intValue];
-    // plus current round score
-  }
-
-  if ([teamOneSlot isEqual:teamSlot]) {
-    teamOneScore += [bidderPoints intValue];
-    teamTwoScore += [nonBidderPoints intValue];
+  if ([self.slotTeamOne isEqual:teamSlot]) {
+    teamOneBidAttempted = hand;
+    teamOneBidAchieved = [NSNumber numberWithBool:[BidType bidderWonHand:hand WithTricksWon:tricksWon]];
+    teamOneTricksWon = [tricksWon intValue];
+    teamTwoTricksWon = siMaximumTricks - [tricksWon intValue];
+    
+    teamOnePointsForRound += [bidderPoints intValue];
+    teamTwoPointsForRound += [nonBidderPoints intValue];
   }
   else {
-    teamOneScore += [nonBidderPoints intValue];
-    teamTwoScore += [bidderPoints intValue];
+    teamTwoBidAttempted = hand;
+    teamTwoBidAchieved = [NSNumber numberWithBool:[BidType bidderWonHand:hand WithTricksWon:tricksWon]];
+    teamTwoTricksWon = [tricksWon intValue];
+    teamOneTricksWon = siMaximumTricks - [tricksWon intValue];
+
+    teamOnePointsForRound += [nonBidderPoints intValue];
+    teamTwoPointsForRound += [bidderPoints intValue];
   }
+
+  if ([self.rounds count] > 0) {
+    // previous round's sub-total and current round's points
+    teamOneScore = [[[self.rounds objectAtIndex:0] valueForKey:ssSubTotalTeamOne] intValue];
+    teamTwoScore = [[[self.rounds objectAtIndex:0] valueForKey:ssSubTotalTeamTwo] intValue];
+  }
+  
+  teamOneScore += teamOnePointsForRound;
+  teamTwoScore += teamTwoPointsForRound;
+  
   
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
   
-  [dict setObject:teamSlot forKey:ssBiddingTeam];
-  [dict setObject:hand forKey:ssBidAttempted];
-  [dict setObject:tricksWon forKey:ssTricksWon];
-  [dict setObject:[NSNumber numberWithInt:teamOneScore] forKey:ssTeamOneScore];
-  [dict setObject:[NSNumber numberWithInt:teamTwoScore] forKey:ssTeamTwoScore];
+  [dict setValue:teamOneBidAttempted forKey:ssBidTeamOne];
+  [dict setValue:teamTwoBidAttempted forKey:ssBidTeamTwo];
+  [dict setValue:teamOneBidAchieved forKey:ssBidAchievedTeamOne];
+  [dict setValue:teamTwoBidAchieved forKey:ssBidAchievedTeamTwo];
+  [dict setValue:[NSNumber numberWithInt:teamOneTricksWon] forKey:ssTricksWonTeamOne];
+  [dict setValue:[NSNumber numberWithInt:teamTwoTricksWon] forKey:ssTricksWonTeamTwo];
+  [dict setValue:[NSNumber numberWithInt:teamOnePointsForRound] forKey:ssPointsForRoundTeamOne];
+  [dict setValue:[NSNumber numberWithInt:teamTwoPointsForRound] forKey:ssPointsForRoundTeamTwo];
+  [dict setValue:[NSNumber numberWithInt:teamOneScore] forKey:ssSubTotalTeamOne];
+  [dict setValue:[NSNumber numberWithInt:teamTwoScore] forKey:ssSubTotalTeamTwo];
   
   [self.rounds insertObject:dict atIndex:0];
   
   [self.roundsTableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
   
-  [self checkGameCompleteOnBidBySlot:[teamSlot intValue] AndBidSuccessful:[BidType bidderWonHand:hand WithTricksWon:tricksWon] TeamOneScore:teamOneScore TeamTwoScore:teamTwoScore];
+  [self checkForGameOver];
 
   [dict release];
   
@@ -149,8 +205,8 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
 - (void) viewDidLoad {
   [super viewDidLoad];
 
-  self.teamOneSlot = [NSNumber numberWithInt:0];
-  self.teamTwoSlot = [NSNumber numberWithInt:1];
+  self.slotTeamOne = [NSNumber numberWithInt:0];
+  self.slotTeamTwo = [NSNumber numberWithInt:1];
  }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -161,6 +217,8 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
     [self edit:self];
     self.newGame = NO;
   }
+  
+  [self.roundsTableView reloadData];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -168,8 +226,21 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
   
   NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
   
-  [store setObject:self.rounds forKey:ssStoreRounds];
-  [store setObject:self.winningSlot forKey:ssStoreWinningSlot];
+  [self.game setValue:self.rounds forKey:ssStoreRounds];
+  [self.game setValue:self.teamOneName.text forKey:ssStoreNameTeamOne];
+  [self.game setValue:self.teamTwoName.text forKey:ssStoreNameTeamTwo];
+  [self.game setValue:self.winningSlot forKey:ssStoreWinningSlot];
+  [self.game setValue:self.lastPlayed forKey:ssStoreLastPlayed];
+  
+  NSMutableDictionary *gameList = [NSMutableDictionary dictionaryWithDictionary:[store valueForKey:ssStoreGames]];
+  if (gameList == nil) {
+    gameList = [[[NSMutableDictionary alloc] init] autorelease];
+  }
+  [gameList setValue:self.game forKey:self.gameKey];
+  
+  [store setObject:gameList forKey:ssStoreGames];
+  
+  NSLog(@"gameList: %@", gameList);
 }
 
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated {
@@ -200,8 +271,8 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
 
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelEdit)] autorelease];
     
-    self.teamOneOldName = self.teamOneName.text;
-    self.teamTwoOldName = self.teamTwoName.text;
+    self.oldNameTeamOne = self.teamOneName.text;
+    self.oldNameTeamTwo = self.teamTwoName.text;
     
     [self.teamOneName becomeFirstResponder];
   }
@@ -238,10 +309,10 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
   [teamOneResult release];
   
   [rounds release];
-  [teamOneSlot release];
-  [teamTwoSlot release];
-  [teamOneOldName release];
-  [teamTwoOldName release];
+  [slotTeamOne release];
+  [slotTeamTwo release];
+  [oldNameTeamOne release];
+  [oldNameTeamTwo release];
   [winningSlot release];
   
   [super dealloc];
@@ -279,25 +350,27 @@ static NSString *ssStoreWinningSlot = @"Winning Slot";
     cellScoringRound = (CellScoringRound *)cellWrapper.cell;
   }
   
-  NSDictionary *round = [self.rounds objectAtIndex:indexPath.row];
-  NSString *hand = [round valueForKey:ssBidAttempted];
-  NSNumber *tricksWon = [round valueForKey:ssTricksWon];
-  NSNumber *bidderPoints = [BidType biddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
-  NSNumber *nonBidderPoints = [BidType nonBiddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
-  
-  NSNumber *bidderSlot = [round valueForKey:ssBiddingTeam];
-  NSNumber *nonBidderSlot = [[round valueForKey:ssBiddingTeam] isEqual:teamOneSlot] ? teamTwoSlot : teamOneSlot;
+  NSDictionary *r = [self.rounds objectAtIndex:indexPath.row];
 
-  [cellScoringRound setStyleForBidderSlot:bidderSlot NonBidderSlot:nonBidderSlot WhenBidderWon:[BidType bidderWonHand:hand WithTricksWon:tricksWon] AndHandText:[BidType tricksAndSymbolForHand:hand] WithBidderTricksWon:tricksWon AndNonBidderTricksWon:[NSNumber numberWithInt:10 - [tricksWon intValue]] AndBidderPoints:bidderPoints AndNonBidderPoints:nonBidderPoints];
+  NSString *teamOneBidAttempted = [r valueForKey:ssBidTeamOne];
+  NSString *teamTwoBidAttempted = [r valueForKey:ssBidTeamTwo];
+  BOOL teamOneBidAchieved  = [[r valueForKey:ssBidAchievedTeamOne] boolValue];
+  BOOL teamTwoBidAchieved  = [[r valueForKey:ssBidAchievedTeamTwo] boolValue];
   
-  cellScoringRound.pointsTeamOneLabel.text = [[round valueForKey:ssTeamOneScore] stringValue];
-  cellScoringRound.pointsTeamTwoLabel.text = [[round valueForKey:ssTeamTwoScore] stringValue];
+  [cellScoringRound setStyleForTeamOneBidAttempted:teamOneBidAttempted AndTeamOneBidAchieved:teamOneBidAchieved WithTeamTwoBidAttempted:teamTwoBidAttempted AndTeamTwoBidAchieved:teamTwoBidAchieved];
+
+  // set round summary text for each team
+  [cellScoringRound descriptionForTeamSlot:self.slotTeamOne FromTricksWon:[r valueForKey:ssTricksWonTeamOne] AndPoints:[r valueForKey:ssPointsForRoundTeamOne]];
+  [cellScoringRound descriptionForTeamSlot:self.slotTeamTwo FromTricksWon:[r valueForKey:ssTricksWonTeamTwo] AndPoints:[r valueForKey:ssPointsForRoundTeamTwo]];
+
+  cellScoringRound.pointsTeamOneLabel.text = [[r valueForKey:ssSubTotalTeamOne] stringValue];
+  cellScoringRound.pointsTeamTwoLabel.text = [[r valueForKey:ssSubTotalTeamTwo] stringValue];
 
   return cellScoringRound;
 }
 
 - (NSString *) teamNameForSlot:(NSNumber *)slot {
-  if ([slot isEqual:self.teamOneSlot]) {
+  if ([slot isEqual:self.slotTeamOne]) {
     return self.teamOneName.text;
   }
   else {

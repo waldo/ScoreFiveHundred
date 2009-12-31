@@ -22,12 +22,15 @@
   IBOutlet UILabel *teamOneResult;
   IBOutlet UILabel *teamTwoResult;
   
+  NSMutableDictionary *game;
+  NSString *gameKey;
   NSMutableArray *rounds;
-  NSNumber *teamOneSlot;
-  NSNumber *teamTwoSlot;
-  NSString *teamOneOldName;
-  NSString *teamTwoOldName;
+  NSNumber *slotTeamOne;
+  NSNumber *slotTeamTwo;
+  NSString *oldNameTeamOne;
+  NSString *oldNameTeamTwo;
   NSNumber *winningSlot;
+  NSDate *lastPlayed;
   BOOL newGame;
 }
 
@@ -41,18 +44,20 @@
 @property (nonatomic, retain) IBOutlet UILabel *teamOneResult;
 @property (nonatomic, retain) IBOutlet UILabel *teamTwoResult;
 
+@property (nonatomic, retain) NSMutableDictionary *game;
+@property (nonatomic, retain) NSString *gameKey;
 @property (nonatomic, retain) NSMutableArray *rounds;
-@property (nonatomic, retain) NSNumber *teamOneSlot;
-@property (nonatomic, retain) NSNumber *teamTwoSlot;
-@property (nonatomic, retain) NSString *teamOneOldName;
-@property (nonatomic, retain) NSString *teamTwoOldName;
+@property (nonatomic, retain) NSNumber *slotTeamOne;
+@property (nonatomic, retain) NSNumber *slotTeamTwo;
+@property (nonatomic, retain) NSString *oldNameTeamOne;
+@property (nonatomic, retain) NSString *oldNameTeamTwo;
 @property (nonatomic, retain) NSNumber *winningSlot;
 @property (nonatomic, getter=isNewGame) BOOL newGame;
-
+@property (nonatomic, retain) NSDate *lastPlayed;
 
 - (IBAction) edit:(id)sender;
 
-- (void) openGameForKey:(NSString *)gameKey AndIsNewGame:(BOOL)isNewGame;
+- (void) openGameForKey:(NSString *)key AndIsNewGame:(BOOL)isNewGame;
 - (void) updateRound:(BOOL)updateRound ForTeamSlot:(NSNumber *)teamOneOrTwo ForHand:(NSString *) hand AndTricksWon:(NSNumber *)tricksWon;
 
 - (NSString *) teamNameForSlot:(NSNumber *)slot;
