@@ -30,12 +30,15 @@ static NSString *ssPointsForRoundTeamTwo  = @"team two points for round";
 static NSString *ssSubTotalTeamOne        = @"team one sub total";
 static NSString *ssSubTotalTeamTwo        = @"team two sub total";
 
-static NSString *ssStoreGames = @"five hundred games";
-static NSString *ssStoreRounds = @"rounds";
-static NSString *ssStoreNameTeamOne = @"team one name";
-static NSString *ssStoreNameTeamTwo = @"team two name";
-static NSString *ssStoreWinningSlot = @"winning slot";
-static NSString *ssStoreLastPlayed = @"last played";
+// TODO: move data saving to the game list (remove the below static strings)
+static NSString *ssStoreGames         = @"five hundred games";
+static NSString *ssStoreRounds        = @"rounds";
+static NSString *ssStoreNameTeamOne   = @"team one name";
+static NSString *ssStoreNameTeamTwo   = @"team two name";
+static NSString *ssStoreScoreTeamOne  = @"team one score";
+static NSString *ssStoreScoreTeamTwo  = @"team two score";
+static NSString *ssStoreWinningSlot   = @"winning slot";
+static NSString *ssStoreLastPlayed    = @"last played";
 
 static int siMaximumTricks = 10;
 static int siWinningScore = 500;
@@ -225,10 +228,20 @@ static int siLosingScore = -500;
   [super viewWillDisappear:animated];
   
   NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
+
+  NSNumber* teamOneScore = [NSNumber numberWithInt:0];
+  NSNumber* teamTwoScore = [NSNumber numberWithInt:0];
+
+  if ([self.rounds count] > 0) {
+    teamOneScore = [[self.rounds objectAtIndex:0] valueForKey:ssSubTotalTeamOne];
+    teamTwoScore = [[self.rounds objectAtIndex:0] valueForKey:ssSubTotalTeamTwo];
+  }
   
   [self.game setValue:self.rounds forKey:ssStoreRounds];
   [self.game setValue:self.teamOneName.text forKey:ssStoreNameTeamOne];
   [self.game setValue:self.teamTwoName.text forKey:ssStoreNameTeamTwo];
+  [self.game setValue:teamOneScore forKey:ssStoreScoreTeamOne];
+  [self.game setValue:teamTwoScore forKey:ssStoreScoreTeamTwo];
   [self.game setValue:self.winningSlot forKey:ssStoreWinningSlot];
   [self.game setValue:self.lastPlayed forKey:ssStoreLastPlayed];
   
