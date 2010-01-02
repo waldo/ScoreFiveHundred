@@ -16,6 +16,8 @@
 		5B49946710CFEF8E00C24443 /* CellWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B49946610CFEF8E00C24443 /* CellWrapper.m */; };
 		5B49946E10CFF0C700C24443 /* CellBidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B49946D10CFF0C700C24443 /* CellBidType.m */; };
 		5B49947010CFF18000C24443 /* CellBidType.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B49946F10CFF18000C24443 /* CellBidType.xib */; };
+		5B57159610EF0CDE005F2E9F /* BiddingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B57159410EF0CDE005F2E9F /* BiddingViewController.m */; };
+		5B5715A010EF0E18005F2E9F /* BiddingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B57159F10EF0E18005F2E9F /* BiddingView.xib */; };
 		5B78341010EA86570002A237 /* CellGame.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B78340F10EA86570002A237 /* CellGame.xib */; };
 		5B78341310EA8B3A0002A237 /* CellGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B78341210EA8B3A0002A237 /* CellGame.m */; };
 		5B85FB2D10C2D12D006BBE9A /* BidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B85FB2C10C2D12D006BBE9A /* BidType.m */; };
@@ -51,6 +53,9 @@
 		5B49946C10CFF0C700C24443 /* CellBidType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellBidType.h; sourceTree = "<group>"; };
 		5B49946D10CFF0C700C24443 /* CellBidType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellBidType.m; sourceTree = "<group>"; };
 		5B49946F10CFF18000C24443 /* CellBidType.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellBidType.xib; sourceTree = "<group>"; };
+		5B57159310EF0CDE005F2E9F /* BiddingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiddingViewController.h; sourceTree = "<group>"; };
+		5B57159410EF0CDE005F2E9F /* BiddingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiddingViewController.m; sourceTree = "<group>"; };
+		5B57159F10EF0E18005F2E9F /* BiddingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BiddingView.xib; sourceTree = "<group>"; };
 		5B78340F10EA86570002A237 /* CellGame.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellGame.xib; sourceTree = "<group>"; };
 		5B78341110EA8B3A0002A237 /* CellGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellGame.h; sourceTree = "<group>"; };
 		5B78341210EA8B3A0002A237 /* CellGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellGame.m; sourceTree = "<group>"; };
@@ -100,6 +105,8 @@
 				1D3623250D0F684500981E51 /* ScoreFiveHundredAppDelegate.m */,
 				5BA10F8910E2A0DB000A391F /* GameViewController.h */,
 				5BA10F8A10E2A0DB000A391F /* GameViewController.m */,
+				5B57159310EF0CDE005F2E9F /* BiddingViewController.h */,
+				5B57159410EF0CDE005F2E9F /* BiddingViewController.m */,
 				5B49946C10CFF0C700C24443 /* CellBidType.h */,
 				5B49946D10CFF0C700C24443 /* CellBidType.m */,
 				5B78341110EA8B3A0002A237 /* CellGame.h */,
@@ -144,8 +151,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* ScoreFiveHundred-Info.plist */,
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				5B57159F10EF0E18005F2E9F /* BiddingView.xib */,
 				5B49946F10CFF18000C24443 /* CellBidType.xib */,
 				5B78340F10EA86570002A237 /* CellGame.xib */,
 				5BA10F7110E297D8000A391F /* CellScoringRound.xib */,
@@ -239,6 +247,7 @@
 				5B49947010CFF18000C24443 /* CellBidType.xib in Resources */,
 				5BA10F7210E297D8000A391F /* CellScoringRound.xib in Resources */,
 				5B78341010EA86570002A237 /* CellGame.xib in Resources */,
+				5B5715A010EF0E18005F2E9F /* BiddingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +289,7 @@
 				5BA10F6F10E2970F000A391F /* CellScoringRound.m in Sources */,
 				5BA10F8B10E2A0DB000A391F /* GameViewController.m in Sources */,
 				5B78341310EA8B3A0002A237 /* CellGame.m in Sources */,
+				5B57159610EF0CDE005F2E9F /* BiddingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

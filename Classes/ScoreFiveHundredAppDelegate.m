@@ -25,16 +25,13 @@ static NSString *ssStoreLastPlayed    = @"last played";
 @synthesize navigationController;
 
 @synthesize gameListController;
+@synthesize cellWrapper;
 @synthesize gameListTableView;
 
 @synthesize gameController;
 
-@synthesize roundController;
-@synthesize bidSelectionTableView;
-@synthesize cellWrapper;
-@synthesize tricksWonSegmentedControl;
+@synthesize biddingController;
 
-@synthesize bidTypeHands;
 @synthesize currentBidIsWithTeamSlot;
 @synthesize gameKeys;
 @synthesize gameList;
@@ -66,11 +63,11 @@ static NSString *ssStoreLastPlayed    = @"last played";
 
 - (IBAction) saveScore {
   // work out what was clicked
-  NSNumber *tricksWon = [NSNumber numberWithLong:self.tricksWonSegmentedControl.selectedSegmentIndex];
-  NSString *hand = [self.bidTypeHands objectAtIndex:[[self.bidSelectionTableView indexPathForSelectedRow] row]];
+  NSNumber *tricksWon = [self.biddingController tricksWon];
+  NSString *hand = [self.biddingController hand];
 
   // update round gameController
-  [self.gameController updateRound:(BOOL)NO ForTeamSlot:self.currentBidIsWithTeamSlot ForHand:hand AndTricksWon:tricksWon];
+  [self.gameController updateRound:NO ForTeamSlot:self.currentBidIsWithTeamSlot ForHand:hand AndTricksWon:tricksWon];
   
   [self.navigationController popViewControllerAnimated:YES];
 }
@@ -82,20 +79,17 @@ static NSString *ssStoreLastPlayed    = @"last played";
 
 - (void) teamBid:(int)teamSlot {
   self.currentBidIsWithTeamSlot = [NSNumber numberWithInt:teamSlot];
-  self.roundController.title = [NSString stringWithFormat:@"%@ Bid", [self.gameController teamNameForSlot:self.currentBidIsWithTeamSlot]];
-  [self.bidSelectionTableView deselectRowAtIndexPath:[self.bidSelectionTableView indexPathForSelectedRow] animated:NO];
-  [self.tricksWonSegmentedControl setSelectedSegmentIndex:5];
-  [self.navigationController pushViewController:self.roundController animated:YES];
+  self.biddingController.title = [NSString stringWithFormat:@"%@ Bid", [self.gameController teamNameForSlot:self.currentBidIsWithTeamSlot]];
+  [self.navigationController pushViewController:self.biddingController animated:YES];
 }
 
 - (void) applicationDidFinishLaunching:(UIApplication *)application {
-  self.bidTypeHands = [BidType orderedHands];
 
   [self.window addSubview:[self.navigationController view]];
   [self.window makeKeyAndVisible];
 }
 
-// TODO: split game list and bids into own custom view controllers
+// TODO: split game list into own custom view controller
 - (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
   if ([self.gameListController isEqual:viewController]) {
     NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
@@ -110,103 +104,68 @@ static NSString *ssStoreLastPlayed    = @"last played";
 // UITableView delegate methods
 //
 
-// TODO: split game list and bids into own custom view controllers
+// TODO: split game list into own custom view controller
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if ([self.gameListTableView isEqual:tableView]) {
     [self viewGameForKey:[self.gameKeys objectAtIndex:indexPath.row] AndIsNewGame:NO];
   }
 }
 
-// TODO: split game list and bids into own custom view controllers
+// TODO: split game list into own custom view controller
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   int count = 0;
   
   if ([self.gameListTableView isEqual:tableView]) {
     count = [self.gameKeys count];
   }
-  else if ([self.bidSelectionTableView isEqual:tableView]) {
-    count = [self.bidTypeHands count];
-  }
   
   return count;
 }
 
-// TODO: split game list and bids into own custom view controllers
+// TODO: split game list into own custom view controller
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  if ([self.gameListTableView isEqual:tableView]) {
-    static NSString *CellIdentifier = @"CellGame";
-    
-    CellGame *cellGame = (CellGame *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cellGame == nil) {
-      [self.cellWrapper loadMyNibFile:CellIdentifier];
-      cellGame = (CellGame *)self.cellWrapper.cell;
-    }
-    
-    NSDictionary *game = [self.gameList valueForKey:[self.gameKeys objectAtIndex:indexPath.row]];
-    
-    cellGame.nameTeamOne.text = [game valueForKey:ssStoreNameTeamOne];
-    cellGame.nameTeamTwo.text = [game valueForKey:ssStoreNameTeamTwo];
-    cellGame.pointsTeamOne.text = [[game valueForKey:ssStoreScoreTeamOne] stringValue];
-    cellGame.pointsTeamTwo.text = [[game valueForKey:ssStoreScoreTeamTwo] stringValue];
-
-    // show icon for winning team
-    NSNumber* winningSlot = [game valueForKey:ssStoreWinningSlot];
-    if (winningSlot == nil) {
-      cellGame.symbolResultTeamOne.hidden = YES;
-      cellGame.symbolResultTeamTwo.hidden = YES;
-    }
-    else if (0 == [winningSlot intValue]) {
-      cellGame.symbolResultTeamOne.hidden = NO;
-    }
-    else if (1 == [winningSlot intValue]) {
-      cellGame.symbolResultTeamTwo.hidden = NO;
-    }
-
-    cellGame.dateLastPlayed.text = [game valueForKey:ssStoreLastPlayed];
-    
-    return cellGame;
+  //if ([self.gameListTableView isEqual:tableView]) {
+  static NSString *CellIdentifier = @"CellGame";
+  
+  CellGame *cellGame = (CellGame *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  
+  if (cellGame == nil) {
+    [self.cellWrapper loadMyNibFile:CellIdentifier];
+    cellGame = (CellGame *)self.cellWrapper.cell;
   }
-  else { //if ([self.bidSelectionTableView isEqual:tableView]) {
-    static NSString *CellIdentifier = @"CellBidType";
-    
-    CellBidType *cellBidType = (CellBidType *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cellBidType == nil) {
-      [self.cellWrapper loadMyNibFile:CellIdentifier];
-      cellBidType = (CellBidType *)self.cellWrapper.cell;
-    }
-    
-    NSString *key = [self.bidTypeHands objectAtIndex:indexPath.row];
-    
-    cellBidType.symbolLabel.text = [BidType tricksAndSymbolForHand:key];
+  
+  NSDictionary *game = [self.gameList valueForKey:[self.gameKeys objectAtIndex:indexPath.row]];
+  
+  cellGame.nameTeamOne.text = [game valueForKey:ssStoreNameTeamOne];
+  cellGame.nameTeamTwo.text = [game valueForKey:ssStoreNameTeamTwo];
+  cellGame.pointsTeamOne.text = [[game valueForKey:ssStoreScoreTeamOne] stringValue];
+  cellGame.pointsTeamTwo.text = [[game valueForKey:ssStoreScoreTeamTwo] stringValue];
 
-    if ([[BidType suitColourForHand:key] isEqual:@"red" ]) {
-      cellBidType.symbolLabel.textColor = [UIColor redColor];
-      cellBidType.symbolLabel.highlightedTextColor = [UIColor redColor];
-    }
-    else if ([[BidType suitColourForHand:key] isEqual:@"black" ]) {
-      cellBidType.symbolLabel.textColor = [UIColor blackColor];
-      cellBidType.symbolLabel.highlightedTextColor = [UIColor blackColor];
-    }
-    
-    cellBidType.descriptionLabel.text = [BidType descriptionForHand:key];
-    cellBidType.pointsLabel.text = [BidType pointsStringForHand:key];
-
-    return cellBidType;
+  // show icon for winning team
+  NSNumber* winningSlot = [game valueForKey:ssStoreWinningSlot];
+  if (winningSlot == nil) {
+    cellGame.symbolResultTeamOne.hidden = YES;
+    cellGame.symbolResultTeamTwo.hidden = YES;
   }
+  else if (0 == [winningSlot intValue]) {
+    cellGame.symbolResultTeamOne.hidden = NO;
+  }
+  else if (1 == [winningSlot intValue]) {
+    cellGame.symbolResultTeamTwo.hidden = NO;
+  }
+
+  cellGame.dateLastPlayed.text = [game valueForKey:ssStoreLastPlayed];
+  
+  return cellGame;
 }
 
 - (void) dealloc {
   [window release];
   [navigationController release];
   [gameListController release];
-  [gameController release];
-  [roundController release];
-  [bidSelectionTableView release];
   [cellWrapper release];
-  [tricksWonSegmentedControl release];
-  [bidTypeHands release];
+  [gameController release];
+  [biddingController release];
 
   [super dealloc];
 }

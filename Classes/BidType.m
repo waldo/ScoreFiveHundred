@@ -23,7 +23,7 @@ static NSString *ssVariation = @"variation";
 static NSString *ssVariationRegular = @"regular";
 static NSString *ssVariationMisere = @"misére";
 
-+ (void)initialize {
++ (void) initialize {
   if (!allTypes) {
     NSArray *tricks = [NSArray arrayWithObjects:
                        [NSNumber numberWithInt: 6],
@@ -91,7 +91,7 @@ static NSString *ssVariationMisere = @"misére";
                 forKey:@"OM"
      ];    
     
-    orderedHands = [NSArray arrayWithObjects:
+    orderedHands = [[NSArray alloc] initWithObjects:
                    @"6S",
                    @"6C",
                    @"6D",
