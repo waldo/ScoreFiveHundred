@@ -9,15 +9,6 @@
 #import "ScoreFiveHundredAppDelegate.h"
 
 @implementation ScoreFiveHundredAppDelegate
-// MARK: static
-static NSString *ssStoreGames         = @"five hundred games";
-//static NSString *ssStoreRounds        = @"rounds";
-static NSString *ssStoreNameTeamOne   = @"team one name";
-static NSString *ssStoreNameTeamTwo   = @"team two name";
-static NSString *ssStoreScoreTeamOne  = @"team one score";
-static NSString *ssStoreScoreTeamTwo  = @"team two score";
-static NSString *ssStoreWinningSlot   = @"winning slot";
-static NSString *ssStoreLastPlayed    = @"last played";
 
 // MARK: synthesize
 @synthesize window;
@@ -25,22 +16,14 @@ static NSString *ssStoreLastPlayed    = @"last played";
 @synthesize navigationController;
 
 @synthesize gameListController;
-@synthesize cellWrapper;
-@synthesize gameListTableView;
-
 @synthesize gameController;
-
 @synthesize biddingController;
-
-@synthesize gameKeys;
-@synthesize gameList;
 
 
 - (void) dealloc {
   [window release];
   [navigationController release];
   [gameListController release];
-  [cellWrapper release];
   [gameController release];
   [biddingController release];
   
@@ -56,7 +39,7 @@ static NSString *ssStoreLastPlayed    = @"last played";
 }
 
 - (IBAction) newGame {
-  [self viewGameForKey:[ScoreFiveHundredAppDelegate uniqueId] AndIsNewGame:YES];
+  [self viewGame:nil WithKey:[ScoreFiveHundredAppDelegate uniqueId] AndIsNewGame:YES];
 }
 
 - (IBAction) cancelScore {
@@ -78,8 +61,12 @@ static NSString *ssStoreLastPlayed    = @"last played";
   [self.navigationController pushViewController:self.biddingController animated:YES];
 }
 
-- (void) viewGameForKey:(NSString*)key AndIsNewGame:(BOOL)newGame {
-  [self.gameController openGameForKey:key AndIsNewGame:newGame];
+- (void) saveGame:(NSDictionary*)game ForKey:(NSString*)key {
+  [self.gameListController saveGame:game ForKey:key];
+}
+
+- (void) viewGame:(NSDictionary*)gameToOpen WithKey:(NSString*)key AndIsNewGame:(BOOL)newGame {
+  [self.gameController openGame:gameToOpen WithKey:key AndIsNewGame:newGame];
   [self.navigationController pushViewController:self.gameController animated:YES];
 }  
 
@@ -87,76 +74,6 @@ static NSString *ssStoreLastPlayed    = @"last played";
 
   [self.window addSubview:[self.navigationController view]];
   [self.window makeKeyAndVisible];
-}
-
-// TODO: split game list into own custom view controller
-- (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-  if ([self.gameListController isEqual:viewController]) {
-    NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
-    self.gameList = [NSMutableDictionary dictionaryWithDictionary:[store dictionaryForKey:ssStoreGames]];
-    self.gameKeys = [NSMutableArray arrayWithArray:[self.gameList allKeys]];  
-    
-    [self.gameListTableView reloadData];
-  }
-}
-
-//
-// UITableView delegate methods
-//
-
-// TODO: split game list into own custom view controller
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  if ([self.gameListTableView isEqual:tableView]) {
-    [self viewGameForKey:[self.gameKeys objectAtIndex:indexPath.row] AndIsNewGame:NO];
-  }
-}
-
-// TODO: split game list into own custom view controller
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  int count = 0;
-  
-  if ([self.gameListTableView isEqual:tableView]) {
-    count = [self.gameKeys count];
-  }
-  
-  return count;
-}
-
-// TODO: split game list into own custom view controller
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  //if ([self.gameListTableView isEqual:tableView]) {
-  static NSString *CellIdentifier = @"CellGame";
-  
-  CellGame *cellGame = (CellGame *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  
-  if (cellGame == nil) {
-    [self.cellWrapper loadMyNibFile:CellIdentifier];
-    cellGame = (CellGame *)self.cellWrapper.cell;
-  }
-  
-  NSDictionary *game = [self.gameList valueForKey:[self.gameKeys objectAtIndex:indexPath.row]];
-  
-  cellGame.nameTeamOne.text = [game valueForKey:ssStoreNameTeamOne];
-  cellGame.nameTeamTwo.text = [game valueForKey:ssStoreNameTeamTwo];
-  cellGame.pointsTeamOne.text = [[game valueForKey:ssStoreScoreTeamOne] stringValue];
-  cellGame.pointsTeamTwo.text = [[game valueForKey:ssStoreScoreTeamTwo] stringValue];
-
-  // show icon for winning team
-  NSNumber* winningSlot = [game valueForKey:ssStoreWinningSlot];
-  if (winningSlot == nil) {
-    cellGame.symbolResultTeamOne.hidden = YES;
-    cellGame.symbolResultTeamTwo.hidden = YES;
-  }
-  else if (0 == [winningSlot intValue]) {
-    cellGame.symbolResultTeamOne.hidden = NO;
-  }
-  else if (1 == [winningSlot intValue]) {
-    cellGame.symbolResultTeamTwo.hidden = NO;
-  }
-
-  cellGame.dateLastPlayed.text = [game valueForKey:ssStoreLastPlayed];
-  
-  return cellGame;
 }
 
 @end

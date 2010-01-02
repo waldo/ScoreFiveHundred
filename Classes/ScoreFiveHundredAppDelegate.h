@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GameListViewController.h"
 #import "GameViewController.h"
 #import "BiddingViewController.h"
 #import "CellWrapper.h"
@@ -17,35 +18,19 @@
   
   IBOutlet UINavigationController *navigationController;
   
-  // Game list view
-  IBOutlet UIViewController *gameListController;
-  IBOutlet CellWrapper *cellWrapper;
-  IBOutlet UITableView *gameListTableView;
-  
-  // Game view
+  IBOutlet GameListViewController *gameListController;
   IBOutlet GameViewController* gameController;
-  
-  // Bidding view
   IBOutlet BiddingViewController *biddingController;
-  
-  NSMutableArray* gameKeys;
-  NSMutableDictionary* gameList;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
-@property (nonatomic, retain) IBOutlet UIViewController *gameListController;
-@property (nonatomic, retain) IBOutlet CellWrapper *cellWrapper;
-@property (nonatomic, retain) IBOutlet UITableView *gameListTableView;
-
+@property (nonatomic, retain) IBOutlet GameListViewController *gameListController;
 @property (nonatomic, retain) IBOutlet GameViewController* gameController;
-
 @property (nonatomic, retain) IBOutlet BiddingViewController *biddingController;
 
-@property (nonatomic, retain) NSMutableArray* gameKeys;
-@property (nonatomic, retain) NSMutableDictionary* gameList;
 
 + (NSString *) uniqueId;
 
@@ -54,7 +39,7 @@
 - (IBAction) saveScore;
 
 - (void) bidForTeamName:(NSString*)teamName;
-- (void) viewGameForKey:(NSString*)key AndIsNewGame:(BOOL)newGame;
+- (void) viewGame:(NSDictionary*)gameToOpen WithKey:(NSString*)key AndIsNewGame:(BOOL)newGame;
+- (void) saveGame:(NSDictionary*)game ForKey:(NSString*)key;
 
 @end
-

@@ -14,7 +14,7 @@
 
 @interface GameViewController : UIViewController {
   IBOutlet UITableView *roundsTableView;
-  CellWrapper *cellWrapper;
+  IBOutlet CellWrapper *cellWrapper;
   IBOutlet UIBarButtonItem *editButton;
   IBOutlet UITextField *teamOneName;
   IBOutlet UITextField *teamTwoName;
@@ -66,7 +66,7 @@
 - (IBAction) edit:(id)sender;
 - (IBAction) bid:(id)sender;
 
-- (void) openGameForKey:(NSString *)key AndIsNewGame:(BOOL)isNewGame;
+- (void) openGame:(NSDictionary*)gameToOpen WithKey:(NSString *)key AndIsNewGame:(BOOL)isNewGame;
 - (void) updateRoundWithHand:(NSString*)hand AndTricksWon:(NSNumber*)tricksWon;
 
 @end

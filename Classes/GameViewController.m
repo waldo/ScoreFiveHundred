@@ -20,6 +20,14 @@
 @implementation GameViewController
 
 // MARK: static
+static NSString *ssStoreRounds        = @"rounds";
+static NSString *ssStoreNameTeamOne   = @"team one name";
+static NSString *ssStoreNameTeamTwo   = @"team two name";
+static NSString *ssStoreScoreTeamOne  = @"team one score";
+static NSString *ssStoreScoreTeamTwo  = @"team two score";
+static NSString *ssStoreWinningSlot   = @"winning slot";
+static NSString *ssStoreLastPlayed    = @"last played";
+
 static NSString *ssBidTeamOne             = @"team one bid";
 static NSString *ssBidTeamTwo             = @"team two bid";
 static NSString *ssBidAchievedTeamOne     = @"team one bid achieved";
@@ -30,16 +38,6 @@ static NSString *ssPointsForRoundTeamOne  = @"team one points for round";
 static NSString *ssPointsForRoundTeamTwo  = @"team two points for round";
 static NSString *ssSubTotalTeamOne        = @"team one sub total";
 static NSString *ssSubTotalTeamTwo        = @"team two sub total";
-
-// TODO: move data saving to the game list (remove the below static strings)
-static NSString *ssStoreGames         = @"five hundred games";
-static NSString *ssStoreRounds        = @"rounds";
-static NSString *ssStoreNameTeamOne   = @"team one name";
-static NSString *ssStoreNameTeamTwo   = @"team two name";
-static NSString *ssStoreScoreTeamOne  = @"team one score";
-static NSString *ssStoreScoreTeamTwo  = @"team two score";
-static NSString *ssStoreWinningSlot   = @"winning slot";
-static NSString *ssStoreLastPlayed    = @"last played";
 
 static int siMaximumTricks = 10;
 static int siWinningScore = 500;
@@ -162,13 +160,11 @@ static int siLosingScore = -500;
   [self gameComplete];
 }
 
-- (void) openGameForKey:(NSString *)key AndIsNewGame:(BOOL)isNewGame {
+- (void) openGame:(NSDictionary*)gameToOpen WithKey:(NSString *)key AndIsNewGame:(BOOL)isNewGame {
   self.newGame = isNewGame;
 
-  NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
-  
   self.gameKey = key;
-  self.game = [NSMutableDictionary dictionaryWithDictionary:[[store dictionaryForKey:ssStoreGames] objectForKey:self.gameKey]];
+  self.game = [NSMutableDictionary dictionaryWithDictionary:gameToOpen];
   self.rounds = [NSMutableArray arrayWithArray:[self.game objectForKey:ssStoreRounds]];
   self.curNameTeamOne = [self.game valueForKey:ssStoreNameTeamOne];
   self.curNameTeamTwo = [self.game valueForKey:ssStoreNameTeamTwo];
@@ -276,8 +272,6 @@ static int siLosingScore = -500;
 
 - (void) viewWillDisappear:(BOOL)animated {
   [super viewWillDisappear:animated];
-  
-  NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
 
   NSNumber* teamOneScore = [NSNumber numberWithInt:0];
   NSNumber* teamTwoScore = [NSNumber numberWithInt:0];
@@ -295,15 +289,11 @@ static int siLosingScore = -500;
   [self.game setValue:self.winningSlot forKey:ssStoreWinningSlot];
   [self.game setValue:self.lastPlayed forKey:ssStoreLastPlayed];
   
-  NSMutableDictionary *gameList = [NSMutableDictionary dictionaryWithDictionary:[store valueForKey:ssStoreGames]];
-  if (gameList == nil) {
-    gameList = [[[NSMutableDictionary alloc] init] autorelease];
-  }
-  [gameList setValue:self.game forKey:self.gameKey];
+  ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
   
-  [store setObject:gameList forKey:ssStoreGames];
+  [app saveGame:self.game ForKey:self.gameKey];
   
-  NSLog(@"gameList: %@", gameList);
+  NSLog(@"self.game: %@", self.game);
 }
 
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated {
