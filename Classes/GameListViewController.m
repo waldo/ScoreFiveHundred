@@ -41,7 +41,13 @@ static NSString *ssStoreLastPlayed    = @"last played";
 
   NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
   
-  [store setObject:gameList forKey:ssStoreGames];  
+  [store setObject:self.gameList forKey:ssStoreGames];
+  
+  self.gameKeys = [NSMutableArray arrayWithArray:[self.gameList allKeys]];    
+  [self.gameListTableView reloadData];
+  
+  NSLog(@"self.gameKeys: %@", self.gameKeys);
+  NSLog(@"self.gameList: %@", self.gameList);
 }
 
 // MARK: View
