@@ -32,10 +32,20 @@ static NSString *ssStoreLastPlayed    = @"last played";
 
 @synthesize biddingController;
 
-@synthesize currentBidIsWithTeamSlot;
 @synthesize gameKeys;
 @synthesize gameList;
 
+
+- (void) dealloc {
+  [window release];
+  [navigationController release];
+  [gameListController release];
+  [cellWrapper release];
+  [gameController release];
+  [biddingController release];
+  
+  [super dealloc];
+}
 
 + (NSString *) uniqueId {
   CFUUIDRef uniqueId = CFUUIDCreate(NULL);
@@ -49,14 +59,6 @@ static NSString *ssStoreLastPlayed    = @"last played";
   [self viewGameForKey:[ScoreFiveHundredAppDelegate uniqueId] AndIsNewGame:YES];
 }
 
-- (IBAction) teamOneBid {
-  [self teamBid:0];
-}
-
-- (IBAction) teamTwoBid {
-  [self teamBid:1];
-}
-
 - (IBAction) cancelScore {
   [self.navigationController popViewControllerAnimated:YES];
 }
@@ -66,22 +68,20 @@ static NSString *ssStoreLastPlayed    = @"last played";
   NSNumber *tricksWon = [self.biddingController tricksWon];
   NSString *hand = [self.biddingController hand];
 
-  // update round gameController
-  [self.gameController updateRound:NO ForTeamSlot:self.currentBidIsWithTeamSlot ForHand:hand AndTricksWon:tricksWon];
+  [self.gameController updateRoundWithHand:hand AndTricksWon:tricksWon];
   
   [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void) bidForTeamName:(NSString*)teamName {
+  self.biddingController.title = [NSString stringWithFormat:@"%@ Bid", teamName];
+  [self.navigationController pushViewController:self.biddingController animated:YES];
 }
 
 - (void) viewGameForKey:(NSString*)key AndIsNewGame:(BOOL)newGame {
   [self.gameController openGameForKey:key AndIsNewGame:newGame];
   [self.navigationController pushViewController:self.gameController animated:YES];
 }  
-
-- (void) teamBid:(int)teamSlot {
-  self.currentBidIsWithTeamSlot = [NSNumber numberWithInt:teamSlot];
-  self.biddingController.title = [NSString stringWithFormat:@"%@ Bid", [self.gameController teamNameForSlot:self.currentBidIsWithTeamSlot]];
-  [self.navigationController pushViewController:self.biddingController animated:YES];
-}
 
 - (void) applicationDidFinishLaunching:(UIApplication *)application {
 
@@ -159,14 +159,4 @@ static NSString *ssStoreLastPlayed    = @"last played";
   return cellGame;
 }
 
-- (void) dealloc {
-  [window release];
-  [navigationController release];
-  [gameListController release];
-  [cellWrapper release];
-  [gameController release];
-  [biddingController release];
-
-  [super dealloc];
-}
 @end

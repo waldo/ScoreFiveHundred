@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+@class ScoreFiveHundredAppDelegate;
 #import "BidType.h"
 #import "CellWrapper.h"
 #import "CellScoringRound.h"
@@ -29,9 +30,12 @@
   NSNumber *slotTeamTwo;
   NSString *oldNameTeamOne;
   NSString *oldNameTeamTwo;
+  NSString* curNameTeamOne;
+  NSString* curNameTeamTwo;
   NSNumber *winningSlot;
   NSDate *lastPlayed;
   BOOL newGame;
+  NSNumber* currentBiddingTeamSlot;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *roundsTableView;
@@ -51,15 +55,18 @@
 @property (nonatomic, retain) NSNumber *slotTeamTwo;
 @property (nonatomic, retain) NSString *oldNameTeamOne;
 @property (nonatomic, retain) NSString *oldNameTeamTwo;
+@property (nonatomic, retain) NSString* curNameTeamOne;
+@property (nonatomic, retain) NSString* curNameTeamTwo;
 @property (nonatomic, retain) NSNumber *winningSlot;
-@property (nonatomic, getter=isNewGame) BOOL newGame;
 @property (nonatomic, retain) NSDate *lastPlayed;
+@property (nonatomic, getter=isNewGame) BOOL newGame;
+@property (nonatomic, retain) NSNumber* currentBiddingTeamSlot;
+
 
 - (IBAction) edit:(id)sender;
+- (IBAction) bid:(id)sender;
 
 - (void) openGameForKey:(NSString *)key AndIsNewGame:(BOOL)isNewGame;
-- (void) updateRound:(BOOL)updateRound ForTeamSlot:(NSNumber *)teamOneOrTwo ForHand:(NSString *) hand AndTricksWon:(NSNumber *)tricksWon;
-
-- (NSString *) teamNameForSlot:(NSNumber *)slot;
+- (void) updateRoundWithHand:(NSString*)hand AndTricksWon:(NSNumber*)tricksWon;
 
 @end

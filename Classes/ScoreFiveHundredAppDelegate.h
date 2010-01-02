@@ -23,12 +23,11 @@
   IBOutlet UITableView *gameListTableView;
   
   // Game view
-  IBOutlet GameViewController *gameController;
+  IBOutlet GameViewController* gameController;
   
   // Bidding view
   IBOutlet BiddingViewController *biddingController;
   
-  NSNumber *currentBidIsWithTeamSlot;
   NSMutableArray* gameKeys;
   NSMutableDictionary* gameList;
 }
@@ -41,24 +40,21 @@
 @property (nonatomic, retain) IBOutlet CellWrapper *cellWrapper;
 @property (nonatomic, retain) IBOutlet UITableView *gameListTableView;
 
-@property (nonatomic, retain) IBOutlet GameViewController *gameController;
+@property (nonatomic, retain) IBOutlet GameViewController* gameController;
 
 @property (nonatomic, retain) IBOutlet BiddingViewController *biddingController;
 
-@property (nonatomic, retain) NSNumber *currentBidIsWithTeamSlot;
 @property (nonatomic, retain) NSMutableArray* gameKeys;
 @property (nonatomic, retain) NSMutableDictionary* gameList;
 
 + (NSString *) uniqueId;
 
 - (IBAction) newGame;
-- (IBAction) teamOneBid;
-- (IBAction) teamTwoBid;
 - (IBAction) cancelScore;
 - (IBAction) saveScore;
 
+- (void) bidForTeamName:(NSString*)teamName;
 - (void) viewGameForKey:(NSString*)key AndIsNewGame:(BOOL)newGame;
-- (void) teamBid:(int)teamSlot;
 
 @end
 

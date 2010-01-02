@@ -6,6 +6,7 @@
 //
 
 #import "GameViewController.h"
+#import "ScoreFiveHundredAppDelegate.h"
 
 @interface GameViewController()
 
@@ -62,13 +63,55 @@ static int siLosingScore = -500;
 @synthesize slotTeamTwo;
 @synthesize oldNameTeamOne;
 @synthesize oldNameTeamTwo;
+@synthesize curNameTeamOne;
+@synthesize curNameTeamTwo;
 @synthesize winningSlot;
 @synthesize lastPlayed;
 @synthesize newGame;
+@synthesize currentBiddingTeamSlot;
 
+- (void) dealloc {  
+  [roundsTableView release];
+  [cellWrapper release];
+  [editButton release];
+  [teamOneName release];
+  [teamTwoName release];
+  [teamOneBid release];
+  [teamTwoBid release];
+  [teamOneResult release];
+  [teamOneResult release];
+  
+  [rounds release];
+  [slotTeamOne release];
+  [slotTeamTwo release];
+  [oldNameTeamOne release];
+  [oldNameTeamTwo release];
+  [curNameTeamOne release];
+  [curNameTeamTwo release];
+  [winningSlot release];
+  
+  [super dealloc];
+}
 
 - (IBAction) edit:(id)sender {
   [self setEditing:!self.editing animated:YES];
+}
+
+- (IBAction) bid:(id)sender {
+  NSString* teamName = nil;
+
+  if ([self.teamOneBid isEqual:sender]) {
+    self.currentBiddingTeamSlot = slotTeamOne;
+    teamName = self.curNameTeamOne;
+  }
+  else if ([self.teamTwoBid isEqual:sender]) {
+    self.currentBiddingTeamSlot = slotTeamTwo;
+    teamName = self.curNameTeamTwo;
+  }
+
+  ScoreFiveHundredAppDelegate *app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
+
+  [app bidForTeamName:teamName];
 }
 
 - (void) cancelEdit {
@@ -127,8 +170,8 @@ static int siLosingScore = -500;
   self.gameKey = key;
   self.game = [NSMutableDictionary dictionaryWithDictionary:[[store dictionaryForKey:ssStoreGames] objectForKey:self.gameKey]];
   self.rounds = [NSMutableArray arrayWithArray:[self.game objectForKey:ssStoreRounds]];
-  self.teamOneName.text = [self.game valueForKey:ssStoreNameTeamOne];
-  self.teamTwoName.text = [self.game valueForKey:ssStoreNameTeamTwo];
+  self.curNameTeamOne = [self.game valueForKey:ssStoreNameTeamOne];
+  self.curNameTeamTwo = [self.game valueForKey:ssStoreNameTeamTwo];
   self.winningSlot = [self.game valueForKey:ssStoreWinningSlot];
   self.lastPlayed = [self.game valueForKey:ssStoreLastPlayed];
   
@@ -136,7 +179,7 @@ static int siLosingScore = -500;
   NSLog(@"self.game: %@", self.game);
 }
 
-- (void) updateRound:(BOOL)updateRound ForTeamSlot:(NSNumber *)teamSlot ForHand:(NSString *) hand AndTricksWon:(NSNumber *)tricksWon {
+- (void) updateRoundWithHand:(NSString*)hand AndTricksWon:(NSNumber*)tricksWon {
   // create a new round
   NSNumber *bidderPoints = [BidType biddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
   NSNumber *nonBidderPoints = [BidType nonBiddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
@@ -152,7 +195,7 @@ static int siLosingScore = -500;
   int teamOneScore = 0;
   int teamTwoScore = 0;
   
-  if ([self.slotTeamOne isEqual:teamSlot]) {
+  if ([self.slotTeamOne isEqual:self.currentBiddingTeamSlot]) {
     teamOneBidAttempted = hand;
     teamOneBidAchieved = [NSNumber numberWithBool:[BidType bidderWonHand:hand WithTricksWon:tricksWon]];
     teamOneTricksWon = [tricksWon intValue];
@@ -210,7 +253,16 @@ static int siLosingScore = -500;
 
   self.slotTeamOne = [NSNumber numberWithInt:0];
   self.slotTeamTwo = [NSNumber numberWithInt:1];
- }
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  
+  self.teamOneName.text = self.curNameTeamOne;
+  self.teamTwoName.text = self.curNameTeamTwo;
+  
+  [self.roundsTableView reloadData];
+}
 
 - (void) viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
@@ -219,9 +271,7 @@ static int siLosingScore = -500;
     // if edit gets called before the view is loaded then the placeholder text position gets screwed up
     [self edit:self];
     self.newGame = NO;
-  }
-  
-  [self.roundsTableView reloadData];
+  }  
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -296,6 +346,9 @@ static int siLosingScore = -500;
     [self gameComplete];
     self.teamOneName.borderStyle = UITextBorderStyleNone;
     self.teamTwoName.borderStyle = UITextBorderStyleNone;
+    
+    self.curNameTeamOne = self.teamOneName.text;
+    self.curNameTeamTwo = self.teamTwoName.text;
 
     rectOne.size.width -= growTextFieldsBy;
     rectOne.origin.x += growTextFieldsBy;
@@ -310,30 +363,7 @@ static int siLosingScore = -500;
   [UIView commitAnimations];
 }
 
-- (void) dealloc {  
-  [roundsTableView release];
-  [cellWrapper release];
-  [editButton release];
-  [teamOneName release];
-  [teamTwoName release];
-  [teamOneBid release];
-  [teamTwoBid release];
-  [teamOneResult release];
-  [teamOneResult release];
-  
-  [rounds release];
-  [slotTeamOne release];
-  [slotTeamTwo release];
-  [oldNameTeamOne release];
-  [oldNameTeamTwo release];
-  [winningSlot release];
-  
-  [super dealloc];
-}
-
-//
-// TextField delegate methods
-//
+// MARK: TextField delegate
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
   if ([self.teamOneName isEqual:textField]) {
     [self.teamTwoName becomeFirstResponder];
@@ -346,9 +376,7 @@ static int siLosingScore = -500;
   return YES;
 }
 
-//
-// UITableView delegate methods
-//
+// MARK: UITableView delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return [self.rounds count];
 }
