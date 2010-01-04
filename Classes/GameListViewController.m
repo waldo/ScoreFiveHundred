@@ -14,7 +14,7 @@
 
 // MARK: static
 static NSString *ssStoreGames         = @"five hundred games";
-//static NSString *ssStoreRounds        = @"rounds";
+static NSString *ssStoreRounds        = @"rounds";
 static NSString *ssStoreNameTeamOne   = @"team one name";
 static NSString *ssStoreNameTeamTwo   = @"team two name";
 static NSString *ssStoreScoreTeamOne  = @"team one score";
@@ -37,7 +37,16 @@ static NSString *ssStoreLastPlayed    = @"last played";
 }
 
 - (void) saveGame:(NSDictionary *)game ForKey:(NSString *)key {
-  [self.gameList setObject:game forKey:key];
+  if (
+      [[game objectForKey:ssStoreRounds] count]       == 0 && 
+      [[game objectForKey:ssStoreNameTeamOne] length] == 0 && 
+      [[game objectForKey:ssStoreNameTeamTwo] length] == 0
+      ) {
+    [self.gameList removeObjectForKey:key];
+  }
+  else {
+    [self.gameList setObject:game forKey:key];
+  }
 
   NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
   
@@ -45,9 +54,6 @@ static NSString *ssStoreLastPlayed    = @"last played";
   
   self.gameKeys = [NSMutableArray arrayWithArray:[self.gameList allKeys]];    
   [self.gameListTableView reloadData];
-  
-  NSLog(@"self.gameKeys: %@", self.gameKeys);
-  NSLog(@"self.gameList: %@", self.gameList);
 }
 
 // MARK: View
