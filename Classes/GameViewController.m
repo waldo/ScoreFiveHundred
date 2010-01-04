@@ -408,15 +408,6 @@ static int siLosingScore = -500;
   return cellScoringRound;
 }
 
-- (NSString *) teamNameForSlot:(NSNumber *)slot {
-  if ([slot isEqual:self.slotTeamOne]) {
-    return self.teamOneName.text;
-  }
-  else {
-    return self.teamTwoName.text;
-  }
-}
-
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   // never selectable
   return nil;

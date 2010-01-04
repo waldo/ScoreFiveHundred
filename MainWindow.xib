@@ -12,6 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="125"/>
 			<integer value="19"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -62,7 +63,12 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIViewController" id="905258217">
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="1054159023">
+							<reference key="IBUINavigationBar"/>
 							<string key="IBUITitle">Game List</string>
+							<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="812727405">
+								<string key="IBUITitle">Edit</string>
+								<int key="IBUIStyle">1</int>
+							</object>
 							<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="835463469">
 								<int key="IBUIStyle">1</int>
 								<int key="IBUISystemItemIdentifier">4</int>
@@ -205,6 +211,22 @@
 					</object>
 					<int key="connectionID">124</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">edit:</string>
+						<reference key="source" ref="812727405"/>
+						<reference key="destination" ref="905258217"/>
+					</object>
+					<int key="connectionID">126</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">editButton</string>
+						<reference key="source" ref="905258217"/>
+						<reference key="destination" ref="812727405"/>
+					</object>
+					<int key="connectionID">127</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -266,6 +288,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="835463469"/>
+							<reference ref="812727405"/>
 						</object>
 						<reference key="parent" ref="905258217"/>
 					</object>
@@ -326,6 +349,11 @@
 						<reference key="object" ref="962486255"/>
 						<reference key="parent" ref="448306788"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">125</int>
+						<reference key="object" ref="812727405"/>
+						<reference key="parent" ref="1054159023"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -340,6 +368,7 @@
 					<string>12.IBPluginDependency</string>
 					<string>120.IBPluginDependency</string>
 					<string>121.IBPluginDependency</string>
+					<string>125.IBPluginDependency</string>
 					<string>14.IBEditorWindowLastContentRect</string>
 					<string>14.IBPluginDependency</string>
 					<string>15.CustomClassName</string>
@@ -361,6 +390,7 @@
 					<string>UIApplication</string>
 					<string>UIResponder</string>
 					<string>ScoreFiveHundredAppDelegate</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -399,7 +429,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">124</int>
+			<int key="maxID">127</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -442,16 +472,22 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">GameListViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">edit:</string>
+						<string key="NS.object.0">id</string>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cellWrapper</string>
+							<string>editButton</string>
 							<string>gameListTableView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>CellWrapper</string>
+							<string>UIBarButtonItem</string>
 							<string>UITableView</string>
 						</object>
 					</object>

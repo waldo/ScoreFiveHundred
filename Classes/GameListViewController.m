@@ -23,8 +23,9 @@ static NSString *ssStoreWinningSlot   = @"winning slot";
 static NSString *ssStoreLastPlayed    = @"last played";
 
 // MARK: synthesize
-@synthesize gameListTableView;
 @synthesize cellWrapper;
+@synthesize gameListTableView;
+@synthesize editButton;
 
 @synthesize gameKeys;
 @synthesize gameList;
@@ -34,6 +35,10 @@ static NSString *ssStoreLastPlayed    = @"last played";
   [cellWrapper dealloc];
   
   [super dealloc];
+}
+
+- (IBAction) edit:(id)sender {
+  [self setEditing:!self.editing animated:YES];
 }
 
 - (void) saveGame:(NSDictionary *)game ForKey:(NSString *)key {
@@ -48,12 +53,16 @@ static NSString *ssStoreLastPlayed    = @"last played";
     [self.gameList setObject:game forKey:key];
   }
 
+  [self saveList];
+}
+
+- (void) saveList {
   NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
   
   [store setObject:self.gameList forKey:ssStoreGames];
   
   self.gameKeys = [NSMutableArray arrayWithArray:[self.gameList allKeys]];    
-  [self.gameListTableView reloadData];
+  [self.gameListTableView reloadData];  
 }
 
 // MARK: View
@@ -69,6 +78,19 @@ static NSString *ssStoreLastPlayed    = @"last played";
   [super viewWillAppear:animated];
   
   [self.gameListTableView reloadData];
+}
+
+- (void) setEditing:(BOOL)editing animated:(BOOL)animated {
+  [super setEditing:editing animated:animated];
+  
+  [self.gameListTableView setEditing:editing animated:animated];
+    
+  if (self.editing) {
+    self.editButton.title = @"Done";
+  }
+  else {
+    self.editButton.title = @"Edit";
+  }
 }
 
 // MARK: TableView delegate
@@ -118,5 +140,23 @@ static NSString *ssStoreLastPlayed    = @"last played";
   
   return cellGame;
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+  return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (editingStyle == UITableViewCellEditingStyleDelete) {
+    [self.gameList removeObjectForKey:[self.gameKeys objectAtIndex:indexPath.row]];
+
+    [self saveList];
+  }
+}
+
+
 
 @end

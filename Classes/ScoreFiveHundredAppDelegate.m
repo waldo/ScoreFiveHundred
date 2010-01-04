@@ -39,6 +39,7 @@
 }
 
 - (IBAction) newGame {
+  [self.gameListController setEditing:NO animated:NO];
   [self viewGame:nil WithKey:[ScoreFiveHundredAppDelegate uniqueId] AndIsNewGame:YES];
 }
 
