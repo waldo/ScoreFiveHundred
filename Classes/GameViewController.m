@@ -10,6 +10,7 @@
 
 @interface GameViewController()
 
+- (NSString*) nonBlankFirst:(NSString*)first OtherwiseSecond:(NSString*)second;
 - (void) gameComplete;
 - (void) undoGameComplete;
 - (void) checkForGameOver;
@@ -99,12 +100,12 @@ static int siLosingScore = -500;
   NSString* teamName = nil;
 
   if ([self.teamOneBid isEqual:sender]) {
-    self.currentBiddingTeamSlot = slotTeamOne;
-    teamName = self.curNameTeamOne;
+    self.currentBiddingTeamSlot = self.slotTeamOne;
+    teamName = [self nonBlankFirst:self.curNameTeamOne OtherwiseSecond:self.teamOneName.placeholder];
   }
   else if ([self.teamTwoBid isEqual:sender]) {
-    self.currentBiddingTeamSlot = slotTeamTwo;
-    teamName = self.curNameTeamTwo;
+    self.currentBiddingTeamSlot = self.slotTeamTwo;
+    teamName = [self nonBlankFirst:self.curNameTeamTwo OtherwiseSecond:self.teamTwoName.placeholder];
   }
 
   ScoreFiveHundredAppDelegate *app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -116,50 +117,6 @@ static int siLosingScore = -500;
   self.teamOneName.text = self.oldNameTeamOne;
   self.teamTwoName.text = self.oldNameTeamTwo;
   [self setEditing:NO animated:YES];
-}
-
-- (void) gameComplete {
-  if (self.winningSlot) {
-    self.teamOneBid.hidden = YES;
-    self.teamTwoBid.hidden = YES;
-    
-    if ([self.winningSlot isEqual:self.slotTeamOne]) {
-      self.teamOneResult.hidden = NO;
-    }
-    else {
-      self.teamTwoResult.hidden = NO;
-    }
-  }
-  else {
-    self.teamOneBid.hidden = NO;
-    self.teamTwoBid.hidden = NO;
-    self.teamOneResult.hidden = YES;
-    self.teamTwoResult.hidden = YES;
-  }
-}
-
-- (void) undoGameComplete {
-  self.winningSlot = nil;
-}
-
-- (void) checkForGameOver {
-  if ([self.rounds count] > 0) {
-    NSDictionary *r = [self.rounds objectAtIndex:0];
-    
-    BOOL teamOneBidAchieved = [[r valueForKey:ssBidAchievedTeamOne] boolValue];
-    BOOL teamTwoBidAchieved = [[r valueForKey:ssBidAchievedTeamTwo] boolValue];
-    int teamOneScore        = [[r valueForKey:ssSubTotalTeamOne] intValue];
-    int teamTwoScore        = [[r valueForKey:ssSubTotalTeamTwo] intValue];
-
-    if ((teamOneBidAchieved && teamOneScore >= siWinningScore) || (teamTwoScore <= siLosingScore)) {
-      self.winningSlot = slotTeamOne;
-    }
-    else if ((teamTwoBidAchieved && teamTwoScore >= siWinningScore) || (teamOneScore <= siLosingScore)) {
-      self.winningSlot = self.slotTeamTwo;
-    }
-  }
-
-  [self gameComplete];
 }
 
 - (void) openGame:(NSDictionary*)gameToOpen WithKey:(NSString *)key AndIsNewGame:(BOOL)isNewGame {
@@ -248,6 +205,59 @@ static int siLosingScore = -500;
   NSLog(@"%@", self.rounds);
 }
 
+// MARK: Hidden functions
+- (NSString*) nonBlankFirst:(NSString*)first OtherwiseSecond:(NSString*)second {
+  if (first == nil || [@"" isEqual:first]) {
+    return second;
+  }
+  
+  return first;
+}
+
+- (void) gameComplete {
+  self.teamOneBid.hidden = NO;
+  self.teamTwoBid.hidden = NO;
+  self.teamOneResult.hidden = YES;
+  self.teamTwoResult.hidden = YES;
+  
+  if (self.winningSlot) {
+    self.teamOneBid.hidden = YES;
+    self.teamTwoBid.hidden = YES;
+    
+    if ([self.winningSlot isEqual:self.slotTeamOne]) {
+      self.teamOneResult.hidden = NO;
+    }
+    else {
+      self.teamTwoResult.hidden = NO;
+    }
+  }
+}
+
+- (void) undoGameComplete {
+  self.winningSlot = nil;
+}
+
+- (void) checkForGameOver {
+  if ([self.rounds count] > 0) {
+    NSDictionary *r = [self.rounds objectAtIndex:0];
+    
+    BOOL teamOneBidAchieved = [[r valueForKey:ssBidAchievedTeamOne] boolValue];
+    BOOL teamTwoBidAchieved = [[r valueForKey:ssBidAchievedTeamTwo] boolValue];
+    int teamOneScore        = [[r valueForKey:ssSubTotalTeamOne] intValue];
+    int teamTwoScore        = [[r valueForKey:ssSubTotalTeamTwo] intValue];
+    
+    if ((teamOneBidAchieved && teamOneScore >= siWinningScore) || (teamTwoScore <= siLosingScore)) {
+      self.winningSlot = slotTeamOne;
+    }
+    else if ((teamTwoBidAchieved && teamTwoScore >= siWinningScore) || (teamOneScore <= siLosingScore)) {
+      self.winningSlot = self.slotTeamTwo;
+    }
+  }
+  
+  [self gameComplete];
+}
+
+// MARK: View
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   
