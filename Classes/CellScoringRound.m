@@ -33,8 +33,8 @@ static int siSlotTeamTwo            = 1;
 
 - (void) setStyleForTeamOneBidAttempted:(NSString*)teamOneBidAttempted AndTeamOneBidAchieved:(BOOL)teamOneBidAchieved WithTeamTwoBidAttempted:(NSString*)teamTwoBidAttempted AndTeamTwoBidAchieved:(BOOL)teamTwoBidAchieved {
   
-  BOOL teamOneWasBidder = !(teamOneBidAttempted == nil);
-  BOOL teamTwoWasBidder = !(teamTwoBidAttempted == nil);
+  BOOL teamOneWasBidder = teamOneBidAttempted != nil;
+  BOOL teamTwoWasBidder = teamTwoBidAttempted != nil;
 
   if (teamOneWasBidder) {
     // hide team two's bid labels

@@ -143,7 +143,7 @@ static NSString *ssVariationMisere = @"misére";
   NSDictionary *aBidType = [allTypes objectForKey:hand];
   NSString *tricksAndSymbol = [NSString stringWithFormat:@"%@%@", [aBidType objectForKey:ssTrick], [aBidType objectForKey:ssSuitSymbol]];
   
-  if (hand == @"CM" || hand == @"OM") {
+  if ([@"CM" isEqual:hand] || [@"OM" isEqual:hand]) {
     tricksAndSymbol = hand;
   }
   
