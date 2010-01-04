@@ -69,7 +69,7 @@ static int siSlotTeamTwo            = 1;
 }
 
 - (void) descriptionForTeamSlot:(NSNumber*)teamSlot FromTricksWon:(NSNumber*)tricksWon AndPoints:(NSNumber*)points {
-  NSString* pointsPrefix = (points > 0 ? @"+" : @"");
+  NSString* pointsPrefix = ([points intValue] > 0 ? @"+" : @"");
   NSString* summary = [NSString stringWithFormat:@"Won %@, %@%@ pts", tricksWon, pointsPrefix, points];
   
   if ([teamSlot intValue] == siSlotTeamOne) {
