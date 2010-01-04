@@ -21,13 +21,13 @@
 @implementation GameViewController
 
 // MARK: static
-static NSString *ssStoreRounds        = @"rounds";
-static NSString *ssStoreNameTeamOne   = @"team one name";
-static NSString *ssStoreNameTeamTwo   = @"team two name";
-static NSString *ssStoreScoreTeamOne  = @"team one score";
-static NSString *ssStoreScoreTeamTwo  = @"team two score";
-static NSString *ssStoreWinningSlot   = @"winning slot";
-static NSString *ssStoreLastPlayed    = @"last played";
+static NSString *ssStoreRounds            = @"rounds";
+static NSString *ssStoreNameTeamOne       = @"team one name";
+static NSString *ssStoreNameTeamTwo       = @"team two name";
+static NSString *ssStoreScoreTeamOne      = @"team one score";
+static NSString *ssStoreScoreTeamTwo      = @"team two score";
+static NSString *ssStoreWinningSlot       = @"winning slot";
+static NSString *ssStoreLastPlayed        = @"last played";
 
 static NSString *ssBidTeamOne             = @"team one bid";
 static NSString *ssBidTeamTwo             = @"team two bid";
@@ -199,10 +199,13 @@ static int siLosingScore = -500;
   [self.roundsTableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
   
   [self checkForGameOver];
+  
+  self.lastPlayed = [NSDate date];
 
   [dict release];
   
   NSLog(@"%@", self.rounds);
+  NSLog(@"%@", self.game);
 }
 
 // MARK: Hidden functions

@@ -136,7 +136,12 @@ static NSString *ssStoreLastPlayed    = @"last played";
     cellGame.symbolResultTeamTwo.hidden = NO;
   }
   
-  cellGame.dateLastPlayed.text = [game valueForKey:ssStoreLastPlayed];
+  NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+  [formatter setDateStyle:NSDateFormatterMediumStyle];
+  
+  cellGame.dateLastPlayed.text = [formatter stringFromDate:[game valueForKey:ssStoreLastPlayed]];
+
+  [formatter release];
   
   return cellGame;
 }
