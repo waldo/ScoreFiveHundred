@@ -123,7 +123,7 @@ static int siLosingScore = -500;
     self.teamOneBid.hidden = YES;
     self.teamTwoBid.hidden = YES;
     
-    if ([self.winningSlot isEqualToNumber:self.slotTeamOne]) {
+    if ([self.winningSlot isEqual:self.slotTeamOne]) {
       self.teamOneResult.hidden = NO;
     }
     else {
@@ -143,25 +143,29 @@ static int siLosingScore = -500;
 }
 
 - (void) checkForGameOver {
-  NSDictionary *r = [self.rounds objectAtIndex:0];
-  
-  BOOL teamOneBidAchieved = [[r valueForKey:ssBidAchievedTeamOne] boolValue];
-  BOOL teamTwoBidAchieved = [[r valueForKey:ssBidAchievedTeamTwo] boolValue];
-  int teamOneScore        = [[r valueForKey:ssSubTotalTeamOne] intValue];
-  int teamTwoScore        = [[r valueForKey:ssSubTotalTeamTwo] intValue];
+  if ([self.rounds count] > 0) {
+    NSDictionary *r = [self.rounds objectAtIndex:0];
+    
+    BOOL teamOneBidAchieved = [[r valueForKey:ssBidAchievedTeamOne] boolValue];
+    BOOL teamTwoBidAchieved = [[r valueForKey:ssBidAchievedTeamTwo] boolValue];
+    int teamOneScore        = [[r valueForKey:ssSubTotalTeamOne] intValue];
+    int teamTwoScore        = [[r valueForKey:ssSubTotalTeamTwo] intValue];
 
-  if ((teamOneBidAchieved && teamOneScore >= siWinningScore) || (teamTwoScore <= siLosingScore)) {
-    self.winningSlot = [NSNumber numberWithInt:0];
+    if ((teamOneBidAchieved && teamOneScore >= siWinningScore) || (teamTwoScore <= siLosingScore)) {
+      self.winningSlot = slotTeamOne;
+    }
+    else if ((teamTwoBidAchieved && teamTwoScore >= siWinningScore) || (teamOneScore <= siLosingScore)) {
+      self.winningSlot = self.slotTeamTwo;
+    }
   }
-  else if ((teamTwoBidAchieved && teamTwoScore >= siWinningScore) || (teamOneScore <= siLosingScore)) {
-    self.winningSlot = [NSNumber numberWithInt:1];
-  }
-  
+
   [self gameComplete];
 }
 
 - (void) openGame:(NSDictionary*)gameToOpen WithKey:(NSString *)key AndIsNewGame:(BOOL)isNewGame {
   self.newGame = isNewGame;
+  self.slotTeamOne = [NSNumber numberWithInt:0];
+  self.slotTeamTwo = [NSNumber numberWithInt:1];
 
   self.gameKey = key;
   self.game = [NSMutableDictionary dictionaryWithDictionary:gameToOpen];
@@ -170,7 +174,7 @@ static int siLosingScore = -500;
   self.curNameTeamTwo = [self.game valueForKey:ssStoreNameTeamTwo];
   self.winningSlot = [self.game valueForKey:ssStoreWinningSlot];
   self.lastPlayed = [self.game valueForKey:ssStoreLastPlayed];
-  
+
   NSLog(@"self.gameKey: %@", self.gameKey);
   NSLog(@"self.game: %@", self.game);
 }
@@ -244,19 +248,13 @@ static int siLosingScore = -500;
   NSLog(@"%@", self.rounds);
 }
 
-- (void) viewDidLoad {
-  [super viewDidLoad];
-
-  self.slotTeamOne = [NSNumber numberWithInt:0];
-  self.slotTeamTwo = [NSNumber numberWithInt:1];
-}
-
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   
   self.teamOneName.text = self.curNameTeamOne;
   self.teamTwoName.text = self.curNameTeamTwo;
   
+  [self checkForGameOver];
   [self.roundsTableView reloadData];
 }
 
@@ -333,7 +331,7 @@ static int siLosingScore = -500;
     editButton.title = @"Edit";
     self.teamOneName.enabled = NO;
     self.teamTwoName.enabled = NO;
-    [self gameComplete];
+    [self checkForGameOver];
     self.teamOneName.borderStyle = UITextBorderStyleNone;
     self.teamTwoName.borderStyle = UITextBorderStyleNone;
     
