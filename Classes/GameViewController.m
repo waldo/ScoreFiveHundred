@@ -130,7 +130,12 @@ static int siLosingScore = -500;
   self.curNameTeamOne = [self.game valueForKey:ssStoreNameTeamOne];
   self.curNameTeamTwo = [self.game valueForKey:ssStoreNameTeamTwo];
   self.winningSlot = [self.game valueForKey:ssStoreWinningSlot];
-  self.lastPlayed = [self.game valueForKey:ssStoreLastPlayed];
+  if (isNewGame) {
+    self.lastPlayed = [NSDate date];
+  }
+  else {
+    self.lastPlayed = [self.game valueForKey:ssStoreLastPlayed];
+  }
 
   NSLog(@"self.gameKey: %@", self.gameKey);
   NSLog(@"self.game: %@", self.game);
