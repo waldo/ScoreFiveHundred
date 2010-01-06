@@ -28,8 +28,6 @@
   NSMutableArray *rounds;
   NSNumber *slotTeamOne;
   NSNumber *slotTeamTwo;
-  NSString *oldNameTeamOne;
-  NSString *oldNameTeamTwo;
   NSString* curNameTeamOne;
   NSString* curNameTeamTwo;
   NSNumber *winningSlot;
@@ -53,8 +51,6 @@
 @property (nonatomic, retain) NSMutableArray *rounds;
 @property (nonatomic, retain) NSNumber *slotTeamOne;
 @property (nonatomic, retain) NSNumber *slotTeamTwo;
-@property (nonatomic, retain) NSString *oldNameTeamOne;
-@property (nonatomic, retain) NSString *oldNameTeamTwo;
 @property (nonatomic, retain) NSString* curNameTeamOne;
 @property (nonatomic, retain) NSString* curNameTeamTwo;
 @property (nonatomic, retain) NSNumber *winningSlot;

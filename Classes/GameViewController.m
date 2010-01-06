@@ -60,8 +60,6 @@ static int siLosingScore = -500;
 @synthesize rounds;
 @synthesize slotTeamOne;
 @synthesize slotTeamTwo;
-@synthesize oldNameTeamOne;
-@synthesize oldNameTeamTwo;
 @synthesize curNameTeamOne;
 @synthesize curNameTeamTwo;
 @synthesize winningSlot;
@@ -83,8 +81,6 @@ static int siLosingScore = -500;
   [rounds release];
   [slotTeamOne release];
   [slotTeamTwo release];
-  [oldNameTeamOne release];
-  [oldNameTeamTwo release];
   [curNameTeamOne release];
   [curNameTeamTwo release];
   [winningSlot release];
@@ -111,12 +107,6 @@ static int siLosingScore = -500;
   ScoreFiveHundredAppDelegate *app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
 
   [app bidForTeamName:teamName];
-}
-
-- (void) cancelEdit {
-  self.teamOneName.text = self.oldNameTeamOne;
-  self.teamTwoName.text = self.oldNameTeamTwo;
-  [self setEditing:NO animated:YES];
 }
 
 - (void) openGame:(NSDictionary*)gameToOpen WithKey:(NSString *)key AndIsNewGame:(BOOL)isNewGame {
@@ -283,7 +273,7 @@ static int siLosingScore = -500;
     // if edit gets called before the view is loaded then the placeholder text position gets screwed up
     [self edit:self];
     self.newGame = NO;
-  }  
+  }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -309,7 +299,9 @@ static int siLosingScore = -500;
   
   [app saveGame:self.game ForKey:self.gameKey];
   
-  NSLog(@"self.game: %@", self.game);
+  if (self.editing) {
+    [self setEditing:NO animated:NO];
+  }
 }
 
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated {
@@ -337,11 +329,6 @@ static int siLosingScore = -500;
     rectOne.origin.x -= growTextFieldsBy;
     rectOne.size.width += growTextFieldsBy;
     rectTwo.size.width += growTextFieldsBy;
-
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelEdit)] autorelease];
-    
-    self.oldNameTeamOne = self.teamOneName.text;
-    self.oldNameTeamTwo = self.teamTwoName.text;
     
     [self.teamOneName becomeFirstResponder];
   }
