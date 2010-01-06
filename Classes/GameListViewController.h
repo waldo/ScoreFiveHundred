@@ -36,5 +36,6 @@
 - (void) saveGame:(NSDictionary*)game ForKey:(NSString*)key;
 - (void) saveList;
 - (void) setKeys;
+- (id) valueForSection:(NSInteger)section ValueInProgress:(id)valueInProgress ValueCompleted:(id)valueCompleted;
 
 @end

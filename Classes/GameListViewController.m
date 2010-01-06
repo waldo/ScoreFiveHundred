@@ -30,6 +30,9 @@ static NSString *ssStoreScoreTeamTwo  = @"team two score";
 static NSString *ssStoreWinningSlot   = @"winning slot";
 static NSString *ssStoreLastPlayed    = @"last played";
 
+static NSString* ssTitleInProgress    = @"In Progress";
+static NSString* ssTitleCompleted     = @"Complete";
+
 // MARK: synthesize
 @synthesize cellWrapper;
 @synthesize gameListTableView;
@@ -80,8 +83,8 @@ static NSString *ssStoreLastPlayed    = @"last played";
 }
 
 - (void) setKeys {
-  NSMutableArray* inProgress = [[NSMutableArray alloc] init];
-  NSMutableArray* completed = [[NSMutableArray alloc] init];
+  NSMutableArray* inProgress = [[[NSMutableArray alloc] init] autorelease];
+  NSMutableArray* completed = [[[NSMutableArray alloc] init] autorelease];
   NSDictionary* game = nil;
   
   for (NSString* key in [self.gameList keysSortedByValueUsingSelector:@selector(compareGameByLastPlayed:)]) {
@@ -99,21 +102,25 @@ static NSString *ssStoreLastPlayed    = @"last played";
 }
 
 - (NSString*) keyForIndexPath:(NSIndexPath*)index {
-  NSString* key = nil;
+  return [[self valueForSection:index.section ValueInProgress:self.gamesInProgressKeys ValueCompleted:self.gamesCompletedKeys] objectAtIndex:index.row];
+}
+
+- (id) valueForSection:(NSInteger)section ValueInProgress:(id)valueInProgress ValueCompleted:(id)valueCompleted {
+  id val = nil;
   
   if ([self.gamesInProgressKeys count] == 0 && [self.gamesCompletedKeys count] > 0) {
-    key = [self.gamesCompletedKeys objectAtIndex:index.row];
+    val = valueCompleted;
   }
   else {
-    if (index.section == 0) {
-      key = [self.gamesInProgressKeys objectAtIndex:index.row];
+    if (section == 0) {
+      val = valueInProgress;
     }
     else {
-      key = [self.gamesCompletedKeys objectAtIndex:index.row];
+      val = valueCompleted;
     }
   }  
   
-  return key;
+  return val;
 }
     
 // MARK: View
@@ -160,41 +167,11 @@ static NSString *ssStoreLastPlayed    = @"last played";
 }
 
 - (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
-  NSString* title = nil;
-  
-  if ([self.gamesInProgressKeys count] == 0 && [self.gamesCompletedKeys count] > 0) {
-    title = @"Complete";
-  }
-  else {
-    if (section == 0) {
-      title = @"In progress";
-    }
-    else {
-      title = @"Complete";
-    }
-  }    
-
-  return title;
+  return [self valueForSection:section ValueInProgress:ssTitleInProgress ValueCompleted:ssTitleCompleted];
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  int gamesInSection = 0;
-  int gamesInProgress = [self.gamesInProgressKeys count];
-  int gamesComplete = [self.gamesCompletedKeys count];
-  
-  if ([self.gamesInProgressKeys count] == 0 && [self.gamesCompletedKeys count] > 0) {
-    gamesInSection = gamesComplete;
-  }
-  else {
-    if (section == 0) {
-      gamesInSection = gamesInProgress;
-    }
-    else {
-      gamesInSection = gamesComplete;
-    }
-  }    
-
-  return gamesInSection;
+  return [[self valueForSection:section ValueInProgress:[NSNumber numberWithInteger:[self.gamesInProgressKeys count]] ValueCompleted:[NSNumber numberWithInteger:[self.gamesCompletedKeys count]]] integerValue];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
