@@ -17,7 +17,8 @@
   IBOutlet UITableView *gameListTableView;
   IBOutlet UIBarButtonItem *editButton;
 
-  NSMutableArray* gameKeys;
+  NSMutableArray* gamesInProgressKeys;
+  NSMutableArray* gamesCompletedKeys;
   NSMutableDictionary* gameList;
 }
 
@@ -26,12 +27,14 @@
 @property (nonatomic, retain) IBOutlet UITableView *gameListTableView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *editButton;
 
-@property (nonatomic, retain) NSMutableArray* gameKeys;
+@property (nonatomic, retain) NSMutableArray* gamesInProgressKeys;
+@property (nonatomic, retain) NSMutableArray* gamesCompletedKeys;
 @property (nonatomic, retain) NSMutableDictionary* gameList;
 
 - (IBAction) edit:(id)sender;
 
 - (void) saveGame:(NSDictionary*)game ForKey:(NSString*)key;
 - (void) saveList;
+- (void) setKeys;
 
 @end

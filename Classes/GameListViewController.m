@@ -9,6 +9,14 @@
 #import "GameListViewController.h"
 #import "ScoreFiveHundredAppDelegate.h"
 
+@implementation NSDictionary (gameComparison)
+
+- (NSComparisonResult) compareGameByLastPlayed:(NSDictionary*)game {
+  return [[game objectForKey:@"last played"] compare:[self objectForKey:@"last played"]];
+}
+
+@end
+
 
 @implementation GameListViewController
 
@@ -27,12 +35,18 @@ static NSString *ssStoreLastPlayed    = @"last played";
 @synthesize gameListTableView;
 @synthesize editButton;
 
-@synthesize gameKeys;
+@synthesize gamesInProgressKeys;
+@synthesize gamesCompletedKeys;
 @synthesize gameList;
 
 - (void)dealloc {
-  [gameListTableView dealloc];
   [cellWrapper dealloc];
+  [gameListTableView dealloc];
+  [editButton dealloc];
+  
+  [gamesInProgressKeys dealloc];
+  [gamesCompletedKeys dealloc];
+  [gameList dealloc];
   
   [super dealloc];
 }
@@ -61,17 +75,55 @@ static NSString *ssStoreLastPlayed    = @"last played";
   
   [store setObject:self.gameList forKey:ssStoreGames];
   
-  self.gameKeys = [NSMutableArray arrayWithArray:[self.gameList allKeys]];    
+  [self setKeys];
   [self.gameListTableView reloadData];  
 }
 
+- (void) setKeys {
+  NSMutableArray* inProgress = [[NSMutableArray alloc] init];
+  NSMutableArray* completed = [[NSMutableArray alloc] init];
+  NSDictionary* game = nil;
+  
+  for (NSString* key in [self.gameList keysSortedByValueUsingSelector:@selector(compareGameByLastPlayed:)]) {
+    game = [self.gameList objectForKey:key];
+    if ([game objectForKey:ssStoreWinningSlot] == nil) {
+      [inProgress addObject:key];
+    }
+    else {
+      [completed addObject:key];
+    }
+  }
+  
+  self.gamesInProgressKeys = inProgress;
+  self.gamesCompletedKeys = completed;
+}
+
+- (NSString*) keyForIndexPath:(NSIndexPath*)index {
+  NSString* key = nil;
+  
+  if ([self.gamesInProgressKeys count] == 0 && [self.gamesCompletedKeys count] > 0) {
+    key = [self.gamesCompletedKeys objectAtIndex:index.row];
+  }
+  else {
+    if (index.section == 0) {
+      key = [self.gamesInProgressKeys objectAtIndex:index.row];
+    }
+    else {
+      key = [self.gamesCompletedKeys objectAtIndex:index.row];
+    }
+  }  
+  
+  return key;
+}
+    
 // MARK: View
 - (void) viewDidLoad {
   [super viewDidLoad];
   
   NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
   self.gameList = [NSMutableDictionary dictionaryWithDictionary:[store dictionaryForKey:ssStoreGames]];
-  self.gameKeys = [NSMutableArray arrayWithArray:[self.gameList allKeys]];    
+
+  [self setKeys];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -94,16 +146,55 @@ static NSString *ssStoreLastPlayed    = @"last played";
 }
 
 // MARK: TableView delegate
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  NSString* key = [self.gameKeys objectAtIndex:indexPath.row];
-
-  ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
+- (NSInteger) numberOfSectionsInTableView:(UITableView*)tableView {	
+  int sections = 0;
   
-  [app viewGame:[self.gameList objectForKey:key] WithKey:key AndIsNewGame:NO];
+  if ([self.gamesInProgressKeys count] > 0) {
+    sections++;
+  }
+  if ([self.gamesCompletedKeys count] > 0) {
+    sections++;
+  }
+  
+	return sections;
+}
+
+- (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
+  NSString* title = nil;
+  
+  if ([self.gamesInProgressKeys count] == 0 && [self.gamesCompletedKeys count] > 0) {
+    title = @"Complete";
+  }
+  else {
+    if (section == 0) {
+      title = @"In progress";
+    }
+    else {
+      title = @"Complete";
+    }
+  }    
+
+  return title;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [self.gameKeys count];
+  int gamesInSection = 0;
+  int gamesInProgress = [self.gamesInProgressKeys count];
+  int gamesComplete = [self.gamesCompletedKeys count];
+  
+  if ([self.gamesInProgressKeys count] == 0 && [self.gamesCompletedKeys count] > 0) {
+    gamesInSection = gamesComplete;
+  }
+  else {
+    if (section == 0) {
+      gamesInSection = gamesInProgress;
+    }
+    else {
+      gamesInSection = gamesComplete;
+    }
+  }    
+
+  return gamesInSection;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,8 +206,8 @@ static NSString *ssStoreLastPlayed    = @"last played";
     [self.cellWrapper loadMyNibFile:CellIdentifier];
     cellGame = (CellGame *)self.cellWrapper.cell;
   }
-  
-  NSDictionary *game = [self.gameList valueForKey:[self.gameKeys objectAtIndex:indexPath.row]];
+
+  NSDictionary *game = [self.gameList valueForKey:[self keyForIndexPath:indexPath]];
   
   cellGame.nameTeamOne.text = [game valueForKey:ssStoreNameTeamOne];
   cellGame.nameTeamTwo.text = [game valueForKey:ssStoreNameTeamTwo];
@@ -146,6 +237,14 @@ static NSString *ssStoreLastPlayed    = @"last played";
   return cellGame;
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  NSString* key = [self keyForIndexPath:indexPath];
+  
+  ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
+  
+  [app viewGame:[self.gameList objectForKey:key] WithKey:key AndIsNewGame:NO];
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
   return YES;
 }
@@ -156,12 +255,11 @@ static NSString *ssStoreLastPlayed    = @"last played";
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-    [self.gameList removeObjectForKey:[self.gameKeys objectAtIndex:indexPath.row]];
+    [self.gameList removeObjectForKey:[self keyForIndexPath:indexPath]];
 
     [self saveList];
   }
 }
-
 
 
 @end
