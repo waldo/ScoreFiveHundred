@@ -46,7 +46,7 @@
   [super viewDidAppear:animated];
   
   [self.tricksWonSegmentedControl setSelectedSegmentIndex:5];
-  [self.bidSelectionTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+  [self.bidSelectionTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
 }
 
 // MARK: tableview delegate
