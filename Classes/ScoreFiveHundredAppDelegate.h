@@ -40,6 +40,7 @@
 
 - (void) bidForTeamName:(NSString*)teamName;
 - (void) viewGame:(NSDictionary*)gameToOpen WithKey:(NSString*)key AndIsNewGame:(BOOL)newGame;
-- (void) saveGame:(NSDictionary*)game ForKey:(NSString*)key;
+- (void) saveGame:(NSDictionary*)game forKey:(NSString*)key;
+- (void) rematch:(NSDictionary*)originalGame forKey:(NSString*)originalGameKey;
 
 @end

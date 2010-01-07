@@ -33,9 +33,9 @@
 
 - (IBAction) edit:(id)sender;
 
-- (void) saveGame:(NSDictionary*)game ForKey:(NSString*)key;
+- (void) saveGame:(NSDictionary*)game forKey:(NSString*)key;
 - (void) saveList;
 - (void) setKeys;
-- (id) valueForSection:(NSInteger)section ValueInProgress:(id)valueInProgress ValueCompleted:(id)valueCompleted;
+- (id) valueForSection:(NSInteger)section valueInProgress:(id)valueInProgress valueCompleted:(id)valueCompleted;
 
 @end

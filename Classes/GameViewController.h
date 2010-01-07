@@ -63,6 +63,7 @@
 - (IBAction) bid:(id)sender;
 
 - (void) openGame:(NSDictionary*)gameToOpen WithKey:(NSString *)key AndIsNewGame:(BOOL)isNewGame;
+- (void) rematchOfGame:(NSDictionary*)gameForRematch withNewKey:(NSString*)newKey;
 - (void) updateRoundWithHand:(NSString*)hand AndTricksWon:(NSNumber*)tricksWon;
 
 @end

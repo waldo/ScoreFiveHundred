@@ -62,8 +62,16 @@
   [self.navigationController pushViewController:self.biddingController animated:YES];
 }
 
-- (void) saveGame:(NSDictionary*)game ForKey:(NSString*)key {
-  [self.gameListController saveGame:game ForKey:key];
+- (void) saveGame:(NSDictionary*)game forKey:(NSString*)key {
+  [self.gameListController saveGame:game forKey:key];
+}
+
+- (void) rematch:(NSDictionary*)originalGame forKey:(NSString*)originalGameKey {
+  // because we are pushing and popping the same view controller viewDisappear won't be called - thus we need to save first
+  [self.gameListController saveGame:originalGame forKey:originalGameKey];
+  [self.navigationController popViewControllerAnimated:NO];
+  [self.gameController rematchOfGame:originalGame withNewKey:[ScoreFiveHundredAppDelegate uniqueId]];
+  [self.navigationController pushViewController:self.gameController animated:YES];
 }
 
 - (void) viewGame:(NSDictionary*)gameToOpen WithKey:(NSString*)key AndIsNewGame:(BOOL)newGame {

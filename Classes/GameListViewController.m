@@ -58,7 +58,7 @@ static NSString* ssTitleCompleted     = @"Complete";
   [self setEditing:!self.editing animated:YES];
 }
 
-- (void) saveGame:(NSDictionary *)game ForKey:(NSString *)key {
+- (void) saveGame:(NSDictionary *)game forKey:(NSString *)key {
   if (
       [[game objectForKey:ssStoreRounds] count]       == 0 && 
       [[game objectForKey:ssStoreNameTeamOne] length] == 0 && 
@@ -102,10 +102,10 @@ static NSString* ssTitleCompleted     = @"Complete";
 }
 
 - (NSString*) keyForIndexPath:(NSIndexPath*)index {
-  return [[self valueForSection:index.section ValueInProgress:self.gamesInProgressKeys ValueCompleted:self.gamesCompletedKeys] objectAtIndex:index.row];
+  return [[self valueForSection:index.section valueInProgress:self.gamesInProgressKeys valueCompleted:self.gamesCompletedKeys] objectAtIndex:index.row];
 }
 
-- (id) valueForSection:(NSInteger)section ValueInProgress:(id)valueInProgress ValueCompleted:(id)valueCompleted {
+- (id) valueForSection:(NSInteger)section valueInProgress:(id)valueInProgress valueCompleted:(id)valueCompleted {
   id val = nil;
   
   if ([self.gamesInProgressKeys count] == 0 && [self.gamesCompletedKeys count] > 0) {
@@ -167,11 +167,11 @@ static NSString* ssTitleCompleted     = @"Complete";
 }
 
 - (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
-  return [self valueForSection:section ValueInProgress:ssTitleInProgress ValueCompleted:ssTitleCompleted];
+  return [self valueForSection:section valueInProgress:ssTitleInProgress valueCompleted:ssTitleCompleted];
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [[self valueForSection:section ValueInProgress:[NSNumber numberWithInteger:[self.gamesInProgressKeys count]] ValueCompleted:[NSNumber numberWithInteger:[self.gamesCompletedKeys count]]] integerValue];
+  return [[self valueForSection:section valueInProgress:[NSNumber numberWithInteger:[self.gamesInProgressKeys count]] valueCompleted:[NSNumber numberWithInteger:[self.gamesCompletedKeys count]]] integerValue];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

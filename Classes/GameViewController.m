@@ -11,6 +11,8 @@
 @interface GameViewController()
 
 - (NSString*) nonBlankFirst:(NSString*)first OtherwiseSecond:(NSString*)second;
+- (void) refreshView;
+- (void) setGameSummary;
 - (void) gameComplete;
 - (void) undoGameComplete;
 - (void) checkForGameOver;
@@ -120,15 +122,27 @@ static int siLosingScore = -500;
   self.curNameTeamOne = [self.game valueForKey:ssStoreNameTeamOne];
   self.curNameTeamTwo = [self.game valueForKey:ssStoreNameTeamTwo];
   self.winningSlot = [self.game valueForKey:ssStoreWinningSlot];
-  if (isNewGame) {
+  if ([self.game valueForKey:ssStoreLastPlayed] == nil) {
     self.lastPlayed = [NSDate date];
   }
   else {
     self.lastPlayed = [self.game valueForKey:ssStoreLastPlayed];
   }
+  
+  [self setGameSummary];
 
   NSLog(@"self.gameKey: %@", self.gameKey);
   NSLog(@"self.game: %@", self.game);
+}
+
+- (void) rematchOfGame:(NSDictionary *)gameForRematch withNewKey:(NSString *)newKey {
+  NSDictionary* cleanGame = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [gameForRematch objectForKey:ssStoreNameTeamOne], ssStoreNameTeamOne,
+                            [gameForRematch objectForKey:ssStoreNameTeamTwo], ssStoreNameTeamTwo,
+                            nil];
+  
+  [self openGame:cleanGame WithKey:newKey AndIsNewGame:NO];
+  [self refreshView];
 }
 
 - (void) updateRoundWithHand:(NSString*)hand AndTricksWon:(NSNumber*)tricksWon {
@@ -196,11 +210,17 @@ static int siLosingScore = -500;
   [self checkForGameOver];
   
   self.lastPlayed = [NSDate date];
+  
+  [self setGameSummary];
+  
+  if (self.winningSlot != nil) {
+    NSString* winningTeamName = [self.winningSlot intValue] == 0 ? self.curNameTeamOne : self.curNameTeamTwo;
+    NSString* msg = [NSString stringWithFormat:@"%@ wins!", winningTeamName];
+    UIAlertView* rematchAlert = [[[UIAlertView alloc] initWithTitle:msg message:nil delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Rematch", nil] autorelease];
+    [rematchAlert show];
+  }
 
   [dict release];
-  
-  NSLog(@"%@", self.rounds);
-  NSLog(@"%@", self.game);
 }
 
 // MARK: Hidden functions
@@ -210,6 +230,32 @@ static int siLosingScore = -500;
   }
   
   return first;
+}
+
+- (void) refreshView {
+  self.teamOneName.text = self.curNameTeamOne;
+  self.teamTwoName.text = self.curNameTeamTwo;
+  
+  [self checkForGameOver];
+  [self.roundsTableView reloadData];
+}
+
+- (void) setGameSummary {
+  NSNumber* teamOneScore = [NSNumber numberWithInt:0];
+  NSNumber* teamTwoScore = [NSNumber numberWithInt:0];
+  
+  if ([self.rounds count] > 0) {
+    teamOneScore = [[self.rounds objectAtIndex:0] valueForKey:ssSubTotalTeamOne];
+    teamTwoScore = [[self.rounds objectAtIndex:0] valueForKey:ssSubTotalTeamTwo];
+  }
+  
+  [self.game setValue:self.rounds forKey:ssStoreRounds];
+  [self.game setValue:self.teamOneName.text forKey:ssStoreNameTeamOne];
+  [self.game setValue:self.teamTwoName.text forKey:ssStoreNameTeamTwo];
+  [self.game setValue:teamOneScore forKey:ssStoreScoreTeamOne];
+  [self.game setValue:teamTwoScore forKey:ssStoreScoreTeamTwo];
+  [self.game setValue:self.winningSlot forKey:ssStoreWinningSlot];
+  [self.game setValue:self.lastPlayed forKey:ssStoreLastPlayed];
 }
 
 - (void) gameComplete {
@@ -252,6 +298,7 @@ static int siLosingScore = -500;
     }
   }
   
+  [self setGameSummary];
   [self gameComplete];
 }
 
@@ -259,11 +306,7 @@ static int siLosingScore = -500;
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   
-  self.teamOneName.text = self.curNameTeamOne;
-  self.teamTwoName.text = self.curNameTeamTwo;
-  
-  [self checkForGameOver];
-  [self.roundsTableView reloadData];
+  [self refreshView];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -279,25 +322,9 @@ static int siLosingScore = -500;
 - (void) viewWillDisappear:(BOOL)animated {
   [super viewWillDisappear:animated];
 
-  NSNumber* teamOneScore = [NSNumber numberWithInt:0];
-  NSNumber* teamTwoScore = [NSNumber numberWithInt:0];
-
-  if ([self.rounds count] > 0) {
-    teamOneScore = [[self.rounds objectAtIndex:0] valueForKey:ssSubTotalTeamOne];
-    teamTwoScore = [[self.rounds objectAtIndex:0] valueForKey:ssSubTotalTeamTwo];
-  }
-  
-  [self.game setValue:self.rounds forKey:ssStoreRounds];
-  [self.game setValue:self.teamOneName.text forKey:ssStoreNameTeamOne];
-  [self.game setValue:self.teamTwoName.text forKey:ssStoreNameTeamTwo];
-  [self.game setValue:teamOneScore forKey:ssStoreScoreTeamOne];
-  [self.game setValue:teamTwoScore forKey:ssStoreScoreTeamTwo];
-  [self.game setValue:self.winningSlot forKey:ssStoreWinningSlot];
-  [self.game setValue:self.lastPlayed forKey:ssStoreLastPlayed];
-  
   ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
   
-  [app saveGame:self.game ForKey:self.gameKey];
+  [app saveGame:self.game forKey:self.gameKey];
   
   if (self.editing) {
     [self setEditing:NO animated:NO];
@@ -356,6 +383,15 @@ static int siLosingScore = -500;
   [UIView commitAnimations];
 }
 
+// MARK: AlertView delegate
+- (void) alertView:(UIAlertView*)alert didDismissWithButtonIndex:(NSInteger)index {
+  if (index == 1) {
+    ScoreFiveHundredAppDelegate *app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    [app rematch:self.game forKey:self.gameKey];
+  }
+}
+
 // MARK: TextField delegate
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
   if ([self.teamOneName isEqual:textField]) {
@@ -369,7 +405,7 @@ static int siLosingScore = -500;
   return YES;
 }
 
-// MARK: UITableView delegate
+// MARK: TableView delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return [self.rounds count];
 }
@@ -426,7 +462,7 @@ static int siLosingScore = -500;
     [self.rounds removeObjectAtIndex:indexPath.row];
     [self undoGameComplete];
 
-    // reload table view
+    [self setGameSummary];
     [self.roundsTableView reloadData];
   }
 }
