@@ -215,6 +215,8 @@ static NSString* ssTitleCompleted     = @"Complete";
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  [self setEditing:NO animated:NO];
+  
   NSString* key = [self keyForIndexPath:indexPath];
   
   ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
