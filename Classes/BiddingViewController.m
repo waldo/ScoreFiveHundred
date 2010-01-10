@@ -42,8 +42,10 @@
   self.bidTypeHands = [BidType orderedHands];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
-  [super viewDidAppear:animated];
+- (void) viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+
+  [self.bidSelectionTableView reloadData];
   
   [self.tricksWonSegmentedControl setSelectedSegmentIndex:5];
   [self.bidSelectionTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
