@@ -307,6 +307,9 @@ static int siLosingScore = -500;
   [super viewWillAppear:animated];
   
   [self refreshView];
+  if ([self.rounds count] > 0) {
+    [self.roundsTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+  }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -316,6 +319,9 @@ static int siLosingScore = -500;
     // if edit gets called before the view is loaded then the placeholder text position gets screwed up
     [self edit:self];
     self.newGame = NO;
+  }
+  if ([self.rounds count] > 0) {
+    [self.roundsTableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES];
   }
 }
 
