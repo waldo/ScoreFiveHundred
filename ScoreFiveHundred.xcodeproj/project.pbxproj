@@ -13,6 +13,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		5B2ED84110FB9F4200228C9E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B2ED84010FB9F4200228C9E /* icon.png */; };
 		5B49946710CFEF8E00C24443 /* CellWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B49946610CFEF8E00C24443 /* CellWrapper.m */; };
 		5B49946E10CFF0C700C24443 /* CellBidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B49946D10CFF0C700C24443 /* CellBidType.m */; };
 		5B49947010CFF18000C24443 /* CellBidType.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B49946F10CFF18000C24443 /* CellBidType.xib */; };
@@ -51,6 +52,7 @@
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* ScoreFiveHundred_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreFiveHundred_Prefix.pch; sourceTree = "<group>"; };
+		5B2ED84010FB9F4200228C9E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		5B49946510CFEF8E00C24443 /* CellWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellWrapper.h; sourceTree = "<group>"; };
 		5B49946610CFEF8E00C24443 /* CellWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellWrapper.m; sourceTree = "<group>"; };
 		5B49946C10CFF0C700C24443 /* CellBidType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellBidType.h; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5B2ED84010FB9F4200228C9E /* icon.png */,
 				8D1107310486CEB800E47090 /* ScoreFiveHundred-Info.plist */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				5B57159F10EF0E18005F2E9F /* BiddingView.xib */,
@@ -261,6 +264,7 @@
 				5B5715A010EF0E18005F2E9F /* BiddingView.xib in Resources */,
 				5BCB36C110EF4C5800799537 /* GameView.xib in Resources */,
 				5BADBD4B10EF70530058E0D0 /* GameListView.xib in Resources */,
+				5B2ED84110FB9F4200228C9E /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,7 +398,7 @@
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				INFOPLIST_FILE = "LogicTests-Info.plist";
+				INFOPLIST_FILE = "Tests/LogicTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
