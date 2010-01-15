@@ -42,7 +42,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUITableView" id="765794721">
 						<reference key="NSNextResponder" ref="899252252"/>
-						<int key="NSvFlags">274</int>
+						<int key="NSvFlags">319</int>
 						<string key="NSFrameSize">{320, 298}</string>
 						<reference key="NSSuperview" ref="899252252"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -59,7 +59,7 @@
 					</object>
 					<object class="IBUISegmentedControl" id="434777763">
 						<reference key="NSNextResponder" ref="899252252"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">271</int>
 						<string key="NSFrame">{{11, 353}, {299, 44}}</string>
 						<reference key="NSSuperview" ref="899252252"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -139,7 +139,7 @@
 					</object>
 					<object class="IBUILabel" id="638172355">
 						<reference key="NSNextResponder" ref="899252252"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">287</int>
 						<string key="NSFrame">{{11, 324}, {213, 21}}</string>
 						<reference key="NSSuperview" ref="899252252"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -316,7 +316,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>BiddingViewController</string>
 					<string>UIResponder</string>
-					<string>{{1638, -149}, {320, 416}}</string>
+					<string>{{717, 107}, {320, 416}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

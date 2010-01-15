@@ -56,6 +56,7 @@ static int siLosingScore = -500;
 @synthesize teamTwoBid;
 @synthesize teamOneResult;
 @synthesize teamTwoResult;
+@synthesize congratulations;
 
 @synthesize game;
 @synthesize gameKey;
@@ -259,21 +260,25 @@ static int siLosingScore = -500;
 }
 
 - (void) gameComplete {
-  self.teamOneBid.hidden = NO;
-  self.teamTwoBid.hidden = NO;
-  self.teamOneResult.hidden = YES;
-  self.teamTwoResult.hidden = YES;
+  self.teamOneBid.hidden        = NO;
+  self.teamTwoBid.hidden        = NO;
+  self.teamOneResult.hidden     = YES;
+  self.teamTwoResult.hidden     = YES;
+  self.congratulations.hidden   = YES;
   
-  if (self.winningSlot) {
-    self.teamOneBid.hidden = YES;
-    self.teamTwoBid.hidden = YES;
-    
+  if (self.winningSlot) {    
     if ([self.winningSlot isEqual:self.slotTeamOne]) {
       self.teamOneResult.hidden = NO;
+      self.congratulations.text = [NSString stringWithFormat:@"%@ wins!", self.curNameTeamOne];
     }
     else {
       self.teamTwoResult.hidden = NO;
+      self.congratulations.text = [NSString stringWithFormat:@"%@ wins!", self.curNameTeamTwo];
     }
+
+    self.teamOneBid.hidden = YES;
+    self.teamTwoBid.hidden = YES;
+    self.congratulations.hidden = NO;    
   }
 }
 
@@ -341,12 +346,7 @@ static int siLosingScore = -500;
   [super setEditing:editing animated:animated];
 
   [self.roundsTableView setEditing:editing animated:animated];
-  
-  int growTextFieldsBy = 44;
-  double growTextFieldDuration = 0.1;
-  
-  CGRect rectOne = self.teamOneName.frame;
-  CGRect rectTwo = self.teamTwoName.frame;
+
   if (self.editing) {
     self.editButton.title = @"Done";
     self.teamOneName.enabled = YES;
@@ -358,10 +358,6 @@ static int siLosingScore = -500;
     
     self.teamOneName.borderStyle = UITextBorderStyleRoundedRect;
     self.teamTwoName.borderStyle = UITextBorderStyleRoundedRect;
-
-    rectOne.origin.x -= growTextFieldsBy;
-    rectOne.size.width += growTextFieldsBy;
-    rectTwo.size.width += growTextFieldsBy;
     
     [self.teamOneName becomeFirstResponder];
   }
@@ -376,17 +372,8 @@ static int siLosingScore = -500;
     self.curNameTeamOne = self.teamOneName.text;
     self.curNameTeamTwo = self.teamTwoName.text;
 
-    rectOne.size.width -= growTextFieldsBy;
-    rectOne.origin.x += growTextFieldsBy;
-    rectTwo.size.width -= growTextFieldsBy;
-    self.navigationItem.leftBarButtonItem = nil;
+//    self.navigationItem.leftBarButtonItem = nil;
   }
-
-  [UIView beginAnimations:@"Resize on edit" context:nil];
-  [UIView setAnimationDuration:growTextFieldDuration];
-  self.teamOneName.frame = rectOne;
-  self.teamTwoName.frame = rectTwo;
-  [UIView commitAnimations];
 }
 
 // MARK: AlertView delegate
