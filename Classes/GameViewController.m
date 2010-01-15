@@ -69,6 +69,7 @@ static int siLosingScore = -500;
 @synthesize lastPlayed;
 @synthesize newGame;
 @synthesize currentBiddingTeamSlot;
+@synthesize newRound;
 
 - (void) dealloc {  
   [roundsTableView release];
@@ -130,8 +131,6 @@ static int siLosingScore = -500;
     self.lastPlayed = [self.game valueForKey:ssStoreLastPlayed];
   }
   
-  [self setGameSummary];
-
   NSLog(@"self.gameKey: %@", self.gameKey);
   NSLog(@"self.game: %@", self.game);
 }
@@ -206,14 +205,13 @@ static int siLosingScore = -500;
   
   [self.rounds insertObject:dict atIndex:0];
   
-  [self.roundsTableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+//  [self.roundsTableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
   
-  [self checkForGameOver];
-  
+  self.newRound = YES;
   self.lastPlayed = [NSDate date];
-  
-  [self setGameSummary];
-  
+
+  [self checkForGameOver];
+
   if (self.winningSlot != nil) {
     NSString* winningTeamName = [self.winningSlot intValue] == 0 ? self.curNameTeamOne : self.curNameTeamTwo;
     NSString* msg = [NSString stringWithFormat:@"%@ wins!", winningTeamName];
@@ -239,6 +237,7 @@ static int siLosingScore = -500;
   
   [self checkForGameOver];
   [self.roundsTableView reloadData];
+  [self.roundsTableView scrollsToTop];
 }
 
 - (void) setGameSummary {
@@ -312,9 +311,6 @@ static int siLosingScore = -500;
   [super viewWillAppear:animated];
   
   [self refreshView];
-  if ([self.rounds count] > 0) {
-    [self.roundsTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-  }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -325,9 +321,12 @@ static int siLosingScore = -500;
     [self edit:self];
     self.newGame = NO;
   }
-  if ([self.rounds count] > 0) {
-    [self.roundsTableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES];
-  }
+  
+  if (self.isNewRound) {
+    self.newRound = NO;
+    [self.roundsTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+    [self.roundsTableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES];    
+  }  
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -371,8 +370,8 @@ static int siLosingScore = -500;
     
     self.curNameTeamOne = self.teamOneName.text;
     self.curNameTeamTwo = self.teamTwoName.text;
-
-//    self.navigationItem.leftBarButtonItem = nil;
+    
+    [self gameComplete];
   }
 }
 
