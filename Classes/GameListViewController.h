@@ -20,6 +20,7 @@
   NSMutableArray* gamesInProgressKeys;
   NSMutableArray* gamesCompletedKeys;
   NSMutableDictionary* gameList;
+  NSString* selectedKey;
 }
 
 
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) NSMutableArray* gamesInProgressKeys;
 @property (nonatomic, retain) NSMutableArray* gamesCompletedKeys;
 @property (nonatomic, retain) NSMutableDictionary* gameList;
+@property (nonatomic, retain) NSString *selectedKey;
 
 - (IBAction) edit:(id)sender;
 
@@ -37,5 +39,7 @@
 - (void) saveList;
 - (void) setKeys;
 - (id) valueForSection:(NSInteger)section valueInProgress:(id)valueInProgress valueCompleted:(id)valueCompleted;
+- (NSString*) keyForIndexPath:(NSIndexPath*)index;
+- (NSIndexPath*) indexPathForKey:(NSString*)key;
 
 @end

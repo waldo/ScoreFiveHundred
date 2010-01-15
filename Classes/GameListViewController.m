@@ -41,6 +41,8 @@ static NSString* ssTitleCompleted     = @"Complete";
 @synthesize gamesInProgressKeys;
 @synthesize gamesCompletedKeys;
 @synthesize gameList;
+@synthesize selectedKey;
+
 
 - (void)dealloc {
   [cellWrapper dealloc];
@@ -59,6 +61,8 @@ static NSString* ssTitleCompleted     = @"Complete";
 }
 
 - (void) saveGame:(NSDictionary *)game forKey:(NSString *)key {
+  self.selectedKey = key;
+
   if (
       [[game objectForKey:ssStoreRounds] count]       == 0 && 
       [[game objectForKey:ssStoreNameTeamOne] length] == 0 && 
@@ -105,6 +109,19 @@ static NSString* ssTitleCompleted     = @"Complete";
   return [[self valueForSection:index.section valueInProgress:self.gamesInProgressKeys valueCompleted:self.gamesCompletedKeys] objectAtIndex:index.row];
 }
 
+- (NSIndexPath*) indexPathForKey:(NSString*)key {
+  NSIndexPath* index = nil;
+  
+  if ([self.gamesInProgressKeys indexOfObject:key] != NSNotFound) {
+    index = [NSIndexPath indexPathForRow:[self.gamesInProgressKeys indexOfObject:key] inSection:[[self valueForSection:0 valueInProgress:[NSNumber numberWithInt:0] valueCompleted:[NSNumber numberWithInt:1]] intValue]];
+  }
+  else if ([self.gamesCompletedKeys indexOfObject:key] != NSNotFound) {
+    index = [NSIndexPath indexPathForRow:[self.gamesCompletedKeys indexOfObject:key] inSection:[[self valueForSection:1 valueInProgress:[NSNumber numberWithInt:0] valueCompleted:[NSNumber numberWithInt:1]] intValue]];    
+  }
+  
+  return index;
+}
+
 - (id) valueForSection:(NSInteger)section valueInProgress:(id)valueInProgress valueCompleted:(id)valueCompleted {
   id val = nil;
   
@@ -137,6 +154,19 @@ static NSString* ssTitleCompleted     = @"Complete";
   [super viewWillAppear:animated];
   
   [self.gameListTableView reloadData];
+  if (self.selectedKey != nil) {
+    [self.gameListTableView selectRowAtIndexPath:[self indexPathForKey:selectedKey] animated:NO scrollPosition:UITableViewScrollPositionNone];
+  }
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  
+  if (self.selectedKey != nil) {
+    [self.gameListTableView deselectRowAtIndexPath:[self indexPathForKey:selectedKey] animated:YES];
+    
+     self.selectedKey = nil;
+  }
 }
 
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated {
@@ -217,11 +247,11 @@ static NSString* ssTitleCompleted     = @"Complete";
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   [self setEditing:NO animated:NO];
   
-  NSString* key = [self keyForIndexPath:indexPath];
+  self.selectedKey = [self keyForIndexPath:indexPath];
   
   ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
   
-  [app viewGame:[self.gameList objectForKey:key] WithKey:key AndIsNewGame:NO];
+  [app viewGame:[self.gameList objectForKey:self.selectedKey] WithKey:self.selectedKey AndIsNewGame:NO];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

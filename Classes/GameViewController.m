@@ -311,6 +311,9 @@ static int siLosingScore = -500;
   [super viewWillAppear:animated];
   
   [self refreshView];
+  if (self.isNewRound) {
+    [self.roundsTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+  }    
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -324,7 +327,6 @@ static int siLosingScore = -500;
   
   if (self.isNewRound) {
     self.newRound = NO;
-    [self.roundsTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
     [self.roundsTableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES];    
   }  
 }
