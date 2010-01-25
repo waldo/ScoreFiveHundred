@@ -16,6 +16,7 @@
 + (NSDictionary *) allTypes;
 + (NSString *) suitColourForHand:(NSString *)hand;
 + (NSString *) tricksAndSymbolForHand:(NSString *)hand;
++ (NSString*) tricksAndDescriptionForHand:(NSString*)hand;
 + (NSString *) descriptionForHand:(NSString *)hand;
 + (NSString *) pointsStringForHand:(NSString *)hand;
 + (NSNumber *) biddersPointsForHand:(NSString *)hand AndBiddersTricksWon:(NSNumber *)tricksWon;

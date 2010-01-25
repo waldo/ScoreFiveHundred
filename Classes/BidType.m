@@ -150,6 +150,17 @@ static NSString *ssVariationMisere = @"misére";
   return tricksAndSymbol;
 }
 
++ (NSString*) tricksAndDescriptionForHand:(NSString*)hand {
+  NSDictionary *aBidType = [allTypes objectForKey:hand];
+  NSString *desc = [NSString stringWithFormat:@"%@ %@", [aBidType objectForKey:ssTrick], [aBidType objectForKey:ssSuit]];
+
+  if ([@"CM" isEqual:hand] || [@"OM" isEqual:hand]) {
+    desc = [NSString stringWithFormat:@"%@", [aBidType objectForKey:ssSuit]];
+  }  
+  
+  return desc;  
+}
+
 + (NSString *)descriptionForHand:(NSString *)hand {
   NSDictionary *aBidType = [allTypes objectForKey:hand];
   NSString *desc = [NSString stringWithFormat:@"%@", [aBidType objectForKey:ssSuit]];

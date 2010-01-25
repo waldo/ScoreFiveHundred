@@ -7,6 +7,7 @@
 //
 
 #import "BiddingViewController.h"
+#import "ScoreFiveHundredAppDelegate.h"
 
 
 @implementation BiddingViewController
@@ -14,21 +15,15 @@
 // MARK: synthesize
 @synthesize bidSelectionTableView;
 @synthesize cellWrapper;
-@synthesize tricksWonSegmentedControl;
 
 @synthesize bidTypeHands;
 
 - (void)dealloc {
   [bidSelectionTableView release];
   [cellWrapper dealloc];
-  [tricksWonSegmentedControl release];
   [bidTypeHands release];
   
   [super dealloc];
-}
-
-- (NSNumber*) tricksWon {
-  return [NSNumber numberWithInt:[[self.tricksWonSegmentedControl titleForSegmentAtIndex:self.tricksWonSegmentedControl.selectedSegmentIndex] intValue]];
 }
 
 - (NSString*) hand {
@@ -46,19 +41,15 @@
   [super viewWillAppear:animated];
 
   [self.bidSelectionTableView reloadData];
-  
-  [self.tricksWonSegmentedControl setSelectedSegmentIndex:5];
-  [self.bidSelectionTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
 }
 
 // MARK: tableview delegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.bidTypeHands count];
 }
 
 
-// Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *CellIdentifier = @"CellBidType";
   
   CellBidType *cellBidType = (CellBidType *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -85,6 +76,14 @@
   cellBidType.pointsLabel.text = [BidType pointsStringForHand:key];
   
   return cellBidType;
+}
+
+- (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
+  ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
+
+  NSString* bidTypeDescription = [BidType tricksAndDescriptionForHand:[self hand]];
+  
+  [app bidTypeSelected:bidTypeDescription];
 }
 
 @end

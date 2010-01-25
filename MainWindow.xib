@@ -12,8 +12,9 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="125"/>
+			<integer value="128"/>
 			<integer value="19"/>
+			<integer value="125"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -96,16 +97,22 @@
 			<object class="IBUIViewController" id="808336287">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="448306788">
 					<string key="IBUITitle">Team X Bid</string>
-					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="962486255">
-						<int key="IBUIStyle">1</int>
-						<int key="IBUISystemItemIdentifier">1</int>
-					</object>
+				</object>
+				<string key="IBUINibName">BiddingView</string>
+				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
+					<bool key="IBUIPrompted">NO</bool>
+				</object>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+			</object>
+			<object class="IBUIViewController" id="537040641">
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="195522173">
+					<reference key="IBUINavigationBar"/>
+					<string key="IBUITitle">Title</string>
 					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="668669279">
 						<int key="IBUIStyle">1</int>
 						<int key="IBUISystemItemIdentifier">3</int>
 					</object>
 				</object>
-				<string key="IBUINibName">BiddingView</string>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
 					<bool key="IBUIPrompted">NO</bool>
 				</object>
@@ -189,14 +196,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">cancelScore</string>
-						<reference key="source" ref="962486255"/>
-						<reference key="destination" ref="664661524"/>
-					</object>
-					<int key="connectionID">122</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">saveScore</string>
 						<reference key="source" ref="668669279"/>
 						<reference key="destination" ref="664661524"/>
@@ -226,6 +225,22 @@
 						<reference key="destination" ref="812727405"/>
 					</object>
 					<int key="connectionID">127</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">saveBid</string>
+						<reference key="source" ref="537040641"/>
+						<reference key="destination" ref="668669279"/>
+					</object>
+					<int key="connectionID">130</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tricksWonController</string>
+						<reference key="source" ref="664661524"/>
+						<reference key="destination" ref="537040641"/>
+					</object>
+					<int key="connectionID">131</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -334,25 +349,36 @@
 						<reference key="object" ref="448306788"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="668669279"/>
-							<reference ref="962486255"/>
 						</object>
 						<reference key="parent" ref="808336287"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">121</int>
-						<reference key="object" ref="668669279"/>
-						<reference key="parent" ref="448306788"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">120</int>
-						<reference key="object" ref="962486255"/>
-						<reference key="parent" ref="448306788"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">125</int>
 						<reference key="object" ref="812727405"/>
 						<reference key="parent" ref="1054159023"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">128</int>
+						<reference key="object" ref="537040641"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="195522173"/>
+						</object>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">129</int>
+						<reference key="object" ref="195522173"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="668669279"/>
+						</object>
+						<reference key="parent" ref="537040641"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">121</int>
+						<reference key="object" ref="668669279"/>
+						<reference key="parent" ref="195522173"/>
 					</object>
 				</object>
 			</object>
@@ -366,9 +392,12 @@
 					<string>10.IBPluginDependency</string>
 					<string>119.IBPluginDependency</string>
 					<string>12.IBPluginDependency</string>
-					<string>120.IBPluginDependency</string>
 					<string>121.IBPluginDependency</string>
 					<string>125.IBPluginDependency</string>
+					<string>128.CustomClassName</string>
+					<string>128.IBEditorWindowLastContentRect</string>
+					<string>128.IBPluginDependency</string>
+					<string>129.IBPluginDependency</string>
 					<string>14.IBEditorWindowLastContentRect</string>
 					<string>14.IBPluginDependency</string>
 					<string>15.CustomClassName</string>
@@ -395,15 +424,18 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>TricksWonViewController</string>
+					<string>{{423, 254}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{1638, 120}, {320, 480}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>{{960, 120}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>GameListViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>GameViewController</string>
-					<string>{{1966, 121}, {320, 480}}</string>
+					<string>{{960, 121}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>BiddingViewController</string>
@@ -429,7 +461,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">127</int>
+			<int key="maxID">131</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -443,13 +475,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>bidSelectionTableView</string>
 							<string>cellWrapper</string>
-							<string>tricksWonSegmentedControl</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UITableView</string>
 							<string>CellWrapper</string>
-							<string>UISegmentedControl</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -517,6 +547,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cellWrapper</string>
+							<string>congratulations</string>
 							<string>editButton</string>
 							<string>roundsTableView</string>
 							<string>teamOneBid</string>
@@ -529,6 +560,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>CellWrapper</string>
+							<string>UILabel</string>
 							<string>UIBarButtonItem</string>
 							<string>UITableView</string>
 							<string>UIButton</string>
@@ -551,13 +583,11 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>cancelScore</string>
 							<string>newGame</string>
 							<string>saveScore</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -570,6 +600,7 @@
 							<string>gameController</string>
 							<string>gameListController</string>
 							<string>navigationController</string>
+							<string>tricksWonController</string>
 							<string>window</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -578,6 +609,7 @@
 							<string>GameViewController</string>
 							<string>GameListViewController</string>
 							<string>UINavigationController</string>
+							<string>TricksWonViewController</string>
 							<string>UIWindow</string>
 						</object>
 					</object>
@@ -592,6 +624,27 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">TricksWonViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>saveBid</string>
+							<string>tricksWonSegmentedControl</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIBarButtonItem</string>
+							<string>UISegmentedControl</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/TricksWonViewController.h</string>
 					</object>
 				</object>
 			</object>
