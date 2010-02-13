@@ -57,6 +57,7 @@ static int siLosingScore = -500;
 @synthesize teamOneResult;
 @synthesize teamTwoResult;
 @synthesize congratulations;
+@synthesize dividerLong;
 
 @synthesize game;
 @synthesize gameKey;
@@ -264,6 +265,7 @@ static int siLosingScore = -500;
   self.teamOneResult.hidden     = YES;
   self.teamTwoResult.hidden     = YES;
   self.congratulations.hidden   = YES;
+  self.dividerLong.hidden       = NO;
   
   if (self.winningSlot) {    
     if ([self.winningSlot isEqual:self.slotTeamOne]) {
@@ -277,7 +279,8 @@ static int siLosingScore = -500;
 
     self.teamOneBid.hidden = YES;
     self.teamTwoBid.hidden = YES;
-    self.congratulations.hidden = NO;    
+    self.dividerLong.hidden = YES;
+    self.congratulations.hidden = NO;
   }
 }
 
