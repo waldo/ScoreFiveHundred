@@ -441,6 +441,15 @@ static int siLosingScore = -500;
   return cellScoringRound;
 }
 
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.row == 0) {
+    [((CellScoringRound*)cell).pointsTeamOneLabel setFont:[UIFont systemFontOfSize:30.0]];
+    [((CellScoringRound*)cell).pointsTeamTwoLabel setFont:[UIFont systemFontOfSize:30.0]];
+    [((CellScoringRound*)cell).pointsTeamOneLabel setTextColor:[UIColor darkTextColor]];
+    [((CellScoringRound*)cell).pointsTeamTwoLabel setTextColor:[UIColor darkTextColor]];
+  }
+}
+
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   // never selectable
   return nil;

@@ -121,7 +121,10 @@
 									<double key="NSSize">24</double>
 									<int key="NSfFlags">16</int>
 								</object>
-								<reference key="IBUITextColor" ref="25857120"/>
+								<object class="NSColor" key="IBUITextColor" id="789027051">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MCAwIDAgMC43NQA</bytes>
+								</object>
 								<reference key="IBUIHighlightedColor" ref="25857120"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">17</float>
@@ -219,7 +222,7 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="IBUIText">550</string>
 								<reference key="IBUIFont" ref="1024789395"/>
-								<reference key="IBUITextColor" ref="25857120"/>
+								<reference key="IBUITextColor" ref="789027051"/>
 								<reference key="IBUIHighlightedColor" ref="25857120"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">17</float>
