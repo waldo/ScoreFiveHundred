@@ -57,7 +57,8 @@ static int siLosingScore = -500;
 @synthesize teamOneResult;
 @synthesize teamTwoResult;
 @synthesize congratulations;
-@synthesize dividerLong;
+@synthesize dividerBottom;
+@synthesize dividerTop;
 
 @synthesize game;
 @synthesize gameKey;
@@ -265,7 +266,7 @@ static int siLosingScore = -500;
   self.teamOneResult.hidden     = YES;
   self.teamTwoResult.hidden     = YES;
   self.congratulations.hidden   = YES;
-  self.dividerLong.hidden       = NO;
+  self.dividerBottom.hidden       = NO;
   
   if (self.winningSlot) {    
     if ([self.winningSlot isEqual:self.slotTeamOne]) {
@@ -279,7 +280,7 @@ static int siLosingScore = -500;
 
     self.teamOneBid.hidden = YES;
     self.teamTwoBid.hidden = YES;
-    self.dividerLong.hidden = YES;
+    self.dividerBottom.hidden = YES;
     self.congratulations.hidden = NO;
   }
 }
@@ -359,6 +360,8 @@ static int siLosingScore = -500;
     self.teamTwoBid.hidden = YES;
     self.teamOneResult.hidden = YES;
     self.teamTwoResult.hidden = YES;
+    self.dividerTop.hidden = YES;
+    self.dividerBottom.hidden = YES;
     
     self.teamOneName.borderStyle = UITextBorderStyleRoundedRect;
     self.teamTwoName.borderStyle = UITextBorderStyleRoundedRect;
@@ -372,6 +375,8 @@ static int siLosingScore = -500;
     [self checkForGameOver];
     self.teamOneName.borderStyle = UITextBorderStyleNone;
     self.teamTwoName.borderStyle = UITextBorderStyleNone;
+    self.dividerTop.hidden = NO;
+    self.dividerBottom.hidden = NO;
     
     self.curNameTeamOne = self.teamOneName.text;
     self.curNameTeamTwo = self.teamTwoName.text;
@@ -432,7 +437,7 @@ static int siLosingScore = -500;
 
   cellScoringRound.pointsTeamOneLabel.text = [[r valueForKey:ssSubTotalTeamOne] stringValue];
   cellScoringRound.pointsTeamTwoLabel.text = [[r valueForKey:ssSubTotalTeamTwo] stringValue];
-
+  
   return cellScoringRound;
 }
 

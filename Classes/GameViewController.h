@@ -23,7 +23,8 @@
   IBOutlet UILabel *teamOneResult;
   IBOutlet UILabel *teamTwoResult;
   IBOutlet UILabel *congratulations;
-  IBOutlet UILabel *dividerLong;
+  IBOutlet UILabel *dividerBottom;
+  IBOutlet UILabel *dividerTop;
   
   NSMutableDictionary *game;
   NSString *gameKey;
@@ -49,7 +50,8 @@
 @property (nonatomic, retain) IBOutlet UILabel *teamOneResult;
 @property (nonatomic, retain) IBOutlet UILabel *teamTwoResult;
 @property (nonatomic, retain) IBOutlet UILabel *congratulations;
-@property (nonatomic, retain) IBOutlet UILabel *dividerLong;
+@property (nonatomic, retain) IBOutlet UILabel *dividerBottom;
+@property (nonatomic, retain) IBOutlet UILabel *dividerTop;
 
 @property (nonatomic, retain) NSMutableDictionary *game;
 @property (nonatomic, retain) NSString *gameKey;

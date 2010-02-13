@@ -69,8 +69,10 @@
 						<int key="NSvFlags">319</int>
 						<string key="NSFrame">{{0, 46}, {320, 310}}</string>
 						<reference key="NSSuperview" ref="313422340"/>
-						<reference key="IBUIBackgroundColor" ref="739395003"/>
-						<bool key="IBUIOpaque">NO</bool>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MSAxIDEAA</bytes>
+						</object>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<bool key="IBUIBouncesZoom">NO</bool>
@@ -189,7 +191,7 @@
 					<object class="IBUILabel" id="61540474">
 						<reference key="NSNextResponder" ref="313422340"/>
 						<int key="NSvFlags">-2147483329</int>
-						<string key="NSFrame">{{0, 356}, {320, 65}}</string>
+						<string key="NSFrame">{{0, 356}, {320, 64}}</string>
 						<reference key="NSSuperview" ref="313422340"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -212,7 +214,7 @@
 					<object class="IBUILabel" id="658448091">
 						<reference key="NSNextResponder" ref="313422340"/>
 						<int key="NSvFlags">317</int>
-						<string key="NSFrame">{{160, 0}, {1, 420}}</string>
+						<string key="NSFrame">{{160, 356}, {1, 64}}</string>
 						<reference key="NSSuperview" ref="313422340"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="117823187">
 							<int key="NSColorSpace">10</int>
@@ -257,7 +259,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBUILabel" id="185882994">
 						<reference key="NSNextResponder" ref="313422340"/>
 						<int key="NSvFlags">317</int>
-						<string key="NSFrame">{{160, 0}, {1, 355}}</string>
+						<string key="NSFrame">{{160, 0}, {1, 356}}</string>
 						<reference key="NSSuperview" ref="313422340"/>
 						<reference key="IBUIBackgroundColor" ref="117823187"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -404,11 +406,19 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">dividerLong</string>
+						<string key="label">dividerBottom</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="658448091"/>
 					</object>
-					<int key="connectionID">47</int>
+					<int key="connectionID">49</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">dividerTop</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="185882994"/>
+					</object>
+					<int key="connectionID">50</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -558,7 +568,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">48</int>
+			<int key="maxID">50</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -597,7 +607,8 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cellWrapper</string>
 							<string>congratulations</string>
-							<string>dividerLong</string>
+							<string>dividerBottom</string>
+							<string>dividerTop</string>
 							<string>editButton</string>
 							<string>roundsTableView</string>
 							<string>teamOneBid</string>
@@ -610,6 +621,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>CellWrapper</string>
+							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UIBarButtonItem</string>
