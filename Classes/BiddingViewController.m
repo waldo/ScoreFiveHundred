@@ -17,6 +17,7 @@
 @synthesize cellWrapper;
 
 @synthesize bidTypeHands;
+@synthesize team;
 
 - (void)dealloc {
   [bidSelectionTableView release];
@@ -28,6 +29,11 @@
 
 - (NSString*) hand {
   return [self.bidTypeHands objectAtIndex:[self.bidSelectionTableView indexPathForSelectedRow].row];
+}
+
+- (void) setTitleUsingTeamName:(NSString*)teamName {
+  self.team = teamName;
+  self.title = [NSString stringWithFormat:@"%@ Bid", self.team];
 }
 
 // MARK: view loading
@@ -83,7 +89,7 @@
 
   NSString* bidTypeDescription = [BidType tricksAndDescriptionForHand:[self hand]];
   
-  [app bidTypeSelected:bidTypeDescription];
+  [app bidTypeSelected:bidTypeDescription forTeamName:self.team];
 }
 
 @end

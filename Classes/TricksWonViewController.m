@@ -11,12 +11,14 @@
 
 @implementation TricksWonViewController
 
-@synthesize tricksWonSegmentedControl;
 @synthesize saveBid;
+@synthesize bidDescription;
+@synthesize tricksWonSegmentedControl;
 
 
 - (void) dealloc {
   [saveBid dealloc];
+  [bidDescription dealloc];
   [tricksWonSegmentedControl dealloc];
   
   [super dealloc];

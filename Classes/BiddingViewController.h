@@ -13,18 +13,20 @@
 #import "CellBidType.h"
 
 @interface BiddingViewController : UIViewController {
-  IBOutlet UITableView *bidSelectionTableView;
-  IBOutlet CellWrapper *cellWrapper;
+  IBOutlet UITableView* bidSelectionTableView;
+  IBOutlet CellWrapper* cellWrapper;
   
-  NSArray *bidTypeHands;
+  NSArray* bidTypeHands;
+  NSString* team;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView *bidSelectionTableView;
-@property (nonatomic, retain) IBOutlet CellWrapper *cellWrapper;
+@property (nonatomic, retain) IBOutlet UITableView* bidSelectionTableView;
+@property (nonatomic, retain) IBOutlet CellWrapper* cellWrapper;
 
-@property (nonatomic, retain) NSArray *bidTypeHands;
-
+@property (nonatomic, retain) NSArray* bidTypeHands;
+@property (nonatomic, retain) NSString* team;
 
 - (NSString*) hand;
+- (void) setTitleUsingTeamName:(NSString*)teamName;
 
 @end

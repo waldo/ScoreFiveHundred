@@ -11,10 +11,12 @@
 
 @interface TricksWonViewController : UIViewController {
   IBOutlet UIBarButtonItem* saveBid;
+  IBOutlet UILabel* bidDescription;
   IBOutlet UISegmentedControl* tricksWonSegmentedControl;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem* saveBid;
+@property (nonatomic, retain) IBOutlet UILabel* bidDescription;
 @property (nonatomic, retain) IBOutlet UISegmentedControl* tricksWonSegmentedControl;
 
 - (NSNumber*) tricksWon;

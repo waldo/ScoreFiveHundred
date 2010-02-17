@@ -73,13 +73,14 @@
 }
 
 - (void) bidForTeamName:(NSString*)teamName {
-  self.biddingController.title = [NSString stringWithFormat:@"%@ Bid", teamName];
+  [self.biddingController setTitleUsingTeamName:teamName];
   [self.navigationController pushViewController:self.biddingController animated:YES];
 }
 
-- (void) bidTypeSelected:(NSString*)bidType {
-  self.tricksWonController.title = bidType;
+- (void) bidTypeSelected:(NSString*)bidType forTeamName:(NSString*)teamName {
   [self.navigationController pushViewController:self.tricksWonController animated:YES];
+  self.tricksWonController.title = bidType;
+  self.tricksWonController.bidDescription.text = [NSString stringWithFormat:@"%@ bid %@ how many did they actually win?", teamName, bidType];
 }
 
 - (void) applicationDidFinishLaunching:(UIApplication *)application {
