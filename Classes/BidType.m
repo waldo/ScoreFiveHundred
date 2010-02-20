@@ -143,7 +143,7 @@ static NSString *ssVariationMisere = @"misére";
   NSDictionary *aBidType = [allTypes objectForKey:hand];
   NSString *tricksAndSymbol = [NSString stringWithFormat:@"%@%@", [aBidType objectForKey:ssTrick], [aBidType objectForKey:ssSuitSymbol]];
   
-  if ([@"CM" isEqual:hand] || [@"OM" isEqual:hand]) {
+  if ([BidType variation:hand] == ssVariationMisere) {
     tricksAndSymbol = hand;
   }
   
@@ -154,7 +154,7 @@ static NSString *ssVariationMisere = @"misére";
   NSDictionary *aBidType = [allTypes objectForKey:hand];
   NSString *desc = [NSString stringWithFormat:@"%@ %@", [aBidType objectForKey:ssTrick], [aBidType objectForKey:ssSuit]];
 
-  if ([@"CM" isEqual:hand] || [@"OM" isEqual:hand]) {
+  if ([BidType variation:hand] == ssVariationMisere) {
     desc = [NSString stringWithFormat:@"%@", [aBidType objectForKey:ssSuit]];
   }  
   
@@ -231,6 +231,19 @@ static NSString *ssVariationMisere = @"misére";
   else {
     return YES;
   }
+}
+
++ (NSString*) variation:(NSString *)hand {
+  NSString* variation = nil;
+  
+  if ([@"CM" isEqual:hand] || [@"OM" isEqual:hand]) {
+    variation = ssVariationMisere;
+  }
+  else {
+    variation = ssVariationRegular;
+  }
+
+  return variation;
 }
 
 @end

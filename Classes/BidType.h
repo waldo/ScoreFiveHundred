@@ -22,5 +22,6 @@
 + (NSNumber *) biddersPointsForHand:(NSString *)hand AndBiddersTricksWon:(NSNumber *)tricksWon;
 + (NSNumber *) nonBiddersPointsForHand:(NSString *)hand AndBiddersTricksWon:(NSNumber *)tricksWon;
 + (BOOL) bidderWonHand:(NSString *)hand WithTricksWon:(NSNumber *)tricksWon;
++ (NSString*) variation:(NSString*)hand;
 
 @end

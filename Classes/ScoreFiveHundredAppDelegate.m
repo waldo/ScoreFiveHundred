@@ -31,6 +31,12 @@
   [super dealloc];
 }
 
+- (void) applicationDidFinishLaunching:(UIApplication *)application {
+  
+  [self.window addSubview:[self.navigationController view]];
+  [self.window makeKeyAndVisible];
+}
+
 + (NSString *) uniqueId {
   CFUUIDRef uniqueId = CFUUIDCreate(NULL);
   NSString *sUniqueId = (NSString *)CFUUIDCreateString(NULL, uniqueId); // convert to string
@@ -42,17 +48,6 @@
 - (IBAction) newGame {
   [self.gameListController setEditing:NO animated:NO];
   [self viewGame:nil WithKey:[ScoreFiveHundredAppDelegate uniqueId] AndIsNewGame:YES];
-}
-
-- (IBAction) saveScore {
-  // work out what was clicked
-  NSNumber *tricksWon = [self.tricksWonController tricksWon];
-  NSString *hand = [self.biddingController hand];
-
-  [self.gameController updateRoundWithHand:hand AndTricksWon:tricksWon];
-  
-  [self.navigationController popViewControllerAnimated:NO];
-  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) saveGame:(NSDictionary*)game forKey:(NSString*)key {
@@ -77,16 +72,23 @@
   [self.navigationController pushViewController:self.biddingController animated:YES];
 }
 
-- (void) bidTypeSelected:(NSString*)bidType forTeamName:(NSString*)teamName {
+- (void) bidSelected:(NSString*)hand forTeamName:(NSString*)teamName {
+  self.tricksWonController.title = [BidType tricksAndDescriptionForHand:hand];
+  self.tricksWonController.bidDescription = [NSString stringWithFormat:@"%@ bid %@. How many did they actually win?", teamName, [BidType tricksAndDescriptionForHand:hand]];
+  self.tricksWonController.bidVariation = [BidType variation:hand];
+
   [self.navigationController pushViewController:self.tricksWonController animated:YES];
-  self.tricksWonController.title = bidType;
-  self.tricksWonController.bidDescription.text = [NSString stringWithFormat:@"%@ bid %@ how many did they actually win?", teamName, bidType];
 }
 
-- (void) applicationDidFinishLaunching:(UIApplication *)application {
-
-  [self.window addSubview:[self.navigationController view]];
-  [self.window makeKeyAndVisible];
+- (void) saveScoreWithTricksWon:(NSInteger)tricksWon {
+  NSNumber* tricks = [NSNumber numberWithInt:tricksWon];
+  NSString* hand = [self.biddingController hand];
+  
+  [self.gameController updateRoundWithHand:hand AndTricksWon:tricks];
+  
+  [self.navigationController popViewControllerAnimated:NO];
+  [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 @end

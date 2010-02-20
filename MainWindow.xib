@@ -108,10 +108,6 @@
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="195522173">
 					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Title</string>
-					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="668669279">
-						<int key="IBUIStyle">1</int>
-						<int key="IBUISystemItemIdentifier">3</int>
-					</object>
 				</object>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
 					<bool key="IBUIPrompted">NO</bool>
@@ -195,14 +191,6 @@
 					<int key="connectionID">117</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">saveScore</string>
-						<reference key="source" ref="668669279"/>
-						<reference key="destination" ref="664661524"/>
-					</object>
-					<int key="connectionID">123</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">biddingController</string>
 						<reference key="source" ref="664661524"/>
@@ -225,14 +213,6 @@
 						<reference key="destination" ref="812727405"/>
 					</object>
 					<int key="connectionID">127</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">saveBid</string>
-						<reference key="source" ref="537040641"/>
-						<reference key="destination" ref="668669279"/>
-					</object>
-					<int key="connectionID">130</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -371,14 +351,8 @@
 						<reference key="object" ref="195522173"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="668669279"/>
 						</object>
 						<reference key="parent" ref="537040641"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">121</int>
-						<reference key="object" ref="668669279"/>
-						<reference key="parent" ref="195522173"/>
 					</object>
 				</object>
 			</object>
@@ -392,7 +366,6 @@
 					<string>10.IBPluginDependency</string>
 					<string>119.IBPluginDependency</string>
 					<string>12.IBPluginDependency</string>
-					<string>121.IBPluginDependency</string>
 					<string>125.IBPluginDependency</string>
 					<string>128.CustomClassName</string>
 					<string>128.IBEditorWindowLastContentRect</string>
@@ -419,7 +392,6 @@
 					<string>UIApplication</string>
 					<string>UIResponder</string>
 					<string>ScoreFiveHundredAppDelegate</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -548,6 +520,8 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cellWrapper</string>
 							<string>congratulations</string>
+							<string>dividerBottom</string>
+							<string>dividerTop</string>
 							<string>editButton</string>
 							<string>roundsTableView</string>
 							<string>teamOneBid</string>
@@ -560,6 +534,8 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>CellWrapper</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UIBarButtonItem</string>
 							<string>UITableView</string>
@@ -630,17 +606,8 @@
 					<string key="className">TricksWonViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>saveBid</string>
-							<string>tricksWonSegmentedControl</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIBarButtonItem</string>
-							<string>UISegmentedControl</string>
-						</object>
+						<string key="NS.key.0">tricksWonTableView</string>
+						<string key="NS.object.0">UITableView</string>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
@@ -865,14 +832,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">UIKit.framework/Headers/UISearchDisplayController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">UISegmentedControl</string>
-					<string key="superclassName">UIControl</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">UIKit.framework/Headers/UISegmentedControl.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

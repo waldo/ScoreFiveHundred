@@ -182,7 +182,7 @@ static NSString* ssTitleCompleted     = @"Complete";
   }
 }
 
-// MARK: TableView delegate
+// MARK: tableview delegate
 - (NSInteger) numberOfSectionsInTableView:(UITableView*)tableView {	
   int sections = 0;
   

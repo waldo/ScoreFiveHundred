@@ -43,6 +43,7 @@
 - (void) saveGame:(NSDictionary*)game forKey:(NSString*)key;
 - (void) rematch:(NSDictionary*)originalGame forKey:(NSString*)originalGameKey;
 - (void) bidForTeamName:(NSString*)teamName;
-- (void) bidTypeSelected:(NSString*)bidType forTeamName:(NSString*)teamName;
+- (void) bidSelected:(NSString*)hand forTeamName:(NSString*)teamName;
+- (void) saveScoreWithTricksWon:(NSInteger)tricksWon;
 
 @end

@@ -87,9 +87,7 @@
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
   ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
 
-  NSString* bidTypeDescription = [BidType tricksAndDescriptionForHand:[self hand]];
-  
-  [app bidTypeSelected:bidTypeDescription forTeamName:self.team];
+  [app bidSelected:[self hand] forTeamName:self.team];
 }
 
 @end

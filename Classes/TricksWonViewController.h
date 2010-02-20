@@ -10,15 +10,22 @@
 
 
 @interface TricksWonViewController : UIViewController {
-  IBOutlet UIBarButtonItem* saveBid;
-  IBOutlet UILabel* bidDescription;
-  IBOutlet UISegmentedControl* tricksWonSegmentedControl;
+  IBOutlet UITableView* tricksWonTableView;
+
+  NSString* bidDescription;
+  NSString* bidVariation;
+  NSArray* regularList;
+  NSArray* misereList;
 }
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem* saveBid;
-@property (nonatomic, retain) IBOutlet UILabel* bidDescription;
-@property (nonatomic, retain) IBOutlet UISegmentedControl* tricksWonSegmentedControl;
+@property (nonatomic, retain) IBOutlet UITableView* tricksWonTableView;
 
-- (NSNumber*) tricksWon;
+@property (nonatomic, retain) NSString* bidDescription;
+@property (nonatomic, retain) NSString* bidVariation;
+@property (nonatomic, retain) NSArray* regularList;
+@property (nonatomic, retain) NSArray* misereList;
+
+
+- (NSArray*) tricksWonList;
 
 @end

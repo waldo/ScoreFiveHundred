@@ -407,7 +407,7 @@ static int siLosingScore = -500;
   return YES;
 }
 
-// MARK: TableView delegate
+// MARK: tableview delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return [self.rounds count];
 }
