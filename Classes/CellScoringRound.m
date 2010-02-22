@@ -11,8 +11,8 @@
 
 @implementation CellScoringRound
 
-static NSString *ssSymbolForBidWon  = @"✔";
-static NSString *ssSymbolForBidLost = @"✘";
+static NSString* ssSymbolForBidWon  = @"✔";
+static NSString* ssSymbolForBidLost = @"✘";
 static int siSlotTeamOne            = 0;
 static int siSlotTeamTwo            = 1;
 
@@ -25,7 +25,7 @@ static int siSlotTeamTwo            = 1;
 @synthesize scoreSummaryTeamOneLabel;
 @synthesize scoreSummaryTeamTwoLabel;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
     }
     return self;

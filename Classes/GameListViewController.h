@@ -13,9 +13,9 @@
 
 
 @interface GameListViewController : UIViewController {
-  IBOutlet CellWrapper *cellWrapper;
-  IBOutlet UITableView *gameListTableView;
-  IBOutlet UIBarButtonItem *editButton;
+  IBOutlet CellWrapper* cellWrapper;
+  IBOutlet UITableView* gameListTableView;
+  IBOutlet UIBarButtonItem* editButton;
 
   NSMutableArray* gamesInProgressKeys;
   NSMutableArray* gamesCompletedKeys;
@@ -24,14 +24,14 @@
 }
 
 
-@property (nonatomic, retain) IBOutlet CellWrapper *cellWrapper;
-@property (nonatomic, retain) IBOutlet UITableView *gameListTableView;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *editButton;
+@property (nonatomic, retain) IBOutlet CellWrapper* cellWrapper;
+@property (nonatomic, retain) IBOutlet UITableView* gameListTableView;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem* editButton;
 
 @property (nonatomic, retain) NSMutableArray* gamesInProgressKeys;
 @property (nonatomic, retain) NSMutableArray* gamesCompletedKeys;
 @property (nonatomic, retain) NSMutableDictionary* gameList;
-@property (nonatomic, retain) NSString *selectedKey;
+@property (nonatomic, retain) NSString* selectedKey;
 
 - (IBAction) edit:(id)sender;
 

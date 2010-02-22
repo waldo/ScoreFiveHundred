@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ScoreFiveHundredAppDelegate;
 
 
 @interface TricksWonViewController : UIViewController {

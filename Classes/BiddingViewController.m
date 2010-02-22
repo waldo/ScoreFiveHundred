@@ -50,22 +50,22 @@
 }
 
 // MARK: tableview delegate
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.bidTypeHands count];
 }
 
 
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *CellIdentifier = @"CellBidType";
+- (UITableViewCell*) tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
+  static NSString* CellIdentifier = @"CellBidType";
   
-  CellBidType *cellBidType = (CellBidType *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  CellBidType* cellBidType = (CellBidType*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   
   if (cellBidType == nil) {
     [self.cellWrapper loadMyNibFile:CellIdentifier];
-    cellBidType = (CellBidType *)self.cellWrapper.cell;
+    cellBidType = (CellBidType*)self.cellWrapper.cell;
   }
   
-  NSString *key = [self.bidTypeHands objectAtIndex:indexPath.row];
+  NSString* key = [self.bidTypeHands objectAtIndex:indexPath.row];
   
   cellBidType.symbolLabel.text = [BidType tricksAndSymbolForHand:key];
   

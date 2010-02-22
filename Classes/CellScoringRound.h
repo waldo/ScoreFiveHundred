@@ -11,24 +11,24 @@
 
 
 @interface CellScoringRound : UITableViewCell {
-  UILabel *bidAttemptedTeamOneLabel;
-  UILabel *bidAttemptedTeamTwoLabel;
-  UILabel *pointsTeamOneLabel;
-  UILabel *pointsTeamTwoLabel;
-  UILabel *symbolBidResultTeamOneLabel;
-  UILabel *symbolBidResultTeamTwoLabel;
-  UILabel *scoreSummaryTeamOneLabel;
-  UILabel *scoreSummaryTeamTwoLabel;
+  UILabel* bidAttemptedTeamOneLabel;
+  UILabel* bidAttemptedTeamTwoLabel;
+  UILabel* pointsTeamOneLabel;
+  UILabel* pointsTeamTwoLabel;
+  UILabel* symbolBidResultTeamOneLabel;
+  UILabel* symbolBidResultTeamTwoLabel;
+  UILabel* scoreSummaryTeamOneLabel;
+  UILabel* scoreSummaryTeamTwoLabel;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *bidAttemptedTeamOneLabel;
-@property (nonatomic, retain) IBOutlet UILabel *bidAttemptedTeamTwoLabel;
-@property (nonatomic, retain) IBOutlet UILabel *pointsTeamOneLabel;
-@property (nonatomic, retain) IBOutlet UILabel *pointsTeamTwoLabel;
-@property (nonatomic, retain) IBOutlet UILabel *symbolBidResultTeamOneLabel;
-@property (nonatomic, retain) IBOutlet UILabel *symbolBidResultTeamTwoLabel;
-@property (nonatomic, retain) IBOutlet UILabel *scoreSummaryTeamOneLabel;
-@property (nonatomic, retain) IBOutlet UILabel *scoreSummaryTeamTwoLabel;
+@property (nonatomic, retain) IBOutlet UILabel* bidAttemptedTeamOneLabel;
+@property (nonatomic, retain) IBOutlet UILabel* bidAttemptedTeamTwoLabel;
+@property (nonatomic, retain) IBOutlet UILabel* pointsTeamOneLabel;
+@property (nonatomic, retain) IBOutlet UILabel* pointsTeamTwoLabel;
+@property (nonatomic, retain) IBOutlet UILabel* symbolBidResultTeamOneLabel;
+@property (nonatomic, retain) IBOutlet UILabel* symbolBidResultTeamTwoLabel;
+@property (nonatomic, retain) IBOutlet UILabel* scoreSummaryTeamOneLabel;
+@property (nonatomic, retain) IBOutlet UILabel* scoreSummaryTeamTwoLabel;
 
 - (void) setStyleForTeamOneBidAttempted:(NSString*)teamOneBidAttempted AndTeamOneBidAchieved:(BOOL)teamOneBidAchieved WithTeamTwoBidAttempted:(NSString*)teamTwoBidAttempted AndTeamTwoBidAchieved:(BOOL)teamTwoBidAchieved;
 

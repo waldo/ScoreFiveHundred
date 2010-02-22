@@ -21,14 +21,14 @@
 @implementation GameListViewController
 
 // MARK: static
-static NSString *ssStoreGames         = @"five hundred games";
-static NSString *ssStoreRounds        = @"rounds";
-static NSString *ssStoreNameTeamOne   = @"team one name";
-static NSString *ssStoreNameTeamTwo   = @"team two name";
-static NSString *ssStoreScoreTeamOne  = @"team one score";
-static NSString *ssStoreScoreTeamTwo  = @"team two score";
-static NSString *ssStoreWinningSlot   = @"winning slot";
-static NSString *ssStoreLastPlayed    = @"last played";
+static NSString* ssStoreGames         = @"five hundred games";
+static NSString* ssStoreRounds        = @"rounds";
+static NSString* ssStoreNameTeamOne   = @"team one name";
+static NSString* ssStoreNameTeamTwo   = @"team two name";
+static NSString* ssStoreScoreTeamOne  = @"team one score";
+static NSString* ssStoreScoreTeamTwo  = @"team two score";
+static NSString* ssStoreWinningSlot   = @"winning slot";
+static NSString* ssStoreLastPlayed    = @"last played";
 
 static NSString* ssTitleInProgress    = @"In Progress";
 static NSString* ssTitleCompleted     = @"Complete";
@@ -60,7 +60,7 @@ static NSString* ssTitleCompleted     = @"Complete";
   [self setEditing:!self.editing animated:YES];
 }
 
-- (void) saveGame:(NSDictionary *)game forKey:(NSString *)key {
+- (void) saveGame:(NSDictionary*)game forKey:(NSString*)key {
   self.selectedKey = key;
 
   if (
@@ -78,7 +78,7 @@ static NSString* ssTitleCompleted     = @"Complete";
 }
 
 - (void) saveList {
-  NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
+  NSUserDefaults* store = [NSUserDefaults standardUserDefaults];
   
   [store setObject:self.gameList forKey:ssStoreGames];
   
@@ -144,7 +144,7 @@ static NSString* ssTitleCompleted     = @"Complete";
 - (void) viewDidLoad {
   [super viewDidLoad];
   
-  NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
+  NSUserDefaults* store = [NSUserDefaults standardUserDefaults];
   self.gameList = [NSMutableDictionary dictionaryWithDictionary:[store dictionaryForKey:ssStoreGames]];
 
   [self setKeys];
@@ -200,21 +200,21 @@ static NSString* ssTitleCompleted     = @"Complete";
   return [self valueForSection:section valueInProgress:ssTitleInProgress valueCompleted:ssTitleCompleted];
 }
 
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
   return [[self valueForSection:section valueInProgress:[NSNumber numberWithInteger:[self.gamesInProgressKeys count]] valueCompleted:[NSNumber numberWithInteger:[self.gamesCompletedKeys count]]] integerValue];
 }
 
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *CellIdentifier = @"CellGame";
+- (UITableViewCell*) tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
+  static NSString* CellIdentifier = @"CellGame";
   
-  CellGame *cellGame = (CellGame *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  CellGame* cellGame = (CellGame*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   
   if (cellGame == nil) {
     [self.cellWrapper loadMyNibFile:CellIdentifier];
-    cellGame = (CellGame *)self.cellWrapper.cell;
+    cellGame = (CellGame*)self.cellWrapper.cell;
   }
 
-  NSDictionary *game = [self.gameList valueForKey:[self keyForIndexPath:indexPath]];
+  NSDictionary* game = [self.gameList valueForKey:[self keyForIndexPath:indexPath]];
   
   cellGame.nameTeamOne.text = [game valueForKey:ssStoreNameTeamOne];
   cellGame.nameTeamTwo.text = [game valueForKey:ssStoreNameTeamTwo];
@@ -244,7 +244,7 @@ static NSString* ssTitleCompleted     = @"Complete";
   return cellGame;
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
   [self setEditing:NO animated:NO];
   
   self.selectedKey = [self keyForIndexPath:indexPath];
@@ -254,15 +254,15 @@ static NSString* ssTitleCompleted     = @"Complete";
   [app viewGame:[self.gameList objectForKey:self.selectedKey] WithKey:self.selectedKey AndIsNewGame:NO];
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)tableView:(UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath*)indexPath {
   return YES;
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCellEditingStyle)tableView:(UITableView*)tableView editingStyleForRowAtIndexPath:(NSIndexPath*)indexPath {
   return UITableViewCellEditingStyleDelete;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
     [self.gameList removeObjectForKey:[self keyForIndexPath:indexPath]];
 

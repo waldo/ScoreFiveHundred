@@ -31,15 +31,15 @@
   [super dealloc];
 }
 
-- (void) applicationDidFinishLaunching:(UIApplication *)application {
+- (void) applicationDidFinishLaunching:(UIApplication*)application {
   
   [self.window addSubview:[self.navigationController view]];
   [self.window makeKeyAndVisible];
 }
 
-+ (NSString *) uniqueId {
++ (NSString*) uniqueId {
   CFUUIDRef uniqueId = CFUUIDCreate(NULL);
-  NSString *sUniqueId = (NSString *)CFUUIDCreateString(NULL, uniqueId); // convert to string
+  NSString* sUniqueId = (NSString*)CFUUIDCreateString(NULL, uniqueId); // convert to string
   CFRelease(uniqueId);
   
   return [sUniqueId autorelease];
@@ -58,12 +58,12 @@
   // because we are pushing and popping the same view controller viewDisappear won't be called - thus we need to save first
   [self.gameListController saveGame:originalGame forKey:originalGameKey];
   [self.navigationController popViewControllerAnimated:NO];
-  [self.gameController rematchOfGame:originalGame withNewKey:[ScoreFiveHundredAppDelegate uniqueId]];
+  [self.gameController rematchOfGame:originalGame newKey:[ScoreFiveHundredAppDelegate uniqueId]];
   [self.navigationController pushViewController:self.gameController animated:YES];
 }
 
 - (void) viewGame:(NSDictionary*)gameToOpen WithKey:(NSString*)key AndIsNewGame:(BOOL)newGame {
-  [self.gameController openGame:gameToOpen WithKey:key AndIsNewGame:newGame];
+  [self.gameController openGame:gameToOpen key:key isNewGame:newGame];
   [self.navigationController pushViewController:self.gameController animated:YES];
 }
 
@@ -84,7 +84,7 @@
   NSNumber* tricks = [NSNumber numberWithInt:tricksWon];
   NSString* hand = [self.biddingController hand];
   
-  [self.gameController updateRoundWithHand:hand AndTricksWon:tricks];
+  [self.gameController updateRoundWithHand:hand tricksWon:tricks];
   
   [self.navigationController popViewControllerAnimated:NO];
   [self.navigationController popViewControllerAnimated:YES];

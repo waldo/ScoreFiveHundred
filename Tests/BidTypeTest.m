@@ -21,13 +21,13 @@
 }
 
 
-- (void) checkForHand:(NSString *)hand withTricksWon:(int)tricks bidderPoints:(int)bidderExpectedPoints andNonBidderPoints:(int)nonBidderExpectedPoints {
-  NSNumber *tricksWon = [NSNumber numberWithInt:tricks];
-  NSNumber *bidderPoints = [NSNumber numberWithInt:bidderExpectedPoints];
-  NSNumber *nonBidderPoints = [NSNumber numberWithInt:nonBidderExpectedPoints];
+- (void) checkForHand:(NSString*)hand withTricksWon:(int)tricks bidderPoints:(int)bidderExpectedPoints andNonBidderPoints:(int)nonBidderExpectedPoints {
+  NSNumber* tricksWon = [NSNumber numberWithInt:tricks];
+  NSNumber* bidderPoints = [NSNumber numberWithInt:bidderExpectedPoints];
+  NSNumber* nonBidderPoints = [NSNumber numberWithInt:nonBidderExpectedPoints];
   
-  NSNumber *bidderResult = [BidType biddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
-  NSNumber *nonBidderResult = [BidType nonBiddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
+  NSNumber* bidderResult = [BidType biddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
+  NSNumber* nonBidderResult = [BidType nonBiddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
   
   STAssertTrue(
                [bidderPoints isEqual:bidderResult],

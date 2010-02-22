@@ -10,13 +10,13 @@
 
 
 @interface CellBidType : UITableViewCell {
-  UILabel *symbolLabel;
-  UILabel *descriptionLabel;
-  UILabel *pointsLabel;
+  UILabel* symbolLabel;
+  UILabel* descriptionLabel;
+  UILabel* pointsLabel;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *symbolLabel;
-@property (nonatomic, retain) IBOutlet UILabel *descriptionLabel;
-@property (nonatomic, retain) IBOutlet UILabel *pointsLabel;
+@property (nonatomic, retain) IBOutlet UILabel* symbolLabel;
+@property (nonatomic, retain) IBOutlet UILabel* descriptionLabel;
+@property (nonatomic, retain) IBOutlet UILabel* pointsLabel;
 
 @end

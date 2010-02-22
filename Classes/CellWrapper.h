@@ -10,11 +10,11 @@
 
 
 @interface CellWrapper : NSObject {
-  UITableViewCell *cell;
+  UITableViewCell* cell;
 }
 
-@property (nonatomic, retain) IBOutlet UITableViewCell *cell;
+@property (nonatomic, retain) IBOutlet UITableViewCell* cell;
 
-- (BOOL)loadMyNibFile:(NSString *)nibName;
+- (BOOL)loadMyNibFile:(NSString*)nibName;
 
 @end

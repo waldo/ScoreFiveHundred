@@ -11,21 +11,21 @@
 
 @implementation BidType
 
-static NSMutableDictionary *allTypes;
-static NSArray *orderedHands;
+static NSMutableDictionary* allTypes;
+static NSArray* orderedHands;
 
-static NSString *ssTrick = @"tricks";
-static NSString *ssSuit = @"suit";
-static NSString *ssSuitSymbol = @"suitSymbol";
-static NSString *ssSuitColour = @"suitColour";
-static NSString *ssPoints = @"points";
-static NSString *ssVariation = @"variation";
-static NSString *ssVariationRegular = @"regular";
-static NSString *ssVariationMisere = @"misére";
+static NSString* ssTrick = @"tricks";
+static NSString* ssSuit = @"suit";
+static NSString* ssSuitSymbol = @"suitSymbol";
+static NSString* ssSuitColour = @"suitColour";
+static NSString* ssPoints = @"points";
+static NSString* ssVariation = @"variation";
+static NSString* ssVariationRegular = @"regular";
+static NSString* ssVariationMisere = @"misére";
 
 + (void) initialize {
   if (!allTypes) {
-    NSArray *tricks = [NSArray arrayWithObjects:
+    NSArray* tricks = [NSArray arrayWithObjects:
                        [NSNumber numberWithInt: 6],
                        [NSNumber numberWithInt: 7],
                        [NSNumber numberWithInt: 8],
@@ -34,7 +34,7 @@ static NSString *ssVariationMisere = @"misére";
                        nil
                        ];
     
-    NSArray *suits = [NSArray arrayWithObjects:
+    NSArray* suits = [NSArray arrayWithObjects:
                       [NSArray arrayWithObjects:@"Spades", @"S", @"♠", @"black", nil],
                       [NSArray arrayWithObjects:@"Clubs", @"C", @"♣", @"black", nil],
                       [NSArray arrayWithObjects:@"Diamonds", @"D", @"♦", @"red", nil],
@@ -47,19 +47,19 @@ static NSString *ssVariationMisere = @"misére";
     
     allTypes = [[NSMutableDictionary alloc] init];
     
-    for (NSNumber *aTrick in tricks) {
-      for (NSArray *aSuit in suits) {
-        NSString *hand = [NSString stringWithFormat:
+    for (NSNumber* aTrick in tricks) {
+      for (NSArray* aSuit in suits) {
+        NSString* hand = [NSString stringWithFormat:
                          @"%@%@",
                          aTrick,
                          [aSuit objectAtIndex:1]
                          ];
-        NSDictionary *aBidType = [NSDictionary dictionaryWithObjectsAndKeys:
+        NSDictionary* aBidType = [NSDictionary dictionaryWithObjectsAndKeys:
                                   aTrick, ssTrick,
                                   [aSuit objectAtIndex:0], ssSuit,
                                   [aSuit objectAtIndex:2], ssSuitSymbol,
                                   [aSuit objectAtIndex:3], ssSuitColour,
-                                  [NSNumber numberWithInt:(40 + (i * 20))], ssPoints,
+                                  [NSNumber numberWithInt:(40 + (i*  20))], ssPoints,
                                   ssVariationRegular, ssVariation,
                                   nil
                                   ];
@@ -124,24 +124,24 @@ static NSString *ssVariationMisere = @"misére";
   }
 }
 
-+ (NSArray *)orderedHands {
++ (NSArray*)orderedHands {
   return orderedHands;
 }
 
-+ (NSDictionary *)allTypes {
++ (NSDictionary*)allTypes {
   return allTypes;
 }
 
-+ (NSString *)suitColourForHand:(NSString *)hand {
-  NSDictionary *aBidType = [allTypes objectForKey:hand];
-  NSString *suitColour = [NSString stringWithFormat:@"%@", [aBidType objectForKey:ssSuitColour]];
++ (NSString*)suitColourForHand:(NSString*)hand {
+  NSDictionary* aBidType = [allTypes objectForKey:hand];
+  NSString* suitColour = [NSString stringWithFormat:@"%@", [aBidType objectForKey:ssSuitColour]];
   
   return suitColour;
 }
 
-+ (NSString *)tricksAndSymbolForHand:(NSString *)hand {
-  NSDictionary *aBidType = [allTypes objectForKey:hand];
-  NSString *tricksAndSymbol = [NSString stringWithFormat:@"%@%@", [aBidType objectForKey:ssTrick], [aBidType objectForKey:ssSuitSymbol]];
++ (NSString*)tricksAndSymbolForHand:(NSString*)hand {
+  NSDictionary* aBidType = [allTypes objectForKey:hand];
+  NSString* tricksAndSymbol = [NSString stringWithFormat:@"%@%@", [aBidType objectForKey:ssTrick], [aBidType objectForKey:ssSuitSymbol]];
   
   if ([BidType variation:hand] == ssVariationMisere) {
     tricksAndSymbol = hand;
@@ -151,8 +151,8 @@ static NSString *ssVariationMisere = @"misére";
 }
 
 + (NSString*) tricksAndDescriptionForHand:(NSString*)hand {
-  NSDictionary *aBidType = [allTypes objectForKey:hand];
-  NSString *desc = [NSString stringWithFormat:@"%@ %@", [aBidType objectForKey:ssTrick], [aBidType objectForKey:ssSuit]];
+  NSDictionary* aBidType = [allTypes objectForKey:hand];
+  NSString* desc = [NSString stringWithFormat:@"%@ %@", [aBidType objectForKey:ssTrick], [aBidType objectForKey:ssSuit]];
 
   if ([BidType variation:hand] == ssVariationMisere) {
     desc = [NSString stringWithFormat:@"%@", [aBidType objectForKey:ssSuit]];
@@ -161,24 +161,24 @@ static NSString *ssVariationMisere = @"misére";
   return desc;  
 }
 
-+ (NSString *)descriptionForHand:(NSString *)hand {
-  NSDictionary *aBidType = [allTypes objectForKey:hand];
-  NSString *desc = [NSString stringWithFormat:@"%@", [aBidType objectForKey:ssSuit]];
++ (NSString*)descriptionForHand:(NSString*)hand {
+  NSDictionary* aBidType = [allTypes objectForKey:hand];
+  NSString* desc = [NSString stringWithFormat:@"%@", [aBidType objectForKey:ssSuit]];
   
   return desc;
 }
 
-+ (NSString *)pointsStringForHand:(NSString *)hand {
-  NSDictionary *aBidType = [allTypes objectForKey:hand];
-  NSString *pts = [NSString stringWithFormat:@"%@ pts", [aBidType objectForKey:ssPoints]];
++ (NSString*)pointsStringForHand:(NSString*)hand {
+  NSDictionary* aBidType = [allTypes objectForKey:hand];
+  NSString* pts = [NSString stringWithFormat:@"%@ pts", [aBidType objectForKey:ssPoints]];
   
   return pts;
 }
 
-+ (NSNumber *)biddersPointsForHand:(NSString *)hand AndBiddersTricksWon:(NSNumber *)tricksWon {
-  NSDictionary *aBidType = [allTypes objectForKey:hand];
++ (NSNumber*)biddersPointsForHand:(NSString*)hand AndBiddersTricksWon:(NSNumber*)tricksWon {
+  NSDictionary* aBidType = [allTypes objectForKey:hand];
   
-  NSString *variation = [aBidType objectForKey:ssVariation];
+  NSString* variation = [aBidType objectForKey:ssVariation];
   int bidPoints = [[aBidType objectForKey:ssPoints] intValue];
 
   // default to giving the points
@@ -197,10 +197,10 @@ static NSString *ssVariationMisere = @"misére";
   return [NSNumber numberWithInt:biddersPoints];
 }
 
-+ (NSNumber *)nonBiddersPointsForHand:(NSString *)hand AndBiddersTricksWon:(NSNumber *)tricksWon {
-  NSDictionary *aBidType = [allTypes objectForKey:hand];
++ (NSNumber*)nonBiddersPointsForHand:(NSString*)hand AndBiddersTricksWon:(NSNumber*)tricksWon {
+  NSDictionary* aBidType = [allTypes objectForKey:hand];
   
-  NSString *variation = [aBidType objectForKey:ssVariation];
+  NSString* variation = [aBidType objectForKey:ssVariation];
 
   // default to zero points
   int nonBiddersPoints = 0;
@@ -208,16 +208,16 @@ static NSString *ssVariationMisere = @"misére";
   // if regular bid and bidders won less than ten
   // => award 10 points x number of tricks (won by the non-bidders)
   if ([variation isEqual:ssVariationRegular]) {
-    nonBiddersPoints = 10 * (10 - tricksWon.intValue);
+    nonBiddersPoints = 10*  (10 - tricksWon.intValue);
   }
   
   return [NSNumber numberWithInt:nonBiddersPoints];
 }
 
-+ (BOOL) bidderWonHand:(NSString *)hand WithTricksWon:(NSNumber *)tricksWon {
-  NSDictionary *aBidType = [allTypes objectForKey:hand];
++ (BOOL) bidderWonHand:(NSString*)hand WithTricksWon:(NSNumber*)tricksWon {
+  NSDictionary* aBidType = [allTypes objectForKey:hand];
   
-  NSString *variation = [aBidType objectForKey:ssVariation];
+  NSString* variation = [aBidType objectForKey:ssVariation];
   int bidTricks = [[aBidType objectForKey:ssTrick] intValue];
   
   // if regular bid and didn't win enough, or misére bid and won any
@@ -233,7 +233,7 @@ static NSString *ssVariationMisere = @"misére";
   }
 }
 
-+ (NSString*) variation:(NSString *)hand {
++ (NSString*) variation:(NSString*)hand {
   NSString* variation = nil;
   
   if ([@"CM" isEqual:hand] || [@"OM" isEqual:hand]) {

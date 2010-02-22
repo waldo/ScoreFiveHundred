@@ -15,26 +15,26 @@
 #import "CellGame.h"
 
 @interface ScoreFiveHundredAppDelegate : NSObject <UIApplicationDelegate> {
-  UIWindow *window;
+  UIWindow* window;
   
-  IBOutlet UINavigationController *navigationController;
+  IBOutlet UINavigationController* navigationController;
   
-  IBOutlet GameListViewController *gameListController;
+  IBOutlet GameListViewController* gameListController;
   IBOutlet GameViewController* gameController;
-  IBOutlet BiddingViewController *biddingController;
+  IBOutlet BiddingViewController* biddingController;
   IBOutlet TricksWonViewController* tricksWonController;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet UIWindow* window;
 
-@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, retain) IBOutlet UINavigationController* navigationController;
 
-@property (nonatomic, retain) IBOutlet GameListViewController *gameListController;
+@property (nonatomic, retain) IBOutlet GameListViewController* gameListController;
 @property (nonatomic, retain) IBOutlet GameViewController* gameController;
-@property (nonatomic, retain) IBOutlet BiddingViewController *biddingController;
+@property (nonatomic, retain) IBOutlet BiddingViewController* biddingController;
 @property (nonatomic, retain) IBOutlet TricksWonViewController* tricksWonController;
 
-+ (NSString *) uniqueId;
++ (NSString*) uniqueId;
 
 - (IBAction) newGame;
 - (IBAction) saveScore;

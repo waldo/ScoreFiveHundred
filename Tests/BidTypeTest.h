@@ -11,11 +11,11 @@
 #import "BidType.h"
 
 @interface BidTypeTest : SenTestCase {
-  NSString *errorOut;
+  NSString* errorOut;
 }
 
-@property (nonatomic, retain) NSString *errorOut;
+@property (nonatomic, retain) NSString* errorOut;
 
-- (void) checkForHand:(NSString *)hand withTricksWon:(int)tricks bidderPoints:(int)bidderExpectedPoints andNonBidderPoints:(int)nonBidderExpectedPoints;
+- (void) checkForHand:(NSString*)hand withTricksWon:(int)tricks bidderPoints:(int)bidderExpectedPoints andNonBidderPoints:(int)nonBidderExpectedPoints;
 
 @end
