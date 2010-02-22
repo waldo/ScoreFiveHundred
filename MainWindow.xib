@@ -12,9 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="128"/>
-			<integer value="19"/>
-			<integer value="125"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -64,7 +61,6 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIViewController" id="905258217">
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="1054159023">
-							<reference key="IBUINavigationBar"/>
 							<string key="IBUITitle">Game List</string>
 							<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="812727405">
 								<string key="IBUITitle">Edit</string>
@@ -81,7 +77,6 @@
 			</object>
 			<object class="IBUIViewController" id="914022305">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="536531313">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Game</string>
 					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="843753065">
 						<string key="IBUITitle">Edit</string>
@@ -106,7 +101,6 @@
 			</object>
 			<object class="IBUIViewController" id="537040641">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="195522173">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Title</string>
 				</object>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
@@ -519,7 +513,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cellWrapper</string>
-							<string>congratulations</string>
+							<string>congratulationsBackground</string>
 							<string>dividerBottom</string>
 							<string>dividerTop</string>
 							<string>editButton</string>
