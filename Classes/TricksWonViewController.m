@@ -12,10 +12,14 @@
 
 @implementation TricksWonViewController
 
+static NSString* ssBidVariationRegular = @"regular";
+static int siMaximumTricks = 10;
+
 // MARK: synthesize
 @synthesize tricksWonTableView;
 
-@synthesize bidDescription;
+@synthesize hand;
+@synthesize teamName;
 @synthesize bidVariation;
 @synthesize regularList;
 @synthesize misereList;
@@ -24,7 +28,7 @@
 - (void) dealloc {
   [tricksWonTableView dealloc];
 
-  [bidDescription dealloc];
+  [hand dealloc];
   [bidVariation dealloc];
   [regularList dealloc];
   [misereList dealloc];
@@ -54,8 +58,8 @@
                       ];
 
   self.misereList = [NSArray arrayWithObjects:
-                     @"Successfully lost every trick",
-                     @"Won at least one trick",
+                     @"Won by losing every trick",
+                     @"Got one or more tricks",
                      nil
                      ];
 }
@@ -72,7 +76,7 @@
 - (NSArray*) tricksWonList {
   NSArray* list = nil;
   
-  if (self.bidVariation == @"regular") {
+  if (self.bidVariation == ssBidVariationRegular) {
     list = self.regularList;
   }
   else {
@@ -80,7 +84,15 @@
   }
 
   return list;
-}  
+}
+
+- (void) styleWithHand:(NSString*)bid teamName:(NSString*)team {
+  self.hand = bid;
+  self.teamName = team;
+  self.bidVariation = [BidType variation:self.hand];
+
+  self.title = [BidType tricksAndDescriptionForHand:hand];
+}
   
 // MARK: tableview delegate
 - (NSInteger) numberOfSectionsInTableView:(UITableView*)tableView {	
@@ -88,7 +100,7 @@
 }
 
 - (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
-  return self.bidDescription;
+  return [NSString stringWithFormat:@"%@ bid %@. How many did they actually win?", teamName, [BidType tricksAndDescriptionForHand:hand]];
 }
 
 - (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
@@ -101,12 +113,32 @@
   UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
   }
 
+  int score = 0;
+  int tricksWon = 0;
+  
+  if (self.bidVariation == ssBidVariationRegular) {
+    tricksWon = (siMaximumTricks - indexPath.row);
+  }
+  else {
+    tricksWon = indexPath.row;
+  }
+
+  score = [[BidType biddersPointsForHand:hand AndBiddersTricksWon:[NSNumber numberWithInt:tricksWon]] intValue];
+  
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   cell.textLabel.text = [[self tricksWonList] objectAtIndex:indexPath.row];
-
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"%i pts", score];
+  [cell.detailTextLabel setFont:[UIFont systemFontOfSize:13.0]];
+  if (score > 0) {
+    [cell.detailTextLabel setTextColor:[UIColor colorWithRed:53.0/255.0 green:102.0/255.0 blue:201.0/255.0 alpha:1.0]];
+  }
+  else {
+    [cell.detailTextLabel setTextColor:[UIColor redColor]];
+  }
+  
   return cell;
 }
 

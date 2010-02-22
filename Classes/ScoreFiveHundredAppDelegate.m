@@ -73,9 +73,7 @@
 }
 
 - (void) bidSelected:(NSString*)hand forTeamName:(NSString*)teamName {
-  self.tricksWonController.title = [BidType tricksAndDescriptionForHand:hand];
-  self.tricksWonController.bidDescription = [NSString stringWithFormat:@"%@ bid %@. How many did they actually win?", teamName, [BidType tricksAndDescriptionForHand:hand]];
-  self.tricksWonController.bidVariation = [BidType variation:hand];
+  [self.tricksWonController styleWithHand:hand teamName:teamName];
 
   [self.navigationController pushViewController:self.tricksWonController animated:YES];
 }

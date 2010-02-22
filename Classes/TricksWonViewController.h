@@ -13,7 +13,8 @@
 @interface TricksWonViewController : UIViewController {
   IBOutlet UITableView* tricksWonTableView;
 
-  NSString* bidDescription;
+  NSString* hand;
+  NSString* teamName;
   NSString* bidVariation;
   NSArray* regularList;
   NSArray* misereList;
@@ -21,12 +22,14 @@
 
 @property (nonatomic, retain) IBOutlet UITableView* tricksWonTableView;
 
-@property (nonatomic, retain) NSString* bidDescription;
+@property (nonatomic, retain) NSString* hand;
+@property (nonatomic, retain) NSString* teamName;
 @property (nonatomic, retain) NSString* bidVariation;
 @property (nonatomic, retain) NSArray* regularList;
 @property (nonatomic, retain) NSArray* misereList;
 
 
 - (NSArray*) tricksWonList;
+- (void) styleWithHand:(NSString*)bid teamName:(NSString*)team;
 
 @end
