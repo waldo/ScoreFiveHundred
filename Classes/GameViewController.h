@@ -70,5 +70,6 @@
 - (void) openGame:(NSDictionary*)gameToOpen key:(NSString*)key isNewGame:(BOOL)isNewGame;
 - (void) rematchOfGame:(NSDictionary*)gameForRematch newKey:(NSString*)newKey;
 - (void) updateRoundWithHand:(NSString*)hand tricksWon:(NSNumber*)tricksWon;
+- (NSInteger) scoreForSlot:(NSInteger)slot;
 
 @end

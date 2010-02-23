@@ -12,7 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -36,7 +35,7 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 			</object>
 			<object class="IBUITableViewCell" id="917307614">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -257,7 +256,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{320, 55}</string>
-				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -280,67 +278,67 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">bidAttemptedTeamOneLabel</string>
+						<string key="label">bidAttemptedTeamOne</string>
 						<reference key="source" ref="917307614"/>
 						<reference key="destination" ref="1045202809"/>
 					</object>
-					<int key="connectionID">15</int>
+					<int key="connectionID">23</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">bidAttemptedTeamTwoLabel</string>
+						<string key="label">bidAttemptedTeamTwo</string>
 						<reference key="source" ref="917307614"/>
 						<reference key="destination" ref="891302279"/>
 					</object>
-					<int key="connectionID">16</int>
+					<int key="connectionID">24</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">pointsTeamOneLabel</string>
+						<string key="label">pointsTeamOne</string>
 						<reference key="source" ref="917307614"/>
 						<reference key="destination" ref="77224705"/>
 					</object>
-					<int key="connectionID">17</int>
+					<int key="connectionID">25</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">pointsTeamTwoLabel</string>
+						<string key="label">pointsTeamTwo</string>
 						<reference key="source" ref="917307614"/>
 						<reference key="destination" ref="336973121"/>
 					</object>
-					<int key="connectionID">18</int>
+					<int key="connectionID">26</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">scoreSummaryTeamOneLabel</string>
-						<reference key="source" ref="917307614"/>
-						<reference key="destination" ref="404435591"/>
-					</object>
-					<int key="connectionID">19</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">scoreSummaryTeamTwoLabel</string>
-						<reference key="source" ref="917307614"/>
-						<reference key="destination" ref="219915380"/>
-					</object>
-					<int key="connectionID">20</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">symbolBidResultTeamOneLabel</string>
+						<string key="label">symbolBidResultTeamOne</string>
 						<reference key="source" ref="917307614"/>
 						<reference key="destination" ref="395631204"/>
 					</object>
-					<int key="connectionID">21</int>
+					<int key="connectionID">27</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">symbolBidResultTeamTwoLabel</string>
+						<string key="label">symbolBidResultTeamTwo</string>
 						<reference key="source" ref="917307614"/>
 						<reference key="destination" ref="958576592"/>
 					</object>
-					<int key="connectionID">22</int>
+					<int key="connectionID">28</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">scoreSummaryTeamOne</string>
+						<reference key="source" ref="917307614"/>
+						<reference key="destination" ref="404435591"/>
+					</object>
+					<int key="connectionID">29</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">scoreSummaryTeamTwo</string>
+						<reference key="source" ref="917307614"/>
+						<reference key="destination" ref="219915380"/>
+					</object>
+					<int key="connectionID">30</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -472,7 +470,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">22</int>
+			<int key="maxID">30</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -484,14 +482,14 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>bidAttemptedTeamOneLabel</string>
-							<string>bidAttemptedTeamTwoLabel</string>
-							<string>pointsTeamOneLabel</string>
-							<string>pointsTeamTwoLabel</string>
-							<string>scoreSummaryTeamOneLabel</string>
-							<string>scoreSummaryTeamTwoLabel</string>
-							<string>symbolBidResultTeamOneLabel</string>
-							<string>symbolBidResultTeamTwoLabel</string>
+							<string>bidAttemptedTeamOne</string>
+							<string>bidAttemptedTeamTwo</string>
+							<string>pointsTeamOne</string>
+							<string>pointsTeamTwo</string>
+							<string>scoreSummaryTeamOne</string>
+							<string>scoreSummaryTeamTwo</string>
+							<string>symbolBidResultTeamOne</string>
+							<string>symbolBidResultTeamTwo</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>

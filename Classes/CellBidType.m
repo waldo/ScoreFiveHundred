@@ -11,9 +11,17 @@
 
 @implementation CellBidType
 
-@synthesize symbolLabel;
-@synthesize descriptionLabel;
-@synthesize pointsLabel;
+@synthesize symbol;
+@synthesize description;
+@synthesize points;
+
+- (void)dealloc {
+  [symbol release];
+  [description release];
+  [points release];
+
+  [super dealloc];
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -29,11 +37,5 @@
 
     // Configure the view for the selected state
 }
-
-
-- (void)dealloc {
-    [super dealloc];
-}
-
 
 @end

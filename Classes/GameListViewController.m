@@ -45,13 +45,14 @@ static NSString* ssTitleCompleted     = @"Complete";
 
 
 - (void)dealloc {
-  [cellWrapper dealloc];
-  [gameListTableView dealloc];
-  [editButton dealloc];
+  [cellWrapper release];
+  [gameListTableView release];
+  [editButton release];
   
-  [gamesInProgressKeys dealloc];
-  [gamesCompletedKeys dealloc];
-  [gameList dealloc];
+  [gamesInProgressKeys release];
+  [gamesCompletedKeys release];
+  [gameList release];
+  [selectedKey release];
   
   [super dealloc];
 }

@@ -84,6 +84,8 @@ static int siLosingScore = -500;
   [dividerBottom release];
   [dividerTop release];
   
+  [game release];
+  [gameKey release];
   [rounds release];
   [slotTeamOne release];
   [slotTeamTwo release];
@@ -226,6 +228,21 @@ static int siLosingScore = -500;
   }
 
   [dict release];
+}
+
+- (NSInteger) scoreForSlot:(NSInteger)slot {
+  int score = 0;
+
+  if ([self.rounds count] > 0) {
+    if (slot == 0) {
+      score = [[self.game objectForKey:ssStoreScoreTeamOne] intValue];
+    }
+    else {
+      score = [[self.game objectForKey:ssStoreScoreTeamTwo] intValue];
+    }
+  }
+  
+  return score;
 }
 
 // MARK: Hidden functions
@@ -439,18 +456,18 @@ static int siLosingScore = -500;
   [cellScoringRound descriptionForTeamSlot:self.slotTeamOne FromTricksWon:[r valueForKey:ssTricksWonTeamOne] AndPoints:[r valueForKey:ssPointsForRoundTeamOne]];
   [cellScoringRound descriptionForTeamSlot:self.slotTeamTwo FromTricksWon:[r valueForKey:ssTricksWonTeamTwo] AndPoints:[r valueForKey:ssPointsForRoundTeamTwo]];
 
-  cellScoringRound.pointsTeamOneLabel.text = [[r valueForKey:ssSubTotalTeamOne] stringValue];
-  cellScoringRound.pointsTeamTwoLabel.text = [[r valueForKey:ssSubTotalTeamTwo] stringValue];
+  cellScoringRound.pointsTeamOne.text = [[r valueForKey:ssSubTotalTeamOne] stringValue];
+  cellScoringRound.pointsTeamTwo.text = [[r valueForKey:ssSubTotalTeamTwo] stringValue];
   
   return cellScoringRound;
 }
 
 - (void) tableView:(UITableView*)tableView willDisplayCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
   if (indexPath.row == 0) {
-    [((CellScoringRound*)cell).pointsTeamOneLabel setFont:[UIFont systemFontOfSize:30.0]];
-    [((CellScoringRound*)cell).pointsTeamTwoLabel setFont:[UIFont systemFontOfSize:30.0]];
-    [((CellScoringRound*)cell).pointsTeamOneLabel setTextColor:[UIColor darkTextColor]];
-    [((CellScoringRound*)cell).pointsTeamTwoLabel setTextColor:[UIColor darkTextColor]];
+    [((CellScoringRound*)cell).pointsTeamOne setFont:[UIFont systemFontOfSize:30.0]];
+    [((CellScoringRound*)cell).pointsTeamTwo setFont:[UIFont systemFontOfSize:30.0]];
+    [((CellScoringRound*)cell).pointsTeamOne setTextColor:[UIColor darkTextColor]];
+    [((CellScoringRound*)cell).pointsTeamTwo setTextColor:[UIColor darkTextColor]];
   }
 }
 

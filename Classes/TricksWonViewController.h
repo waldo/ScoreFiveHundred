@@ -12,7 +12,11 @@
 
 @interface TricksWonViewController : UIViewController {
   IBOutlet UITableView* tricksWonTableView;
-
+  IBOutlet UILabel* nameTeamOne;
+  IBOutlet UILabel* nameTeamTwo;
+  IBOutlet UILabel* scoreTeamOne;
+  IBOutlet UILabel* scoreTeamTwo;
+  
   NSString* hand;
   NSString* teamName;
   NSString* bidVariation;
@@ -21,6 +25,10 @@
 }
 
 @property (nonatomic, retain) IBOutlet UITableView* tricksWonTableView;
+@property (nonatomic, retain) UILabel* nameTeamOne;
+@property (nonatomic, retain) UILabel* nameTeamTwo;
+@property (nonatomic, retain) UILabel* scoreTeamOne;
+@property (nonatomic, retain) UILabel* scoreTeamTwo;
 
 @property (nonatomic, retain) NSString* hand;
 @property (nonatomic, retain) NSString* teamName;

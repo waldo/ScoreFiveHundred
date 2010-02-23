@@ -12,9 +12,7 @@
 
 // MARK: synthesize
 @synthesize window;
-
 @synthesize navigationController;
-
 @synthesize gameListController;
 @synthesize gameController;
 @synthesize biddingController;
@@ -27,6 +25,7 @@
   [gameListController release];
   [gameController release];
   [biddingController release];
+  [tricksWonController release];
   
   [super dealloc];
 }
@@ -69,13 +68,24 @@
 
 - (void) bidForTeamName:(NSString*)teamName {
   [self.biddingController setTitleUsingTeamName:teamName];
+
   [self.navigationController pushViewController:self.biddingController animated:YES];
+
+  self.biddingController.nameTeamOne.text = self.gameController.curNameTeamOne;
+  self.biddingController.nameTeamTwo.text = self.gameController.curNameTeamTwo;
+  self.biddingController.scoreTeamOne.text = [NSString stringWithFormat:@"%i pts", [self.gameController scoreForSlot:0]];
+  self.biddingController.scoreTeamTwo.text = [NSString stringWithFormat:@"%i pts", [self.gameController scoreForSlot:1]];
 }
 
 - (void) bidSelected:(NSString*)hand forTeamName:(NSString*)teamName {
   [self.tricksWonController styleWithHand:hand teamName:teamName];
-
+  
   [self.navigationController pushViewController:self.tricksWonController animated:YES];
+
+  self.tricksWonController.nameTeamOne.text = self.gameController.curNameTeamOne;
+  self.tricksWonController.nameTeamTwo.text = self.gameController.curNameTeamTwo;
+  self.tricksWonController.scoreTeamOne.text = [NSString stringWithFormat:@"%i pts", [self.gameController scoreForSlot:0]];
+  self.tricksWonController.scoreTeamTwo.text = [NSString stringWithFormat:@"%i pts", [self.gameController scoreForSlot:1]];  
 }
 
 - (void) saveScoreWithTricksWon:(NSInteger)tricksWon {

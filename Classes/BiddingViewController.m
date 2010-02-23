@@ -15,14 +15,24 @@
 // MARK: synthesize
 @synthesize bidSelectionTableView;
 @synthesize cellWrapper;
+@synthesize nameTeamOne;
+@synthesize nameTeamTwo;
+@synthesize scoreTeamOne;
+@synthesize scoreTeamTwo;
 
 @synthesize bidTypeHands;
 @synthesize team;
 
 - (void)dealloc {
   [bidSelectionTableView release];
-  [cellWrapper dealloc];
+  [cellWrapper release];
+  [nameTeamOne release];
+  [nameTeamTwo release];
+  [scoreTeamOne release];
+  [scoreTeamTwo release];  
+
   [bidTypeHands release];
+  [team release];
   
   [super dealloc];
 }
@@ -67,19 +77,19 @@
   
   NSString* key = [self.bidTypeHands objectAtIndex:indexPath.row];
   
-  cellBidType.symbolLabel.text = [BidType tricksAndSymbolForHand:key];
+  cellBidType.symbol.text = [BidType tricksAndSymbolForHand:key];
   
   if ([[BidType suitColourForHand:key] isEqual:@"red" ]) {
-    cellBidType.symbolLabel.textColor = [UIColor redColor];
-    cellBidType.symbolLabel.highlightedTextColor = [UIColor redColor];
+    cellBidType.symbol.textColor = [UIColor redColor];
+    cellBidType.symbol.highlightedTextColor = [UIColor redColor];
   }
   else if ([[BidType suitColourForHand:key] isEqual:@"black" ]) {
-    cellBidType.symbolLabel.textColor = [UIColor blackColor];
-    cellBidType.symbolLabel.highlightedTextColor = [UIColor blackColor];
+    cellBidType.symbol.textColor = [UIColor blackColor];
+    cellBidType.symbol.highlightedTextColor = [UIColor blackColor];
   }
   
-  cellBidType.descriptionLabel.text = [BidType descriptionForHand:key];
-  cellBidType.pointsLabel.text = [BidType pointsStringForHand:key];
+  cellBidType.description.text = [BidType descriptionForHand:key];
+  cellBidType.points.text = [BidType pointsStringForHand:key];
   
   return cellBidType;
 }

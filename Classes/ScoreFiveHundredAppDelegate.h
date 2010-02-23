@@ -37,7 +37,6 @@
 + (NSString*) uniqueId;
 
 - (IBAction) newGame;
-- (IBAction) saveScore;
 
 - (void) viewGame:(NSDictionary*)gameToOpen WithKey:(NSString*)key AndIsNewGame:(BOOL)newGame;
 - (void) saveGame:(NSDictionary*)game forKey:(NSString*)key;

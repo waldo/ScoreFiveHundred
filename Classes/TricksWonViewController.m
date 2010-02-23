@@ -17,6 +17,10 @@ static int siMaximumTricks = 10;
 
 // MARK: synthesize
 @synthesize tricksWonTableView;
+@synthesize nameTeamOne;
+@synthesize nameTeamTwo;
+@synthesize scoreTeamOne;
+@synthesize scoreTeamTwo;
 
 @synthesize hand;
 @synthesize teamName;
@@ -26,12 +30,17 @@ static int siMaximumTricks = 10;
 
 
 - (void) dealloc {
-  [tricksWonTableView dealloc];
+  [tricksWonTableView release];
+  [nameTeamOne release];
+  [nameTeamTwo release];
+  [scoreTeamOne release];
+  [scoreTeamTwo release];
 
-  [hand dealloc];
-  [bidVariation dealloc];
-  [regularList dealloc];
-  [misereList dealloc];
+  [hand release];
+  [teamName release];
+  [bidVariation release];
+  [regularList release];
+  [misereList release];
   
   [super dealloc];
 }

@@ -17,6 +17,17 @@
 @synthesize symbolResultTeamTwo;
 @synthesize dateLastPlayed;
 
+- (void) dealloc {
+  [nameTeamOne release];
+  [nameTeamTwo release];
+  [pointsTeamOne release];
+  [pointsTeamTwo release];
+  [symbolResultTeamOne release];
+  [symbolResultTeamTwo release];
+  [dateLastPlayed release];
+
+  [super dealloc];
+}
 
 //
 // UITableViewCell functions
@@ -32,10 +43,6 @@
   [super setSelected:selected animated:animated];
   
   // Configure the view for the selected state
-}
-
-- (void)dealloc {
-  [super dealloc];
 }
 
 @end
