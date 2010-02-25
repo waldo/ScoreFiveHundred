@@ -1,0 +1,43 @@
+ Application Name:
+Score 500
+
+ Application Description:
+Keep score for your 500 card games on your iPhone (or touch).
+* Score all hands from 6 spades to open misére and remember who won (all your previous games).
+* Also a good bid list reference – shows the suit order and points awarded for each type of bid.
+
+ Device Requirements:
+iPhone and iPod touch
+
+ Primary Category:
+Utilities
+
+ Secondary Category:
+Games
+
+ Subcategory:
+Card
+
+ Subcategory:
+Family
+
+ Copyright:
+2010 MeltingWaldo
+
+ Version Number:
+1.0
+
+ SKU Number:
+1000000000
+
+ Keywords:
+500, five hundred, card, cards, score, scorer, scoring, 500 score, five hundred score
+
+ Application URL:
+http://meltingwaldo.com/apps/score-500
+
+ Support URL:
+http://meltingwaldo.com/apps/score-500
+
+ Support Email Address:
+score500@meltingwaldo.com

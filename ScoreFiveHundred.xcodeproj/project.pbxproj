@@ -507,12 +507,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = beta_scorefivehundred;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: MeltingWaldo UK Ltd";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.1.2;
+				PROVISIONING_PROFILE = "7DEFABF4-4847-463E-A322-739AA7602D1C";
+				SDKROOT = iphoneos3.1.3;
 			};
 			name = Release;
 		};
