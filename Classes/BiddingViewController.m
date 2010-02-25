@@ -42,8 +42,17 @@
 }
 
 - (void) setTitleUsingTeamName:(NSString*)teamName {
+  NSString* possessive = nil;
   self.team = teamName;
-  self.title = [NSString stringWithFormat:@"%@ Bid", self.team];
+  
+  if ([[teamName substringFromIndex:[teamName length]-1] isEqual:@"s"]) {
+    possessive = [NSString stringWithFormat:@"%@'", teamName];
+  }
+  else {
+    possessive = [NSString stringWithFormat:@"%@'s", teamName];
+  }
+  
+  self.title = [NSString stringWithFormat:@"%@ Bid", possessive];
 }
 
 // MARK: view loading

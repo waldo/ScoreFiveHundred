@@ -222,7 +222,7 @@ static int siLosingScore = -500;
 
   if (self.winningSlot != nil) {
     NSString* winningTeamName = [self.winningSlot intValue] == 0 ? self.curNameTeamOne : self.curNameTeamTwo;
-    NSString* msg = [NSString stringWithFormat:@"%@ won!", winningTeamName];
+    NSString* msg = [NSString stringWithFormat:@"%@ win!", winningTeamName];
     UIAlertView* rematchAlert = [[[UIAlertView alloc] initWithTitle:msg message:nil delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Rematch", nil] autorelease];
     [rematchAlert show];
   }
@@ -302,7 +302,7 @@ static int siLosingScore = -500;
       team = self.curNameTeamTwo;
     }
 
-    [self.congratulations setTitle:[NSString stringWithFormat:@"%@ wins! Rematch?", team] forState:UIControlStateNormal];
+    [self.congratulations setTitle:[NSString stringWithFormat:@"%@ won! Rematch?", team] forState:UIControlStateNormal];
     self.teamOneBid.hidden        = YES;
     self.teamTwoBid.hidden        = YES;
     self.dividerBottom.hidden     = YES;

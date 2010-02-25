@@ -109,7 +109,7 @@ static int siMaximumTricks = 10;
 }
 
 - (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
-  return [NSString stringWithFormat:@"%@ bid %@. How many did they actually win?", teamName, [BidType tricksAndDescriptionForHand:hand]];
+  return [NSString stringWithFormat:@"How many tricks did %@ win?", teamName];
 }
 
 - (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
