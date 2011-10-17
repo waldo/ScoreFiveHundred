@@ -40,7 +40,7 @@
 }
 
 - (void) testBiddersLose {
-  [self checkForHand:@"CM" withTricksWon:10 bidderPoints:-250 andNonBidderPoints:0];
+  [self checkForHand:@"CM" withTricksWon:1 bidderPoints:-250 andNonBidderPoints:0];
   [self checkForHand:@"10H" withTricksWon:7 bidderPoints:-500 andNonBidderPoints:30];
 }
 
