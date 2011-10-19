@@ -103,20 +103,13 @@ static int siLosingScore = -500;
 }
 
 - (IBAction) bid:(id)sender {
-  NSString* teamName = nil;
-
-  if ([self.teamOneBid isEqual:sender]) {
-    self.currentBiddingTeamSlot = self.slotTeamOne;
-    teamName = [self nonBlankFirst:self.curNameTeamOne OtherwiseSecond:self.teamOneName.placeholder];
-  }
-  else if ([self.teamTwoBid isEqual:sender]) {
-    self.currentBiddingTeamSlot = self.slotTeamTwo;
-    teamName = [self nonBlankFirst:self.curNameTeamTwo OtherwiseSecond:self.teamTwoName.placeholder];
-  }
-
   ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
+  
+  NSMutableString* t1 = [NSMutableString stringWithString:self.curNameTeamOne];
+  NSMutableString* t2 = [NSMutableString stringWithString:self.curNameTeamTwo];
+  NSMutableArray* teamNames = [[NSMutableArray alloc] initWithObjects:t1, t2, nil];
 
-  [app bidForTeamName:teamName];
+  [app addRound:teamNames];
 }
 
 - (IBAction) rematch:(id)sender {

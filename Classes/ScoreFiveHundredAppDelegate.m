@@ -15,6 +15,7 @@
 @synthesize navigationController;
 @synthesize gameListController;
 @synthesize gameController;
+@synthesize highestBiddingTeamController;
 @synthesize biddingController;
 @synthesize tricksWonController;
 
@@ -24,6 +25,7 @@
   [navigationController release];
   [gameListController release];
   [gameController release];
+  [highestBiddingTeamController release];
   [biddingController release];
   [tricksWonController release];
   
@@ -66,6 +68,17 @@
   [self.navigationController pushViewController:self.gameController animated:YES];
 }
 
+- (void) addRound:(NSArray*)teams {
+  self.highestBiddingTeamController.teams = teams;
+
+  [self.navigationController pushViewController:self.highestBiddingTeamController animated:YES];
+
+  self.highestBiddingTeamController.nameTeamOne.text = self.gameController.curNameTeamOne;
+  self.highestBiddingTeamController.nameTeamTwo.text = self.gameController.curNameTeamTwo;
+  self.highestBiddingTeamController.scoreTeamOne.text = [NSString stringWithFormat:@"%i pts", [self.gameController scoreForSlot:0]];
+  self.highestBiddingTeamController.scoreTeamTwo.text = [NSString stringWithFormat:@"%i pts", [self.gameController scoreForSlot:1]];
+}
+
 - (void) bidForTeamName:(NSString*)teamName {
   [self.biddingController setTitleUsingTeamName:teamName];
 
@@ -94,6 +107,7 @@
   
   [self.gameController updateRoundWithHand:hand tricksWon:tricks];
   
+  [self.navigationController popViewControllerAnimated:NO];
   [self.navigationController popViewControllerAnimated:NO];
   [self.navigationController popViewControllerAnimated:YES];
 }
