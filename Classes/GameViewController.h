@@ -34,7 +34,6 @@
   NSNumber* winningSlot;
   NSDate* lastPlayed;
   BOOL newGame;
-  NSNumber* currentBiddingTeamSlot;
   BOOL newRound;
 }
 
@@ -59,7 +58,6 @@
 @property (nonatomic, retain) NSNumber* winningSlot;
 @property (nonatomic, retain) NSDate* lastPlayed;
 @property (nonatomic, getter=isNewGame) BOOL newGame;
-@property (nonatomic, retain) NSNumber* currentBiddingTeamSlot;
 @property (nonatomic, getter=isNewRound) BOOL newRound;
 
 
@@ -69,7 +67,7 @@
 
 - (void) openGame:(NSDictionary*)gameToOpen key:(NSString*)key isNewGame:(BOOL)isNewGame;
 - (void) rematchOfGame:(NSDictionary*)gameForRematch newKey:(NSString*)newKey;
-- (void) updateRoundWithHand:(NSString*)hand tricksWon:(NSNumber*)tricksWon;
+- (void) updateRoundWithTeam:(NSString*)team hand:(NSString*)hand tricksWon:(NSNumber*)tricksWon;
 - (NSInteger) scoreForSlot:(NSInteger)slot;
 
 @end

@@ -69,7 +69,6 @@ static int siLosingScore = -500;
 @synthesize winningSlot;
 @synthesize lastPlayed;
 @synthesize newGame;
-@synthesize currentBiddingTeamSlot;
 @synthesize newRound;
 
 - (void) dealloc {  
@@ -93,7 +92,6 @@ static int siLosingScore = -500;
   [curNameTeamTwo release];
   [winningSlot release];
   [lastPlayed release];
-  [currentBiddingTeamSlot release];
   
   [super dealloc];
 }
@@ -148,7 +146,7 @@ static int siLosingScore = -500;
   [self refreshView];
 }
 
-- (void) updateRoundWithHand:(NSString*)hand tricksWon:(NSNumber*)tricksWon {
+- (void) updateRoundWithTeam:(NSString*)team hand:(NSString*)hand tricksWon:(NSNumber*)tricksWon {
   // create a new round
   NSNumber* bidderPoints = [BidType biddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
   NSNumber* nonBidderPoints = [BidType nonBiddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
@@ -164,7 +162,7 @@ static int siLosingScore = -500;
   int teamOneScore = 0;
   int teamTwoScore = 0;
   
-  if ([self.slotTeamOne isEqual:self.currentBiddingTeamSlot]) {
+  if ([self.curNameTeamOne isEqualToString:team]) {
     teamOneBidAttempted = hand;
     teamOneBidAchieved = [NSNumber numberWithBool:[BidType bidderWonHand:hand WithTricksWon:tricksWon]];
     teamOneTricksWon = [tricksWon intValue];

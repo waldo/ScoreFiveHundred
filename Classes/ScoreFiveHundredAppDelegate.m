@@ -102,10 +102,11 @@
 }
 
 - (void) saveScoreWithTricksWon:(NSInteger)tricksWon {
-  NSNumber* tricks = [NSNumber numberWithInt:tricksWon];
+  NSString* team = [self.highestBiddingTeamController team];
   NSString* hand = [self.biddingController hand];
+  NSNumber* tricks = [NSNumber numberWithInt:tricksWon];
   
-  [self.gameController updateRoundWithHand:hand tricksWon:tricks];
+  [self.gameController updateRoundWithTeam:team hand:hand tricksWon:tricks];
   
   [self.navigationController popViewControllerAnimated:NO];
   [self.navigationController popViewControllerAnimated:NO];
