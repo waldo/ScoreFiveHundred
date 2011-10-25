@@ -12,32 +12,32 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
-		5B083DAB10FBAE3C0018A6D1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B083DAA10FBAE3C0018A6D1 /* Default.png */; };
-		5B083DAC10FBAE3C0018A6D1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B083DAA10FBAE3C0018A6D1 /* Default.png */; };
-		5B2ED84110FB9F4200228C9E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B2ED84010FB9F4200228C9E /* icon.png */; };
-		5B49946710CFEF8E00C24443 /* CellWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B49946610CFEF8E00C24443 /* CellWrapper.m */; };
-		5B49946E10CFF0C700C24443 /* CellBidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B49946D10CFF0C700C24443 /* CellBidType.m */; };
-		5B49947010CFF18000C24443 /* CellBidType.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B49946F10CFF18000C24443 /* CellBidType.xib */; };
-		5B57159610EF0CDE005F2E9F /* BiddingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B57159410EF0CDE005F2E9F /* BiddingViewController.m */; };
-		5B5715A010EF0E18005F2E9F /* BiddingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B57159F10EF0E18005F2E9F /* BiddingView.xib */; };
-		5B78341010EA86570002A237 /* CellGame.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B78340F10EA86570002A237 /* CellGame.xib */; };
-		5B78341310EA8B3A0002A237 /* CellGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B78341210EA8B3A0002A237 /* CellGame.m */; };
-		5B7C27251125542800D3B703 /* adhoc.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B7C27241125542800D3B703 /* adhoc.plist */; };
-		5B823370110C6E6000C543B6 /* TricksWonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B82336F110C6E6000C543B6 /* TricksWonView.xib */; };
-		5B823378110C714500C543B6 /* TricksWonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B823377110C714500C543B6 /* TricksWonViewController.m */; };
-		5B85FB2D10C2D12D006BBE9A /* BidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B85FB2C10C2D12D006BBE9A /* BidType.m */; };
 		5B87EE2C144F0D2200C96F95 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B87EE2B144F0D2200C96F95 /* MainWindow-iPad.xib */; };
 		5B904C5810D28A2B003F5324 /* BidTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B904C5710D28A2B003F5324 /* BidTypeTest.m */; };
-		5B904CA510D29702003F5324 /* BidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B85FB2C10C2D12D006BBE9A /* BidType.m */; };
-		5B913613144F183B00C50E85 /* HighestBiddingTeamView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B913612144F183B00C50E85 /* HighestBiddingTeamView.xib */; };
-		5B913616144F188800C50E85 /* HighestBiddingTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B913615144F188800C50E85 /* HighestBiddingTeamViewController.m */; };
-		5BA10F6F10E2970F000A391F /* CellScoringRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA10F6E10E2970F000A391F /* CellScoringRound.m */; };
-		5BA10F7210E297D8000A391F /* CellScoringRound.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BA10F7110E297D8000A391F /* CellScoringRound.xib */; };
-		5BA10F8B10E2A0DB000A391F /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA10F8A10E2A0DB000A391F /* GameViewController.m */; };
-		5BADBD4B10EF70530058E0D0 /* GameListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BADBD4A10EF70530058E0D0 /* GameListView.xib */; };
-		5BADBD4E10EF70730058E0D0 /* GameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BADBD4D10EF70730058E0D0 /* GameListViewController.m */; };
-		5BCB36C110EF4C5800799537 /* GameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCB36C010EF4C5800799537 /* GameView.xib */; };
+		5BAA5CD414569465007274F7 /* BiddingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CC914569465007274F7 /* BiddingViewController.m */; };
+		5BAA5CD514569465007274F7 /* GameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CCB14569465007274F7 /* GameListViewController.m */; };
+		5BAA5CD614569465007274F7 /* GameSetUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CCD14569465007274F7 /* GameSetUpViewController.m */; };
+		5BAA5CD714569465007274F7 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CCF14569465007274F7 /* GameViewController.m */; };
+		5BAA5CD814569465007274F7 /* HighestBiddingTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CD114569465007274F7 /* HighestBiddingTeamViewController.m */; };
+		5BAA5CD914569465007274F7 /* TricksWonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CD314569465007274F7 /* TricksWonViewController.m */; };
+		5BAA5CDD145694B0007274F7 /* BidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CDC145694B0007274F7 /* BidType.m */; };
+		5BAA5CE7145694B9007274F7 /* CellBidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CE0145694B9007274F7 /* CellBidType.m */; };
+		5BAA5CE8145694B9007274F7 /* CellGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CE2145694B9007274F7 /* CellGame.m */; };
+		5BAA5CE9145694B9007274F7 /* CellScoringRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CE4145694B9007274F7 /* CellScoringRound.m */; };
+		5BAA5CEA145694B9007274F7 /* CellWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CE6145694B9007274F7 /* CellWrapper.m */; };
+		5BAA5CFA14569552007274F7 /* BiddingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CEC14569552007274F7 /* BiddingView.xib */; };
+		5BAA5CFB14569552007274F7 /* CellBidType.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CED14569552007274F7 /* CellBidType.xib */; };
+		5BAA5CFC14569552007274F7 /* CellGame.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CEE14569552007274F7 /* CellGame.xib */; };
+		5BAA5CFD14569552007274F7 /* CellScoringRound.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CEF14569552007274F7 /* CellScoringRound.xib */; };
+		5BAA5CFE14569552007274F7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF014569552007274F7 /* Default.png */; };
+		5BAA5CFF14569552007274F7 /* GameListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF114569552007274F7 /* GameListView.xib */; };
+		5BAA5D0014569552007274F7 /* GameSetUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF214569552007274F7 /* GameSetUpView.xib */; };
+		5BAA5D0114569552007274F7 /* GameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF314569552007274F7 /* GameView.xib */; };
+		5BAA5D0214569552007274F7 /* HighestBiddingTeamView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF414569552007274F7 /* HighestBiddingTeamView.xib */; };
+		5BAA5D0314569552007274F7 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF514569552007274F7 /* icon.png */; };
+		5BAA5D0414569552007274F7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF614569552007274F7 /* MainWindow.xib */; };
+		5BAA5D0614569552007274F7 /* TricksWonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF814569552007274F7 /* TricksWonView.xib */; };
+		5BB92ABE1456A3E1008C70CB /* BidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CDC145694B0007274F7 /* BidType.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,46 +57,49 @@
 		1D6058910D05DD3D006BFB54 /* ScoreFiveHundred.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreFiveHundred.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* ScoreFiveHundred_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreFiveHundred_Prefix.pch; sourceTree = "<group>"; };
-		5B083DAA10FBAE3C0018A6D1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		5B2ED84010FB9F4200228C9E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		5B49946510CFEF8E00C24443 /* CellWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellWrapper.h; sourceTree = "<group>"; };
-		5B49946610CFEF8E00C24443 /* CellWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellWrapper.m; sourceTree = "<group>"; };
-		5B49946C10CFF0C700C24443 /* CellBidType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellBidType.h; sourceTree = "<group>"; };
-		5B49946D10CFF0C700C24443 /* CellBidType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellBidType.m; sourceTree = "<group>"; };
-		5B49946F10CFF18000C24443 /* CellBidType.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellBidType.xib; sourceTree = "<group>"; };
-		5B57159310EF0CDE005F2E9F /* BiddingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiddingViewController.h; sourceTree = "<group>"; };
-		5B57159410EF0CDE005F2E9F /* BiddingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiddingViewController.m; sourceTree = "<group>"; };
-		5B57159F10EF0E18005F2E9F /* BiddingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BiddingView.xib; sourceTree = "<group>"; };
-		5B78340F10EA86570002A237 /* CellGame.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellGame.xib; sourceTree = "<group>"; };
-		5B78341110EA8B3A0002A237 /* CellGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellGame.h; sourceTree = "<group>"; };
-		5B78341210EA8B3A0002A237 /* CellGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellGame.m; sourceTree = "<group>"; };
-		5B7C27241125542800D3B703 /* adhoc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = adhoc.plist; sourceTree = "<group>"; };
-		5B82336F110C6E6000C543B6 /* TricksWonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TricksWonView.xib; sourceTree = "<group>"; };
-		5B823376110C714500C543B6 /* TricksWonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TricksWonViewController.h; sourceTree = "<group>"; };
-		5B823377110C714500C543B6 /* TricksWonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TricksWonViewController.m; sourceTree = "<group>"; };
-		5B85FB2B10C2D12D006BBE9A /* BidType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidType.h; sourceTree = "<group>"; };
-		5B85FB2C10C2D12D006BBE9A /* BidType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidType.m; sourceTree = "<group>"; };
 		5B87EE2B144F0D2200C96F95 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		5B904C4010D2894A003F5324 /* LogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B904C4110D2894A003F5324 /* LogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "LogicTests-Info.plist"; path = "Tests/LogicTests-Info.plist"; sourceTree = "<group>"; };
 		5B904C5610D28A2B003F5324 /* BidTypeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BidTypeTest.h; path = Tests/BidTypeTest.h; sourceTree = "<group>"; };
 		5B904C5710D28A2B003F5324 /* BidTypeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BidTypeTest.m; path = Tests/BidTypeTest.m; sourceTree = "<group>"; };
-		5B913612144F183B00C50E85 /* HighestBiddingTeamView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HighestBiddingTeamView.xib; sourceTree = "<group>"; };
-		5B913614144F188800C50E85 /* HighestBiddingTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighestBiddingTeamViewController.h; sourceTree = "<group>"; };
-		5B913615144F188800C50E85 /* HighestBiddingTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighestBiddingTeamViewController.m; sourceTree = "<group>"; };
-		5BA10F6D10E2970F000A391F /* CellScoringRound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellScoringRound.h; sourceTree = "<group>"; };
-		5BA10F6E10E2970F000A391F /* CellScoringRound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellScoringRound.m; sourceTree = "<group>"; };
-		5BA10F7110E297D8000A391F /* CellScoringRound.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellScoringRound.xib; sourceTree = "<group>"; };
-		5BA10F8910E2A0DB000A391F /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
-		5BA10F8A10E2A0DB000A391F /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
-		5BADBD4A10EF70530058E0D0 /* GameListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameListView.xib; sourceTree = "<group>"; };
-		5BADBD4C10EF70730058E0D0 /* GameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameListViewController.h; sourceTree = "<group>"; };
-		5BADBD4D10EF70730058E0D0 /* GameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameListViewController.m; sourceTree = "<group>"; };
-		5BCB36C010EF4C5800799537 /* GameView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameView.xib; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* ScoreFiveHundred-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ScoreFiveHundred-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		5BAA5CC814569465007274F7 /* BiddingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiddingViewController.h; sourceTree = "<group>"; };
+		5BAA5CC914569465007274F7 /* BiddingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiddingViewController.m; sourceTree = "<group>"; };
+		5BAA5CCA14569465007274F7 /* GameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameListViewController.h; sourceTree = "<group>"; };
+		5BAA5CCB14569465007274F7 /* GameListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameListViewController.m; sourceTree = "<group>"; };
+		5BAA5CCC14569465007274F7 /* GameSetUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetUpViewController.h; sourceTree = "<group>"; };
+		5BAA5CCD14569465007274F7 /* GameSetUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSetUpViewController.m; sourceTree = "<group>"; };
+		5BAA5CCE14569465007274F7 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		5BAA5CCF14569465007274F7 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		5BAA5CD014569465007274F7 /* HighestBiddingTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighestBiddingTeamViewController.h; sourceTree = "<group>"; };
+		5BAA5CD114569465007274F7 /* HighestBiddingTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighestBiddingTeamViewController.m; sourceTree = "<group>"; };
+		5BAA5CD214569465007274F7 /* TricksWonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TricksWonViewController.h; sourceTree = "<group>"; };
+		5BAA5CD314569465007274F7 /* TricksWonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TricksWonViewController.m; sourceTree = "<group>"; };
+		5BAA5CDB145694B0007274F7 /* BidType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidType.h; sourceTree = "<group>"; };
+		5BAA5CDC145694B0007274F7 /* BidType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidType.m; sourceTree = "<group>"; };
+		5BAA5CDF145694B9007274F7 /* CellBidType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellBidType.h; sourceTree = "<group>"; };
+		5BAA5CE0145694B9007274F7 /* CellBidType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellBidType.m; sourceTree = "<group>"; };
+		5BAA5CE1145694B9007274F7 /* CellGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellGame.h; sourceTree = "<group>"; };
+		5BAA5CE2145694B9007274F7 /* CellGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellGame.m; sourceTree = "<group>"; };
+		5BAA5CE3145694B9007274F7 /* CellScoringRound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellScoringRound.h; sourceTree = "<group>"; };
+		5BAA5CE4145694B9007274F7 /* CellScoringRound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellScoringRound.m; sourceTree = "<group>"; };
+		5BAA5CE5145694B9007274F7 /* CellWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellWrapper.h; sourceTree = "<group>"; };
+		5BAA5CE6145694B9007274F7 /* CellWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellWrapper.m; sourceTree = "<group>"; };
+		5BAA5CEC14569552007274F7 /* BiddingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BiddingView.xib; path = Resources/BiddingView.xib; sourceTree = "<group>"; };
+		5BAA5CED14569552007274F7 /* CellBidType.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellBidType.xib; path = Resources/CellBidType.xib; sourceTree = "<group>"; };
+		5BAA5CEE14569552007274F7 /* CellGame.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellGame.xib; path = Resources/CellGame.xib; sourceTree = "<group>"; };
+		5BAA5CEF14569552007274F7 /* CellScoringRound.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellScoringRound.xib; path = Resources/CellScoringRound.xib; sourceTree = "<group>"; };
+		5BAA5CF014569552007274F7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
+		5BAA5CF114569552007274F7 /* GameListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GameListView.xib; path = Resources/GameListView.xib; sourceTree = "<group>"; };
+		5BAA5CF214569552007274F7 /* GameSetUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GameSetUpView.xib; path = Resources/GameSetUpView.xib; sourceTree = "<group>"; };
+		5BAA5CF314569552007274F7 /* GameView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GameView.xib; path = Resources/GameView.xib; sourceTree = "<group>"; };
+		5BAA5CF414569552007274F7 /* HighestBiddingTeamView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HighestBiddingTeamView.xib; path = Resources/HighestBiddingTeamView.xib; sourceTree = "<group>"; };
+		5BAA5CF514569552007274F7 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Resources/icon.png; sourceTree = "<group>"; };
+		5BAA5CF614569552007274F7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = Resources/MainWindow.xib; sourceTree = "<group>"; };
+		5BAA5CF814569552007274F7 /* TricksWonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TricksWonView.xib; path = Resources/TricksWonView.xib; sourceTree = "<group>"; };
+		5BAA5D071456A244007274F7 /* adhoc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = adhoc.plist; sourceTree = "<group>"; };
+		5BAA5D081456A244007274F7 /* ScoreFiveHundred-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ScoreFiveHundred-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,28 +126,11 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				5B913614144F188800C50E85 /* HighestBiddingTeamViewController.h */,
-				5B913615144F188800C50E85 /* HighestBiddingTeamViewController.m */,
-				5B85FB2B10C2D12D006BBE9A /* BidType.h */,
-				5B85FB2C10C2D12D006BBE9A /* BidType.m */,
+				5BAA5CDE145694B9007274F7 /* Views */,
+				5BAA5CDA145694B0007274F7 /* Models */,
+				5BAA5CC714569465007274F7 /* Controllers */,
 				1D3623240D0F684500981E51 /* ScoreFiveHundredAppDelegate.h */,
 				1D3623250D0F684500981E51 /* ScoreFiveHundredAppDelegate.m */,
-				5BADBD4C10EF70730058E0D0 /* GameListViewController.h */,
-				5BADBD4D10EF70730058E0D0 /* GameListViewController.m */,
-				5BA10F8910E2A0DB000A391F /* GameViewController.h */,
-				5BA10F8A10E2A0DB000A391F /* GameViewController.m */,
-				5B57159310EF0CDE005F2E9F /* BiddingViewController.h */,
-				5B57159410EF0CDE005F2E9F /* BiddingViewController.m */,
-				5B823376110C714500C543B6 /* TricksWonViewController.h */,
-				5B823377110C714500C543B6 /* TricksWonViewController.m */,
-				5B49946510CFEF8E00C24443 /* CellWrapper.h */,
-				5B49946610CFEF8E00C24443 /* CellWrapper.m */,
-				5B78341110EA8B3A0002A237 /* CellGame.h */,
-				5B78341210EA8B3A0002A237 /* CellGame.m */,
-				5BA10F6D10E2970F000A391F /* CellScoringRound.h */,
-				5BA10F6E10E2970F000A391F /* CellScoringRound.m */,
-				5B49946C10CFF0C700C24443 /* CellBidType.h */,
-				5B49946D10CFF0C700C24443 /* CellBidType.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -164,6 +150,8 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				5B904C5410D28990003F5324 /* Tests */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				5BAA5D071456A244007274F7 /* adhoc.plist */,
+				5BAA5D081456A244007274F7 /* ScoreFiveHundred-Info.plist */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				5B87EE2A144F0D2100C96F95 /* iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -184,19 +172,18 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5B2ED84010FB9F4200228C9E /* icon.png */,
-				8D1107310486CEB800E47090 /* ScoreFiveHundred-Info.plist */,
-				5B7C27241125542800D3B703 /* adhoc.plist */,
-				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
-				5BCB36C010EF4C5800799537 /* GameView.xib */,
-				5BADBD4A10EF70530058E0D0 /* GameListView.xib */,
-				5B913612144F183B00C50E85 /* HighestBiddingTeamView.xib */,
-				5B57159F10EF0E18005F2E9F /* BiddingView.xib */,
-				5B82336F110C6E6000C543B6 /* TricksWonView.xib */,
-				5B49946F10CFF18000C24443 /* CellBidType.xib */,
-				5B78340F10EA86570002A237 /* CellGame.xib */,
-				5BA10F7110E297D8000A391F /* CellScoringRound.xib */,
-				5B083DAA10FBAE3C0018A6D1 /* Default.png */,
+				5BAA5CEC14569552007274F7 /* BiddingView.xib */,
+				5BAA5CED14569552007274F7 /* CellBidType.xib */,
+				5BAA5CEE14569552007274F7 /* CellGame.xib */,
+				5BAA5CEF14569552007274F7 /* CellScoringRound.xib */,
+				5BAA5CF014569552007274F7 /* Default.png */,
+				5BAA5CF114569552007274F7 /* GameListView.xib */,
+				5BAA5CF214569552007274F7 /* GameSetUpView.xib */,
+				5BAA5CF314569552007274F7 /* GameView.xib */,
+				5BAA5CF414569552007274F7 /* HighestBiddingTeamView.xib */,
+				5BAA5CF514569552007274F7 /* icon.png */,
+				5BAA5CF614569552007274F7 /* MainWindow.xib */,
+				5BAA5CF814569552007274F7 /* TricksWonView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -227,6 +214,49 @@
 				5B904C4110D2894A003F5324 /* LogicTests-Info.plist */,
 			);
 			name = Tests;
+			sourceTree = "<group>";
+		};
+		5BAA5CC714569465007274F7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5BAA5CC814569465007274F7 /* BiddingViewController.h */,
+				5BAA5CC914569465007274F7 /* BiddingViewController.m */,
+				5BAA5CCA14569465007274F7 /* GameListViewController.h */,
+				5BAA5CCB14569465007274F7 /* GameListViewController.m */,
+				5BAA5CCC14569465007274F7 /* GameSetUpViewController.h */,
+				5BAA5CCD14569465007274F7 /* GameSetUpViewController.m */,
+				5BAA5CCE14569465007274F7 /* GameViewController.h */,
+				5BAA5CCF14569465007274F7 /* GameViewController.m */,
+				5BAA5CD014569465007274F7 /* HighestBiddingTeamViewController.h */,
+				5BAA5CD114569465007274F7 /* HighestBiddingTeamViewController.m */,
+				5BAA5CD214569465007274F7 /* TricksWonViewController.h */,
+				5BAA5CD314569465007274F7 /* TricksWonViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5BAA5CDA145694B0007274F7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5BAA5CDB145694B0007274F7 /* BidType.h */,
+				5BAA5CDC145694B0007274F7 /* BidType.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5BAA5CDE145694B9007274F7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5BAA5CDF145694B9007274F7 /* CellBidType.h */,
+				5BAA5CE0145694B9007274F7 /* CellBidType.m */,
+				5BAA5CE1145694B9007274F7 /* CellGame.h */,
+				5BAA5CE2145694B9007274F7 /* CellGame.m */,
+				5BAA5CE3145694B9007274F7 /* CellScoringRound.h */,
+				5BAA5CE4145694B9007274F7 /* CellScoringRound.m */,
+				5BAA5CE5145694B9007274F7 /* CellWrapper.h */,
+				5BAA5CE6145694B9007274F7 /* CellWrapper.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,19 +328,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				5B49947010CFF18000C24443 /* CellBidType.xib in Resources */,
-				5BA10F7210E297D8000A391F /* CellScoringRound.xib in Resources */,
-				5B78341010EA86570002A237 /* CellGame.xib in Resources */,
-				5B5715A010EF0E18005F2E9F /* BiddingView.xib in Resources */,
-				5BCB36C110EF4C5800799537 /* GameView.xib in Resources */,
-				5BADBD4B10EF70530058E0D0 /* GameListView.xib in Resources */,
-				5B2ED84110FB9F4200228C9E /* icon.png in Resources */,
-				5B083DAB10FBAE3C0018A6D1 /* Default.png in Resources */,
-				5B823370110C6E6000C543B6 /* TricksWonView.xib in Resources */,
-				5B7C27251125542800D3B703 /* adhoc.plist in Resources */,
 				5B87EE2C144F0D2200C96F95 /* MainWindow-iPad.xib in Resources */,
-				5B913613144F183B00C50E85 /* HighestBiddingTeamView.xib in Resources */,
+				5BAA5CFA14569552007274F7 /* BiddingView.xib in Resources */,
+				5BAA5CFB14569552007274F7 /* CellBidType.xib in Resources */,
+				5BAA5CFC14569552007274F7 /* CellGame.xib in Resources */,
+				5BAA5CFD14569552007274F7 /* CellScoringRound.xib in Resources */,
+				5BAA5CFE14569552007274F7 /* Default.png in Resources */,
+				5BAA5CFF14569552007274F7 /* GameListView.xib in Resources */,
+				5BAA5D0014569552007274F7 /* GameSetUpView.xib in Resources */,
+				5BAA5D0114569552007274F7 /* GameView.xib in Resources */,
+				5BAA5D0214569552007274F7 /* HighestBiddingTeamView.xib in Resources */,
+				5BAA5D0314569552007274F7 /* icon.png in Resources */,
+				5BAA5D0414569552007274F7 /* MainWindow.xib in Resources */,
+				5BAA5D0614569552007274F7 /* TricksWonView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +348,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B083DAC10FBAE3C0018A6D1 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,16 +376,17 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* ScoreFiveHundredAppDelegate.m in Sources */,
-				5B85FB2D10C2D12D006BBE9A /* BidType.m in Sources */,
-				5B49946710CFEF8E00C24443 /* CellWrapper.m in Sources */,
-				5B49946E10CFF0C700C24443 /* CellBidType.m in Sources */,
-				5BA10F6F10E2970F000A391F /* CellScoringRound.m in Sources */,
-				5BA10F8B10E2A0DB000A391F /* GameViewController.m in Sources */,
-				5B78341310EA8B3A0002A237 /* CellGame.m in Sources */,
-				5B57159610EF0CDE005F2E9F /* BiddingViewController.m in Sources */,
-				5BADBD4E10EF70730058E0D0 /* GameListViewController.m in Sources */,
-				5B823378110C714500C543B6 /* TricksWonViewController.m in Sources */,
-				5B913616144F188800C50E85 /* HighestBiddingTeamViewController.m in Sources */,
+				5BAA5CD414569465007274F7 /* BiddingViewController.m in Sources */,
+				5BAA5CD514569465007274F7 /* GameListViewController.m in Sources */,
+				5BAA5CD614569465007274F7 /* GameSetUpViewController.m in Sources */,
+				5BAA5CD714569465007274F7 /* GameViewController.m in Sources */,
+				5BAA5CD814569465007274F7 /* HighestBiddingTeamViewController.m in Sources */,
+				5BAA5CD914569465007274F7 /* TricksWonViewController.m in Sources */,
+				5BAA5CDD145694B0007274F7 /* BidType.m in Sources */,
+				5BAA5CE7145694B9007274F7 /* CellBidType.m in Sources */,
+				5BAA5CE8145694B9007274F7 /* CellGame.m in Sources */,
+				5BAA5CE9145694B9007274F7 /* CellScoringRound.m in Sources */,
+				5BAA5CEA145694B9007274F7 /* CellWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,7 +394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B904CA510D29702003F5324 /* BidType.m in Sources */,
+				5BB92ABE1456A3E1008C70CB /* BidType.m in Sources */,
 				5B904C5810D28A2B003F5324 /* BidTypeTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,7 +419,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ScoreFiveHundred_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "ScoreFiveHundred-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = ScoreFiveHundred;
@@ -405,7 +435,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ScoreFiveHundred_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "ScoreFiveHundred-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = ScoreFiveHundred;
@@ -435,7 +465,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ScoreFiveHundred_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "ScoreFiveHundred-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = ScoreFiveHundred;

@@ -105,7 +105,7 @@ static int siLosingScore = -500;
   
   NSMutableString* t1 = [NSMutableString stringWithString:self.curNameTeamOne];
   NSMutableString* t2 = [NSMutableString stringWithString:self.curNameTeamTwo];
-  NSMutableArray* teamNames = [[NSMutableArray alloc] initWithObjects:t1, t2, nil];
+  NSMutableArray* teamNames = [[[NSMutableArray alloc] initWithObjects:t1, t2, nil] autorelease];
 
   [app addRound:teamNames];
 }
