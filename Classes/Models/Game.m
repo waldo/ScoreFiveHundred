@@ -17,7 +17,11 @@
 }
 
 - (NSString*) nameForPosition:(int)pos {
-  return [[self.teams objectAtIndex:pos] name];
+  if ([self.teams count] > pos) {
+    return [[self.teams objectAtIndex:pos] name];
+  }
+
+  return nil;
 }
 
 - (NSString*) scoreForPosition:(int)pos {
@@ -81,6 +85,8 @@
 }
 
 - (void) checkForGameOver {
+  self.winningTeam = nil;
+
   if ([self.rounds count] > 0) {
     Round* r = [self.rounds objectAtIndex:0];
 
@@ -89,9 +95,6 @@
     }
     else if (([[r scoreForPosition:1] intValue] >= 500 && [r bidAchievedForPosition:1]) || [[r scoreForPosition:0] intValue] <= -500) {
       self.winningTeam = [self.teams objectAtIndex:1];
-    }
-    else {
-      self.winningTeam = nil;
     }
   }
 }
