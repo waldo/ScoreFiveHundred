@@ -11,7 +11,6 @@
   IBOutlet CellWrapper* cellWrapper;
   IBOutlet UITableView* gameListTableView;
   IBOutlet UINavigationItem* navItem;
-  IBOutlet UIBarButtonItem* editButton;
   IBOutlet UIBarButtonItem* addButton;
   IBOutlet GameSetUpViewController* setUpController;
   IBOutlet GameViewController* gameController;
@@ -25,7 +24,6 @@
 @property (nonatomic, retain) IBOutlet CellWrapper* cellWrapper;
 @property (nonatomic, retain) IBOutlet UITableView* gameListTableView;
 @property (nonatomic, retain) IBOutlet UINavigationItem* navItem;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem* editButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem* addButton;
 @property (nonatomic, retain) IBOutlet GameSetUpViewController* setUpController;
 @property (nonatomic, retain) IBOutlet GameViewController* gameController;
@@ -35,7 +33,6 @@
 @property (nonatomic, retain) NSMutableArray* gamesInProgress;
 @property (nonatomic, retain) NSMutableArray* gamesComplete;
 
-- (IBAction) edit:(id)sender;
 - (IBAction) newGame:(id)sender;
 
 - (void) loadGames;

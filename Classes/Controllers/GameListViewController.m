@@ -11,7 +11,6 @@ static NSString* ssTitleCompleted     = @"Complete";
 @synthesize cellWrapper,
             gameListTableView,
             navItem,
-            editButton,
             addButton,
             setUpController,
             gameController,
@@ -24,7 +23,6 @@ static NSString* ssTitleCompleted     = @"Complete";
   [cellWrapper release];
   [gameListTableView release];
   [navItem release];
-  [editButton release];
   [addButton release];
   [setUpController release];
   [gameController release];
@@ -34,10 +32,6 @@ static NSString* ssTitleCompleted     = @"Complete";
   [gamesComplete release];
   
   [super dealloc];
-}
-
-- (IBAction) edit:(id)sender {
-  [self setEditing:!self.editing animated:YES];
 }
 
 - (IBAction) newGame:(id)sender {
@@ -100,8 +94,7 @@ static NSString* ssTitleCompleted     = @"Complete";
   [super viewDidLoad];
   
   self.title = @"Game List";
-  
-  [self.navigationItem setLeftBarButtonItem:self.editButton animated:NO];
+
   [self.navigationItem setRightBarButtonItem:self.addButton animated:NO];
 }
 
@@ -113,19 +106,6 @@ static NSString* ssTitleCompleted     = @"Complete";
 
 - (void) viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
-}
-
-- (void) setEditing:(BOOL)editing animated:(BOOL)animated {
-  [super setEditing:editing animated:animated];
-  
-  [self.gameListTableView setEditing:editing animated:animated];
-    
-  if (self.editing) {
-    self.editButton.title = @"Done";
-  }
-  else {
-    self.editButton.title = @"Edit";
-  }
 }
 
 // MARK: tableview delegate

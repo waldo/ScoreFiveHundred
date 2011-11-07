@@ -42,11 +42,6 @@
 				<int key="IBUIStyle">1</int>
 				<int key="IBUISystemItemIdentifier">4</int>
 			</object>
-			<object class="IBUIBarButtonItem" id="646524523">
-				<string key="IBUITitle">Edit</string>
-				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-				<int key="IBUIStyle">1</int>
-			</object>
 			<object class="IBUIView" id="182801239">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
@@ -165,14 +160,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">editButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="646524523"/>
-					</object>
-					<int key="connectionID">16</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dataSource</string>
 						<reference key="source" ref="455041342"/>
 						<reference key="destination" ref="841351856"/>
@@ -186,14 +173,6 @@
 						<reference key="destination" ref="841351856"/>
 					</object>
 					<int key="connectionID">5</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">edit:</string>
-						<reference key="source" ref="646524523"/>
-						<reference key="destination" ref="841351856"/>
-					</object>
-					<int key="connectionID">15</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -260,11 +239,6 @@
 						<reference key="object" ref="123754754"/>
 						<reference key="parent" ref="0"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">12</int>
-						<reference key="object" ref="646524523"/>
-						<reference key="parent" ref="0"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -277,7 +251,6 @@
 					<string>-2.IBPluginDependency</string>
 					<string>10.CustomClassName</string>
 					<string>10.IBPluginDependency</string>
-					<string>12.IBPluginDependency</string>
 					<string>13.IBPluginDependency</string>
 					<string>2.IBPluginDependency</string>
 					<string>21.CustomClassName</string>
@@ -293,7 +266,6 @@
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>GameSetUpViewController</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -588,12 +560,10 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>bid:</string>
-							<string>edit:</string>
 							<string>rematch:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -603,17 +573,12 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>bid:</string>
-							<string>edit:</string>
 							<string>rematch:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">bid:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">edit:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -626,12 +591,11 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>addButton</string>
 							<string>bidButton</string>
 							<string>cellWrapper</string>
 							<string>congratulations</string>
-							<string>dividerBottom</string>
 							<string>dividerTop</string>
-							<string>editButton</string>
 							<string>highestBidderController</string>
 							<string>roundsTableView</string>
 							<string>teamOneName</string>
@@ -639,12 +603,11 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIBarButtonItem</string>
 							<string>UIButton</string>
 							<string>CellWrapper</string>
 							<string>UIButton</string>
 							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UIBarButtonItem</string>
 							<string>HighestBiddingTeamViewController</string>
 							<string>UITableView</string>
 							<string>UITextField</string>
@@ -655,12 +618,11 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>addButton</string>
 							<string>bidButton</string>
 							<string>cellWrapper</string>
 							<string>congratulations</string>
-							<string>dividerBottom</string>
 							<string>dividerTop</string>
-							<string>editButton</string>
 							<string>highestBidderController</string>
 							<string>roundsTableView</string>
 							<string>teamOneName</string>
@@ -668,6 +630,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">addButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">bidButton</string>
 								<string key="candidateClassName">UIButton</string>
@@ -681,16 +647,8 @@
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">dividerBottom</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">dividerTop</string>
 								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">editButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">highestBidderController</string>
