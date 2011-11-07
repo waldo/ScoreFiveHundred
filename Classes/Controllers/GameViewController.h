@@ -11,7 +11,7 @@
   IBOutlet HighestBiddingTeamViewController* highestBidderController;
   IBOutlet UITableView* roundsTableView;
   IBOutlet CellWrapper* cellWrapper;
-  IBOutlet UIBarButtonItem* editButton;
+  IBOutlet UIBarButtonItem* addButton;
   IBOutlet UITextField* teamOneName;
   IBOutlet UITextField* teamTwoName;
   IBOutlet UIButton* bidButton;
@@ -24,7 +24,7 @@
 @property (nonatomic, retain) IBOutlet HighestBiddingTeamViewController* highestBidderController;
 @property (nonatomic, retain) IBOutlet UITableView* roundsTableView;
 @property (nonatomic, retain) IBOutlet CellWrapper* cellWrapper;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem* editButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem* addButton;
 @property (nonatomic, retain) IBOutlet UITextField* teamOneName;
 @property (nonatomic, retain) IBOutlet UITextField* teamTwoName;
 @property (nonatomic, retain) IBOutlet UIButton* bidButton;
@@ -33,7 +33,6 @@
 
 @property (nonatomic, retain) Game* game;
 
-- (IBAction) edit:(id)sender;
 - (IBAction) bid:(id)sender;
 - (IBAction) rematch:(id)sender;
 

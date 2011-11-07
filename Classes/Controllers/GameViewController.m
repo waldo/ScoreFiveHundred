@@ -18,7 +18,7 @@
 @synthesize highestBidderController;
 @synthesize roundsTableView;
 @synthesize cellWrapper;
-@synthesize editButton;
+@synthesize addButton;
 @synthesize teamOneName;
 @synthesize teamTwoName;
 @synthesize bidButton;
@@ -31,7 +31,7 @@
   [highestBidderController release];
   [roundsTableView release];
   [cellWrapper release];
-  [editButton release];
+  [addButton release];
   [teamOneName release];
   [teamTwoName release];
   [bidButton release];
@@ -41,10 +41,6 @@
   [game release];
   
   [super dealloc];
-}
-
-- (IBAction) edit:(id)sender {
-  [self setEditing:!self.editing animated:YES];
 }
 
 - (IBAction) bid:(id)sender {
@@ -114,7 +110,7 @@
   
   self.title = @"Game";
   
-  [self.navigationItem setRightBarButtonItem:self.editButton animated:YES];
+  [self.navigationItem setRightBarButtonItem:self.addButton animated:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
