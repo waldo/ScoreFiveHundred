@@ -12,7 +12,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		5B36AACC1466FE1400F900C1 /* RoundScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B36AACB1466FE1400F900C1 /* RoundScore.m */; };
+		5B777F4314684CDE00955729 /* RoundScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B777F4214684CDE00955729 /* RoundScore.m */; };
 		5B87EE2C144F0D2200C96F95 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B87EE2B144F0D2200C96F95 /* MainWindow-iPad.xib */; };
 		5B904C5810D28A2B003F5324 /* BidTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B904C5710D28A2B003F5324 /* BidTypeTest.m */; };
 		5BA29367145F318500D5FAD6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA29366145F318500D5FAD6 /* CoreData.framework */; };
@@ -65,8 +65,8 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* ScoreFiveHundred_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreFiveHundred_Prefix.pch; sourceTree = "<group>"; };
-		5B36AACA1466FE1400F900C1 /* RoundScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundScore.h; sourceTree = "<group>"; };
-		5B36AACB1466FE1400F900C1 /* RoundScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundScore.m; sourceTree = "<group>"; };
+		5B777F4114684CDE00955729 /* RoundScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundScore.h; sourceTree = "<group>"; };
+		5B777F4214684CDE00955729 /* RoundScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundScore.m; sourceTree = "<group>"; };
 		5B87EE2B144F0D2200C96F95 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		5B904C4010D2894A003F5324 /* LogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B904C4110D2894A003F5324 /* LogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "LogicTests-Info.plist"; path = "Tests/LogicTests-Info.plist"; sourceTree = "<group>"; };
@@ -259,14 +259,14 @@
 				5BAA5CDB145694B0007274F7 /* BidType.h */,
 				5BAA5CDC145694B0007274F7 /* BidType.m */,
 				5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */,
+				5B777F4114684CDE00955729 /* RoundScore.h */,
+				5B777F4214684CDE00955729 /* RoundScore.m */,
 				5BD2F373145EDB8900C7E762 /* Game.h */,
 				5BD2F374145EDB8900C7E762 /* Game.m */,
 				5BD2F376145EDB8A00C7E762 /* Team.h */,
 				5BD2F377145EDB8A00C7E762 /* Team.m */,
 				5BD2F37C145EE22D00C7E762 /* Round.h */,
 				5BD2F37D145EE22D00C7E762 /* Round.m */,
-				5B36AACA1466FE1400F900C1 /* RoundScore.h */,
-				5B36AACB1466FE1400F900C1 /* RoundScore.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -418,7 +418,7 @@
 				5BD2F375145EDB8900C7E762 /* Game.m in Sources */,
 				5BD2F378145EDB8A00C7E762 /* Team.m in Sources */,
 				5BD2F37E145EE22D00C7E762 /* Round.m in Sources */,
-				5B36AACC1466FE1400F900C1 /* RoundScore.m in Sources */,
+				5B777F4314684CDE00955729 /* RoundScore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,13 +19,13 @@
     <entity name="RoundScore" representedClassName="RoundScore" syncable="YES">
         <attribute name="score" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="tricksWon" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="round" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Round" inverseName="scores" inverseEntity="Round" syncable="YES"/>
+        <relationship name="round" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Round" inverseName="scores" inverseEntity="Round" syncable="YES"/>
         <relationship name="team" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="roundScores" inverseEntity="Team" syncable="YES"/>
     </entity>
     <entity name="Team" representedClassName="Team" syncable="YES">
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="games" toMany="YES" minCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="Game" inverseName="teams" inverseEntity="Game" syncable="YES"/>
+        <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Game" inverseName="teams" inverseEntity="Game" syncable="YES"/>
         <relationship name="gameWinner" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="winningTeam" inverseEntity="Game" syncable="YES"/>
         <relationship name="roundBidder" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Round" inverseName="biddingTeam" inverseEntity="Round" syncable="YES"/>
         <relationship name="roundScores" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RoundScore" inverseName="team" inverseEntity="RoundScore" syncable="YES"/>

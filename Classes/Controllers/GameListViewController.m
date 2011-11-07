@@ -186,7 +186,13 @@ static NSString* ssTitleCompleted     = @"Complete";
 - (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
     [managedObjectContext deleteObject:[self gameForIndexPath:indexPath]];
-      // TODO: save context
+    NSError* err = nil;
+
+    if (![managedObjectContext save:&err]) {
+      NSLog(@"Unresolved error %@, %@", err, [err userInfo]);
+    }
+
+    [self loadGames];
   }
 }
 

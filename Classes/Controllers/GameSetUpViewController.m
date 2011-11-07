@@ -62,6 +62,10 @@ static int tagOffset = 1000;
 
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
+
+  for (UITextField* field in self.teamNameTextFields) {
+    field.text = @"";
+  }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -159,14 +163,18 @@ static int tagOffset = 1000;
       UITextField* playerTextField = [[[UITextField alloc] initWithFrame:CGRectMake(110, 10, 185, 30)] autorelease];
       playerTextField.adjustsFontSizeToFitWidth = YES;
       playerTextField.textColor = [UIColor blackColor];
-      playerTextField.placeholder = @"The greatest";
-      playerTextField.placeholder = @"The greatest tribute";
+      if (indexPath.row == 0) {
+        playerTextField.placeholder = @"The greatest";
+      }
+      else {
+        playerTextField.placeholder = @"The greatest tribute";
+      }
       playerTextField.keyboardType = UIKeyboardTypeDefault;
       playerTextField.autocorrectionType = UITextAutocorrectionTypeNo;
       playerTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
       playerTextField.textAlignment = UITextAlignmentLeft;
       playerTextField.tag = indexPath.row + tagOffset;
-      playerTextField.delegate = self;      
+      playerTextField.delegate = self;
       
       [cell addSubview:playerTextField];
       
