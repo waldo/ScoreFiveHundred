@@ -37,6 +37,5 @@
 - (IBAction) rematch:(id)sender;
 
 - (void) initWithGame:(Game*)g;
-- (void) addFinalisedRound:(Round*)r;
 
 @end

@@ -60,18 +60,6 @@
   [self.game save];
 }
 
-- (void) addFinalisedRound:(Round*)r {
-  [self.game insertObject:r inRoundsAtIndex:0];
-  [self.game save];
-
-  if (self.game.isComplete) {
-    NSString* winningTeamName = [self.game.winningTeam name];
-    NSString* msg = [NSString stringWithFormat:@"%@ win!", winningTeamName];
-    UIAlertView* rematchAlert = [[[UIAlertView alloc] initWithTitle:msg message:nil delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Rematch", nil] autorelease];
-    [rematchAlert show];
-  }
-}
-
 // MARK: Hidden functions
 - (NSString*) nonBlankFirst:(NSString*)first OtherwiseSecond:(NSString*)second {
   if (first == nil || [@"" isEqual:first]) {
@@ -101,6 +89,20 @@
     [self.congratulations setTitle:[NSString stringWithFormat:@"%@ won! Rematch?", team] forState:UIControlStateNormal];
     self.bidButton.hidden       = YES;
     self.congratulations.hidden = NO;
+    if ([[NSDate date] timeIntervalSinceDate:self.game.lastPlayed] < 2) {
+//      // debug
+//      NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//      [formatter setDateFormat: @"yyyy-MM-dd HH:mm:ss zzz"];
+//      NSLog(@"current: %@", [formatter stringFromDate:[NSDate date]]);
+//      NSLog(@"lastPlayed: %@", [formatter stringFromDate:self.game.lastPlayed]);
+//      NSLog(@"interval: %f", [[NSDate date] timeIntervalSinceDate:self.game.lastPlayed]);
+//      // end debug
+
+      NSString* winningTeamName = [self.game.winningTeam name];
+      NSString* msg = [NSString stringWithFormat:@"%@ win!", winningTeamName];
+      UIAlertView* rematchAlert = [[[UIAlertView alloc] initWithTitle:msg message:nil delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Rematch", nil] autorelease];
+      [rematchAlert show];
+    }
   }
 }
 
