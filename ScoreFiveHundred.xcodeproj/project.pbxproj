@@ -12,8 +12,10 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		5B36AACC1466FE1400F900C1 /* RoundScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B36AACB1466FE1400F900C1 /* RoundScore.m */; };
 		5B87EE2C144F0D2200C96F95 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B87EE2B144F0D2200C96F95 /* MainWindow-iPad.xib */; };
 		5B904C5810D28A2B003F5324 /* BidTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B904C5710D28A2B003F5324 /* BidTypeTest.m */; };
+		5BA29367145F318500D5FAD6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA29366145F318500D5FAD6 /* CoreData.framework */; };
 		5BAA5CD414569465007274F7 /* BiddingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CC914569465007274F7 /* BiddingViewController.m */; };
 		5BAA5CD514569465007274F7 /* GameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CCB14569465007274F7 /* GameListViewController.m */; };
 		5BAA5CD614569465007274F7 /* GameSetUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CCD14569465007274F7 /* GameSetUpViewController.m */; };
@@ -38,6 +40,10 @@
 		5BAA5D0414569552007274F7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF614569552007274F7 /* MainWindow.xib */; };
 		5BAA5D0614569552007274F7 /* TricksWonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF814569552007274F7 /* TricksWonView.xib */; };
 		5BB92ABE1456A3E1008C70CB /* BidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CDC145694B0007274F7 /* BidType.m */; };
+		5BD2F375145EDB8900C7E762 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F374145EDB8900C7E762 /* Game.m */; };
+		5BD2F378145EDB8A00C7E762 /* Team.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F377145EDB8A00C7E762 /* Team.m */; };
+		5BD2F37E145EE22D00C7E762 /* Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F37D145EE22D00C7E762 /* Round.m */; };
+		5BF2F043145EC1D30067E00C /* GameModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,11 +65,14 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* ScoreFiveHundred_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreFiveHundred_Prefix.pch; sourceTree = "<group>"; };
+		5B36AACA1466FE1400F900C1 /* RoundScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundScore.h; sourceTree = "<group>"; };
+		5B36AACB1466FE1400F900C1 /* RoundScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundScore.m; sourceTree = "<group>"; };
 		5B87EE2B144F0D2200C96F95 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		5B904C4010D2894A003F5324 /* LogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B904C4110D2894A003F5324 /* LogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "LogicTests-Info.plist"; path = "Tests/LogicTests-Info.plist"; sourceTree = "<group>"; };
 		5B904C5610D28A2B003F5324 /* BidTypeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BidTypeTest.h; path = Tests/BidTypeTest.h; sourceTree = "<group>"; };
 		5B904C5710D28A2B003F5324 /* BidTypeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BidTypeTest.m; path = Tests/BidTypeTest.m; sourceTree = "<group>"; };
+		5BA29366145F318500D5FAD6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5BAA5CC814569465007274F7 /* BiddingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiddingViewController.h; sourceTree = "<group>"; };
 		5BAA5CC914569465007274F7 /* BiddingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiddingViewController.m; sourceTree = "<group>"; };
 		5BAA5CCA14569465007274F7 /* GameListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameListViewController.h; sourceTree = "<group>"; };
@@ -100,6 +109,13 @@
 		5BAA5CF814569552007274F7 /* TricksWonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TricksWonView.xib; path = Resources/TricksWonView.xib; sourceTree = "<group>"; };
 		5BAA5D071456A244007274F7 /* adhoc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = adhoc.plist; sourceTree = "<group>"; };
 		5BAA5D081456A244007274F7 /* ScoreFiveHundred-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ScoreFiveHundred-Info.plist"; sourceTree = "<group>"; };
+		5BD2F373145EDB8900C7E762 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		5BD2F374145EDB8900C7E762 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		5BD2F376145EDB8A00C7E762 /* Team.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Team.h; sourceTree = "<group>"; };
+		5BD2F377145EDB8A00C7E762 /* Team.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Team.m; sourceTree = "<group>"; };
+		5BD2F37C145EE22D00C7E762 /* Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Round.h; sourceTree = "<group>"; };
+		5BD2F37D145EE22D00C7E762 /* Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Round.m; sourceTree = "<group>"; };
+		5BF2F042145EC1D30067E00C /* GameModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BA29367145F318500D5FAD6 /* CoreData.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -147,6 +164,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				5BA29366145F318500D5FAD6 /* CoreData.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				5B904C5410D28990003F5324 /* Tests */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -172,18 +190,18 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5BAA5CEC14569552007274F7 /* BiddingView.xib */,
-				5BAA5CED14569552007274F7 /* CellBidType.xib */,
-				5BAA5CEE14569552007274F7 /* CellGame.xib */,
-				5BAA5CEF14569552007274F7 /* CellScoringRound.xib */,
-				5BAA5CF014569552007274F7 /* Default.png */,
+				5BAA5CF614569552007274F7 /* MainWindow.xib */,
 				5BAA5CF114569552007274F7 /* GameListView.xib */,
 				5BAA5CF214569552007274F7 /* GameSetUpView.xib */,
 				5BAA5CF314569552007274F7 /* GameView.xib */,
 				5BAA5CF414569552007274F7 /* HighestBiddingTeamView.xib */,
-				5BAA5CF514569552007274F7 /* icon.png */,
-				5BAA5CF614569552007274F7 /* MainWindow.xib */,
+				5BAA5CEC14569552007274F7 /* BiddingView.xib */,
 				5BAA5CF814569552007274F7 /* TricksWonView.xib */,
+				5BAA5CF014569552007274F7 /* Default.png */,
+				5BAA5CF514569552007274F7 /* icon.png */,
+				5BAA5CED14569552007274F7 /* CellBidType.xib */,
+				5BAA5CEE14569552007274F7 /* CellGame.xib */,
+				5BAA5CEF14569552007274F7 /* CellScoringRound.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -219,8 +237,6 @@
 		5BAA5CC714569465007274F7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5BAA5CC814569465007274F7 /* BiddingViewController.h */,
-				5BAA5CC914569465007274F7 /* BiddingViewController.m */,
 				5BAA5CCA14569465007274F7 /* GameListViewController.h */,
 				5BAA5CCB14569465007274F7 /* GameListViewController.m */,
 				5BAA5CCC14569465007274F7 /* GameSetUpViewController.h */,
@@ -229,6 +245,8 @@
 				5BAA5CCF14569465007274F7 /* GameViewController.m */,
 				5BAA5CD014569465007274F7 /* HighestBiddingTeamViewController.h */,
 				5BAA5CD114569465007274F7 /* HighestBiddingTeamViewController.m */,
+				5BAA5CC814569465007274F7 /* BiddingViewController.h */,
+				5BAA5CC914569465007274F7 /* BiddingViewController.m */,
 				5BAA5CD214569465007274F7 /* TricksWonViewController.h */,
 				5BAA5CD314569465007274F7 /* TricksWonViewController.m */,
 			);
@@ -240,6 +258,15 @@
 			children = (
 				5BAA5CDB145694B0007274F7 /* BidType.h */,
 				5BAA5CDC145694B0007274F7 /* BidType.m */,
+				5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */,
+				5BD2F373145EDB8900C7E762 /* Game.h */,
+				5BD2F374145EDB8900C7E762 /* Game.m */,
+				5BD2F376145EDB8A00C7E762 /* Team.h */,
+				5BD2F377145EDB8A00C7E762 /* Team.m */,
+				5BD2F37C145EE22D00C7E762 /* Round.h */,
+				5BD2F37D145EE22D00C7E762 /* Round.m */,
+				5B36AACA1466FE1400F900C1 /* RoundScore.h */,
+				5B36AACB1466FE1400F900C1 /* RoundScore.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -387,6 +414,11 @@
 				5BAA5CE8145694B9007274F7 /* CellGame.m in Sources */,
 				5BAA5CE9145694B9007274F7 /* CellScoringRound.m in Sources */,
 				5BAA5CEA145694B9007274F7 /* CellWrapper.m in Sources */,
+				5BF2F043145EC1D30067E00C /* GameModel.xcdatamodeld in Sources */,
+				5BD2F375145EDB8900C7E762 /* Game.m in Sources */,
+				5BD2F378145EDB8A00C7E762 /* Team.m in Sources */,
+				5BD2F37E145EE22D00C7E762 /* Round.m in Sources */,
+				5B36AACC1466FE1400F900C1 /* RoundScore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,7 +592,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				SDKROOT = iphonesimulator3.1.2;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -611,6 +643,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5BF2F042145EC1D30067E00C /* GameModel.xcdatamodel */,
+			);
+			currentVersion = 5BF2F042145EC1D30067E00C /* GameModel.xcdatamodel */;
+			path = GameModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }

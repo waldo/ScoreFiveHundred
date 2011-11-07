@@ -1,420 +1,226 @@
-//
-//  GameSetUpViewController.m
-//
-//  Created by Ben Walsham on 2011-10-24.
-//  Copyright 2011 MeltingWaldo. All rights reserved.
-//
-
 #import "GameSetUpViewController.h"
 #import "ScoreFiveHundredAppDelegate.h"
-
-@interface GameSetUpViewController()
-
-- (void) sendRematch;
-- (NSString*) nonBlankFirst:(NSString*)first OtherwiseSecond:(NSString*)second;
-- (void) refreshView;
-- (void) setGameSummary;
-- (void) gameComplete;
-- (void) undoGameComplete;
-- (void) checkForGameOver;
-
-@end
-
 
 @implementation GameSetUpViewController
 
 // MARK: static
-static NSString* ssStoreRounds            = @"rounds";
-static NSString* ssStoreNameTeamOne       = @"team one name";
-static NSString* ssStoreNameTeamTwo       = @"team two name";
-static NSString* ssStoreScoreTeamOne      = @"team one score";
-static NSString* ssStoreScoreTeamTwo      = @"team two score";
-static NSString* ssStoreWinningSlot       = @"winning slot";
-static NSString* ssStoreLastPlayed        = @"last played";
-
-static NSString* ssBidTeamOne             = @"team one bid";
-static NSString* ssBidTeamTwo             = @"team two bid";
-static NSString* ssBidAchievedTeamOne     = @"team one bid achieved";
-static NSString* ssBidAchievedTeamTwo     = @"team two bid achieved";
-static NSString* ssTricksWonTeamOne       = @"team one tricks won";
-static NSString* ssTricksWonTeamTwo       = @"team two tricks won";
-static NSString* ssPointsForRoundTeamOne  = @"team one points for round";
-static NSString* ssPointsForRoundTeamTwo  = @"team two points for round";
-static NSString* ssSubTotalTeamOne        = @"team one sub total";
-static NSString* ssSubTotalTeamTwo        = @"team two sub total";
-
-static int siMaximumTricks = 10;
-static int siWinningScore = 500;
-static int siLosingScore = -500;
+static int tagOffset = 1000;
 
 // MARK: synthesize
-@synthesize roundsTableView;
-@synthesize editButton;
-@synthesize teamOneName;
-@synthesize teamTwoName;
-@synthesize teamOneBid;
-@synthesize teamTwoBid;
-@synthesize congratulations;
-@synthesize dividerBottom;
-@synthesize dividerTop;
+@synthesize gameController,
+            table,
+            startButton,
+            game,
+            teamNameTextFields;
 
-@synthesize game;
-@synthesize gameKey;
-@synthesize rounds;
-@synthesize slotTeamOne;
-@synthesize slotTeamTwo;
-@synthesize curNameTeamOne;
-@synthesize curNameTeamTwo;
-@synthesize winningSlot;
-@synthesize lastPlayed;
-@synthesize newGame;
-@synthesize newRound;
-
-- (void) dealloc {  
-  [roundsTableView release];
-  [editButton release];
-  [teamOneName release];
-  [teamTwoName release];
-  [teamOneBid release];
-  [teamTwoBid release];
-  [congratulations release];
-  [dividerBottom release];
-  [dividerTop release];
-  
+- (void) dealloc {
+  [gameController release];
+  [table release];
+  [startButton release];  
   [game release];
-  [gameKey release];
-  [rounds release];
-  [slotTeamOne release];
-  [slotTeamTwo release];
-  [curNameTeamOne release];
-  [curNameTeamTwo release];
-  [winningSlot release];
-  [lastPlayed release];
+  [teamNameTextFields release];
   
   [super dealloc];
 }
 
-- (IBAction) edit:(id)sender {
-  [self setEditing:!self.editing animated:YES];
-}
+- (IBAction) start:(id)sender {
+  //  add name and settings to game
+  NSMutableOrderedSet* names = [[[NSMutableOrderedSet alloc] initWithCapacity:[self.teamNameTextFields count]] autorelease];
+  for (UITextField* field in self.teamNameTextFields) {
+    NSString* name = [NSString stringWithFormat:@"Team %d", field.tag + 1 - tagOffset];
+    if (field.text != nil) {
+      name = field.text;
+    }
 
-- (IBAction) bid:(id)sender {
-  ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
-  
-  NSMutableString* t1 = [NSMutableString stringWithString:self.curNameTeamOne];
-  NSMutableString* t2 = [NSMutableString stringWithString:self.curNameTeamTwo];
-  NSMutableArray* teamNames = [[[NSMutableArray alloc] initWithObjects:t1, t2, nil] autorelease];
-
-  [app addRound:teamNames];
-}
-
-- (IBAction) rematch:(id)sender {
-  [self sendRematch];
-}
-
-- (void) openGame:(NSDictionary*)gameToOpen key:(NSString*)key isNewGame:(BOOL)isNewGame {
-  self.newGame = isNewGame;
-  self.slotTeamOne = [NSNumber numberWithInt:0];
-  self.slotTeamTwo = [NSNumber numberWithInt:1];
-
-  self.gameKey = key;
-  self.game = [NSMutableDictionary dictionaryWithDictionary:gameToOpen];
-  self.rounds = [NSMutableArray arrayWithArray:[self.game objectForKey:ssStoreRounds]];
-  self.curNameTeamOne = [self.game valueForKey:ssStoreNameTeamOne];
-  self.curNameTeamTwo = [self.game valueForKey:ssStoreNameTeamTwo];
-  self.winningSlot = [self.game valueForKey:ssStoreWinningSlot];
-  if ([self.game valueForKey:ssStoreLastPlayed] == nil) {
-    self.lastPlayed = [NSDate date];
-  }
-  else {
-    self.lastPlayed = [self.game valueForKey:ssStoreLastPlayed];
+    [names addObject:name];
   }
   
-  NSLog(@"self.gameKey: %@", self.gameKey);
-  NSLog(@"self.game: %@", self.game);
-}
+  [self.game setTeamsByNames:names];
 
-- (void) rematchOfGame:(NSDictionary*)gameForRematch newKey:(NSString*)newKey {
-  NSDictionary* cleanGame = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [gameForRematch objectForKey:ssStoreNameTeamOne], ssStoreNameTeamOne,
-                            [gameForRematch objectForKey:ssStoreNameTeamTwo], ssStoreNameTeamTwo,
-                            nil];
-  
-  [self openGame:cleanGame key:newKey isNewGame:NO];
-  [self refreshView];
-}
-
-- (void) updateRoundWithTeam:(NSString*)team hand:(NSString*)hand tricksWon:(NSNumber*)tricksWon {
-  // create a new round
-  NSNumber* bidderPoints = [BidType biddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
-  NSNumber* nonBidderPoints = [BidType nonBiddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
-
-  NSString* teamOneBidAttempted = nil;
-  NSString* teamTwoBidAttempted = nil;
-  NSNumber* teamOneBidAchieved = nil;
-  NSNumber* teamTwoBidAchieved = nil;
-  int teamOneTricksWon = 0;
-  int teamTwoTricksWon = 0;
-  int teamOnePointsForRound = 0;
-  int teamTwoPointsForRound = 0;
-  int teamOneScore = 0;
-  int teamTwoScore = 0;
-  
-  if ([self.curNameTeamOne isEqualToString:team]) {
-    teamOneBidAttempted = hand;
-    teamOneBidAchieved = [NSNumber numberWithBool:[BidType bidderWonHand:hand WithTricksWon:tricksWon]];
-    teamOneTricksWon = [tricksWon intValue];
-    teamTwoTricksWon = siMaximumTricks - [tricksWon intValue];
+  UINavigationController *navController = self.navigationController;
     
-    teamOnePointsForRound += [bidderPoints intValue];
-    teamTwoPointsForRound += [nonBidderPoints intValue];
-  }
-  else {
-    teamTwoBidAttempted = hand;
-    teamTwoBidAchieved = [NSNumber numberWithBool:[BidType bidderWonHand:hand WithTricksWon:tricksWon]];
-    teamTwoTricksWon = [tricksWon intValue];
-    teamOneTricksWon = siMaximumTricks - [tricksWon intValue];
+  [self.gameController initWithGame:self.game];
 
-    teamOnePointsForRound += [nonBidderPoints intValue];
-    teamTwoPointsForRound += [bidderPoints intValue];
-  }
-
-  if ([self.rounds count] > 0) {
-    // previous round's sub-total and current round's points
-    teamOneScore = [[[self.rounds objectAtIndex:0] valueForKey:ssSubTotalTeamOne] intValue];
-    teamTwoScore = [[[self.rounds objectAtIndex:0] valueForKey:ssSubTotalTeamTwo] intValue];
-  }
-  
-  teamOneScore += teamOnePointsForRound;
-  teamTwoScore += teamTwoPointsForRound;
-  
-  
-  NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-  
-  [dict setValue:teamOneBidAttempted forKey:ssBidTeamOne];
-  [dict setValue:teamTwoBidAttempted forKey:ssBidTeamTwo];
-  [dict setValue:teamOneBidAchieved forKey:ssBidAchievedTeamOne];
-  [dict setValue:teamTwoBidAchieved forKey:ssBidAchievedTeamTwo];
-  [dict setValue:[NSNumber numberWithInt:teamOneTricksWon] forKey:ssTricksWonTeamOne];
-  [dict setValue:[NSNumber numberWithInt:teamTwoTricksWon] forKey:ssTricksWonTeamTwo];
-  [dict setValue:[NSNumber numberWithInt:teamOnePointsForRound] forKey:ssPointsForRoundTeamOne];
-  [dict setValue:[NSNumber numberWithInt:teamTwoPointsForRound] forKey:ssPointsForRoundTeamTwo];
-  [dict setValue:[NSNumber numberWithInt:teamOneScore] forKey:ssSubTotalTeamOne];
-  [dict setValue:[NSNumber numberWithInt:teamTwoScore] forKey:ssSubTotalTeamTwo];
-  
-  [self.rounds insertObject:dict atIndex:0];
-
-  self.newRound = YES;
-  self.lastPlayed = [NSDate date];
-
-  [self checkForGameOver];
-
-  if (self.winningSlot != nil) {
-    NSString* winningTeamName = [self.winningSlot intValue] == 0 ? self.curNameTeamOne : self.curNameTeamTwo;
-    NSString* msg = [NSString stringWithFormat:@"%@ win!", winningTeamName];
-    UIAlertView* rematchAlert = [[[UIAlertView alloc] initWithTitle:msg message:nil delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Rematch", nil] autorelease];
-    [rematchAlert show];
-  }
-
-  [dict release];
+  [navController popViewControllerAnimated:NO];
+  [navController pushViewController:self.gameController animated:YES];
 }
 
-- (NSInteger) scoreForSlot:(NSInteger)slot {
-  int score = 0;
-
-  if ([self.rounds count] > 0) {
-    if (slot == 0) {
-      score = [[self.game objectForKey:ssStoreScoreTeamOne] intValue];
-    }
-    else {
-      score = [[self.game objectForKey:ssStoreScoreTeamTwo] intValue];
-    }
-  }
-  
-  return score;
-}
-
-// MARK: Hidden functions
-- (void) sendRematch {
-  ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
-  
-  [app rematch:self.game forKey:self.gameKey];
-}  
-
-- (NSString*) nonBlankFirst:(NSString*)first OtherwiseSecond:(NSString*)second {
-  if (first == nil || [@"" isEqual:first]) {
-    return second;
-  }
-  
-  return first;
-}
-
-- (void) refreshView {
-  self.teamOneName.text = self.curNameTeamOne;
-  self.teamTwoName.text = self.curNameTeamTwo;
-  
-  [self checkForGameOver];
-  [self.roundsTableView reloadData];
-  [self.roundsTableView scrollsToTop];
-}
-
-- (void) setGameSummary {
-  NSNumber* teamOneScore = [NSNumber numberWithInt:0];
-  NSNumber* teamTwoScore = [NSNumber numberWithInt:0];
-  
-  if ([self.rounds count] > 0) {
-    teamOneScore = [[self.rounds objectAtIndex:0] valueForKey:ssSubTotalTeamOne];
-    teamTwoScore = [[self.rounds objectAtIndex:0] valueForKey:ssSubTotalTeamTwo];
-  }
-  
-  [self.game setValue:self.rounds forKey:ssStoreRounds];
-  [self.game setValue:self.teamOneName.text forKey:ssStoreNameTeamOne];
-  [self.game setValue:self.teamTwoName.text forKey:ssStoreNameTeamTwo];
-  [self.game setValue:teamOneScore forKey:ssStoreScoreTeamOne];
-  [self.game setValue:teamTwoScore forKey:ssStoreScoreTeamTwo];
-  [self.game setValue:self.winningSlot forKey:ssStoreWinningSlot];
-  [self.game setValue:self.lastPlayed forKey:ssStoreLastPlayed];
-}
-
-- (void) gameComplete {
-  self.teamOneBid.hidden                  = NO;
-  self.teamTwoBid.hidden                  = NO;
-  self.congratulations.hidden             = YES;
-  self.dividerBottom.hidden               = NO;
-  NSString* team = nil;
-  
-  if (self.winningSlot) {    
-    if ([self.winningSlot isEqual:self.slotTeamOne]) {
-      team = self.curNameTeamOne;
-    }
-    else {
-      team = self.curNameTeamTwo;
-    }
-
-    [self.congratulations setTitle:[NSString stringWithFormat:@"%@ won! Rematch?", team] forState:UIControlStateNormal];
-    self.teamOneBid.hidden        = YES;
-    self.teamTwoBid.hidden        = YES;
-    self.dividerBottom.hidden     = YES;
-    self.congratulations.hidden   = NO;
-  }
-}
-
-- (void) undoGameComplete {
-  self.winningSlot = nil;
-}
-
-- (void) checkForGameOver {
-  if ([self.rounds count] > 0) {
-    NSDictionary* r = [self.rounds objectAtIndex:0];
-    
-    BOOL teamOneBidAchieved = [[r valueForKey:ssBidAchievedTeamOne] boolValue];
-    BOOL teamTwoBidAchieved = [[r valueForKey:ssBidAchievedTeamTwo] boolValue];
-    int teamOneScore        = [[r valueForKey:ssSubTotalTeamOne] intValue];
-    int teamTwoScore        = [[r valueForKey:ssSubTotalTeamTwo] intValue];
-    
-    if ((teamOneBidAchieved && teamOneScore >= siWinningScore) || (teamTwoScore <= siLosingScore)) {
-      self.winningSlot = self.slotTeamOne;
-    }
-    else if ((teamTwoBidAchieved && teamTwoScore >= siWinningScore) || (teamOneScore <= siLosingScore)) {
-      self.winningSlot = self.slotTeamTwo;
-    }
-  }
-  
-  [self setGameSummary];
-  [self gameComplete];
+- (void) initWithGame:(Game*)g {
+  self.game = g;
 }
 
 // MARK: View
+- (void) viewDidLoad {
+  [super viewDidLoad];
+
+  self.title = @"Game Settings";
+  
+  [self.navigationItem setRightBarButtonItem:self.startButton animated:YES];
+
+  self.teamNameTextFields = [[NSMutableOrderedSet alloc] init];
+}
+
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  
-  [self refreshView];
-  if (self.isNewRound) {
-    [self.roundsTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-  }    
 }
 
 - (void) viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
-  
-  if (self.isNewGame) {
-    // if edit gets called before the view is loaded then the placeholder text position gets screwed up
-    [self edit:self];
-    self.newGame = NO;
-  }
-  
-  if (self.isNewRound) {
-    self.newRound = NO;
-    [self.roundsTableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES];    
-  }  
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
   [super viewWillDisappear:animated];
-
-  ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
-  
-  [app saveGame:self.game forKey:self.gameKey];
-  
-  if (self.editing) {
-    [self setEditing:NO animated:NO];
-  }
-}
-
-- (void) setEditing:(BOOL)editing animated:(BOOL)animated {
-  [super setEditing:editing animated:animated];
-
-  [self.roundsTableView setEditing:editing animated:animated];
-
-  if (self.editing) {
-    self.editButton.title = @"Done";
-    self.teamOneName.enabled = YES;
-    self.teamTwoName.enabled = YES;
-    self.teamOneBid.hidden = YES;
-    self.teamTwoBid.hidden = YES;
-    self.dividerTop.hidden = YES;
-    self.dividerBottom.hidden = YES;
-    
-    self.teamOneName.borderStyle = UITextBorderStyleRoundedRect;
-    self.teamTwoName.borderStyle = UITextBorderStyleRoundedRect;
-    
-    [self.teamOneName becomeFirstResponder];
-  }
-  else {
-    editButton.title = @"Edit";
-    self.teamOneName.enabled = NO;
-    self.teamTwoName.enabled = NO;
-    [self checkForGameOver];
-    self.teamOneName.borderStyle = UITextBorderStyleNone;
-    self.teamTwoName.borderStyle = UITextBorderStyleNone;
-    self.dividerTop.hidden = NO;
-    self.dividerBottom.hidden = NO;
-    
-    self.curNameTeamOne = self.teamOneName.text;
-    self.curNameTeamTwo = self.teamTwoName.text;
-    
-    [self gameComplete];
-  }
-}
-
-// MARK: AlertView delegate
-- (void) alertView:(UIAlertView*)alert didDismissWithButtonIndex:(NSInteger)index {
-  if (index == 1) {
-    [self sendRematch];
-  }
 }
 
 // MARK: TextField delegate
 - (BOOL) textFieldShouldReturn:(UITextField*)textField {
-  if ([self.teamOneName isEqual:textField]) {
-    [self.teamTwoName becomeFirstResponder];
+  // mod 2 should be mod number of teams
+  int nextIndex = (textField.tag - tagOffset + 1) % 2;
+  UITextField* next = [self.teamNameTextFields objectAtIndex:nextIndex];
+
+  if (nextIndex == 0) {
+    [textField endEditing:YES];
   }
   else {
-    [self.teamOneName becomeFirstResponder];
-    [self setEditing:NO animated:YES];
+    [next becomeFirstResponder];
   }
-  
+
   return YES;
 }
+
+// MARK: tableview delegate
+- (NSInteger) numberOfSectionsInTableView:(UITableView*)tableView {	
+  // If paid 4, 2 otherwise.
+  int sections = 4;
+
+	return sections;
+}
+
+- (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
+  if (section == 0) {
+    return @"";
+  }
+  else if (section == 1) {
+    return @"Team names";
+  }
+  else if (section == 2) {
+    return @"Settings";
+  }
+  else {
+    return @"";
+  }
+}
+
+- (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
+  if (section == 0) {
+    return 1;
+  }
+  else if (section == 1) {
+    return 2;
+  }
+  else if (section == 2) {
+    return 5;
+  }
+  else if (section == 3) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
+}
+
+- (UITableViewCell*) tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
+  static NSString* CellTeamSetting = @"CellTeamSetting";
+  static NSString* CellTeamName = @"CellTeamName";
+  static NSString* CellGeneralSetting = @"CellGeneralSetting";
+  static NSString* CellDoneButton = @"CellDoneButton";
+  
+  UITableViewCell* cellTeamSetting = [tableView dequeueReusableCellWithIdentifier:CellTeamSetting];
+  UITableViewCell* cellTeamName = [tableView dequeueReusableCellWithIdentifier:CellTeamName];
+  UITableViewCell* cellGeneralSetting = [tableView dequeueReusableCellWithIdentifier:CellGeneralSetting];
+  UITableViewCell* cellDoneButton = [tableView dequeueReusableCellWithIdentifier:CellDoneButton];
+  UITableViewCell* cell = nil;
+  
+  if (indexPath.section == 0) {
+    cell = cellTeamSetting;
+    if (cell == nil) {
+      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTeamSetting] autorelease];
+
+      cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+      cell.textLabel.text = @"Number of teams";
+      cell.detailTextLabel.text = @"2";
+    }
+  }
+  else if (indexPath.section == 1) {
+    cell = cellTeamName;
+    if (cell == nil) {
+      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTeamName] autorelease];
+
+      UITextField* playerTextField = [[[UITextField alloc] initWithFrame:CGRectMake(110, 10, 185, 30)] autorelease];
+      playerTextField.adjustsFontSizeToFitWidth = YES;
+      playerTextField.textColor = [UIColor blackColor];
+      playerTextField.placeholder = @"The greatest";
+      playerTextField.placeholder = @"The greatest tribute";
+      playerTextField.keyboardType = UIKeyboardTypeDefault;
+      playerTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+      playerTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+      playerTextField.textAlignment = UITextAlignmentLeft;
+      playerTextField.tag = indexPath.row + tagOffset;
+      playerTextField.delegate = self;      
+      
+      [cell addSubview:playerTextField];
+      
+      [self.teamNameTextFields addObject:playerTextField];
+      
+      cell.textLabel.text = [NSString stringWithFormat:@"Name %d", indexPath.row + 1];
+    }
+  }
+  else if (indexPath.section == 2) {
+    cell = cellGeneralSetting;
+    if (cell == nil) {
+      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellGeneralSetting] autorelease];
+
+      cell.accessoryType = UITableViewCellAccessoryNone;
+      cell.textLabel.text = @"Hi, lots.";
+      cell.detailTextLabel.text = @"and lots...";
+    }
+  }
+  else if (indexPath.section == 3) {
+    cell = cellDoneButton;
+    if (cell == nil) {
+      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellDoneButton] autorelease];
+
+      UIButton* doneButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+      doneButton.frame = CGRectMake(10, 0, CGRectGetWidth(cell.contentView.bounds)-20, CGRectGetHeight(cell.contentView.bounds)+3);
+      [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+      [doneButton addTarget:self action:@selector(start:) forControlEvents:UIControlEventTouchUpInside];
+      [cell addSubview:doneButton];
+      [cell bringSubviewToFront:doneButton];
+    }
+  }
+
+
+  return cell;
+}
+
+- (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
+  // if it's row 0 section 0 show the team size page.
+//  [self.gameController openWithGame:[self gameForIndexPath:indexPath]];
+//  [self.navigationController pushViewController:self.gameController animated:YES];
+}
+
+- (BOOL)tableView:(UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath*)indexPath {
+  BOOL canEdit = YES;
+  
+  return canEdit;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView*)tableView editingStyleForRowAtIndexPath:(NSIndexPath*)indexPath {
+  return UITableViewCellEditingStyleNone;
+}
+
+- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {
+}
+
 
 @end

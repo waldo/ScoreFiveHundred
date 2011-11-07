@@ -1,11 +1,3 @@
-//
-//  BiddingViewController.m
-//  ScoreFiveHundred
-//
-//  Created by Ben Walsham on 02/01/2010.
-//  Copyright 2010 MeltingWaldo. All rights reserved.
-//
-
 #import "BiddingViewController.h"
 #import "ScoreFiveHundredAppDelegate.h"
 
@@ -13,6 +5,7 @@
 @implementation BiddingViewController
 
 // MARK: synthesize
+@synthesize tricksWonController;
 @synthesize bidSelectionTableView;
 @synthesize cellWrapper;
 @synthesize nameTeamOne;
@@ -21,9 +14,11 @@
 @synthesize scoreTeamTwo;
 
 @synthesize bidTypeHands;
-@synthesize team;
+@synthesize game;
+@synthesize biddingTeam;
 
 - (void)dealloc {
+  [tricksWonController release];
   [bidSelectionTableView release];
   [cellWrapper release];
   [nameTeamOne release];
@@ -32,8 +27,9 @@
   [scoreTeamTwo release];  
 
   [bidTypeHands release];
-  [team release];
-  
+  [game release];
+  [biddingTeam release];
+
   [super dealloc];
 }
 
@@ -41,10 +37,13 @@
   return [self.bidTypeHands objectAtIndex:[self.bidSelectionTableView indexPathForSelectedRow].row];
 }
 
-- (void) setTitleUsingTeamName:(NSString*)teamName {
-  NSString* possessive = nil;
-  self.team = teamName;
+- (void) initWithGame:(Game*)g andTeam:(Team*)t {
+  self.game = g;
+  self.biddingTeam = t;
   
+  NSString* possessive = nil;
+  NSString* teamName = [self.biddingTeam name];
+
   if ([[teamName substringFromIndex:[teamName length]-1] isEqual:@"s"]) {
     possessive = [NSString stringWithFormat:@"%@'", teamName];
   }
@@ -55,11 +54,16 @@
   self.title = [NSString stringWithFormat:@"%@ Bid", possessive];
 }
 
-// MARK: view loading
+// MARK: View
 - (void) viewDidLoad {
   [super viewDidLoad];
 
   self.bidTypeHands = [BidType orderedHands];
+
+  self.nameTeamOne.text = [self.game nameForPosition:0];
+  self.nameTeamTwo.text = [self.game nameForPosition:1];
+  self.scoreTeamOne.text = [NSString stringWithFormat:@"%i pts", [self.game scoreForPosition:0]];
+  self.scoreTeamTwo.text = [NSString stringWithFormat:@"%i pts", [self.game scoreForPosition:1]];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -104,9 +108,8 @@
 }
 
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
-
-  [app bidSelected:[self hand] forTeamName:self.team];
+  [self.tricksWonController initWithGame:self.game team:self.biddingTeam andBid:[self hand]];
+  [self.navigationController pushViewController:self.tricksWonController animated:YES];
 }
 
 @end

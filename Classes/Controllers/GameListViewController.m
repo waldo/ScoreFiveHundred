@@ -1,58 +1,37 @@
-//
-//  GameListViewController.m
-//  ScoreFiveHundred
-//
-//  Created by Ben Walsham on 02/01/2010.
-//  Copyright 2010 MeltingWaldo. All rights reserved.
-//
-
 #import "GameListViewController.h"
-#import "ScoreFiveHundredAppDelegate.h"
-
-@implementation NSDictionary (gameComparison)
-
-- (NSComparisonResult) compareGameByLastPlayed:(NSDictionary*)game {
-  return [[game objectForKey:@"last played"] compare:[self objectForKey:@"last played"]];
-}
-
-@end
-
+#import "Game.h"
 
 @implementation GameListViewController
 
 // MARK: static
-static NSString* ssStoreGames         = @"five hundred games";
-static NSString* ssStoreRounds        = @"rounds";
-static NSString* ssStoreNameTeamOne   = @"team one name";
-static NSString* ssStoreNameTeamTwo   = @"team two name";
-static NSString* ssStoreScoreTeamOne  = @"team one score";
-static NSString* ssStoreScoreTeamTwo  = @"team two score";
-static NSString* ssStoreWinningSlot   = @"winning slot";
-static NSString* ssStoreLastPlayed    = @"last played";
-
 static NSString* ssTitleInProgress    = @"In Progress";
 static NSString* ssTitleCompleted     = @"Complete";
 
 // MARK: synthesize
-@synthesize cellWrapper;
-@synthesize gameListTableView;
-@synthesize editButton;
-
-@synthesize gamesInProgressKeys;
-@synthesize gamesCompletedKeys;
-@synthesize gameList;
-@synthesize selectedKey;
+@synthesize cellWrapper,
+            gameListTableView,
+            navItem,
+            editButton,
+            addButton,
+            setUpController,
+            gameController,
+            managedObjectContext,
+            gamesInProgress,
+            gamesComplete;
 
 
 - (void)dealloc {
   [cellWrapper release];
   [gameListTableView release];
+  [navItem release];
   [editButton release];
+  [addButton release];
+  [setUpController release];
+  [gameController release];
   
-  [gamesInProgressKeys release];
-  [gamesCompletedKeys release];
-  [gameList release];
-  [selectedKey release];
+  [managedObjectContext release];
+  [gamesInProgress release];
+  [gamesComplete release];
   
   [super dealloc];
 }
@@ -61,72 +40,47 @@ static NSString* ssTitleCompleted     = @"Complete";
   [self setEditing:!self.editing animated:YES];
 }
 
-- (void) saveGame:(NSDictionary*)game forKey:(NSString*)key {
-  self.selectedKey = key;
-
-  if (
-      [[game objectForKey:ssStoreRounds] count]       == 0 && 
-      [[game objectForKey:ssStoreNameTeamOne] length] == 0 && 
-      [[game objectForKey:ssStoreNameTeamTwo] length] == 0
-      ) {
-    [self.gameList removeObjectForKey:key];
-  }
-  else {
-    [self.gameList setObject:game forKey:key];
-  }
-
-  [self saveList];
+- (IBAction) newGame:(id)sender {
+  Game* g = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
+  [self.setUpController initWithGame:g];
+  [self.navigationController pushViewController:self.setUpController animated:YES];
 }
 
-- (void) saveList {
-  NSUserDefaults* store = [NSUserDefaults standardUserDefaults];
+- (void) loadGames {
+  NSPredicate* inProgress = [NSPredicate predicateWithFormat:@"winningTeam == nil"];
+  NSPredicate* complete = [NSPredicate predicateWithFormat:@"winningTeam != nil"];
   
-  [store setObject:self.gameList forKey:ssStoreGames];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:managedObjectContext];
   
-  [self setKeys];
-  [self.gameListTableView reloadData];  
+  NSFetchRequest *request = [[NSFetchRequest alloc] init];
+  [request setEntity:entity];
+  [request setIncludesSubentities:YES];
+  
+  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastPlayed" ascending:NO];
+  NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+  [request setSortDescriptors:sortDescriptors];
+  [sortDescriptor release];
+  
+  NSError *error;
+  NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    
+  [self setGamesInProgress:[NSMutableArray arrayWithArray:[mutableFetchResults filteredArrayUsingPredicate:inProgress]]];
+  [self setGamesComplete:[NSMutableArray arrayWithArray:[mutableFetchResults filteredArrayUsingPredicate:complete]]];
+
+  [mutableFetchResults release];
+  [request release];
+  
+  [self.gameListTableView reloadData];
 }
 
-- (void) setKeys {
-  NSMutableArray* inProgress = [[[NSMutableArray alloc] init] autorelease];
-  NSMutableArray* completed = [[[NSMutableArray alloc] init] autorelease];
-  NSDictionary* game = nil;
-  
-  for (NSString* key in [self.gameList keysSortedByValueUsingSelector:@selector(compareGameByLastPlayed:)]) {
-    game = [self.gameList objectForKey:key];
-    if ([game objectForKey:ssStoreWinningSlot] == nil) {
-      [inProgress addObject:key];
-    }
-    else {
-      [completed addObject:key];
-    }
-  }
-  
-  self.gamesInProgressKeys = inProgress;
-  self.gamesCompletedKeys = completed;
-}
-
-- (NSString*) keyForIndexPath:(NSIndexPath*)index {
-  return [[self valueForSection:index.section valueInProgress:self.gamesInProgressKeys valueCompleted:self.gamesCompletedKeys] objectAtIndex:index.row];
-}
-
-- (NSIndexPath*) indexPathForKey:(NSString*)key {
-  NSIndexPath* index = nil;
-  
-  if ([self.gamesInProgressKeys indexOfObject:key] != NSNotFound) {
-    index = [NSIndexPath indexPathForRow:[self.gamesInProgressKeys indexOfObject:key] inSection:[[self valueForSection:0 valueInProgress:[NSNumber numberWithInt:0] valueCompleted:[NSNumber numberWithInt:1]] intValue]];
-  }
-  else if ([self.gamesCompletedKeys indexOfObject:key] != NSNotFound) {
-    index = [NSIndexPath indexPathForRow:[self.gamesCompletedKeys indexOfObject:key] inSection:[[self valueForSection:1 valueInProgress:[NSNumber numberWithInt:0] valueCompleted:[NSNumber numberWithInt:1]] intValue]];    
-  }
-  
-  return index;
+- (Game*) gameForIndexPath:(NSIndexPath*)index {
+  return [[self valueForSection:index.section valueInProgress:self.gamesInProgress valueCompleted:self.gamesComplete] objectAtIndex:index.row];
 }
 
 - (id) valueForSection:(NSInteger)section valueInProgress:(id)valueInProgress valueCompleted:(id)valueCompleted {
   id val = nil;
   
-  if ([self.gamesInProgressKeys count] == 0 && [self.gamesCompletedKeys count] > 0) {
+  if ([self.gamesInProgress count] == 0 && [self.gamesComplete count] > 0) {
     val = valueCompleted;
   }
   else {
@@ -140,34 +94,25 @@ static NSString* ssTitleCompleted     = @"Complete";
   
   return val;
 }
-    
+
 // MARK: View
 - (void) viewDidLoad {
   [super viewDidLoad];
   
-  NSUserDefaults* store = [NSUserDefaults standardUserDefaults];
-  self.gameList = [NSMutableDictionary dictionaryWithDictionary:[store dictionaryForKey:ssStoreGames]];
-
-  [self setKeys];
+  self.title = @"Game List";
+  
+  [self.navigationItem setLeftBarButtonItem:self.editButton animated:NO];
+  [self.navigationItem setRightBarButtonItem:self.addButton animated:NO];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  
-  [self.gameListTableView reloadData];
-  if (self.selectedKey != nil) {
-    [self.gameListTableView selectRowAtIndexPath:[self indexPathForKey:selectedKey] animated:NO scrollPosition:UITableViewScrollPositionNone];
-  }
+
+  [self loadGames];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
-  
-  if (self.selectedKey != nil) {
-    [self.gameListTableView deselectRowAtIndexPath:[self indexPathForKey:selectedKey] animated:YES];
-    
-     self.selectedKey = nil;
-  }
 }
 
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated {
@@ -187,10 +132,10 @@ static NSString* ssTitleCompleted     = @"Complete";
 - (NSInteger) numberOfSectionsInTableView:(UITableView*)tableView {	
   int sections = 0;
   
-  if ([self.gamesInProgressKeys count] > 0) {
+  if ([self.gamesInProgress count] > 0) {
     sections++;
   }
-  if ([self.gamesCompletedKeys count] > 0) {
+  if ([self.gamesComplete count] > 0) {
     sections++;
   }
   
@@ -202,7 +147,7 @@ static NSString* ssTitleCompleted     = @"Complete";
 }
 
 - (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-  return [[self valueForSection:section valueInProgress:[NSNumber numberWithInteger:[self.gamesInProgressKeys count]] valueCompleted:[NSNumber numberWithInteger:[self.gamesCompletedKeys count]]] integerValue];
+  return [[self valueForSection:section valueInProgress:[NSNumber numberWithInteger:[self.gamesInProgress count]] valueCompleted:[NSNumber numberWithInteger:[self.gamesComplete count]]] integerValue];
 }
 
 - (UITableViewCell*) tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
@@ -215,30 +160,29 @@ static NSString* ssTitleCompleted     = @"Complete";
     cellGame = (CellGame*)self.cellWrapper.cell;
   }
 
-  NSDictionary* game = [self.gameList valueForKey:[self keyForIndexPath:indexPath]];
+  Game* g = [self gameForIndexPath:indexPath];
   
-  cellGame.nameTeamOne.text = [game valueForKey:ssStoreNameTeamOne];
-  cellGame.nameTeamTwo.text = [game valueForKey:ssStoreNameTeamTwo];
-  cellGame.pointsTeamOne.text = [[game valueForKey:ssStoreScoreTeamOne] stringValue];
-  cellGame.pointsTeamTwo.text = [[game valueForKey:ssStoreScoreTeamTwo] stringValue];
+  cellGame.nameTeamOne.text = [g nameForPosition:0];
+  cellGame.nameTeamTwo.text = [g nameForPosition:1];
+  cellGame.pointsTeamOne.text = [g scoreForPosition:0];
+  cellGame.pointsTeamTwo.text = [g scoreForPosition:1];
   
   // show icon for winning team
-  NSNumber* winningSlot = [game valueForKey:ssStoreWinningSlot];
-  if (winningSlot == nil) {
+  if (!g.isComplete) {
     cellGame.symbolResultTeamOne.hidden = YES;
     cellGame.symbolResultTeamTwo.hidden = YES;
   }
-  else if (0 == [winningSlot intValue]) {
+  else if ([g isVictorInPosition:0]) {
     cellGame.symbolResultTeamOne.hidden = NO;
   }
-  else if (1 == [winningSlot intValue]) {
+  else if ([g isVictorInPosition:1]) {
     cellGame.symbolResultTeamTwo.hidden = NO;
   }
   
   NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
   [formatter setDateStyle:NSDateFormatterMediumStyle];
   
-  cellGame.dateLastPlayed.text = [formatter stringFromDate:[game valueForKey:ssStoreLastPlayed]];
+  cellGame.dateLastPlayed.text = [formatter stringFromDate:g.lastPlayed];
 
   [formatter release];
   
@@ -247,12 +191,8 @@ static NSString* ssTitleCompleted     = @"Complete";
 
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
   [self setEditing:NO animated:NO];
-  
-  self.selectedKey = [self keyForIndexPath:indexPath];
-  
-  ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
-  
-  [app viewGame:[self.gameList objectForKey:self.selectedKey] WithKey:self.selectedKey AndIsNewGame:NO];
+  [self.gameController initWithGame:[self gameForIndexPath:indexPath]];
+  [self.navigationController pushViewController:self.gameController animated:YES];
 }
 
 - (BOOL)tableView:(UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath*)indexPath {
@@ -265,11 +205,9 @@ static NSString* ssTitleCompleted     = @"Complete";
 
 - (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-    [self.gameList removeObjectForKey:[self keyForIndexPath:indexPath]];
-
-    [self saveList];
+    [managedObjectContext deleteObject:[self gameForIndexPath:indexPath]];
+      // TODO: save context
   }
 }
-
 
 @end

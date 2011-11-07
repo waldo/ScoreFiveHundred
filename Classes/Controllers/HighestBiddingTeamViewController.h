@@ -1,32 +1,29 @@
-//
-//  HighestBiddingTeamViewController.h
-//  ScoreFiveHundred
-//
-//  Created by Ben Walsham on 2011-10-19.
-//  Copyright 2011 MeltingWaldo. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
-@class ScoreFiveHundredAppDelegate;
+#import "Game.h"
+#import "Round.h"
+#import "BiddingViewController.h"
 
 @interface HighestBiddingTeamViewController : UIViewController {
+  IBOutlet BiddingViewController* biddingController;
   IBOutlet UITableView* teamSelectionTableView;
   IBOutlet UILabel* nameTeamOne;
   IBOutlet UILabel* nameTeamTwo;
   IBOutlet UILabel* scoreTeamOne;
-  IBOutlet UILabel* scoreTeamTwo;  
-  
-  NSArray* teams;
+  IBOutlet UILabel* scoreTeamTwo;
+
+  Game* game;
 }
 
+@property (nonatomic, retain) IBOutlet BiddingViewController* biddingController;
 @property (nonatomic, retain) IBOutlet UITableView* teamSelectionTableView;
 @property (nonatomic, retain) UILabel* nameTeamOne;
 @property (nonatomic, retain) UILabel* nameTeamTwo;
 @property (nonatomic, retain) UILabel* scoreTeamOne;
 @property (nonatomic, retain) UILabel* scoreTeamTwo;
 
-@property (nonatomic, retain) NSArray* teams;
+@property (nonatomic, retain) Game* game;
 
-- (NSString*) team;
+- (void) initWithGame:(Game*)g;
+- (NSString*) selectedTeam;
 
 @end

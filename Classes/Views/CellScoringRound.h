@@ -1,39 +1,28 @@
-//
-//  CellScoringRound.h
-//  ScoreFiveHundred
-//
-//  Created by Ben Walsham on 23/12/2009.
-//  Copyright 2009 MeltingWaldo. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import "BidType.h"
-
+#import "Round.h"
+#import "RoundScore.h"
 
 @interface CellScoringRound : UITableViewCell {
-  UILabel* bidAttemptedTeamOne;
-  UILabel* bidAttemptedTeamTwo;
-  UILabel* pointsTeamOne;
-  UILabel* pointsTeamTwo;
-  UILabel* symbolBidResultTeamOne;
-  UILabel* symbolBidResultTeamTwo;
-  UILabel* scoreSummaryTeamOne;
-  UILabel* scoreSummaryTeamTwo;
+  NSArray* bidAttempted;
+  NSArray* points;
+  NSArray* bidSucceeded;
+  NSArray* bidFailed;
+  NSArray* tricksWon;
+
+  Round* round;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel* bidAttemptedTeamOne;
-@property (nonatomic, retain) IBOutlet UILabel* bidAttemptedTeamTwo;
-@property (nonatomic, retain) IBOutlet UILabel* pointsTeamOne;
-@property (nonatomic, retain) IBOutlet UILabel* pointsTeamTwo;
-@property (nonatomic, retain) IBOutlet UILabel* symbolBidResultTeamOne;
-@property (nonatomic, retain) IBOutlet UILabel* symbolBidResultTeamTwo;
-@property (nonatomic, retain) IBOutlet UILabel* scoreSummaryTeamOne;
-@property (nonatomic, retain) IBOutlet UILabel* scoreSummaryTeamTwo;
+@property (nonatomic, retain) IBOutletCollection(UILabel) NSArray* bidAttempted;
+@property (nonatomic, retain) IBOutletCollection(UILabel) NSArray* points;
+@property (nonatomic, retain) IBOutletCollection(UILabel) NSArray* bidSucceeded;
+@property (nonatomic, retain) IBOutletCollection(UILabel) NSArray* bidFailed;
+@property (nonatomic, retain) IBOutletCollection(UILabel) NSArray* tricksWon;
 
-- (void) setStyleForTeamOneBidAttempted:(NSString*)teamOneBidAttempted AndTeamOneBidAchieved:(BOOL)teamOneBidAchieved WithTeamTwoBidAttempted:(NSString*)teamTwoBidAttempted AndTeamTwoBidAchieved:(BOOL)teamTwoBidAchieved;
+@property (nonatomic, retain) Round* round;
 
-- (void) descriptionForTeamSlot:(NSNumber*)teamSlot FromTricksWon:(NSNumber*)tricksWon AndPoints:(NSNumber*)points;
-
+- (void) setStyleForRound:(Round*)r;
+- (void) setStyleForPosition:(int)pos;
 - (NSString*) prettyStringForHand:(NSString*)hand;
 
 @end

@@ -1,19 +1,5 @@
-//
-//  ScoreFiveHundredAppDelegate.h
-//  ScoreFiveHundred
-//
-//  Created by Ben Walsham on 26/11/2009.
-//  Copyright MeltingWaldo 2009. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import "GameListViewController.h"
-#import "GameViewController.h"
-#import "HighestBiddingTeamViewController.h"
-#import "BiddingViewController.h"
-#import "TricksWonViewController.h"
-#import "CellWrapper.h"
-#import "CellGame.h"
 
 @interface ScoreFiveHundredAppDelegate : NSObject <UIApplicationDelegate> {
   UIWindow* window;
@@ -21,10 +7,6 @@
   IBOutlet UINavigationController* navigationController;
   
   IBOutlet GameListViewController* gameListController;
-  IBOutlet GameViewController* gameController;
-  IBOutlet HighestBiddingTeamViewController* highestBiddingTeamController;
-  IBOutlet BiddingViewController* biddingController;
-  IBOutlet TricksWonViewController* tricksWonController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow* window;
@@ -32,21 +14,12 @@
 @property (nonatomic, retain) IBOutlet UINavigationController* navigationController;
 
 @property (nonatomic, retain) IBOutlet GameListViewController* gameListController;
-@property (nonatomic, retain) IBOutlet GameViewController* gameController;
-@property (nonatomic, retain) IBOutlet HighestBiddingTeamViewController* highestBiddingTeamController;
-@property (nonatomic, retain) IBOutlet BiddingViewController* biddingController;
-@property (nonatomic, retain) IBOutlet TricksWonViewController* tricksWonController;
 
-+ (NSString*) uniqueId;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-- (IBAction) newGame;
-
-- (void) viewGame:(NSDictionary*)gameToOpen WithKey:(NSString*)key AndIsNewGame:(BOOL)newGame;
-- (void) saveGame:(NSDictionary*)game forKey:(NSString*)key;
-- (void) rematch:(NSDictionary*)originalGame forKey:(NSString*)originalGameKey;
-- (void) addRound:(NSArray*)teams;
-- (void) bidForTeamName:(NSString*)teamName;
-- (void) bidSelected:(NSString*)hand forTeamName:(NSString*)teamName;
-- (void) saveScoreWithTricksWon:(NSInteger)tricksWon;
+- (NSURL *)applicationDocumentsDirectory;
+- (void) saveContext;
 
 @end

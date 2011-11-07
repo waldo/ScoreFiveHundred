@@ -1,11 +1,3 @@
-//
-//  HighestBiddingTeamViewController.m
-//  ScoreFiveHundred
-//
-//  Created by Ben Walsham on 2011-10-19.
-//  Copyright 2011 MeltingWaldo. All rights reserved.
-//
-
 #import "HighestBiddingTeamViewController.h"
 #import "ScoreFiveHundredAppDelegate.h"
 
@@ -13,31 +5,48 @@
 @implementation HighestBiddingTeamViewController
 
 // MARK: synthesize
+@synthesize biddingController;
 @synthesize teamSelectionTableView;
 @synthesize nameTeamOne;
 @synthesize nameTeamTwo;
 @synthesize scoreTeamOne;
 @synthesize scoreTeamTwo;
 
-@synthesize teams;
+@synthesize game;
 
 - (void)dealloc {
+  [biddingController release];
   [teamSelectionTableView release];
   [nameTeamOne release];
   [nameTeamTwo release];
   [scoreTeamOne release];
   [scoreTeamTwo release];  
 
-  [teams release];
+  [game release];
   
   [super dealloc];
 }
 
-- (NSString*) team {
-  return [NSString stringWithString:[self.teams objectAtIndex:[self.teamSelectionTableView indexPathForSelectedRow].row]];
+- (void) initWithGame:(Game*)g {
+  self.game = g;
 }
 
-// MARK: view loading
+- (NSString*) selectedTeam {
+  return [self.game.teams objectAtIndex:self.teamSelectionTableView.indexPathForSelectedRow.row];
+}
+
+// MARK: View
+- (void) viewDidLoad {
+  [super viewDidLoad];
+  
+  self.title = @"Team that bid highest";
+
+  self.nameTeamOne.text = [self.game nameForPosition:0];
+  self.nameTeamTwo.text = [self.game nameForPosition:1];
+  self.scoreTeamOne.text = [NSString stringWithFormat:@"%i pts", [self.game scoreForPosition:0]];
+  self.scoreTeamTwo.text = [NSString stringWithFormat:@"%i pts", [self.game scoreForPosition:1]];
+}
+
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
@@ -46,7 +55,7 @@
 
 // MARK: tableview delegate
 - (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.teams count];
+    return [self.game.teams count];
 }
 
 - (UITableViewCell*) tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
@@ -55,16 +64,15 @@
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TeamIdentifier] autorelease];
   }
-
-  cell.textLabel.text = [teams objectAtIndex:indexPath.row];
+  
+  cell.textLabel.text = [self.game nameForPosition:indexPath.row];
 
   return cell;
 }
 
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
-
-  [app bidForTeamName:[self team]];
+  [self.biddingController initWithGame:self.game andTeam:[self.game.teams objectAtIndex:indexPath.row]];
+  [self.navigationController pushViewController:self.biddingController animated:YES];
 }
 
 @end

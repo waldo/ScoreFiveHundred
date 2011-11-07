@@ -1,45 +1,45 @@
-//
-//  GameListViewController.h
-//  ScoreFiveHundred
-//
-//  Created by Ben Walsham on 02/01/2010.
-//  Copyright 2010 MeltingWaldo. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
-@class ScoreFiveHundredAppDelegate;
+#import <CoreData/CoreData.h>
+#import "Game.h"
 #import "CellWrapper.h"
 #import "CellGame.h"
+#import "GameSetUpViewController.h"
+#import "GameViewController.h"
 
 
 @interface GameListViewController : UIViewController {
   IBOutlet CellWrapper* cellWrapper;
   IBOutlet UITableView* gameListTableView;
+  IBOutlet UINavigationItem* navItem;
   IBOutlet UIBarButtonItem* editButton;
+  IBOutlet UIBarButtonItem* addButton;
+  IBOutlet GameSetUpViewController* setUpController;
+  IBOutlet GameViewController* gameController;
 
-  NSMutableArray* gamesInProgressKeys;
-  NSMutableArray* gamesCompletedKeys;
-  NSMutableDictionary* gameList;
-  NSString* selectedKey;
+  NSManagedObjectContext* managedObjectContext;
+  NSMutableArray* gamesInProgress;
+  NSMutableArray* gamesComplete;
 }
 
 
 @property (nonatomic, retain) IBOutlet CellWrapper* cellWrapper;
 @property (nonatomic, retain) IBOutlet UITableView* gameListTableView;
+@property (nonatomic, retain) IBOutlet UINavigationItem* navItem;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem* editButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem* addButton;
+@property (nonatomic, retain) IBOutlet GameSetUpViewController* setUpController;
+@property (nonatomic, retain) IBOutlet GameViewController* gameController;
 
-@property (nonatomic, retain) NSMutableArray* gamesInProgressKeys;
-@property (nonatomic, retain) NSMutableArray* gamesCompletedKeys;
-@property (nonatomic, retain) NSMutableDictionary* gameList;
-@property (nonatomic, retain) NSString* selectedKey;
+
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSMutableArray* gamesInProgress;
+@property (nonatomic, retain) NSMutableArray* gamesComplete;
 
 - (IBAction) edit:(id)sender;
+- (IBAction) newGame:(id)sender;
 
-- (void) saveGame:(NSDictionary*)game forKey:(NSString*)key;
-- (void) saveList;
-- (void) setKeys;
+- (void) loadGames;
 - (id) valueForSection:(NSInteger)section valueInProgress:(id)valueInProgress valueCompleted:(id)valueCompleted;
-- (NSString*) keyForIndexPath:(NSIndexPath*)index;
-- (NSIndexPath*) indexPathForKey:(NSString*)key;
+- (Game*) gameForIndexPath:(NSIndexPath*)index;
 
 @end

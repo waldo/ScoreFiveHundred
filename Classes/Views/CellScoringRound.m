@@ -1,39 +1,23 @@
-//
-//  CellScoringRound.m
-//  ScoreFiveHundred
-//
-//  Created by Ben Walsham on 23/12/2009.
-//  Copyright 2009 MeltingWaldo. All rights reserved.
-//
-
 #import "CellScoringRound.h"
-
 
 @implementation CellScoringRound
 
-static NSString* ssSymbolForBidWon  = @"✔";
-static NSString* ssSymbolForBidLost = @"✘";
-static int siSlotTeamOne            = 0;
-static int siSlotTeamTwo            = 1;
+@synthesize bidAttempted;
+@synthesize points;
+@synthesize bidSucceeded;
+@synthesize bidFailed;
+@synthesize tricksWon;
 
-@synthesize bidAttemptedTeamOne;
-@synthesize bidAttemptedTeamTwo;
-@synthesize pointsTeamOne;
-@synthesize pointsTeamTwo;
-@synthesize symbolBidResultTeamOne;
-@synthesize symbolBidResultTeamTwo;
-@synthesize scoreSummaryTeamOne;
-@synthesize scoreSummaryTeamTwo;
+@synthesize round;
 
 - (void) dealloc {
-  [bidAttemptedTeamOne release];
-  [bidAttemptedTeamTwo release];
-  [pointsTeamOne release];
-  [pointsTeamTwo release];
-  [symbolBidResultTeamOne release];
-  [symbolBidResultTeamTwo release];
-  [scoreSummaryTeamOne release];
-  [scoreSummaryTeamTwo release];
+  [bidAttempted release];
+  [points release];
+  [bidSucceeded release];
+  [bidFailed release];
+  [tricksWon release];
+
+  [round release];
 
   [super dealloc];
 }
@@ -44,53 +28,19 @@ static int siSlotTeamTwo            = 1;
     return self;
 }
 
-- (void) setStyleForTeamOneBidAttempted:(NSString*)teamOneBidAttempted AndTeamOneBidAchieved:(BOOL)teamOneBidAchieved WithTeamTwoBidAttempted:(NSString*)teamTwoBidAttempted AndTeamTwoBidAchieved:(BOOL)teamTwoBidAchieved {
-  
-  BOOL teamOneWasBidder = teamOneBidAttempted != nil;
-  BOOL teamTwoWasBidder = teamTwoBidAttempted != nil;
-
-  if (teamOneWasBidder) {
-    // hide team two's bid labels
-    self.bidAttemptedTeamTwo.hidden = YES;
-    self.symbolBidResultTeamTwo.hidden = YES;
-
-    self.bidAttemptedTeamOne.text = [self prettyStringForHand:teamOneBidAttempted];
-    if (teamOneBidAchieved) {
-      self.symbolBidResultTeamOne.text = ssSymbolForBidWon;
-      self.symbolBidResultTeamOne.textColor = [UIColor greenColor];
-    }
-    else {
-      self.symbolBidResultTeamOne.text = ssSymbolForBidLost;
-      self.symbolBidResultTeamOne.textColor = [UIColor redColor];
-    }
-  }
-  else if (teamTwoWasBidder) {
-    // hide team one's bid labels
-    self.bidAttemptedTeamOne.hidden = YES;
-    self.symbolBidResultTeamOne.hidden = YES;
-    
-    self.bidAttemptedTeamTwo.text = [self prettyStringForHand:teamTwoBidAttempted];
-    if (teamTwoBidAchieved) {
-      self.symbolBidResultTeamTwo.text = ssSymbolForBidWon;
-      self.symbolBidResultTeamTwo.textColor = [UIColor greenColor];
-    }
-    else {
-      self.symbolBidResultTeamTwo.text = ssSymbolForBidLost;
-      self.symbolBidResultTeamTwo.textColor = [UIColor redColor];
-    }
-  }  
+- (void) setStyleForRound:(Round*)r {
+  self.round = r;
+  [self setStyleForPosition:0];
+  [self setStyleForPosition:1];
 }
 
-- (void) descriptionForTeamSlot:(NSNumber*)teamSlot FromTricksWon:(NSNumber*)tricksWon AndPoints:(NSNumber*)points {
-  NSString* pointsPrefix = ([points intValue] > 0 ? @"+" : @"");
-  NSString* summary = [NSString stringWithFormat:@"Won %@, %@%@ pts", tricksWon, pointsPrefix, points];
-  
-  if ([teamSlot intValue] == siSlotTeamOne) {
-    self.scoreSummaryTeamOne.text = summary;
-  }
-  else if ([teamSlot intValue] == siSlotTeamTwo) {
-    self.scoreSummaryTeamTwo.text = summary;
-  }
+- (void) setStyleForPosition:(int)pos {
+  [[self.bidAttempted objectAtIndex:pos] setText:[self prettyStringForHand:[self.round bidForPosition:pos]]];
+  [[self.bidAttempted objectAtIndex:pos] setHidden:([self.round bidForPosition:pos] == nil)];
+  [[self.bidSucceeded objectAtIndex:pos] setHidden:([self.round bidAchievedForPosition:pos] == nil || [[self.round bidAchievedForPosition:pos] boolValue] == NO)];
+  [[self.bidFailed objectAtIndex:pos] setHidden:([self.round bidAchievedForPosition:pos] == nil || [[self.round bidAchievedForPosition:pos] boolValue] == YES)];
+  [[self.tricksWon objectAtIndex:pos] setText:[@"Won " stringByAppendingString:[self.round tricksWonForPosition:pos]]];
+  [[self.points objectAtIndex:pos] setText:[self.round scoreForPosition:pos]];
 }
 
 - (NSString*) prettyStringForHand:(NSString*)hand {

@@ -1,10 +1,3 @@
-//
-//  CellGame.h
-//
-//  Created by Ben Walsham on 29/12/2009.
-//  Copyright 2009 MeltingWaldo. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
 @interface CellGame : UITableViewCell {
