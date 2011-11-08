@@ -47,8 +47,8 @@
 
   self.nameTeamOne.text = [self.game nameForPosition:0];
   self.nameTeamTwo.text = [self.game nameForPosition:1];
-  self.scoreTeamOne.text = [NSString stringWithFormat:@"%@ pts", [self.game scoreForPosition:0]];
-  self.scoreTeamTwo.text = [NSString stringWithFormat:@"%@ pts", [self.game scoreForPosition:1]];
+  self.scoreTeamOne.text = [NSString stringWithFormat:@"%d pts", [[self.game scoreForPosition:0] intValue]];
+  self.scoreTeamTwo.text = [NSString stringWithFormat:@"%d pts", [[self.game scoreForPosition:1] intValue]];
   [self.teamSelectionTableView reloadData];
 }
 
