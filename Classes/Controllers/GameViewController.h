@@ -12,6 +12,7 @@
   IBOutlet UITableView* roundsTableView;
   IBOutlet CellWrapper* cellWrapper;
   IBOutlet UIBarButtonItem* addButton;
+  IBOutlet UIBarButtonItem* rematchButton;
   IBOutlet UITextField* teamOneName;
   IBOutlet UITextField* teamTwoName;
   IBOutlet UIButton* bidButton;
@@ -25,6 +26,7 @@
 @property (nonatomic, retain) IBOutlet UITableView* roundsTableView;
 @property (nonatomic, retain) IBOutlet CellWrapper* cellWrapper;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem* addButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem* rematchButton;
 @property (nonatomic, retain) IBOutlet UITextField* teamOneName;
 @property (nonatomic, retain) IBOutlet UITextField* teamTwoName;
 @property (nonatomic, retain) IBOutlet UIButton* bidButton;

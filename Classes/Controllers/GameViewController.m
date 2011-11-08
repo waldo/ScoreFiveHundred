@@ -19,6 +19,7 @@
 @synthesize roundsTableView;
 @synthesize cellWrapper;
 @synthesize addButton;
+@synthesize rematchButton;
 @synthesize teamOneName;
 @synthesize teamTwoName;
 @synthesize bidButton;
@@ -32,6 +33,7 @@
   [roundsTableView release];
   [cellWrapper release];
   [addButton release];
+  [rematchButton release];
   [teamOneName release];
   [teamTwoName release];
   [bidButton release];
@@ -82,6 +84,8 @@
   self.bidButton.hidden         = NO;
   self.congratulations.hidden   = YES;
   NSString* team                = nil;
+
+  [self.navigationItem setRightBarButtonItem:self.addButton animated:NO];
   
   if ([self.game.isComplete boolValue]) {    
     team = [self.game.winningTeam name];
@@ -89,6 +93,7 @@
     [self.congratulations setTitle:[NSString stringWithFormat:@"%@ won! Rematch?", team] forState:UIControlStateNormal];
     self.bidButton.hidden       = YES;
     self.congratulations.hidden = NO;
+    [self.navigationItem setRightBarButtonItem:self.rematchButton animated:NO];
     if ([[NSDate date] timeIntervalSinceDate:self.game.lastPlayed] < 2) {
 //      // debug
 //      NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

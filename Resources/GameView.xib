@@ -45,6 +45,11 @@
 				<int key="IBUIStyle">1</int>
 				<int key="IBUISystemItemIdentifier">4</int>
 			</object>
+			<object class="IBUIBarButtonItem" id="533738179">
+				<string key="IBUITitle">Rematch</string>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<int key="IBUIStyle">1</int>
+			</object>
 			<object class="IBUICustomObject" id="178555089">
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
@@ -434,6 +439,14 @@ AAgACAAIAAEAAQABAAE</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">rematchButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="533738179"/>
+					</object>
+					<int key="connectionID">67</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="47856122"/>
 						<reference key="destination" ref="841351856"/>
@@ -498,6 +511,14 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<reference key="destination" ref="841351856"/>
 					</object>
 					<int key="connectionID">63</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">rematch:</string>
+						<reference key="source" ref="533738179"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">66</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -590,6 +611,11 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<reference key="object" ref="861912691"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">64</int>
+						<reference key="object" ref="533738179"/>
+						<reference key="parent" ref="0"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -613,6 +639,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<string>56.IBPluginDependency</string>
 					<string>58.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
+					<string>64.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -633,6 +660,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -647,7 +675,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">63</int>
+			<int key="maxID">67</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -791,6 +819,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<string>congratulations</string>
 							<string>dividerTop</string>
 							<string>highestBidderController</string>
+							<string>rematchButton</string>
 							<string>roundsTableView</string>
 							<string>teamOneName</string>
 							<string>teamTwoName</string>
@@ -803,6 +832,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<string>UIButton</string>
 							<string>UILabel</string>
 							<string>HighestBiddingTeamViewController</string>
+							<string>UIBarButtonItem</string>
 							<string>UITableView</string>
 							<string>UITextField</string>
 							<string>UITextField</string>
@@ -818,6 +848,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<string>congratulations</string>
 							<string>dividerTop</string>
 							<string>highestBidderController</string>
+							<string>rematchButton</string>
 							<string>roundsTableView</string>
 							<string>teamOneName</string>
 							<string>teamTwoName</string>
@@ -847,6 +878,10 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<object class="IBToOneOutletInfo">
 								<string key="name">highestBidderController</string>
 								<string key="candidateClassName">HighestBiddingTeamViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">rematchButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">roundsTableView</string>
