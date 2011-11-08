@@ -92,11 +92,6 @@ static int siMaximumTricks = 10;
                      @"Got one or more tricks",
                      nil
                      ];
-
-  self.nameTeamOne.text = [self.game nameForPosition:0];
-  self.nameTeamTwo.text = [self.game nameForPosition:1];
-  self.scoreTeamOne.text = [NSString stringWithFormat:@"%i pts", [self.game scoreForPosition:0]];
-  self.scoreTeamTwo.text = [NSString stringWithFormat:@"%i pts", [self.game scoreForPosition:1]];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -105,6 +100,10 @@ static int siMaximumTricks = 10;
   NSLog(@"self.bidVariation: %@", self.bidVariation);
   NSLog(@"[self tricksWonList: %@", [self tricksWonList]);
   
+  self.nameTeamOne.text = [self.game nameForPosition:0];
+  self.nameTeamTwo.text = [self.game nameForPosition:1];
+  self.scoreTeamOne.text = [NSString stringWithFormat:@"%@ pts", [self.game scoreForPosition:0]];
+  self.scoreTeamTwo.text = [NSString stringWithFormat:@"%@ pts", [self.game scoreForPosition:1]];
   [self.tricksWonTableView reloadData];
 }
 

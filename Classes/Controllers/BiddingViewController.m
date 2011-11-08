@@ -59,16 +59,15 @@
   [super viewDidLoad];
 
   self.bidTypeHands = [BidType orderedHands];
-
-  self.nameTeamOne.text = [self.game nameForPosition:0];
-  self.nameTeamTwo.text = [self.game nameForPosition:1];
-  self.scoreTeamOne.text = [NSString stringWithFormat:@"%i pts", [self.game scoreForPosition:0]];
-  self.scoreTeamTwo.text = [NSString stringWithFormat:@"%i pts", [self.game scoreForPosition:1]];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
+  self.nameTeamOne.text = [self.game nameForPosition:0];
+  self.nameTeamTwo.text = [self.game nameForPosition:1];
+  self.scoreTeamOne.text = [NSString stringWithFormat:@"%@ pts", [self.game scoreForPosition:0]];
+  self.scoreTeamTwo.text = [NSString stringWithFormat:@"%@ pts", [self.game scoreForPosition:1]];
   [self.bidSelectionTableView reloadData];
 }
 
