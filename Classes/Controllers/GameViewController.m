@@ -52,8 +52,13 @@
 }
 
 - (IBAction) rematch:(id)sender {
-  self.game = [self.game duplicate];
-  [self refreshView];
+  UINavigationController* navController = self.navigationController;
+  GameViewController* newGameView = [GameViewController alloc];
+  [newGameView initWithGame:[self.game duplicate]];
+  
+  [navController popViewControllerAnimated:NO];
+  [navController pushViewController:newGameView animated:YES];
+  [newGameView release];
 }
 
 - (void) initWithGame:(Game*)g {
@@ -117,7 +122,7 @@
   
   self.title = @"Game";
   
-  [self.navigationItem setRightBarButtonItem:self.addButton animated:YES];
+  [self.navigationItem setRightBarButtonItem:self.addButton animated:NO];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

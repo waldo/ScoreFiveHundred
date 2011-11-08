@@ -100,8 +100,14 @@
 }
 
 - (Game*) duplicate {
-// TODO: new game just re-use same team ids
-  return self;
+  Game* clone = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
+  
+  clone.teams = self.teams;
+  // TODO: copy settings (when they exist)
+  
+  [clone save];
+
+  return clone;
 }
 
 - (void) save {
