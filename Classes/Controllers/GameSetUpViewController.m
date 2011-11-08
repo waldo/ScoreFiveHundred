@@ -28,13 +28,17 @@ static int tagOffset = 1000;
   NSMutableOrderedSet* names = [[[NSMutableOrderedSet alloc] initWithCapacity:[self.teamNameTextFields count]] autorelease];
   for (UITextField* field in self.teamNameTextFields) {
     NSString* name = [NSString stringWithFormat:@"Team %d", field.tag + 1 - tagOffset];
-    if (field.text != nil) {
+    if (field.text != nil && ![@"" isEqualToString:field.text]) {
       name = field.text;
     }
 
     [names addObject:name];
   }
   
+  // associate the previously unassociated game model
+  ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
+  [app.managedObjectContext insertObject:self.game];
+
   [self.game setTeamsByNames:names];
 
   UINavigationController *navController = self.navigationController;

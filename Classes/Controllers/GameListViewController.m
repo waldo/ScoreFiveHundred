@@ -35,8 +35,10 @@ static NSString* ssTitleCompleted     = @"Complete";
 }
 
 - (IBAction) newGame:(id)sender {
-  Game* g = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
-  [self.setUpController initWithGame:g];
+  NSEntityDescription* entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
+  Game* unassociatedGame = (Game*)[[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+
+  [self.setUpController initWithGame:unassociatedGame];
   [self.navigationController pushViewController:self.setUpController animated:YES];
 }
 
