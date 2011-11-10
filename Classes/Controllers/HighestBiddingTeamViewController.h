@@ -5,6 +5,7 @@
 
 @interface HighestBiddingTeamViewController : UIViewController {
   IBOutlet BiddingViewController* biddingController;
+  IBOutlet TricksWonViewController* tricksWonController;
   IBOutlet UITableView* teamSelectionTableView;
   IBOutlet UILabel* nameTeamOne;
   IBOutlet UILabel* nameTeamTwo;
@@ -15,6 +16,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet BiddingViewController* biddingController;
+@property (nonatomic, retain) IBOutlet TricksWonViewController* tricksWonController;
 @property (nonatomic, retain) IBOutlet UITableView* teamSelectionTableView;
 @property (nonatomic, retain) UILabel* nameTeamOne;
 @property (nonatomic, retain) UILabel* nameTeamTwo;

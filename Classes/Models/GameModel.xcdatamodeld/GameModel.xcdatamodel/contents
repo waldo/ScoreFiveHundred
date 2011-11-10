@@ -12,7 +12,7 @@
         <attribute name="bid" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="ordinal" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="biddingTeam" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="roundBidder" inverseEntity="Team" syncable="YES"/>
+        <relationship name="biddingTeams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="roundBidder" inverseEntity="Team" syncable="YES"/>
         <relationship name="game" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="rounds" inverseEntity="Game" syncable="YES"/>
         <relationship name="scores" toMany="YES" minCount="1" deletionRule="Cascade" ordered="YES" destinationEntity="RoundScore" inverseName="round" inverseEntity="RoundScore" syncable="YES"/>
     </entity>
@@ -27,7 +27,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Game" inverseName="teams" inverseEntity="Game" syncable="YES"/>
         <relationship name="gameWinner" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="winningTeam" inverseEntity="Game" syncable="YES"/>
-        <relationship name="roundBidder" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Round" inverseName="biddingTeam" inverseEntity="Round" syncable="YES"/>
+        <relationship name="roundBidder" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Round" inverseName="biddingTeams" inverseEntity="Round" syncable="YES"/>
         <relationship name="roundScores" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RoundScore" inverseName="team" inverseEntity="RoundScore" syncable="YES"/>
     </entity>
     <elements>

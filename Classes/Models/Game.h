@@ -16,7 +16,7 @@
 - (NSString*) scoreForPosition:(int)pos;
 - (BOOL) isVictorInPosition:(int)pos;
 - (void) setTeamsByNames:(NSMutableOrderedSet*)names;
-- (void) buildRoundWithBiddingTeam:(Team*)t hand:(NSString*)h andTricksAndScoreDict:(NSOrderedSet*)tricksAndScore;
+- (void) buildRoundWithBiddingTeams:(NSOrderedSet*)biddingTeams hand:(NSString*)h andTricksAndScoreDict:(NSOrderedSet*)tricksAndScore;
 - (void) checkForGameOver;
 - (Game*) duplicate;
 - (void) save;

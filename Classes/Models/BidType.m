@@ -1,5 +1,12 @@
 #import "BidType.h"
 
+@interface BidType()
+
++ (NSNumber*) biddersPointsForHand:(NSString*)hand AndBiddersTricksWon:(NSNumber*)tricksWon;
++ (NSNumber*) nonBiddersPointsForHand:(NSString*)hand AndBiddersTricksWon:(NSNumber*)tricksWon;
+
+@end
+
 @implementation BidType
 
 static NSMutableDictionary* allTypes;
@@ -13,6 +20,7 @@ static NSString* ssPoints = @"points";
 static NSString* ssVariation = @"variation";
 static NSString* ssVariationRegular = @"regular";
 static NSString* ssVariationMisere = @"misére";
+static NSString* ssVariationNoBid = @"no bid";
 
 + (void) initialize {
   if (!allTypes) {
@@ -81,6 +89,17 @@ static NSString* ssVariationMisere = @"misére";
       ]
                 forKey:@"OM"
      ];    
+
+    [allTypes setValue:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      @"No Bid", ssSuit,
+      @"NB", ssSuitSymbol,
+      [NSNumber numberWithInt:0], ssPoints,
+      ssVariationNoBid, ssVariation,
+      nil
+      ]
+                forKey:@"NB"
+     ];    
     
     orderedHands = [[NSArray alloc] initWithObjects:
                    @"6S",
@@ -115,15 +134,15 @@ static NSString* ssVariationMisere = @"misére";
   }
 }
 
-+ (NSArray*)orderedHands {
++ (NSArray*) orderedHands {
   return orderedHands;
 }
 
-+ (NSDictionary*)allTypes {
++ (NSDictionary*) allTypes {
   return allTypes;
 }
 
-+ (NSString*)suitColourForHand:(NSString*)hand {
++ (NSString*) suitColourForHand:(NSString*)hand {
   NSDictionary* aBidType = [allTypes objectForKey:hand];
   NSString* suitColour = [NSString stringWithFormat:@"%@", [aBidType objectForKey:ssSuitColour]];
   
@@ -134,7 +153,7 @@ static NSString* ssVariationMisere = @"misére";
   NSDictionary* aBidType = [allTypes objectForKey:hand];
   NSString* tricksAndSymbol = [NSString stringWithFormat:@"%@%@", [aBidType objectForKey:ssTrick], [aBidType objectForKey:ssSuitSymbol]];
   
-  if ([BidType variation:hand] == ssVariationMisere) {
+  if (![[BidType variation:hand] isEqualToString:ssVariationRegular]) {
     tricksAndSymbol = hand;
   }
   
@@ -145,7 +164,7 @@ static NSString* ssVariationMisere = @"misére";
   NSDictionary* aBidType = [allTypes objectForKey:hand];
   NSString* desc = [NSString stringWithFormat:@"%@ %@", [aBidType objectForKey:ssTrick], [aBidType objectForKey:ssSuit]];
 
-  if ([BidType variation:hand] == ssVariationMisere) {
+  if (![[BidType variation:hand] isEqualToString:ssVariationRegular]) {
     desc = [NSString stringWithFormat:@"%@", [aBidType objectForKey:ssSuit]];
   }  
   
@@ -164,6 +183,14 @@ static NSString* ssVariationMisere = @"misére";
   NSString* pts = [NSString stringWithFormat:@"%@ pts", [aBidType objectForKey:ssPoints]];
   
   return pts;
+}
+
++ (NSNumber*)pointsForTeam:(Team*)t biddingTeams:(NSOrderedSet*)biddingTeams withHand:(NSString*)hand andTricksWon:(NSNumber*)tricksWon {
+  if ([biddingTeams containsObject:t]) {
+    return [BidType biddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
+  }
+
+  return [BidType nonBiddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
 }
 
 + (NSNumber*)biddersPointsForHand:(NSString*)hand AndBiddersTricksWon:(NSNumber*)tricksWon {
@@ -198,8 +225,8 @@ static NSString* ssVariationMisere = @"misére";
   
   // if regular bid and bidders won less than ten
   // => award 10 points x number of tricks (won by the non-bidders)
-  if ([variation isEqual:ssVariationRegular]) {
-    nonBiddersPoints = 10*  (10 - tricksWon.intValue);
+  if (![variation isEqual:ssVariationMisere]) {
+    nonBiddersPoints = 10 * tricksWon.intValue;
   }
   
   return [NSNumber numberWithInt:nonBiddersPoints];
@@ -229,6 +256,9 @@ static NSString* ssVariationMisere = @"misére";
   
   if ([@"CM" isEqual:hand] || [@"OM" isEqual:hand]) {
     variation = ssVariationMisere;
+  }
+  else if ([@"NB" isEqualToString:hand]) {
+    variation = ssVariationNoBid;
   }
   else {
     variation = ssVariationRegular;

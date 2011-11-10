@@ -107,7 +107,8 @@
 }
 
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  [self.tricksWonController initWithGame:self.game team:self.biddingTeam andBid:[self hand]];
+  NSOrderedSet* biddingTeams = [NSOrderedSet orderedSetWithObjects:self.biddingTeam, nil];
+  [self.tricksWonController initWithGame:self.game biddingTeams:biddingTeams currentTeam:self.biddingTeam andBid:[self hand]];
   [self.navigationController pushViewController:self.tricksWonController animated:YES];
 }
 

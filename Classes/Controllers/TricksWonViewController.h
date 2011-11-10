@@ -12,7 +12,8 @@
   IBOutlet UILabel* scoreTeamTwo;
 
   Game* game;
-  Team* biddingTeam;
+  Team* currentTeam;
+  NSOrderedSet* biddingTeams;
   NSString* hand;
   NSString* bidVariation;
   NSArray* regularList;
@@ -27,7 +28,8 @@
 @property (nonatomic, retain) UILabel* scoreTeamTwo;
 
 @property (nonatomic, retain) Game* game;
-@property (nonatomic, retain) Team* biddingTeam;
+@property (nonatomic, retain) Team* currentTeam;
+@property (nonatomic, retain) NSOrderedSet* biddingTeams;
 @property (nonatomic, retain) NSString* hand;
 @property (nonatomic, retain) NSString* bidVariation;
 @property (nonatomic, retain) NSArray* regularList;
@@ -35,6 +37,6 @@
 
 
 - (NSArray*) tricksWonList;
-- (void) initWithGame:(Game*)g team:(Team*)t andBid:(NSString*)hand;
+- (void) initWithGame:(Game*)g biddingTeams:(NSOrderedSet*)teams currentTeam:(Team *)t andBid:(NSString *)bid;
 
 @end

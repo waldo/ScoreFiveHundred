@@ -9,7 +9,7 @@
 @dynamic bid;
 @dynamic id;
 @dynamic ordinal;
-@dynamic biddingTeam;
+@dynamic biddingTeams;
 @dynamic game;
 @dynamic scores;
 
@@ -17,7 +17,7 @@
 - (NSString*) bidForPosition:(int)pos {
   NSString* theBid = nil;
 
-  if ([self.game nameForPosition:pos] == self.biddingTeam.name) {
+  if ([self.biddingTeams containsObject:[self.game.teams objectAtIndex:pos]]) {
     theBid = self.bid;
   }
 
@@ -64,6 +64,12 @@
   NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.scores];
   [tempSet addObject:value];
   self.scores = tempSet;
+}
+
+- (void)addBiddingTeamsObject:(Team *)value {
+  NSMutableSet* tempSet = [NSMutableSet setWithSet:self.biddingTeams];
+  [tempSet addObject:value];
+  self.biddingTeams = tempSet;
 }
 
 @end

@@ -51,7 +51,7 @@
   }
 }
 
-- (void) buildRoundWithBiddingTeam:(Team*)t hand:(NSString*)h andTricksAndScoreDict:(NSOrderedSet*)tricksAndScore {
+- (void) buildRoundWithBiddingTeams:(NSOrderedSet*)biddingTeams hand:(NSString*)h andTricksAndScoreDict:(NSOrderedSet*)tricksAndScore {
   Round* r = [NSEntityDescription insertNewObjectForEntityForName:@"Round" inManagedObjectContext:self.managedObjectContext];
   RoundScore* scoreTeamOne = [NSEntityDescription insertNewObjectForEntityForName:@"RoundScore" inManagedObjectContext:self.managedObjectContext];
   RoundScore* scoreTeamTwo = [NSEntityDescription insertNewObjectForEntityForName:@"RoundScore" inManagedObjectContext:self.managedObjectContext];
@@ -60,7 +60,7 @@
   int thisRoundScoreTeamOne = [[[tricksAndScore objectAtIndex:0] objectForKey:@"score"] intValue];
   int thisRoundScoreTeamTwo = [[[tricksAndScore objectAtIndex:1] objectForKey:@"score"] intValue];
 
-  r.biddingTeam = t;
+  [r addBiddingTeams:[biddingTeams set]];
   r.bid = h;
   
   scoreTeamOne.team = [[self.teams objectAtIndex:0] retain];

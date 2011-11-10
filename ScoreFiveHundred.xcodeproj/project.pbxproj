@@ -13,8 +13,14 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		5B777F4314684CDE00955729 /* RoundScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B777F4214684CDE00955729 /* RoundScore.m */; };
+		5B7C7E00146C3ED200DB4785 /* GameModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */; };
 		5B87EE2C144F0D2200C96F95 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B87EE2B144F0D2200C96F95 /* MainWindow-iPad.xib */; };
 		5B904C5810D28A2B003F5324 /* BidTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B904C5710D28A2B003F5324 /* BidTypeTest.m */; };
+		5B924BBF146C38A700CCF760 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA29366145F318500D5FAD6 /* CoreData.framework */; };
+		5B924BC0146C38E700CCF760 /* RoundScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B777F4214684CDE00955729 /* RoundScore.m */; };
+		5B924BC1146C38E700CCF760 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F374145EDB8900C7E762 /* Game.m */; };
+		5B924BC2146C38E700CCF760 /* Team.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F377145EDB8A00C7E762 /* Team.m */; };
+		5B924BC3146C38E700CCF760 /* Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F37D145EE22D00C7E762 /* Round.m */; };
 		5BA29367145F318500D5FAD6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA29366145F318500D5FAD6 /* CoreData.framework */; };
 		5BAA5CD414569465007274F7 /* BiddingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CC914569465007274F7 /* BiddingViewController.m */; };
 		5BAA5CD514569465007274F7 /* GameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CCB14569465007274F7 /* GameListViewController.m */; };
@@ -134,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B924BBF146C38A700CCF760 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +433,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B7C7E00146C3ED200DB4785 /* GameModel.xcdatamodeld in Sources */,
+				5B924BC0146C38E700CCF760 /* RoundScore.m in Sources */,
+				5B924BC1146C38E700CCF760 /* Game.m in Sources */,
+				5B924BC2146C38E700CCF760 /* Team.m in Sources */,
+				5B924BC3146C38E700CCF760 /* Round.m in Sources */,
 				5BB92ABE1456A3E1008C70CB /* BidType.m in Sources */,
 				5B904C5810D28A2B003F5324 /* BidTypeTest.m in Sources */,
 			);
