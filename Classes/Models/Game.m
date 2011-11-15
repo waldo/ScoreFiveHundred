@@ -1,6 +1,7 @@
 #import "Game.h"
 #import "Round.h"
 #import "RoundScore.h"
+#import "Setting.h"
 #import "Team.h"
 
 @implementation Game
@@ -11,6 +12,7 @@
 @dynamic rounds;
 @dynamic teams;
 @dynamic winningTeam;
+@dynamic setting;
 
 - (NSNumber*) isComplete {
   return [NSNumber numberWithBool:(self.winningTeam != nil)];

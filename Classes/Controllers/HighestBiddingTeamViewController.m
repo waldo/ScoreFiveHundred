@@ -60,16 +60,19 @@ static NSString* ssTitleNoBid     = @"No-one bid - play a no-trumps round for 10
 
 // MARK: tableview delegate
 - (NSInteger) numberOfSectionsInTableView:(UITableView*)tableView {
-  return 2;
+  if ([self.game.setting isPlayOnNoOneBid]) {
+    return 2;    
+  }
+
+  return 1;
 }
 
 - (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
   if (section == 0) {
     return [self.game.teams count];
   }
-  else {
-    return 1;
-  }
+
+  return 1;
 }
 
 - (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {

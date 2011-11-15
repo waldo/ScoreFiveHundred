@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "Game.h"
+@class Setting;
 #import "CellWrapper.h"
 #import "CellGame.h"
 #import "GameSetUpViewController.h"

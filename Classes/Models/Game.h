@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Round, Team;
+@class Round, Setting, Team;
 
 @interface Game : NSManagedObject
 
@@ -11,6 +11,7 @@
 @property (nonatomic, retain) NSOrderedSet *rounds;
 @property (nonatomic, retain) NSOrderedSet *teams;
 @property (nonatomic, retain) Team *winningTeam;
+@property (nonatomic, retain) Setting *setting;
 
 - (NSString*) nameForPosition:(int)pos;
 - (NSString*) scoreForPosition:(int)pos;

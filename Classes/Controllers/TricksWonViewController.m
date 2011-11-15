@@ -168,7 +168,7 @@ static int siMaximumTricks = 10;
     tricksWon = 10 - indexPath.row;
   }
   else {
-    tricksWon = indexPath.row; 
+    tricksWon = indexPath.row;
   }
   
   NSMutableOrderedSet* tricksAndScores = [NSMutableOrderedSet orderedSetWithObjects:nil];

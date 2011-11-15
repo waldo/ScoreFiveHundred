@@ -1,5 +1,6 @@
 #import "GameListViewController.h"
 #import "Game.h"
+#import "Setting.h"
 
 @implementation GameListViewController
 
@@ -35,11 +36,19 @@ static NSString* ssTitleCompleted     = @"Complete";
 }
 
 - (IBAction) newGame:(id)sender {
-  NSEntityDescription* entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
-  Game* unassociatedGame = (Game*)[[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+  NSEntityDescription* gameEntity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
+  Game* unassociatedGame = (Game*)[[NSManagedObject alloc] initWithEntity:gameEntity insertIntoManagedObjectContext:nil];
+  NSEntityDescription* settingEntity = [NSEntityDescription entityForName:@"Setting" inManagedObjectContext:self.managedObjectContext];
+  Setting* unassociatedSetting = (Setting*)[[NSManagedObject alloc] initWithEntity:settingEntity insertIntoManagedObjectContext:nil];
+  [unassociatedSetting initOptions];
+  unassociatedGame.setting = unassociatedSetting;
+  unassociatedSetting.game = unassociatedGame;
 
   [self.setUpController initWithGame:unassociatedGame];
   [self.navigationController pushViewController:self.setUpController animated:YES];
+  
+  [unassociatedGame release];
+  [unassociatedSetting release];
 }
 
 - (void) loadGames {
