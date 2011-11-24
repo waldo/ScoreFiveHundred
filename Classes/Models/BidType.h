@@ -12,7 +12,7 @@
 + (NSString*) tricksAndDescriptionForHand:(NSString*)hand;
 + (NSString*) descriptionForHand:(NSString*)hand;
 + (NSString*) pointsStringForHand:(NSString*)hand;
-+ (NSNumber*)pointsForTeam:(Team*)t biddingTeams:(NSOrderedSet*)biddingTeams withHand:(NSString*)hand andTricksWon:(NSNumber*)tricksWon;
++ (NSNumber*)pointsForTeam:(Team*)t biddingTeams:(NSSet*)biddingTeams withHand:(NSString*)hand andTricksWon:(NSNumber*)tricksWon;
 + (BOOL) bidderWonHand:(NSString*)hand WithTricksWon:(NSNumber*)tricksWon;
 + (NSString*) variation:(NSString*)hand;
 

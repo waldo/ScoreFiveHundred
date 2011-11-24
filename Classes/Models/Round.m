@@ -4,6 +4,11 @@
 #import "Team.h"
 #import "BidType.h"
 
+@interface Round()
+- (BOOL) guardForScoresOnPosition:(NSUInteger)pos;
+- (void) setTricksWon:(NSUInteger)tricksWon forPosition:(NSUInteger)pos;
+@end
+
 @implementation Round
 
 @dynamic bid;
@@ -14,7 +19,7 @@
 @dynamic scores;
 
 
-- (NSString*) bidForPosition:(int)pos {
+- (NSString*) bidForPosition:(NSUInteger)pos {
   NSString* theBid = nil;
 
   if ([self.biddingTeams containsObject:[self.game.teams objectAtIndex:pos]]) {
@@ -24,7 +29,7 @@
   return theBid;
 }
 
-- (NSString*) bidAchievedForPosition:(int)pos {
+- (NSString*) bidAchievedForPosition:(NSUInteger)pos {
   NSString* bidAchieved = nil;
   NSString* theBid = [self bidForPosition:pos];
   NSNumber* tricksWon = [[self.scores objectAtIndex:pos] tricksWon];
@@ -36,12 +41,52 @@
   return bidAchieved;
 }
 
-- (NSString*) scoreForPosition:(int)pos {
+- (NSString*) scoreForPosition:(NSUInteger)pos {
+  if ([self guardForScoresOnPosition:pos]) {
+    return nil;
+  }
+
   return [[[self.scores objectAtIndex:pos] score] stringValue];
 }
 
-- (NSString*) tricksWonForPosition:(int)pos {
+- (NSString*) tricksWonForPosition:(NSUInteger)pos {
+  if ([self guardForScoresOnPosition:pos]) {
+    return nil;
+  }
+
   return [[[self.scores objectAtIndex:pos] tricksWon] stringValue];
+}
+
+- (RoundScore*) getScoreForPosition:(NSUInteger)pos {
+  if ([self guardForScoresOnPosition:pos]) {
+    return nil;
+  }
+
+  return [self.scores objectAtIndex:pos];
+}
+
+- (void) setTricksWon:(NSUInteger)tricksWon forPosition:(NSUInteger)pos {
+  RoundScore* rs = [self getScoreForPosition:pos];
+  rs.tricksWon = [NSNumber numberWithInt:tricksWon];
+  rs.score = [NSNumber numberWithInt:([[BidType pointsForTeam:[self.game.teams objectAtIndex:pos] biddingTeams:self.biddingTeams withHand:self.bid andTricksWon:[NSNumber numberWithInt:tricksWon]] intValue] + [[self.game oldScoreForPosition:pos] intValue])];
+}
+
+- (void) updateAndSetTricksWon:(NSUInteger)tricksWon forPosition:(NSUInteger)pos {
+  [self setTricksWon:tricksWon forPosition:pos];
+
+  // update others
+  int newPos = -1;
+  
+  if ([self.game.teams count] == 2) {
+    if (pos == 0) {
+      newPos = 1;
+    }
+    else {
+      newPos = 0;
+    }
+
+    [self setTricksWon:10-tricksWon forPosition:newPos];      
+  }
 }
 
 // MARK: set core data defaults
@@ -60,16 +105,21 @@
 }
 
 // MARK: override buggy coredata code
-- (void)addScoresObject:(Round*)value {
+- (void) addScoresObject:(RoundScore*)value {
   NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.scores];
   [tempSet addObject:value];
   self.scores = tempSet;
 }
 
-- (void)addBiddingTeamsObject:(Team *)value {
+- (void) addBiddingTeamsObject:(Team *)value {
   NSMutableSet* tempSet = [NSMutableSet setWithSet:self.biddingTeams];
   [tempSet addObject:value];
   self.biddingTeams = tempSet;
+}
+
+// MARK: hidden
+- (BOOL) guardForScoresOnPosition:(NSUInteger)pos {
+  return (self.scores == nil || [self.scores count] <= pos);
 }
 
 @end

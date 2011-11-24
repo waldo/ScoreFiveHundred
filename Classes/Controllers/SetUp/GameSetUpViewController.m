@@ -24,6 +24,8 @@ static int tagOffset = 1000;
   [startButton release];  
   [game release];
   [teamNameTextFields release];
+
+  self.navigationController.navigationBar.delegate = nil;
   
   [super dealloc];
 }
@@ -41,12 +43,16 @@ static int tagOffset = 1000;
     [names addObject:name];
   }
   
-  // associate the previously unassociated game model
-  ScoreFiveHundredAppDelegate* app = (ScoreFiveHundredAppDelegate*)[[UIApplication sharedApplication] delegate];
-  [app.managedObjectContext insertObject:self.game.setting];
-  [app.managedObjectContext insertObject:self.game];
+  NSLog(@"undoActionName: %@", self.game.managedObjectContext.undoManager.undoActionName);
+
+  if ([self.game.managedObjectContext.undoManager.undoActionName isEqualToString:@"new game"]) {
+    [self.game.managedObjectContext.undoManager endUndoGrouping];
+    [self.game.managedObjectContext.undoManager removeAllActions];
+    NSLog(@"undoActionName: %@", self.game.managedObjectContext.undoManager.undoActionName);
+  }
 
   [self.game setTeamsByNames:names];
+  [self.game save];
 
   UINavigationController *navController = self.navigationController;
     
@@ -103,6 +109,11 @@ static int tagOffset = 1000;
 
 - (void) viewWillDisappear:(BOOL)animated {
   [super viewWillDisappear:animated];
+
+  if ([self.game.managedObjectContext.undoManager.undoActionName isEqualToString:@"new game"]) {
+    [self.game.managedObjectContext.undoManager endUndoGrouping];
+    [self.game.managedObjectContext.undoManager undo];
+  }
 }
 
 // MARK: TextField delegate
@@ -280,6 +291,5 @@ static int tagOffset = 1000;
 - (void) noOneBidChanged:(id)control {
   self.game.setting.noOneBid = [NSNumber numberWithBool:((UISwitch*)control).on];
 }
-
 
 @end

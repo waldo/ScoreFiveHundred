@@ -4,6 +4,11 @@
 #import "Setting.h"
 #import "Team.h"
 
+@interface Game()
+- (BOOL) guardForRoundIndex:(NSUInteger)ix;
+- (NSString*) scoreForPosition:(NSUInteger)pos andIndex:(NSUInteger)ix;
+@end
+
 @implementation Game
 
 @dynamic complete;
@@ -18,7 +23,7 @@
   return [NSNumber numberWithBool:(self.winningTeam != nil)];
 }
 
-- (NSString*) nameForPosition:(int)pos {
+- (NSString*) nameForPosition:(NSUInteger)pos {
   if ([self.teams count] > pos) {
     return [[self.teams objectAtIndex:pos] name];
   }
@@ -26,17 +31,15 @@
   return nil;
 }
 
-- (NSString*) scoreForPosition:(int)pos {
-  Round* r = [self.rounds firstObject];
-  if (r == nil) {
-    return nil;
-  }
-  else {
-    return [r scoreForPosition:pos];
-  }
+- (NSString*) scoreForPosition:(NSUInteger)pos {
+  return [self scoreForPosition:pos andIndex:0];
 }
 
-- (BOOL) isVictorInPosition:(int)pos {
+- (NSString*) oldScoreForPosition:(NSUInteger)pos {
+  return [self scoreForPosition:pos andIndex:1];
+}
+
+- (BOOL) isVictorInPosition:(NSUInteger)pos {
   if (self.winningTeam == nil) {
     return false;
   }
@@ -45,11 +48,30 @@
   }
 }
 
-- (void) setTeamsByNames:(NSMutableOrderedSet*)names {
-  for (NSString* name in names) {
-    Team* t = [NSEntityDescription insertNewObjectForEntityForName:@"Team" inManagedObjectContext:self.managedObjectContext];
-    t.name = name;
-    [self addTeamsObject:t];
+- (Round*) buildRound {
+  [self.managedObjectContext.undoManager beginUndoGrouping];
+  [self.managedObjectContext.undoManager setActionName:@"new round"];
+  Round* r = [NSEntityDescription insertNewObjectForEntityForName:@"Round" inManagedObjectContext:self.managedObjectContext];
+  [self insertObject:r inRoundsAtIndex:0];
+
+  for (Team* t in self.teams) {
+    RoundScore* rs = [NSEntityDescription insertNewObjectForEntityForName:@"RoundScore" inManagedObjectContext:self.managedObjectContext];
+    rs.round = r;
+    rs.team = t;
+    [r addScoresObject:rs];
+  }
+
+  return r;
+}
+
+- (void) finaliseRound {
+  if ([self.managedObjectContext.undoManager.undoActionName isEqualToString:@"new round"]) {
+    [self.managedObjectContext.undoManager endUndoGrouping];
+    [self.managedObjectContext.undoManager setActionName:@""];
+    self.lastPlayed = [NSDate date];
+
+    [self checkForGameOver];
+    [self save];
   }
 }
 
@@ -84,6 +106,14 @@
 
   [self checkForGameOver];
   [self save];
+}
+
+- (void) setTeamsByNames:(NSMutableOrderedSet*)names {
+  for (NSString* name in names) {
+    Team* t = [NSEntityDescription insertNewObjectForEntityForName:@"Team" inManagedObjectContext:self.managedObjectContext];
+    t.name = name;
+    [self addTeamsObject:t];
+  }
 }
 
 - (void) checkForGameOver {
@@ -161,6 +191,19 @@
   self.rounds = tempSet;
   [self.managedObjectContext deleteObject:r];
   [self checkForGameOver];
+}
+
+// MARK: hidden
+- (BOOL) guardForRoundIndex:(NSUInteger)ix {
+  return (self.rounds == nil || [self.rounds count] <= ix);
+}
+
+- (NSString*) scoreForPosition:(NSUInteger)pos andIndex:(NSUInteger)ix {
+  if ([self guardForRoundIndex:ix]) {
+    return nil;
+  }
+  
+  return [[self.rounds objectAtIndex:ix] scoreForPosition:pos];
 }
 
 @end

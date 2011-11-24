@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSOrderedSet* tournamentOptions;
 @property (nonatomic, retain) NSOrderedSet* modeOptions;
 
-- (void) initOptions;
+//- (void) initOptions;
 - (NSString*) textForCurrentTournament;
 - (NSString*) textForTournament:(NSUInteger)ix;
 - (NSIndexPath*) indexPathOfCurrentMode;

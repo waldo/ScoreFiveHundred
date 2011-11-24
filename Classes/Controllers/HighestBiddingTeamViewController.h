@@ -2,30 +2,29 @@
 #import "Game.h"
 #import "Round.h"
 #import "BiddingViewController.h"
+#import "ScoreMiniViewController.h"
 
 @interface HighestBiddingTeamViewController : UIViewController {
   IBOutlet BiddingViewController* biddingController;
-  IBOutlet TricksWonViewController* tricksWonController;
+  IBOutlet TricksWonSummaryViewController* tricksWonSummaryController;
   IBOutlet UITableView* teamSelectionTableView;
-  IBOutlet UILabel* nameTeamOne;
-  IBOutlet UILabel* nameTeamTwo;
-  IBOutlet UILabel* scoreTeamOne;
-  IBOutlet UILabel* scoreTeamTwo;
+  IBOutlet ScoreMiniViewController* scoreController;
+  IBOutlet UIBarButtonItem* cancelButton;
 
   Game* game;
+  Round* round;
 }
 
 @property (nonatomic, retain) IBOutlet BiddingViewController* biddingController;
-@property (nonatomic, retain) IBOutlet TricksWonViewController* tricksWonController;
+@property (nonatomic, retain) IBOutlet TricksWonSummaryViewController* tricksWonSummaryController;
 @property (nonatomic, retain) IBOutlet UITableView* teamSelectionTableView;
-@property (nonatomic, retain) UILabel* nameTeamOne;
-@property (nonatomic, retain) UILabel* nameTeamTwo;
-@property (nonatomic, retain) UILabel* scoreTeamOne;
-@property (nonatomic, retain) UILabel* scoreTeamTwo;
+@property (nonatomic, retain) IBOutlet ScoreMiniViewController* scoreController;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem* cancelButton;
 
 @property (nonatomic, retain) Game* game;
+@property (nonatomic, retain) Round* round;
 
 - (void) initWithGame:(Game*)g;
-- (NSString*) selectedTeam;
+- (IBAction) cancel:(id)sender;
 
 @end

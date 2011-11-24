@@ -56,63 +56,6 @@
   }
 }
 
-//- (void) setUpComplete:(Game*)game {
-//  
-//}
-//
-//- (void) rematch:(Game*)originalGame {
-//  // because we are pushing and popping the same view controller viewDisappear won't be called - thus we need to save first
-////  [originalGame save];
-////  [self.navigationController popViewControllerAnimated:NO];
-////  [self.gameController rematchOfGameKey:originalGame.key];
-////  [self.navigationController pushViewController:self.gameController animated:YES];
-//}
-
-//- (void) viewGameWithKey:(NSString*)key AndIsNewGame:(BOOL)newGame {
-//  [self.gameController openGameWithKey:key isNewGame:newGame];
-//  [self.navigationController pushViewController:self.gameController animated:YES];
-//}
-
-//- (void) addRoundForGameKey:(NSString *)key {
-////  [self.navigationController pushViewController:self.highestBiddingTeamController animated:YES];
-////
-////  [self.highestBiddingTeamController initWithGameKey:key];
-//}
-//
-//- (void) bidForTeamName:(NSString*)teamName {
-//  [self.biddingController setTitleUsingTeamName:teamName];
-//
-//  [self.navigationController pushViewController:self.biddingController animated:YES];
-//
-//  self.biddingController.nameTeamOne.text = [self.gameController.game nameForPosition:0];
-//  self.biddingController.nameTeamTwo.text = [self.gameController.game nameForPosition:1];
-//  self.biddingController.scoreTeamOne.text = [NSString stringWithFormat:@"%i pts", [self.gameController.game scoreForPosition:0]];
-//  self.biddingController.scoreTeamTwo.text = [NSString stringWithFormat:@"%i pts", [self.gameController.game scoreForPosition:1]];
-//}
-//
-//- (void) bidSelected:(NSString*)hand forTeamName:(NSString*)teamName {
-//  [self.tricksWonController styleWithHand:hand teamName:teamName];
-//  
-//  [self.navigationController pushViewController:self.tricksWonController animated:YES];
-//
-//  self.tricksWonController.nameTeamOne.text = [self.gameController.game nameForPosition:0];
-//  self.tricksWonController.nameTeamTwo.text = [self.gameController.game nameForPosition:1];
-//  self.tricksWonController.scoreTeamOne.text = [NSString stringWithFormat:@"%i pts", [self.gameController.game scoreForPosition:0]];
-//  self.tricksWonController.scoreTeamTwo.text = [NSString stringWithFormat:@"%i pts", [self.gameController.game scoreForPosition:1]];  
-//}
-//
-//- (void) saveScoreWithTricksWon:(NSInteger)tricksWon {
-//  NSString* team = [self.highestBiddingTeamController selectedTeam];
-//  NSString* hand = [self.biddingController hand];
-//  NSNumber* tricks = [NSNumber numberWithInt:tricksWon];
-//  
-//  [self.gameController updateRoundWithTeam:team hand:hand tricksWon:tricks];
-//  
-//  [self.navigationController popViewControllerAnimated:NO];
-//  [self.navigationController popViewControllerAnimated:NO];
-//  [self.navigationController popViewControllerAnimated:YES];
-//}
-
 // MARK: Core Data stack
 
 /**
@@ -132,6 +75,10 @@
     __managedObjectContext = [[NSManagedObjectContext alloc] init];
     [__managedObjectContext setPersistentStoreCoordinator:coordinator];
   }
+  
+  NSUndoManager* undoManager = [[[NSUndoManager alloc] init] autorelease];
+  [__managedObjectContext setUndoManager:undoManager];
+  
   return __managedObjectContext;
 }
 

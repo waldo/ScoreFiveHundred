@@ -13,11 +13,13 @@
 @property (nonatomic, retain) Team *winningTeam;
 @property (nonatomic, retain) Setting *setting;
 
-- (NSString*) nameForPosition:(int)pos;
-- (NSString*) scoreForPosition:(int)pos;
-- (BOOL) isVictorInPosition:(int)pos;
+- (NSString*) nameForPosition:(NSUInteger)pos;
+- (NSString*) scoreForPosition:(NSUInteger)pos;
+- (NSString*) oldScoreForPosition:(NSUInteger)pos;
+- (BOOL) isVictorInPosition:(NSUInteger)pos;
+- (Round*) buildRound;
+- (void) finaliseRound;
 - (void) setTeamsByNames:(NSMutableOrderedSet*)names;
-- (void) buildRoundWithBiddingTeams:(NSOrderedSet*)biddingTeams hand:(NSString*)h andTricksAndScoreDict:(NSOrderedSet*)tricksAndScore;
 - (void) checkForGameOver;
 - (Game*) duplicate;
 - (void) save;

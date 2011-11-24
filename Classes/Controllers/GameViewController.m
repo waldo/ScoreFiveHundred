@@ -63,8 +63,6 @@
 
 - (void) initWithGame:(Game*)g {
   self.game = g;
-
-  [self.game save];
 }
 
 // MARK: Hidden functions

@@ -5,30 +5,24 @@
 @implementation BiddingViewController
 
 // MARK: synthesize
-@synthesize tricksWonController;
-@synthesize bidSelectionTableView;
-@synthesize cellWrapper;
-@synthesize nameTeamOne;
-@synthesize nameTeamTwo;
-@synthesize scoreTeamOne;
-@synthesize scoreTeamTwo;
-
-@synthesize bidTypeHands;
-@synthesize game;
-@synthesize biddingTeam;
+@synthesize
+  tricksWonSummaryController,
+  bidSelectionTableView,
+  cellWrapper,
+  scoreController,
+  bidTypeHands,
+  game,
+  round;
 
 - (void)dealloc {
-  [tricksWonController release];
+  [tricksWonSummaryController release];
   [bidSelectionTableView release];
   [cellWrapper release];
-  [nameTeamOne release];
-  [nameTeamTwo release];
-  [scoreTeamOne release];
-  [scoreTeamTwo release];  
+  [scoreController release];
 
   [bidTypeHands release];
   [game release];
-  [biddingTeam release];
+  [round release];
 
   [super dealloc];
 }
@@ -37,12 +31,12 @@
   return [self.bidTypeHands objectAtIndex:[self.bidSelectionTableView indexPathForSelectedRow].row];
 }
 
-- (void) initWithGame:(Game*)g andTeam:(Team*)t {
+- (void) initWithGame:(Game*)g andRound:(Round *)r {
   self.game = g;
-  self.biddingTeam = t;
+  self.round = r;
   
   NSString* possessive = nil;
-  NSString* teamName = [self.biddingTeam name];
+  NSString* teamName = [[self.round.biddingTeams anyObject] name];
 
   if ([[teamName substringFromIndex:[teamName length]-1] isEqual:@"s"]) {
     possessive = [NSString stringWithFormat:@"%@'", teamName];
@@ -59,15 +53,15 @@
   [super viewDidLoad];
 
   self.bidTypeHands = [BidType orderedHands];
+
+  [self.scoreController setStandardFrame];
+  [self.view addSubview:self.scoreController.view];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
-  self.nameTeamOne.text = [self.game nameForPosition:0];
-  self.nameTeamTwo.text = [self.game nameForPosition:1];
-  self.scoreTeamOne.text = [NSString stringWithFormat:@"%d pts", [[self.game scoreForPosition:0] intValue]];
-  self.scoreTeamTwo.text = [NSString stringWithFormat:@"%d pts", [[self.game scoreForPosition:1] intValue]];
+  [self.scoreController initWithGame:self.game];
   [self.bidSelectionTableView reloadData];
 }
 
@@ -107,9 +101,9 @@
 }
 
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  NSOrderedSet* biddingTeams = [NSOrderedSet orderedSetWithObjects:self.biddingTeam, nil];
-  [self.tricksWonController initWithGame:self.game biddingTeams:biddingTeams currentTeam:self.biddingTeam andBid:[self hand]];
-  [self.navigationController pushViewController:self.tricksWonController animated:YES];
+  self.round.bid = self.hand;
+  [self.tricksWonSummaryController initWithGame:self.game andRound:self.round];
+  [self.navigationController pushViewController:self.tricksWonSummaryController animated:YES];
 }
 
 @end

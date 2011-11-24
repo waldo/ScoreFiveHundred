@@ -10,44 +10,27 @@ static NSString* ssBidVariationNoBid = @"no bid";
 static int siMaximumTricks = 10;
 
 // MARK: synthesize
-@synthesize gameController;
-@synthesize tricksWonTableView;
-@synthesize nameTeamOne;
-@synthesize nameTeamTwo;
-@synthesize scoreTeamOne;
-@synthesize scoreTeamTwo;
-
-@synthesize game;
-@synthesize currentTeam;
-@synthesize biddingTeams;
-@synthesize hand;
-@synthesize bidVariation;
-@synthesize regularList;
-@synthesize misereList;
+@synthesize
+  scoreController,
+  tricksWonTableView,
+  game,
+  round,
+  bidVariation,
+  regularList,
+  misereList;
 
 
 - (void) dealloc {
-  [gameController release];
+  [scoreController release];
   [tricksWonTableView release];
-  [nameTeamOne release];
-  [nameTeamTwo release];
-  [scoreTeamOne release];
-  [scoreTeamTwo release];
 
   [game release];
-  [currentTeam release];
-  [biddingTeams release];
-  [hand release];
+  [round release];
   [bidVariation release];
   [regularList release];
   [misereList release];
   
   [super dealloc];
-}
-
-- (void) didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
 }
 
 - (NSArray*) tricksWonList {
@@ -63,14 +46,13 @@ static int siMaximumTricks = 10;
   return list;
 }
 
-- (void) initWithGame:(Game*)g biddingTeams:(NSOrderedSet*)teams currentTeam:(Team *)t andBid:(NSString *)bid {
+- (void) initWithGame:(Game*)g round:(Round*)r andPosition:(NSUInteger)pos {
   self.game = g;
-  self.biddingTeams = teams;
-  self.currentTeam = t;
-  self.hand = bid;
-  self.bidVariation = [BidType variation:self.hand];
+  self.round = r;
+  position = pos;
+  self.bidVariation = [BidType variation:self.round.bid];
 
-  self.title = [BidType tricksAndDescriptionForHand:self.hand];
+  self.title = [NSString stringWithFormat:@"%@", [self.game nameForPosition:position]];
 }
 
 // MARK: View
@@ -97,21 +79,17 @@ static int siMaximumTricks = 10;
                      @"Got one or more tricks",
                      nil
                      ];
+
+  [self.scoreController setStandardFrame];  
+  [self.view addSubview:self.scoreController.view];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  
-  NSLog(@"self.bidVariation: %@", self.bidVariation);
-  NSLog(@"[self tricksWonList: %@", [self tricksWonList]);
-  
-  self.nameTeamOne.text = [self.game nameForPosition:0];
-  self.nameTeamTwo.text = [self.game nameForPosition:1];
-  self.scoreTeamOne.text = [NSString stringWithFormat:@"%d pts", [[self.game scoreForPosition:0] intValue]];
-  self.scoreTeamTwo.text = [NSString stringWithFormat:@"%d pts", [[self.game scoreForPosition:1] intValue]];
+
+  [self.scoreController initWithGame:self.game];
   [self.tricksWonTableView reloadData];
 }
-
 
 // MARK: tableview delegate
 - (NSInteger) numberOfSectionsInTableView:(UITableView*)tableView {	
@@ -119,7 +97,7 @@ static int siMaximumTricks = 10;
 }
 
 - (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
-  return [NSString stringWithFormat:@"How many tricks did %@ win?", [self.currentTeam name]];
+  return @"";
 }
 
 - (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
@@ -145,8 +123,8 @@ static int siMaximumTricks = 10;
     tricksWon = (siMaximumTricks - indexPath.row);
   }
 
-  score = [[BidType pointsForTeam:self.currentTeam biddingTeams:self.biddingTeams withHand:self.hand andTricksWon:[NSNumber numberWithInt:tricksWon]] intValue];
-  
+  score = [[BidType pointsForTeam:[self.game.teams objectAtIndex:position] biddingTeams:self.round.biddingTeams withHand:self.round.bid andTricksWon:[NSNumber numberWithInt:tricksWon]] intValue];
+    
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   cell.textLabel.text = [[self tricksWonList] objectAtIndex:indexPath.row];
   cell.detailTextLabel.text = [NSString stringWithFormat:@"%i pts", score];
@@ -171,30 +149,9 @@ static int siMaximumTricks = 10;
     tricksWon = indexPath.row;
   }
   
-  NSMutableOrderedSet* tricksAndScores = [NSMutableOrderedSet orderedSetWithObjects:nil];
+  [self.round updateAndSetTricksWon:tricksWon forPosition:position];
 
-  for (Team* t in self.game.teams) {
-    int tricks = tricksWon;
-    NSNumber* score = nil;
-
-    if (![self.currentTeam isEqual:t]) {
-      tricks = 10 - tricksWon;
-    }
-
-    score = [BidType pointsForTeam:t biddingTeams:self.biddingTeams withHand:self.hand andTricksWon:[NSNumber numberWithInt:tricks]];
-    
-    NSDictionary* someTricksAndScores = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:tricks], @"tricksWon", score, @"score", nil];
-    [tricksAndScores addObject:someTricksAndScores];
-  }
-
-  [self.game buildRoundWithBiddingTeams:self.biddingTeams hand:self.hand andTricksAndScoreDict:(NSOrderedSet*)tricksAndScores];
-
-  UINavigationController *navController = self.navigationController;
-  [navController popViewControllerAnimated:NO];
-  if (![self.bidVariation isEqual:ssBidVariationNoBid]) {
-    [navController popViewControllerAnimated:NO];
-  }
-  [navController popViewControllerAnimated:YES];
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

@@ -21,7 +21,9 @@
 }
 
 
-- (void) initOptions {
+- (void) awakeFromInsert {
+  [super awakeFromInsert];
+
   self.modeOptions = [NSOrderedSet orderedSetWithObjects:
                       [NSDictionary dictionaryWithObjectsAndKeys:@"2 teams", @"text", @"4 or 6 players", @"detail", nil],
                       [NSDictionary dictionaryWithObjectsAndKeys:@"3 players", @"text", @"", @"detail", nil],

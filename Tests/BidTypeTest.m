@@ -28,7 +28,7 @@
 - (void) checkForHand:(NSString*)hand withTeamOneTricksWon:(int)tricks teamOnePoints:(int)bidderExpectedPoints andTeamTwoPoints:(int)nonBidderExpectedPoints {
   Team* bidder = [NSEntityDescription insertNewObjectForEntityForName:@"Team" inManagedObjectContext:self.moc];
   Team* nonBidder = [NSEntityDescription insertNewObjectForEntityForName:@"Team" inManagedObjectContext:self.moc];
-  NSOrderedSet* biddingTeams = [NSOrderedSet orderedSetWithObjects:bidder, nil];
+  NSSet* biddingTeams = [NSSet setWithObjects:bidder, nil];
 
   if ([hand isEqualToString:@"NB"]) {
     biddingTeams = [NSOrderedSet orderedSetWithObjects:nil];

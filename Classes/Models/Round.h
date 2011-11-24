@@ -12,10 +12,13 @@
 @property (nonatomic, retain) Game* game;
 @property (nonatomic, retain) NSOrderedSet* scores;
 
-- (NSString*) bidForPosition:(int)pos;
-- (NSString*) bidAchievedForPosition:(int)pos;
-- (NSString*) scoreForPosition:(int)pos;
-- (NSString*) tricksWonForPosition:(int)pos;
+- (NSString*) bidForPosition:(NSUInteger)pos;
+- (NSString*) bidAchievedForPosition:(NSUInteger)pos;
+- (NSString*) scoreForPosition:(NSUInteger)pos;
+- (NSString*) tricksWonForPosition:(NSUInteger)pos;
+
+- (RoundScore*) getScoreForPosition:(NSUInteger)pos;
+- (void) updateAndSetTricksWon:(NSUInteger)tricksWon forPosition:(NSUInteger)pos;
 
 + (NSString*) uniqueId;
 
