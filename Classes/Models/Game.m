@@ -104,7 +104,15 @@
   Game* clone = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
   
   clone.teams = self.teams;
-  // TODO: copy settings (when they exist)
+  clone.setting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:self.managedObjectContext];
+  
+  clone.setting.mode = [self.setting.mode copy];
+  clone.setting.tournament = [self.setting.tournament copy];
+  clone.setting.firstToCross = [self.setting.firstToCross copy];
+  clone.setting.nonBidderScoresTen = [self.setting.nonBidderScoresTen copy];
+  clone.setting.noOneBid = [self.setting.noOneBid copy];
+
+  clone.lastPlayed = [NSDate date];
   
   [clone save];
 
