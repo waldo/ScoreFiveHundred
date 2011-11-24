@@ -61,6 +61,8 @@
     [r addScoresObject:rs];
   }
 
+  [r updateAndSetTricksWon:10 forPosition:0];
+  
   return r;
 }
 
@@ -73,39 +75,6 @@
     [self checkForGameOver];
     [self save];
   }
-}
-
-- (void) buildRoundWithBiddingTeams:(NSOrderedSet*)biddingTeams hand:(NSString*)h andTricksAndScoreDict:(NSOrderedSet*)tricksAndScore {
-  Round* r = [NSEntityDescription insertNewObjectForEntityForName:@"Round" inManagedObjectContext:self.managedObjectContext];
-  RoundScore* scoreTeamOne = [NSEntityDescription insertNewObjectForEntityForName:@"RoundScore" inManagedObjectContext:self.managedObjectContext];
-  RoundScore* scoreTeamTwo = [NSEntityDescription insertNewObjectForEntityForName:@"RoundScore" inManagedObjectContext:self.managedObjectContext];
-  int oldScoreTeamOne = [self scoreForPosition:0] == nil ? 0 : [[self scoreForPosition:0] intValue];
-  int oldScoreTeamTwo = [self scoreForPosition:1] == nil ? 0 : [[self scoreForPosition:1] intValue];
-  int thisRoundScoreTeamOne = [[[tricksAndScore objectAtIndex:0] objectForKey:@"score"] intValue];
-  int thisRoundScoreTeamTwo = [[[tricksAndScore objectAtIndex:1] objectForKey:@"score"] intValue];
-
-  [r addBiddingTeams:[biddingTeams set]];
-  r.bid = h;
-  
-  scoreTeamOne.team = [[self.teams objectAtIndex:0] retain];
-  scoreTeamTwo.team = [[self.teams objectAtIndex:1] retain];
-  
-  scoreTeamOne.round = r;
-  scoreTeamTwo.round = r;
-  
-  scoreTeamOne.tricksWon = [[tricksAndScore objectAtIndex:0] objectForKey:@"tricksWon"];
-  scoreTeamTwo.tricksWon = [[tricksAndScore objectAtIndex:1] objectForKey:@"tricksWon"];
-  scoreTeamOne.score = [NSNumber numberWithInt:(oldScoreTeamOne + thisRoundScoreTeamOne)];
-  scoreTeamTwo.score = [NSNumber numberWithInt:(oldScoreTeamTwo + thisRoundScoreTeamTwo)];
-  
-  [r addScoresObject:scoreTeamOne];
-  [r addScoresObject:scoreTeamTwo];
-
-  [self insertObject:r inRoundsAtIndex:0];
-  self.lastPlayed = [NSDate date];
-
-  [self checkForGameOver];
-  [self save];
 }
 
 - (void) setTeamsByNames:(NSMutableOrderedSet*)names {
