@@ -163,6 +163,15 @@ AAgACAAIAAEAAQABAAE</bytes>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
+			<object class="IBUIViewController" id="222924115">
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
@@ -214,6 +223,14 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<reference key="destination" ref="898548132"/>
 					</object>
 					<int key="connectionID">63</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tricksWonController</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="222924115"/>
+					</object>
+					<int key="connectionID">67</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -302,6 +319,11 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<reference key="object" ref="898548132"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">66</int>
+						<reference key="object" ref="222924115"/>
+						<reference key="parent" ref="0"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -321,6 +343,8 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<string>59.CustomClassName</string>
 					<string>59.IBPluginDependency</string>
 					<string>61.IBPluginDependency</string>
+					<string>66.CustomClassName</string>
+					<string>66.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -337,6 +361,8 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<string>ScoreMiniViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>TricksWonViewController</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -351,7 +377,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">65</int>
+			<int key="maxID">67</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -370,6 +396,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<string>scoreController</string>
 							<string>scoreTeamOne</string>
 							<string>scoreTeamTwo</string>
+							<string>tricksWonController</string>
 							<string>tricksWonSummaryController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -381,6 +408,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<string>ScoreMiniViewController</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
+							<string>TricksWonViewController</string>
 							<string>TricksWonSummaryViewController</string>
 						</object>
 					</object>
@@ -395,6 +423,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<string>scoreController</string>
 							<string>scoreTeamOne</string>
 							<string>scoreTeamTwo</string>
+							<string>tricksWonController</string>
 							<string>tricksWonSummaryController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -426,6 +455,10 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<object class="IBToOneOutletInfo">
 								<string key="name">scoreTeamTwo</string>
 								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">tricksWonController</string>
+								<string key="candidateClassName">TricksWonViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">tricksWonSummaryController</string>
@@ -607,6 +640,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<string>cancelButton</string>
 							<string>scoreController</string>
 							<string>teamSelectionTableView</string>
+							<string>tricksWonController</string>
 							<string>tricksWonSummaryController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -615,6 +649,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<string>UIBarButtonItem</string>
 							<string>ScoreMiniViewController</string>
 							<string>UITableView</string>
+							<string>TricksWonViewController</string>
 							<string>TricksWonSummaryViewController</string>
 						</object>
 					</object>
@@ -626,6 +661,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<string>cancelButton</string>
 							<string>scoreController</string>
 							<string>teamSelectionTableView</string>
+							<string>tricksWonController</string>
 							<string>tricksWonSummaryController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -645,6 +681,10 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<object class="IBToOneOutletInfo">
 								<string key="name">teamSelectionTableView</string>
 								<string key="candidateClassName">UITableView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">tricksWonController</string>
+								<string key="candidateClassName">TricksWonViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">tricksWonSummaryController</string>
@@ -790,11 +830,13 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>gameController</string>
 							<string>scoreController</string>
 							<string>tricksWonTableView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>GameViewController</string>
 							<string>ScoreMiniViewController</string>
 							<string>UITableView</string>
 						</object>
@@ -803,11 +845,16 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>gameController</string>
 							<string>scoreController</string>
 							<string>tricksWonTableView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">gameController</string>
+								<string key="candidateClassName">GameViewController</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">scoreController</string>
 								<string key="candidateClassName">ScoreMiniViewController</string>

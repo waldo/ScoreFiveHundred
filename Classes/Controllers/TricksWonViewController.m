@@ -11,6 +11,7 @@ static int siMaximumTricks = 10;
 
 // MARK: synthesize
 @synthesize
+  gameController,
   scoreController,
   tricksWonTableView,
   game,
@@ -22,6 +23,7 @@ static int siMaximumTricks = 10;
 
 
 - (void) dealloc {
+  [gameController release];
   [scoreController release];
   [tricksWonTableView release];
 
@@ -84,6 +86,7 @@ static int siMaximumTricks = 10;
 
   [self.scoreController setStandardFrame];  
   [self.view addSubview:self.scoreController.view];
+  self.gameController = [self.navigationController.viewControllers objectAtIndex:1];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -152,8 +155,13 @@ static int siMaximumTricks = 10;
   }
   
   [self.round updateAndSetTricksWon:tricksWon forTeam:self.team];
-
-  [self.navigationController popViewControllerAnimated:YES];
+  if ([self.game.setting.mode isEqualToString:@"2 teams"] || [self.game.setting.mode isEqualToString:@"Quebec mode"] || [self.bidVariation isEqualToString:@"misére"]) {
+    [self.game finaliseRound];    
+    [self.navigationController popToViewController:self.gameController animated:YES];
+  }
+  else {
+    [self.navigationController popViewControllerAnimated:YES];
+  }
 }
 
 @end

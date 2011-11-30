@@ -2,8 +2,10 @@
 #import "ScoreMiniViewController.h"
 #import "Game.h"
 #import "Round.h"
+@class GameViewController;
 
 @interface TricksWonViewController : UIViewController {
+  IBOutlet GameViewController* gameController;
   IBOutlet ScoreMiniViewController* scoreController;
   IBOutlet UITableView* tricksWonTableView;
 
@@ -15,6 +17,7 @@
   NSArray* misereList;
 }
 
+@property (nonatomic, retain) IBOutlet GameViewController* gameController;
 @property (nonatomic, retain) IBOutlet ScoreMiniViewController* scoreController;
 @property (nonatomic, retain) IBOutlet UITableView* tricksWonTableView;
 

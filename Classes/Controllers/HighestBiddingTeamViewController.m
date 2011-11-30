@@ -5,13 +5,14 @@
 @implementation HighestBiddingTeamViewController
 
 // MARK: static
-static NSString* ssTitleTeam      = @"Team that won the bidding";
+static NSString* ssTitleTeam      = @"Highest bidders";
 static NSString* ssTitleNoBid     = @"No-one bid - play a no-trumps round for 10 points per trick";
 
 // MARK: synthesize
 @synthesize
   biddingController,
   tricksWonSummaryController,
+  tricksWonController,
   teamSelectionTableView,
   scoreController,
   cancelButton,
@@ -21,6 +22,7 @@ static NSString* ssTitleNoBid     = @"No-one bid - play a no-trumps round for 10
 - (void)dealloc {
   [biddingController release];
   [tricksWonSummaryController release];
+  [tricksWonController release];
   [teamSelectionTableView release];
   [scoreController release];
   [cancelButton release];
@@ -117,6 +119,8 @@ static NSString* ssTitleNoBid     = @"No-one bid - play a no-trumps round for 10
 }
 
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
+  [self.round setBiddingTeams:nil];
+
   if (indexPath.section == 0) {
     [self.round addBiddingTeamsObject:[self.game.teams objectAtIndex:indexPath.row]];
     [self.biddingController initWithGame:self.game andRound:self.round];
@@ -124,8 +128,15 @@ static NSString* ssTitleNoBid     = @"No-one bid - play a no-trumps round for 10
   }
   else {
     self.round.bid = @"NB";
-    [self.tricksWonSummaryController initWithGame:self.game andRound:self.round];
-    [self.navigationController pushViewController:self.tricksWonSummaryController animated:YES];
+
+    if ([self.game.setting.mode isEqualToString:@"2 teams"] || [self.game.setting.mode isEqualToString:@"Quebec mode"]) {
+      [self.tricksWonController initWithGame:self.game round:self.round andTeam:[self.game.teams firstObject]];
+      [self.navigationController pushViewController:self.tricksWonController animated:YES];
+    }
+    else {
+      [self.tricksWonSummaryController initWithGame:self.game andRound:self.round];
+      [self.navigationController pushViewController:self.tricksWonSummaryController animated:YES];
+    }
   }
 }
 

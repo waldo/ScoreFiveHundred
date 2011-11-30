@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "TricksWonSummaryViewController.h"
+#import "TricksWonViewController.h"
 #import "ScoreMiniViewController.h"
 #import "Game.h"
 #import "Team.h"
@@ -9,6 +10,7 @@
 
 @interface BiddingViewController : UIViewController {
   IBOutlet TricksWonSummaryViewController* tricksWonSummaryController;
+  IBOutlet TricksWonViewController* tricksWonController;
   IBOutlet ScoreMiniViewController* scoreController;
   IBOutlet UITableView* bidSelectionTableView;
   IBOutlet CellWrapper* cellWrapper;
@@ -23,6 +25,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet TricksWonSummaryViewController* tricksWonSummaryController;
+@property (nonatomic, retain) IBOutlet TricksWonViewController* tricksWonController;
 @property (nonatomic, retain) IBOutlet ScoreMiniViewController* scoreController;
 @property (nonatomic, retain) IBOutlet UITableView* bidSelectionTableView;
 @property (nonatomic, retain) IBOutlet CellWrapper* cellWrapper;
