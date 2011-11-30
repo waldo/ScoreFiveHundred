@@ -34,7 +34,9 @@ static int tagOffset = 1000;
   if ([self.game.managedObjectContext.undoManager.undoActionName isEqualToString:@"new game"]) {
     [self.game.managedObjectContext.undoManager endUndoGrouping];
     [self.game.managedObjectContext.undoManager undo];
-  }  
+  }
+
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction) start:(id)sender {
