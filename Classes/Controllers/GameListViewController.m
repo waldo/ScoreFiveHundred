@@ -167,10 +167,10 @@ static NSString* ssTitleCompleted     = @"Complete";
     cellGame.symbolResultTeamOne.hidden = YES;
     cellGame.symbolResultTeamTwo.hidden = YES;
   }
-  else if ([g isVictorInPosition:0]) {
+  if ([g isVictorInPosition:0]) {
     cellGame.symbolResultTeamOne.hidden = NO;
   }
-  else if ([g isVictorInPosition:1]) {
+  if ([g isVictorInPosition:1]) {
     cellGame.symbolResultTeamTwo.hidden = NO;
   }
   
