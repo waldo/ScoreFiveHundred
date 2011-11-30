@@ -32,10 +32,10 @@
 - (NSString*) bidAchievedForPosition:(NSUInteger)pos {
   NSString* bidAchieved = nil;
   NSString* theBid = [self bidForPosition:pos];
-  NSNumber* tricksWon = [[self.scores objectAtIndex:pos] tricksWon];
+  NSUInteger tricksWon = [[[self.scores objectAtIndex:pos] tricksWon] intValue];
 
   if (theBid) {
-    bidAchieved = [NSString stringWithFormat:@"%d", [BidType bidderWonHand:theBid WithTricksWon:tricksWon]];
+    bidAchieved = [NSString stringWithFormat:@"%d", [BidType bidderWonHand:theBid withTricksWon:tricksWon]];
   }
   
   return bidAchieved;
@@ -68,7 +68,7 @@
 - (void) setTricksWon:(NSUInteger)tricksWon forPosition:(NSUInteger)pos {
   RoundScore* rs = [self getScoreForPosition:pos];
   rs.tricksWon = [NSNumber numberWithInt:tricksWon];
-  rs.score = [NSNumber numberWithInt:([[BidType pointsForTeam:[self.game.teams objectAtIndex:pos] biddingTeams:self.biddingTeams withHand:self.bid andTricksWon:[NSNumber numberWithInt:tricksWon]] intValue] + [[self.game oldScoreForPosition:pos] intValue])];
+  rs.score = [NSNumber numberWithInt:([BidType pointsForTeam:[self.game.teams objectAtIndex:pos] game:self.game andTricksWon:tricksWon] + [[self.game oldScoreForPosition:pos] intValue])];
 }
 
 - (void) updateAndSetTricksWon:(NSUInteger)tricksWon forPosition:(NSUInteger)pos {

@@ -1,4 +1,7 @@
 #import <Foundation/Foundation.h>
+#import "Game.h"
+#import "Setting.h"
+#import "Round.h"
 #import "Team.h"
 
 @interface BidType : NSObject {
@@ -12,8 +15,8 @@
 + (NSString*) tricksAndDescriptionForHand:(NSString*)hand;
 + (NSString*) descriptionForHand:(NSString*)hand;
 + (NSString*) pointsStringForHand:(NSString*)hand;
-+ (NSNumber*)pointsForTeam:(Team*)t biddingTeams:(NSSet*)biddingTeams withHand:(NSString*)hand andTricksWon:(NSNumber*)tricksWon;
-+ (BOOL) bidderWonHand:(NSString*)hand WithTricksWon:(NSNumber*)tricksWon;
++ (NSInteger) pointsForTeam:(Team*)t game:(Game*)g andTricksWon:(NSUInteger)tricksWon;
++ (BOOL) bidderWonHand:(NSString*)hand withTricksWon:(NSUInteger)tricksWon;
 + (NSString*) variation:(NSString*)hand;
 
 @end

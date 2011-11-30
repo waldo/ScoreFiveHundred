@@ -123,7 +123,7 @@ static int siMaximumTricks = 10;
     tricksWon = (siMaximumTricks - indexPath.row);
   }
 
-  score = [[BidType pointsForTeam:[self.game.teams objectAtIndex:position] biddingTeams:self.round.biddingTeams withHand:self.round.bid andTricksWon:[NSNumber numberWithInt:tricksWon]] intValue];
+  score = [BidType pointsForTeam:[self.game.teams objectAtIndex:position] game:self.game andTricksWon:tricksWon];
     
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   cell.textLabel.text = [[self tricksWonList] objectAtIndex:indexPath.row];

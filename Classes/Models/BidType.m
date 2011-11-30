@@ -2,8 +2,8 @@
 
 @interface BidType()
 
-+ (NSNumber*) biddersPointsForHand:(NSString*)hand AndBiddersTricksWon:(NSNumber*)tricksWon;
-+ (NSNumber*) nonBiddersPointsForHand:(NSString*)hand AndBiddersTricksWon:(NSNumber*)tricksWon;
++ (NSInteger) biddersPointsForGame:(Game*)g andTricksWon:(NSUInteger)tricksWon;
++ (NSInteger) nonBiddersPointsForGame:(Game*)g andTricksWon:(NSUInteger)tricksWon;
 
 @end
 
@@ -21,6 +21,7 @@ static NSString* ssVariation = @"variation";
 static NSString* ssVariationRegular = @"regular";
 static NSString* ssVariationMisere = @"misére";
 static NSString* ssVariationNoBid = @"no bid";
+static NSString* ssVariationQuebec = @"quebec";
 
 + (void) initialize {
   if (!allTypes) {
@@ -185,16 +186,18 @@ static NSString* ssVariationNoBid = @"no bid";
   return pts;
 }
 
-+ (NSNumber*)pointsForTeam:(Team*)t biddingTeams:(NSOrderedSet*)biddingTeams withHand:(NSString*)hand andTricksWon:(NSNumber*)tricksWon {
-  if ([biddingTeams containsObject:t]) {
-    return [BidType biddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
++ (NSInteger) pointsForTeam:(Team*)t game:(Game*)g andTricksWon:(NSUInteger)tricksWon {
+  Round* r = [g.rounds firstObject];
+  if ([r.biddingTeams containsObject:t]) {
+    return [BidType biddersPointsForGame:g andTricksWon:tricksWon];
   }
 
-  return [BidType nonBiddersPointsForHand:hand AndBiddersTricksWon:tricksWon];
+  return [BidType nonBiddersPointsForGame:g andTricksWon:tricksWon];
 }
 
-+ (NSNumber*)biddersPointsForHand:(NSString*)hand AndBiddersTricksWon:(NSNumber*)tricksWon {
-  NSDictionary* aBidType = [allTypes objectForKey:hand];
++ (NSInteger) biddersPointsForGame:(Game*)g andTricksWon:(NSUInteger)tricksWon {
+  Round* r = [g.rounds firstObject];
+  NSDictionary* aBidType = [allTypes objectForKey:r.bid];
   
   NSString* variation = [aBidType objectForKey:ssVariation];
   int bidPoints = [[aBidType objectForKey:ssPoints] intValue];
@@ -202,21 +205,22 @@ static NSString* ssVariationNoBid = @"no bid";
   // default to giving the points
   int biddersPoints = bidPoints;
 
-  if (![BidType bidderWonHand:hand WithTricksWon:tricksWon]) {
+  if (![BidType bidderWonHand:r.bid withTricksWon:tricksWon]) {
     biddersPoints = -bidPoints;
   }
   
   // if won 10 and bid points worth less than a slam (250 pts)
   // => award a slam
-  if ([variation isEqual:ssVariationRegular] && tricksWon.intValue == 10 && bidPoints < 250) {
+  if ([variation isEqual:ssVariationRegular] && tricksWon == 10 && bidPoints < 250) {
     biddersPoints = 250;
   }
 
-  return [NSNumber numberWithInt:biddersPoints];
+  return biddersPoints;
 }
 
-+ (NSNumber*)nonBiddersPointsForHand:(NSString*)hand AndBiddersTricksWon:(NSNumber*)tricksWon {
-  NSDictionary* aBidType = [allTypes objectForKey:hand];
++ (NSInteger) nonBiddersPointsForGame:(Game*)g andTricksWon:(NSUInteger)tricksWon {
+  Round* r = [g.rounds firstObject];
+  NSDictionary* aBidType = [allTypes objectForKey:r.bid];
   
   NSString* variation = [aBidType objectForKey:ssVariation];
 
@@ -225,14 +229,14 @@ static NSString* ssVariationNoBid = @"no bid";
   
   // if regular bid and bidders won less than ten
   // => award 10 points x number of tricks (won by the non-bidders)
-  if (![variation isEqual:ssVariationMisere]) {
-    nonBiddersPoints = 10 * tricksWon.intValue;
+  if (![variation isEqual:ssVariationMisere] && [g.setting.nonBidderScoresTen boolValue]) {
+    nonBiddersPoints = 10 * tricksWon;
   }
   
-  return [NSNumber numberWithInt:nonBiddersPoints];
+  return nonBiddersPoints;
 }
 
-+ (BOOL) bidderWonHand:(NSString*)hand WithTricksWon:(NSNumber*)tricksWon {
++ (BOOL) bidderWonHand:(NSString*)hand withTricksWon:(NSUInteger)tricksWon {
   NSDictionary* aBidType = [allTypes objectForKey:hand];
   
   NSString* variation = [aBidType objectForKey:ssVariation];
@@ -241,8 +245,8 @@ static NSString* ssVariationNoBid = @"no bid";
   // if regular bid and didn't win enough, or misére bid and won any
   // => loss
   if (
-      ([variation isEqual:ssVariationRegular] && tricksWon.intValue < bidTricks) ||
-      ([variation isEqual:ssVariationMisere]  && tricksWon.intValue > 0)
+      ([variation isEqual:ssVariationRegular] && tricksWon < bidTricks) ||
+      ([variation isEqual:ssVariationMisere]  && tricksWon > 0)
       ) {
     return NO;
   }
