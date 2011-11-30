@@ -62,10 +62,10 @@
 
 - (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
   if ([self.round.bid isEqualToString:@"NB"]) {
-    return [NSString stringWithFormat:@"%@ - what did everyone get?", [BidType tricksAndDescriptionForHand:self.round.bid]];
+    return [NSString stringWithFormat:@"%@", [BidType tricksAndDescriptionForHand:self.round.bid]];
   }
 
-  return [NSString stringWithFormat:@"%@ bid %@ - what did everyone get?", [[self.round.biddingTeams anyObject] name], [BidType tricksAndDescriptionForHand:self.round.bid]];
+  return [NSString stringWithFormat:@"%@ bid %@", [[self.round.biddingTeams anyObject] name], [BidType tricksAndDescriptionForHand:self.round.bid]];
 }
 
 - (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
