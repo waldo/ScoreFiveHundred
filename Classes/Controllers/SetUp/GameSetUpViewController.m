@@ -230,13 +230,13 @@ static int tagOffset = 1000;
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         break;
       case 1:
-        cell.textLabel.text = @"First over the line wins";
+        cell.textLabel.text = @"First to 500 wins";
         [swit setOn:[self.game.setting.firstToCross boolValue]];
         
         [swit addTarget:self action:@selector(firstToCrossChanged:) forControlEvents:UIControlEventValueChanged];
         break;
       case 2:
-        cell.textLabel.text = @"10 pts non-bidder trick";
+        cell.textLabel.text = @"10 points per trick";
         [swit setOn:[self.game.setting.nonBidderScoresTen boolValue]];
 
         [swit addTarget:self action:@selector(nonBidderScoresTenChanged:) forControlEvents:UIControlEventValueChanged];
