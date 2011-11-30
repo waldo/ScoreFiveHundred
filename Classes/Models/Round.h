@@ -18,7 +18,7 @@
 - (NSString*) tricksWonForPosition:(NSUInteger)pos;
 
 - (RoundScore*) getScoreForPosition:(NSUInteger)pos;
-- (void) updateAndSetTricksWon:(NSUInteger)tricksWon forPosition:(NSUInteger)pos;
+- (void) updateAndSetTricksWon:(NSUInteger)tricksWon forTeam:(Team*)t;
 
 + (NSString*) uniqueId;
 

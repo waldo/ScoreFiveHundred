@@ -15,6 +15,7 @@ static int siMaximumTricks = 10;
   tricksWonTableView,
   game,
   round,
+  team,
   bidVariation,
   regularList,
   misereList;
@@ -26,6 +27,7 @@ static int siMaximumTricks = 10;
 
   [game release];
   [round release];
+  [team release];
   [bidVariation release];
   [regularList release];
   [misereList release];
@@ -46,13 +48,13 @@ static int siMaximumTricks = 10;
   return list;
 }
 
-- (void) initWithGame:(Game*)g round:(Round*)r andPosition:(NSUInteger)pos {
+- (void) initWithGame:(Game*)g round:(Round*)r andTeam:(Team*)t {
   self.game = g;
   self.round = r;
-  position = pos;
+  self.team = t;
   self.bidVariation = [BidType variation:self.round.bid];
 
-  self.title = [NSString stringWithFormat:@"%@", [self.game nameForPosition:position]];
+  self.title = [NSString stringWithFormat:@"%@", self.team.name];
 }
 
 // MARK: View
@@ -123,7 +125,7 @@ static int siMaximumTricks = 10;
     tricksWon = (siMaximumTricks - indexPath.row);
   }
 
-  score = [BidType pointsForTeam:[self.game.teams objectAtIndex:position] game:self.game andTricksWon:tricksWon];
+  score = [BidType pointsForTeam:self.team game:self.game andTricksWon:tricksWon];
     
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   cell.textLabel.text = [[self tricksWonList] objectAtIndex:indexPath.row];
@@ -149,7 +151,7 @@ static int siMaximumTricks = 10;
     tricksWon = indexPath.row;
   }
   
-  [self.round updateAndSetTricksWon:tricksWon forPosition:position];
+  [self.round updateAndSetTricksWon:tricksWon forTeam:self.team];
 
   [self.navigationController popViewControllerAnimated:YES];
 }

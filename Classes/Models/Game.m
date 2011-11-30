@@ -76,7 +76,7 @@ static int scoreToLose = -500;
     [r addScoresObject:rs];
   }
 
-  [r updateAndSetTricksWon:10 forPosition:0];
+  [r updateAndSetTricksWon:10 forTeam:[self.teams objectAtIndex:0]];
   
   return r;
 }

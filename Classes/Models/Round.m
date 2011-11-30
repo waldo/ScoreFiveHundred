@@ -71,7 +71,8 @@
   rs.score = [NSNumber numberWithInt:([BidType pointsForTeam:[self.game.teams objectAtIndex:pos] game:self.game andTricksWon:tricksWon] + [[self.game oldScoreForPosition:pos] intValue])];
 }
 
-- (void) updateAndSetTricksWon:(NSUInteger)tricksWon forPosition:(NSUInteger)pos {
+- (void) updateAndSetTricksWon:(NSUInteger)tricksWon forTeam:(Team*)t {
+  int pos = [self.game.teams indexOfObject:t];
   [self setTricksWon:tricksWon forPosition:pos];
 
   // update others

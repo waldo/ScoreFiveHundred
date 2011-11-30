@@ -9,7 +9,7 @@
 
   Game* game;
   Round* round;
-  NSUInteger position;
+  Team* team;
   NSString* bidVariation;
   NSArray* regularList;
   NSArray* misereList;
@@ -20,12 +20,13 @@
 
 @property (nonatomic, retain) Game* game;
 @property (nonatomic, retain) Round* round;
+@property (nonatomic, retain) Team* team;
 @property (nonatomic, retain) NSString* bidVariation;
 @property (nonatomic, retain) NSArray* regularList;
 @property (nonatomic, retain) NSArray* misereList;
 
 
 - (NSArray*) tricksWonList;
-- (void) initWithGame:(Game*)g round:(Round*)r andPosition:(NSUInteger)pos;
+- (void) initWithGame:(Game*)g round:(Round*)r andTeam:(Team*)t;
 
 @end

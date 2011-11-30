@@ -150,7 +150,13 @@ static NSString* ssVariationQuebec = @"quebec";
   return suitColour;
 }
 
-+ (NSString*)tricksAndSymbolForHand:(NSString*)hand {
++ (NSNumber*) tricksForHand:(NSString*)hand {
+  NSDictionary* aBidType = [allTypes objectForKey:hand];
+  
+  return [aBidType objectForKey:ssTrick];
+}
+
++ (NSString*) tricksAndSymbolForHand:(NSString*)hand {
   NSDictionary* aBidType = [allTypes objectForKey:hand];
   NSString* tricksAndSymbol = [NSString stringWithFormat:@"%@%@", [aBidType objectForKey:ssTrick], [aBidType objectForKey:ssSuitSymbol]];
   
@@ -172,14 +178,14 @@ static NSString* ssVariationQuebec = @"quebec";
   return desc;  
 }
 
-+ (NSString*)descriptionForHand:(NSString*)hand {
++ (NSString*) descriptionForHand:(NSString*)hand {
   NSDictionary* aBidType = [allTypes objectForKey:hand];
   NSString* desc = [NSString stringWithFormat:@"%@", [aBidType objectForKey:ssSuit]];
   
   return desc;
 }
 
-+ (NSString*)pointsStringForHand:(NSString*)hand {
++ (NSString*) pointsStringForHand:(NSString*)hand {
   NSDictionary* aBidType = [allTypes objectForKey:hand];
   NSString* pts = [NSString stringWithFormat:@"%@ pts", [aBidType objectForKey:ssPoints]];
   

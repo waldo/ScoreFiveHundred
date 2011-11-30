@@ -11,6 +11,7 @@
 + (NSArray*) orderedHands;
 + (NSDictionary*) allTypes;
 + (NSString*) suitColourForHand:(NSString*)hand;
++ (NSNumber*) tricksForHand:(NSString*)hand;
 + (NSString*) tricksAndSymbolForHand:(NSString*)hand;
 + (NSString*) tricksAndDescriptionForHand:(NSString*)hand;
 + (NSString*) descriptionForHand:(NSString*)hand;

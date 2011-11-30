@@ -102,7 +102,7 @@
 
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
   self.round.bid = self.hand;
-  [self.round updateAndSetTricksWon:10 forPosition:0];
+  [self.round updateAndSetTricksWon:[[BidType tricksForHand:self.hand] intValue] forTeam:[self.round.biddingTeams anyObject]];
   [self.tricksWonSummaryController initWithGame:self.game andRound:self.round];
   [self.navigationController pushViewController:self.tricksWonSummaryController animated:YES];
 }

@@ -91,7 +91,7 @@
 }
 
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  [self.tricksWonController initWithGame:self.game round:self.round andPosition:indexPath.row];
+  [self.tricksWonController initWithGame:self.game round:self.round andTeam:[self.game.teams objectAtIndex:indexPath.row]];
 
   [self.navigationController pushViewController:self.tricksWonController animated:YES];
 }
