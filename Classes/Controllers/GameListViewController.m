@@ -49,8 +49,8 @@ static NSString* ssTitleCompleted     = @"Complete";
 }
 
 - (void) loadGames {
-  NSPredicate* inProgress = [NSPredicate predicateWithFormat:@"winningTeams == nil"];
-  NSPredicate* complete = [NSPredicate predicateWithFormat:@"winningTeams != nil"];
+  NSPredicate* inProgress = [NSPredicate predicateWithFormat:@"winningTeams.@count == 0"];
+  NSPredicate* complete = [NSPredicate predicateWithFormat:@"winningTeams.@count > 0"];
   
   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:managedObjectContext];
   
