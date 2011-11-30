@@ -7,8 +7,10 @@
 @interface Game()
 - (BOOL) guardForRoundIndex:(NSUInteger)ix;
 - (NSString*) scoreForPosition:(NSUInteger)pos andIndex:(NSUInteger)ix;
+- (void) scoresForRound:(Round*)r min:(int*)minScore andMax:(int*)maxScore;
 - (void) checkWithNormalRules:(Round*)r;
 - (void) checkWithFirstToCross:(Round*)r;
+- (void) checkWithTournament:(Round*)r;
 @end
 
 @implementation Game
@@ -116,79 +118,14 @@ static int scoreToLose = -500;
   if ([self.rounds count] > 0) {
     Round* r = [self.rounds objectAtIndex:0];
 
-    if ([self.setting.firstToCross boolValue]) {
+    if ([self.setting.tournament intValue] > 0) {
+      [self checkWithTournament:r];
+    }
+    else if ([self.setting.firstToCross boolValue]) {
       [self checkWithFirstToCross:r];
     }
     else {
       [self checkWithNormalRules:r];
-    }
-  }
-}
-
-- (void) checkWithNormalRules:(Round*)r {
-  int maxScore = scoreToLose;
-  int minScore = scoreToWin;
-
-  for (int i = 0; i < [self.teams count]; ++i) {
-    int score = [[r scoreForPosition:i] intValue];
-    if (score > maxScore) {
-      maxScore = score;
-    }
-    else if (score < minScore) {
-      minScore = score;
-    }
-  }
-
-  if (maxScore >= scoreToWin) {
-    for (int i = 0; i < [self.teams count]; ++i) {
-      int score = [[r scoreForPosition:i] intValue];
-
-      if (score >= scoreToWin && [r bidAchievedForPosition:i]) {
-        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
-      }
-    }
-  }
-  else if (minScore <= scoreToLose) {
-    for (int i = 0; i < [self.teams count]; ++i) {
-      int score = [[r scoreForPosition:i] intValue];
-
-      if (score != scoreToLose) {
-        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
-      }
-    }
-  }
-}
-
-- (void) checkWithFirstToCross:(Round*)r {
-  int maxScore = scoreToLose;
-  int minScore = scoreToWin;
-  
-  for (int i = 0; i < [self.teams count]; ++i) {
-    int score = [[r scoreForPosition:i] intValue];
-    if (score > maxScore) {
-      maxScore = score;
-    }
-    else if (score < minScore) {
-      minScore = score;
-    }
-  }
-  
-  if (maxScore >= scoreToWin) {
-    for (int i = 0; i < [self.teams count]; ++i) {
-      int score = [[r scoreForPosition:i] intValue];
-      
-      if (score >= scoreToWin) {
-        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
-      }
-    }
-  }
-  else if (minScore <= scoreToLose) {
-    for (int i = 0; i < [self.teams count]; ++i) {
-      int score = [[r scoreForPosition:i] intValue];
-      
-      if (score != scoreToLose) {
-        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
-      }
     }
   }
 }
@@ -278,6 +215,84 @@ static int scoreToLose = -500;
   }
   
   return [[self.rounds objectAtIndex:ix] scoreForPosition:pos];
+}
+
+- (void) checkWithNormalRules:(Round*)r {
+  int maxScore, minScore;
+  [self scoresForRound:r min:&minScore andMax:&maxScore];
+  
+  if (maxScore >= scoreToWin) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+      
+      if (score >= scoreToWin && [r bidAchievedForPosition:i]) {
+        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+      }
+    }
+  }
+  else if (minScore <= scoreToLose) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+      
+      if (score != scoreToLose) {
+        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+      }
+    }
+  }
+}
+
+- (void) checkWithFirstToCross:(Round*)r {
+  int maxScore, minScore;
+  [self scoresForRound:r min:&minScore andMax:&maxScore];
+  
+  if (maxScore >= scoreToWin) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+      
+      if (score >= scoreToWin) {
+        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+      }
+    }
+  }
+  else if (minScore <= scoreToLose) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+      
+      if (score != scoreToLose) {
+        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+      }
+    }
+  }
+}
+
+- (void) checkWithTournament:(Round*)r {
+  int maxScore, minScore;
+  [self scoresForRound:r min:&minScore andMax:&maxScore];
+
+  if ([self.rounds count] >= [self.setting.tournament intValue]) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+      
+      if (score == maxScore) {
+        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+      }
+    }
+  }
+}
+
+- (void) scoresForRound:(Round*)r min:(int*)minScore andMax:(int*)maxScore {
+  *maxScore = scoreToLose;
+  *minScore = scoreToWin;
+  
+  for (int i = 0; i < [self.teams count]; ++i) {
+    int score = [[r scoreForPosition:i] intValue];
+    if (score > *maxScore) {
+      *maxScore = score;
+    }
+    else if (score < *minScore) {
+      *minScore = score;
+    }
+  }
 }
 
 @end

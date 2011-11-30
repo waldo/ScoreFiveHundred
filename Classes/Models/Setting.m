@@ -10,13 +10,11 @@
 @dynamic noOneBid;
 @dynamic game;
 
-@synthesize tournamentOptions;
 @synthesize modeOptions;
 
-- (void) didTurnIntoFault {
-  [tournamentOptions release];
+- (void) didTurnIntoFault {  
   [modeOptions release];
-  
+
   [super didTurnIntoFault];
 }
 
@@ -30,22 +28,6 @@
                       [NSDictionary dictionaryWithObjectsAndKeys:@"5 players", @"text", @"", @"detail", nil],
                       [NSDictionary dictionaryWithObjectsAndKeys:@"Quebec mode", @"text", @"Play to 1000 points", @"detail", nil],
                       nil];
-  
-  self.tournamentOptions = [NSOrderedSet orderedSetWithObjects:
-                            [NSNumber numberWithInt:0],
-                            [NSNumber numberWithInt:1],
-                            [NSNumber numberWithInt:2],
-                            [NSNumber numberWithInt:3],
-                            [NSNumber numberWithInt:4],
-                            [NSNumber numberWithInt:5],
-                            [NSNumber numberWithInt:6],
-                            [NSNumber numberWithInt:7],
-                            [NSNumber numberWithInt:8],
-                            [NSNumber numberWithInt:9],
-                            [NSNumber numberWithInt:10],
-                            [NSNumber numberWithInt:15],
-                            [NSNumber numberWithInt:20],
-                            nil];
 }
 
 - (void) setToMatch:(Setting*)recent {
@@ -57,18 +39,18 @@
 }
 
 - (NSString*) textForCurrentTournament {
-  return [self textForTournament:[self.tournamentOptions indexOfObject:self.tournament]];
+  return [self textForTournament:[self.tournament intValue]];
 }
 
-- (NSString*) textForTournament:(NSUInteger)ix {
-  if (ix == 0) {
+- (NSString*) textForTournament:(NSUInteger)rounds {
+  if (rounds == 0) {
     return @"Off";
   }
-  else if (ix == 1) {
-    return [NSString stringWithFormat:@"%@ round", [self.tournamentOptions objectAtIndex:ix]];
+  else if (rounds == 1) {
+    return @"1 round";
   }
   
-  return [NSString stringWithFormat:@"%@ rounds", [self.tournamentOptions objectAtIndex:ix]];
+  return [NSString stringWithFormat:@"%d rounds", rounds];
 }
 
 - (NSIndexPath*) indexPathOfCurrentMode {
