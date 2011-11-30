@@ -155,7 +155,6 @@
 }
 
 - (NSIndexPath*)tableView:(UITableView*)tableView willSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  // never selectable
   return nil;
 }
 

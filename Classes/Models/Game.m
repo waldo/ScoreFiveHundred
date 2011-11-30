@@ -150,18 +150,9 @@ static int scoreToLose = -500;
 }
 
 - (void) save {
-  NSError *error = nil;
-  NSManagedObjectContext *moc = self.managedObjectContext;
-  if (moc != nil) {
-    if ([moc hasChanges] && ![moc save:&error]) {
-      /*
-       Replace this implementation with code to handle the error appropriately.
-       
-       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-       */
-      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-      abort();
-    } 
+  NSError *err = nil;
+  if (![self.managedObjectContext save:&err]) {
+    NSLog(@"Unresolved error %@, %@", err, [err userInfo]);
   }
 }
 

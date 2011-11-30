@@ -98,7 +98,7 @@
 // MARK: class methods
 + (NSString*) uniqueId {
   CFUUIDRef uniqueId = CFUUIDCreate(NULL);
-  NSString* sUniqueId = (NSString*)CFUUIDCreateString(NULL, uniqueId); // convert to string
+  NSString* sUniqueId = (NSString*)CFUUIDCreateString(NULL, uniqueId);
   CFRelease(uniqueId);
   
   return [sUniqueId autorelease];

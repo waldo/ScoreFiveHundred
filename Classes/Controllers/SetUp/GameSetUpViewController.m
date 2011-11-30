@@ -38,7 +38,7 @@ static int tagOffset = 1000;
 }
 
 - (IBAction) start:(id)sender {
-  //  add name and settings to game
+  // add name and settings to game
   NSMutableOrderedSet* names = [[[NSMutableOrderedSet alloc] initWithCapacity:[self.teamNameTextFields count]] autorelease];
   for (int i = 0; i < [self.game.setting numberOfTeams]; ++i) {
     UITextField* field = [self.teamNameTextFields objectAtIndex:i];
@@ -49,13 +49,10 @@ static int tagOffset = 1000;
     
     [names addObject:name];
   }
-  
-  NSLog(@"undoActionName: %@", self.game.managedObjectContext.undoManager.undoActionName);
 
   if ([self.game.managedObjectContext.undoManager.undoActionName isEqualToString:@"new game"]) {
     [self.game.managedObjectContext.undoManager endUndoGrouping];
     [self.game.managedObjectContext.undoManager removeAllActions];
-    NSLog(@"undoActionName: %@", self.game.managedObjectContext.undoManager.undoActionName);
   }
 
   [self.game setTeamsByNames:names];
@@ -124,7 +121,6 @@ static int tagOffset = 1000;
 
 // MARK: TextField delegate
 - (BOOL) textFieldShouldReturn:(UITextField*)textField {
-  // mod 2 should be mod number of teams
   int nextIndex = (textField.tag - tagOffset + 1) % [self.game.setting numberOfTeams];
   UITextField* next = [self.teamNameTextFields objectAtIndex:nextIndex];
 
