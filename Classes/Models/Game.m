@@ -7,20 +7,27 @@
 @interface Game()
 - (BOOL) guardForRoundIndex:(NSUInteger)ix;
 - (NSString*) scoreForPosition:(NSUInteger)pos andIndex:(NSUInteger)ix;
+- (void) checkWithNormalRules:(Round*)r;
+- (void) checkWithFirstToCross:(Round*)r;
 @end
 
 @implementation Game
+// MARK: static
+static int scoreToWin = 500;
+static int scoreToLose = -500;
+//static int scoreToWinQuebec = 1000;
 
+// MARK: dynamic
 @dynamic complete;
 @dynamic id;
 @dynamic lastPlayed;
 @dynamic rounds;
 @dynamic teams;
-@dynamic winningTeam;
+@dynamic winningTeams;
 @dynamic setting;
 
 - (NSNumber*) isComplete {
-  return [NSNumber numberWithBool:(self.winningTeam != nil)];
+  return [NSNumber numberWithBool:([self.winningTeams count] > 0)];
 }
 
 - (NSString*) nameForPosition:(NSUInteger)pos {
@@ -40,12 +47,18 @@
 }
 
 - (BOOL) isVictorInPosition:(NSUInteger)pos {
-  if (self.winningTeam == nil) {
+  if (self.winningTeams == nil) {
     return false;
   }
   else {
-    return [self nameForPosition:pos] == self.winningTeam.name;
+    for (Team* t in self.winningTeams) {
+      if ([t isEqual:[self.teams objectAtIndex:pos]]) {
+        return true;
+      }
+    }
   }
+
+  return false;
 }
 
 - (Round*) buildRound {
@@ -85,17 +98,97 @@
   }
 }
 
+- (NSString*) teamNames:(NSSet*)teams {
+  if (teams == nil || [teams count] == 0) {
+    return nil;
+  }
+  NSMutableArray* names = [[[NSMutableArray alloc] initWithCapacity:[teams count]] autorelease];
+  for (Team* t in teams) {
+    [names addObject:t.name];
+  }
+
+  return [names componentsJoinedByString:@" and "];
+}
+
 - (void) checkForGameOver {
-  self.winningTeam = nil;
+  self.winningTeams = nil;
 
   if ([self.rounds count] > 0) {
     Round* r = [self.rounds objectAtIndex:0];
 
-    if (([[r scoreForPosition:0] intValue] >= 500 && [r bidAchievedForPosition:0]) || [[r scoreForPosition:1] intValue] <= -500) {
-      self.winningTeam = [self.teams objectAtIndex:0];
+    if ([self.setting.firstToCross boolValue]) {
+      [self checkWithFirstToCross:r];
     }
-    else if (([[r scoreForPosition:1] intValue] >= 500 && [r bidAchievedForPosition:1]) || [[r scoreForPosition:0] intValue] <= -500) {
-      self.winningTeam = [self.teams objectAtIndex:1];
+    else {
+      [self checkWithNormalRules:r];
+    }
+  }
+}
+
+- (void) checkWithNormalRules:(Round*)r {
+  int maxScore = scoreToLose;
+  int minScore = scoreToWin;
+
+  for (int i = 0; i < [self.teams count]; ++i) {
+    int score = [[r scoreForPosition:i] intValue];
+    if (score > maxScore) {
+      maxScore = score;
+    }
+    else if (score < minScore) {
+      minScore = score;
+    }
+  }
+
+  if (maxScore >= scoreToWin) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+
+      if (score >= scoreToWin && [r bidAchievedForPosition:i]) {
+        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+      }
+    }
+  }
+  else if (minScore <= scoreToLose) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+
+      if (score != scoreToLose) {
+        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+      }
+    }
+  }
+}
+
+- (void) checkWithFirstToCross:(Round*)r {
+  int maxScore = scoreToLose;
+  int minScore = scoreToWin;
+  
+  for (int i = 0; i < [self.teams count]; ++i) {
+    int score = [[r scoreForPosition:i] intValue];
+    if (score > maxScore) {
+      maxScore = score;
+    }
+    else if (score < minScore) {
+      minScore = score;
+    }
+  }
+  
+  if (maxScore >= scoreToWin) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+      
+      if (score >= scoreToWin) {
+        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+      }
+    }
+  }
+  else if (minScore <= scoreToLose) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+      
+      if (score != scoreToLose) {
+        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+      }
     }
   }
 }
@@ -140,6 +233,10 @@
   [super awakeFromInsert];
   [self setValue:[Round uniqueId] forKey:@"id"];
   [self setValue:[NSDate date] forKey:@"lastPlayed"];
+}
+
+- (void) didTurnIntoFault {
+  [super didTurnIntoFault];
 }
 
 // MARK: override buggy coredata code

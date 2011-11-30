@@ -10,13 +10,14 @@
 @property (nonatomic, retain) NSDate * lastPlayed;
 @property (nonatomic, retain) NSOrderedSet *rounds;
 @property (nonatomic, retain) NSOrderedSet *teams;
-@property (nonatomic, retain) Team *winningTeam;
+@property (nonatomic, retain) NSSet *winningTeams;
 @property (nonatomic, retain) Setting *setting;
 
 - (NSString*) nameForPosition:(NSUInteger)pos;
 - (NSString*) scoreForPosition:(NSUInteger)pos;
 - (NSString*) oldScoreForPosition:(NSUInteger)pos;
 - (BOOL) isVictorInPosition:(NSUInteger)pos;
+- (NSString*) teamNames:(NSSet*)teams;
 - (Round*) buildRound;
 - (void) finaliseRound;
 - (void) setTeamsByNames:(NSMutableOrderedSet*)names;
@@ -48,4 +49,8 @@
 - (void)removeTeamsObject:(Team *)value;
 - (void)addTeams:(NSOrderedSet *)values;
 - (void)removeTeams:(NSOrderedSet *)values;
+- (void)addWinningTeamsObject:(Team *)value;
+- (void)removeWinningTeamsObject:(Team *)value;
+- (void)addWinningTeams:(NSSet *)values;
+- (void)removeWinningTeams:(NSSet *)values;
 @end

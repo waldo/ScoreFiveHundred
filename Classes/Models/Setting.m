@@ -48,6 +48,14 @@
                             nil];
 }
 
+- (void) setToMatch:(Setting*)recent {
+  self.mode = recent.mode;
+  self.tournament = recent.tournament;
+  self.firstToCross = recent.firstToCross;
+  self.nonBidderScoresTen = recent.nonBidderScoresTen;
+  self.noOneBid = recent.noOneBid;
+}
+
 - (NSString*) textForCurrentTournament {
   return [self textForTournament:[self.tournamentOptions indexOfObject:self.tournament]];
 }

@@ -9,21 +9,21 @@ static NSString* ssTitleInProgress    = @"In Progress";
 static NSString* ssTitleCompleted     = @"Complete";
 
 // MARK: synthesize
-@synthesize cellWrapper,
-            gameListTableView,
-            navItem,
-            addButton,
-            setUpController,
-            gameController,
-            managedObjectContext,
-            gamesInProgress,
-            gamesComplete;
+@synthesize 
+  cellWrapper,
+  gameListTableView,
+  addButton,
+  setUpController,
+  gameController,
+  managedObjectContext,
+  gamesInProgress,
+  gamesComplete,
+  mostRecentGame;
 
 
 - (void)dealloc {
   [cellWrapper release];
   [gameListTableView release];
-  [navItem release];
   [addButton release];
   [setUpController release];
   [gameController release];
@@ -31,6 +31,7 @@ static NSString* ssTitleCompleted     = @"Complete";
   [managedObjectContext release];
   [gamesInProgress release];
   [gamesComplete release];
+  [mostRecentGame release];
   
   [super dealloc];
 }
@@ -43,13 +44,13 @@ static NSString* ssTitleCompleted     = @"Complete";
   Setting* s = (Setting*)[NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:self.managedObjectContext];
   g.setting = s;
 
-  [self.setUpController initWithGame:g];
+  [self.setUpController initWithGame:g mostRecentSettings:self.mostRecentGame.setting];
   [self.navigationController pushViewController:self.setUpController animated:YES];
 }
 
 - (void) loadGames {
-  NSPredicate* inProgress = [NSPredicate predicateWithFormat:@"winningTeam == nil"];
-  NSPredicate* complete = [NSPredicate predicateWithFormat:@"winningTeam != nil"];
+  NSPredicate* inProgress = [NSPredicate predicateWithFormat:@"winningTeams == nil"];
+  NSPredicate* complete = [NSPredicate predicateWithFormat:@"winningTeams != nil"];
   
   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:managedObjectContext];
   
@@ -64,7 +65,14 @@ static NSString* ssTitleCompleted     = @"Complete";
   
   NSError *error;
   NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    
+  
+  if ([mutableFetchResults count] > 0) {
+    self.mostRecentGame = [mutableFetchResults objectAtIndex:0];
+  }
+  else {
+    self.mostRecentGame = nil;
+  }
+
   [self setGamesInProgress:[NSMutableArray arrayWithArray:[mutableFetchResults filteredArrayUsingPredicate:inProgress]]];
   [self setGamesComplete:[NSMutableArray arrayWithArray:[mutableFetchResults filteredArrayUsingPredicate:complete]]];
 

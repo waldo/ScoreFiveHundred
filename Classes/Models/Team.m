@@ -9,7 +9,7 @@
 @dynamic id;
 @dynamic name;
 @dynamic games;
-@dynamic gameWinner;
+@dynamic gameWinners;
 @dynamic roundBidder;
 @dynamic roundScores;
 

@@ -8,7 +8,7 @@
 @property (nonatomic, retain) NSString * id;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSOrderedSet *games;
-@property (nonatomic, retain) Game *gameWinner;
+@property (nonatomic, retain) NSSet *gameWinners;
 @property (nonatomic, retain) Round *roundBidder;
 @property (nonatomic, retain) RoundScore *roundScores;
 @end
@@ -25,4 +25,19 @@
 - (void)removeGamesObject:(Game *)value;
 - (void)addGames:(NSOrderedSet *)values;
 - (void)removeGames:(NSOrderedSet *)values;
+- (void)addGameWinnersObject:(Game *)value;
+- (void)removeGameWinnersObject:(Game *)value;
+- (void)addGameWinners:(NSSet *)values;
+- (void)removeGameWinners:(NSSet *)values;
+
+- (void)addRoundBidderObject:(Round *)value;
+- (void)removeRoundBidderObject:(Round *)value;
+- (void)addRoundBidder:(NSSet *)values;
+- (void)removeRoundBidder:(NSSet *)values;
+
+- (void)addRoundScoresObject:(RoundScore *)value;
+- (void)removeRoundScoresObject:(RoundScore *)value;
+- (void)addRoundScores:(NSSet *)values;
+- (void)removeRoundScores:(NSSet *)values;
+
 @end

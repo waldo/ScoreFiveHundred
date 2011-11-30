@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSOrderedSet* modeOptions;
 
 //- (void) initOptions;
+- (void) setToMatch:(Setting*)recent;
 - (NSString*) textForCurrentTournament;
 - (NSString*) textForTournament:(NSUInteger)ix;
 - (NSIndexPath*) indexPathOfCurrentMode;

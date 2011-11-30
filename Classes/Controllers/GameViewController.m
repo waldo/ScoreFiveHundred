@@ -86,28 +86,18 @@
 - (void) gameComplete {
   self.bidButton.hidden         = NO;
   self.congratulations.hidden   = YES;
-  NSString* team                = nil;
 
   [self.navigationItem setRightBarButtonItem:self.addButton animated:NO];
   
-  if ([self.game.isComplete boolValue]) {    
-    team = [self.game.winningTeam name];
+  if ([self.game.isComplete boolValue]) {
+    NSString* winningTeamNames = [self.game teamNames:self.game.winningTeams];
 
-    [self.congratulations setTitle:[NSString stringWithFormat:@"%@ won! Rematch?", team] forState:UIControlStateNormal];
+    [self.congratulations setTitle:[NSString stringWithFormat:@"%@ won! Rematch?", winningTeamNames] forState:UIControlStateNormal];
     self.bidButton.hidden       = YES;
     self.congratulations.hidden = NO;
     [self.navigationItem setRightBarButtonItem:self.rematchButton animated:NO];
     if ([[NSDate date] timeIntervalSinceDate:self.game.lastPlayed] < 2) {
-//      // debug
-//      NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//      [formatter setDateFormat: @"yyyy-MM-dd HH:mm:ss zzz"];
-//      NSLog(@"current: %@", [formatter stringFromDate:[NSDate date]]);
-//      NSLog(@"lastPlayed: %@", [formatter stringFromDate:self.game.lastPlayed]);
-//      NSLog(@"interval: %f", [[NSDate date] timeIntervalSinceDate:self.game.lastPlayed]);
-//      // end debug
-
-      NSString* winningTeamName = [self.game.winningTeam name];
-      NSString* msg = [NSString stringWithFormat:@"%@ win!", winningTeamName];
+      NSString* msg = [NSString stringWithFormat:@"%@ win!", winningTeamNames];
       UIAlertView* rematchAlert = [[[UIAlertView alloc] initWithTitle:msg message:nil delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Rematch", nil] autorelease];
       [rematchAlert show];
     }

@@ -12,7 +12,8 @@ static int tagOffset = 1000;
   gameModeController,
   gameTournamentController,
   table,
-  startButton,
+  cancel,
+  start,
   game,
   teamNameTextFields;
 
@@ -21,13 +22,19 @@ static int tagOffset = 1000;
   [gameModeController release];
   [gameTournamentController release];
   [table release];
-  [startButton release];  
+  [cancel release];
+  [start release];  
   [game release];
   [teamNameTextFields release];
-
-  self.navigationController.navigationBar.delegate = nil;
   
   [super dealloc];
+}
+
+- (IBAction) cancel:(id)sender {
+  if ([self.game.managedObjectContext.undoManager.undoActionName isEqualToString:@"new game"]) {
+    [self.game.managedObjectContext.undoManager endUndoGrouping];
+    [self.game.managedObjectContext.undoManager undo];
+  }  
 }
 
 - (IBAction) start:(id)sender {
@@ -62,8 +69,11 @@ static int tagOffset = 1000;
   [navController pushViewController:self.gameController animated:YES];
 }
 
-- (void) initWithGame:(Game*)g {
+- (void) initWithGame:(Game*)g mostRecentSettings:(Setting*)recent {
   self.game = g;
+  if (recent != nil) {
+    [self.game.setting setToMatch:recent];
+  }
 
   for (UITextField* field in self.teamNameTextFields) {
     field.text = @"";
@@ -76,7 +86,8 @@ static int tagOffset = 1000;
 
   self.title = @"Game Settings";
   
-  [self.navigationItem setRightBarButtonItem:self.startButton animated:YES];
+  [self.navigationItem setLeftBarButtonItem:self.cancel animated:NO];
+  [self.navigationItem setRightBarButtonItem:self.start animated:NO];
 
   self.teamNameTextFields = [[NSMutableOrderedSet alloc] init];
   NSArray* teamPlaceholders = [NSArray arrayWithObjects:@"The greatest", @"The greatest tribute", @"Tribute to a tribute", @"You've gone", @"Too far", nil];
@@ -109,11 +120,6 @@ static int tagOffset = 1000;
 
 - (void) viewWillDisappear:(BOOL)animated {
   [super viewWillDisappear:animated];
-
-  if ([self.game.managedObjectContext.undoManager.undoActionName isEqualToString:@"new game"]) {
-    [self.game.managedObjectContext.undoManager endUndoGrouping];
-    [self.game.managedObjectContext.undoManager undo];
-  }
 }
 
 // MARK: TextField delegate
