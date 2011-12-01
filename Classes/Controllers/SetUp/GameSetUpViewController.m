@@ -290,10 +290,19 @@ static int tagOffset = 1000;
 
 - (void) nonBidderScoresTenChanged:(id)control {
   self.game.setting.nonBidderScoresTen = [NSNumber numberWithBool:((UISwitch*)control).on];
+  if (!((UISwitch*)control).on) {
+    self.game.setting.noOneBid = [NSNumber numberWithBool:NO];
+    [self.table reloadData];
+  }
+
 }
 
 - (void) noOneBidChanged:(id)control {
   self.game.setting.noOneBid = [NSNumber numberWithBool:((UISwitch*)control).on];
+  if (((UISwitch*)control).on) {
+    self.game.setting.nonBidderScoresTen = [NSNumber numberWithBool:YES];
+    [self.table reloadData];
+  }
 }
 
 @end
