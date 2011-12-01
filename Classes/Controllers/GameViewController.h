@@ -15,9 +15,8 @@
   IBOutlet UIBarButtonItem* rematchButton;
   IBOutlet UITextField* teamOneName;
   IBOutlet UITextField* teamTwoName;
-  IBOutlet UIButton* bidButton;
-  IBOutlet UIButton* congratulations;
-  IBOutlet UILabel* dividerTop;
+  IBOutlet UITextField* teamOneScore;
+  IBOutlet UITextField* teamTwoScore;
   
   Game* game;
 }
@@ -29,9 +28,8 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem* rematchButton;
 @property (nonatomic, retain) IBOutlet UITextField* teamOneName;
 @property (nonatomic, retain) IBOutlet UITextField* teamTwoName;
-@property (nonatomic, retain) IBOutlet UIButton* bidButton;
-@property (nonatomic, retain) IBOutlet UIButton* congratulations;
-@property (nonatomic, retain) IBOutlet UILabel* dividerTop;
+@property (nonatomic, retain) IBOutlet UITextField* teamOneScore;
+@property (nonatomic, retain) IBOutlet UITextField* teamTwoScore;
 
 @property (nonatomic, retain) Game* game;
 

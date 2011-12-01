@@ -11,7 +11,6 @@
 @interface GameListViewController : UIViewController {
   IBOutlet CellWrapper* cellWrapper;
   IBOutlet UITableView* gameListTableView;
-  IBOutlet UINavigationItem* navItem;
   IBOutlet UIBarButtonItem* addButton;
   IBOutlet GameSetUpViewController* setUpController;
   IBOutlet GameViewController* gameController;

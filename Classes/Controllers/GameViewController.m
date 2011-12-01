@@ -15,18 +15,17 @@
 @implementation GameViewController
 
 // MARK: synthesize
-@synthesize highestBidderController;
-@synthesize roundsTableView;
-@synthesize cellWrapper;
-@synthesize addButton;
-@synthesize rematchButton;
-@synthesize teamOneName;
-@synthesize teamTwoName;
-@synthesize bidButton;
-@synthesize congratulations;
-@synthesize dividerTop;
-
-@synthesize game;
+@synthesize
+  highestBidderController,
+  roundsTableView,
+  cellWrapper,
+  addButton,
+  rematchButton,
+  teamOneName,
+  teamTwoName,
+  teamOneScore,
+  teamTwoScore,
+  game;
 
 - (void) dealloc {
   [highestBidderController release];
@@ -36,9 +35,8 @@
   [rematchButton release];
   [teamOneName release];
   [teamTwoName release];
-  [bidButton release];
-  [congratulations release];
-  [dividerTop release];
+  [teamOneScore release];
+  [teamTwoScore release];
   
   [game release];
   
@@ -77,6 +75,18 @@
 - (void) refreshView {
   self.teamOneName.text = [self.game nameForPosition:0];
   self.teamTwoName.text = [self.game nameForPosition:1];
+  if ([self.game scoreForPosition:0] == nil) {
+    self.teamOneScore.text = @"0";
+  }
+  else {
+    self.teamOneScore.text = [self.game scoreForPosition:0];    
+  }
+  if ([self.game scoreForPosition:1] == nil) {
+    self.teamTwoScore.text = @"0";
+  }
+  else {
+    self.teamTwoScore.text = [self.game scoreForPosition:1];
+  }
 
   [self.roundsTableView reloadData];
   [self.roundsTableView scrollsToTop];
@@ -84,17 +94,11 @@
 }
 
 - (void) gameComplete {
-  self.bidButton.hidden         = NO;
-  self.congratulations.hidden   = YES;
-
   [self.navigationItem setRightBarButtonItem:self.addButton animated:NO];
-  
+
   if ([self.game.isComplete boolValue]) {
     NSString* winningTeamNames = [self.game teamNames:self.game.winningTeams];
 
-    [self.congratulations setTitle:[NSString stringWithFormat:@"%@ won! Rematch?", winningTeamNames] forState:UIControlStateNormal];
-    self.bidButton.hidden       = YES;
-    self.congratulations.hidden = NO;
     [self.navigationItem setRightBarButtonItem:self.rematchButton animated:NO];
     if ([[NSDate date] timeIntervalSinceDate:self.game.lastPlayed] < 2) {
       NSString* msg = [NSString stringWithFormat:@"%@ win!", winningTeamNames];
@@ -135,23 +139,61 @@
 }
 
 // MARK: tableview delegate
+- (NSInteger) numberOfSectionsInTableView:(UITableView*)tableView {	
+	return 2;
+}
+
+- (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
+  if (section == 0 && [self.game.rounds count] > 0) {
+    return @"Rounds";
+  }
+
+  return nil;
+}
+
+
 - (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-  return [self.game.rounds count];
+  if (section == 0) {
+    return [self.game.rounds count];
+  }
+  
+  return 1;
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-  static NSString* CellIdentifier = @"CellScoringRound";
-  
-  CellScoringRound* cellScoringRound = (CellScoringRound*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  
-  if (cellScoringRound == nil) {
-    [cellWrapper loadMyNibFile:CellIdentifier];
-    cellScoringRound = (CellScoringRound*)cellWrapper.cell;
-  }
-  
-  [cellScoringRound setStyleForRound:[self.game.rounds objectAtIndex:indexPath.row]];
+  if (indexPath.section == 0) {
+    static NSString* CellIdentifier = @"CellScoringRound";
+    
+    CellScoringRound* cellScoringRound = (CellScoringRound*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cellScoringRound == nil) {
+      [cellWrapper loadMyNibFile:CellIdentifier];
+      cellScoringRound = (CellScoringRound*)cellWrapper.cell;
+    }
+    
+    [cellScoringRound setStyleForRound:[[self.game.rounds reversedOrderedSet] objectAtIndex:indexPath.row]];
 
-  return cellScoringRound;
+    return cellScoringRound;
+  }
+  else {
+    UITableViewCell* cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"CellAddButton"] autorelease];
+    
+    UIButton* btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn.frame = CGRectMake(10, 0, CGRectGetWidth(cell.contentView.bounds)-20, CGRectGetHeight(cell.contentView.bounds)+3);
+    if ([self.game.isComplete boolValue]) {
+      NSString* winningTeamNames = [self.game teamNames:self.game.winningTeams];
+
+      [btn setTitle:[NSString stringWithFormat:@"%@ won! Rematch?", winningTeamNames] forState:UIControlStateNormal];
+      [btn addTarget:self action:@selector(rematch:) forControlEvents:UIControlEventTouchUpInside];      
+    }
+    else {
+      [btn setTitle:@"Add round" forState:UIControlStateNormal];
+      [btn addTarget:self action:@selector(bid:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    [cell addSubview:btn];
+    
+    return cell;
+  }
 }
 
 - (NSIndexPath*)tableView:(UITableView*)tableView willSelectRowAtIndexPath:(NSIndexPath*)indexPath {
@@ -161,7 +203,7 @@
 - (BOOL)tableView:(UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath*)indexPath {
   BOOL canEdit = NO;
 
-  if (0 == indexPath.row) {
+  if ([self.game.rounds count]-1 == indexPath.row) {
     canEdit = YES;
   }
   return canEdit;
@@ -173,7 +215,7 @@
 
 - (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-    [self.game removeObjectFromRoundsAtIndex:indexPath.row];
+    [self.game removeObjectFromRoundsAtIndex:0];
     [self.game save];
 
     [self refreshView];

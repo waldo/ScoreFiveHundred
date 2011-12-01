@@ -83,7 +83,14 @@ static NSString* ssTitleCompleted     = @"Complete";
 }
 
 - (Game*) gameForIndexPath:(NSIndexPath*)index {
-  return [[self valueForSection:index.section valueInProgress:self.gamesInProgress valueCompleted:self.gamesComplete] objectAtIndex:index.row];
+  if (index.section == 0) {
+    return [self.gamesInProgress objectAtIndex:index.row];
+  }
+  else if (index.section == 1) {
+    return [self.gamesComplete objectAtIndex:index.row];
+  }
+  
+  return nil;
 }
 
 - (id) valueForSection:(NSInteger)section valueInProgress:(id)valueInProgress valueCompleted:(id)valueCompleted {
@@ -125,63 +132,80 @@ static NSString* ssTitleCompleted     = @"Complete";
 
 // MARK: tableview delegate
 - (NSInteger) numberOfSectionsInTableView:(UITableView*)tableView {	
-  int sections = 0;
-  
-  if ([self.gamesInProgress count] > 0) {
-    sections++;
-  }
-  if ([self.gamesComplete count] > 0) {
-    sections++;
-  }
-  
-	return sections;
+	return 3;
 }
 
 - (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
-  return [self valueForSection:section valueInProgress:ssTitleInProgress valueCompleted:ssTitleCompleted];
+  if (section == 0 && [self.gamesInProgress count] > 0) {
+    return @"In progress";
+  }
+  else if (section == 1 && [self.gamesComplete count] > 0) {
+    return @"Complete";
+  }
+
+  return nil;
 }
 
 - (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-  return [[self valueForSection:section valueInProgress:[NSNumber numberWithInteger:[self.gamesInProgress count]] valueCompleted:[NSNumber numberWithInteger:[self.gamesComplete count]]] integerValue];
+  if (section == 0) {
+    return [self.gamesInProgress count];
+  }
+  else if (section == 1) {
+    return [self.gamesComplete count];
+  }
+  
+  return 1;
 }
 
 - (UITableViewCell*) tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-  static NSString* CellIdentifier = @"CellGame";
-  
-  CellGame* cellGame = (CellGame*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  
-  if (cellGame == nil) {
-    [self.cellWrapper loadMyNibFile:CellIdentifier];
-    cellGame = (CellGame*)self.cellWrapper.cell;
-  }
+  if (indexPath.section == 2) {
+    UITableViewCell* cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"CellAddButton"] autorelease];
+    
+    UIButton* btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn.frame = CGRectMake(10, 0, CGRectGetWidth(cell.contentView.bounds)-20, CGRectGetHeight(cell.contentView.bounds)+3);
+    [btn setTitle:@"New game" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(newGame:) forControlEvents:UIControlEventTouchUpInside];
+    [cell addSubview:btn];
 
-  Game* g = [self gameForIndexPath:indexPath];
-  
-  cellGame.nameTeamOne.text = [g nameForPosition:0];
-  cellGame.nameTeamTwo.text = [g nameForPosition:1];
-  cellGame.pointsTeamOne.text = [g scoreForPosition:0];
-  cellGame.pointsTeamTwo.text = [g scoreForPosition:1];
-  
-  // show icon for winning team
-  if (!g.isComplete) {
-    cellGame.symbolResultTeamOne.hidden = YES;
-    cellGame.symbolResultTeamTwo.hidden = YES;
+    return cell;
   }
-  if ([g isVictorInPosition:0]) {
-    cellGame.symbolResultTeamOne.hidden = NO;
-  }
-  if ([g isVictorInPosition:1]) {
-    cellGame.symbolResultTeamTwo.hidden = NO;
-  }
-  
-  NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-  [formatter setDateStyle:NSDateFormatterMediumStyle];
-  
-  cellGame.dateLastPlayed.text = [formatter stringFromDate:g.lastPlayed];
+  else {
+    static NSString* CellIdentifier = @"CellGame";
+    CellGame* cellGame = (CellGame*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cellGame == nil) {
+      [self.cellWrapper loadMyNibFile:CellIdentifier];
+      cellGame = (CellGame*)self.cellWrapper.cell;
+    }
 
-  [formatter release];
-  
-  return cellGame;
+    Game* g = [self gameForIndexPath:indexPath];
+    
+    cellGame.nameTeamOne.text = [g nameForPosition:0];
+    cellGame.nameTeamTwo.text = [g nameForPosition:1];
+    cellGame.pointsTeamOne.text = [g scoreForPosition:0];
+    cellGame.pointsTeamTwo.text = [g scoreForPosition:1];
+    
+    // show icon for winning team
+    if (!g.isComplete) {
+      cellGame.symbolResultTeamOne.hidden = YES;
+      cellGame.symbolResultTeamTwo.hidden = YES;
+    }
+    if ([g isVictorInPosition:0]) {
+      cellGame.symbolResultTeamOne.hidden = NO;
+    }
+    if ([g isVictorInPosition:1]) {
+      cellGame.symbolResultTeamTwo.hidden = NO;
+    }
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    cellGame.dateLastPlayed.text = [formatter stringFromDate:g.lastPlayed];
+
+    [formatter release];
+    
+    return cellGame;
+  }
 }
 
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
