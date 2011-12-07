@@ -78,4 +78,12 @@
   return [self.noOneBid boolValue];
 }
 
+- (void) consistentForMode {
+  if ([self.mode isEqualToString:@"Quebec mode"]) {
+    self.noOneBid = [NSNumber numberWithBool:NO];
+    self.nonBidderScoresTen = [NSNumber numberWithBool:NO];
+    self.firstToCross = [NSNumber numberWithBool:YES];
+  }
+}
+
 @end

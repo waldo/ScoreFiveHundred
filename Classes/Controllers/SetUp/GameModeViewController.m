@@ -89,6 +89,7 @@
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
   int ix = [self indexFromIndexPath:indexPath];
   self.setting.mode = [[self.setting.modeOptions objectAtIndex:ix] objectForKey:@"text"];
+  [self.setting consistentForMode];
 
   [self.navigationController popViewControllerAnimated:YES];
 }

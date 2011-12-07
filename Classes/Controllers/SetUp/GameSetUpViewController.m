@@ -168,6 +168,10 @@ static int tagOffset = 1000;
     return [game.setting numberOfTeams];
   }
   else if (section == 2) {
+    if ([self.game.setting.mode isEqualToString:@"Quebec mode"]) {
+      return 1;
+    }
+
     return 4;
   }
   else if (section == 3) {

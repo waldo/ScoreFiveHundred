@@ -11,13 +11,14 @@
 - (void) checkWithNormalRules:(Round*)r;
 - (void) checkWithFirstToCross:(Round*)r;
 - (void) checkWithTournament:(Round*)r;
+- (void) checkWithQuebec:(Round*)r;
 @end
 
 @implementation Game
 // MARK: static
 static int scoreToWin = 500;
 static int scoreToLose = -500;
-//static int scoreToWinQuebec = 1000;
+static int scoreToWinQuebec = 1000;
 
 // MARK: dynamic
 @dynamic complete;
@@ -118,7 +119,10 @@ static int scoreToLose = -500;
   if ([self.rounds count] > 0) {
     Round* r = [self.rounds objectAtIndex:0];
 
-    if ([self.setting.tournament intValue] > 0) {
+    if ([self.setting.mode isEqualToString:@"Quebec mode"]) {
+      [self checkWithQuebec:r];
+    }
+    else if ([self.setting.tournament intValue] > 0) {
       [self checkWithTournament:r];
     }
     else if ([self.setting.firstToCross boolValue]) {
@@ -240,7 +244,7 @@ static int scoreToLose = -500;
     for (int i = 0; i < [self.teams count]; ++i) {
       int score = [[r scoreForPosition:i] intValue];
       
-      if (score >= scoreToWin) {
+      if (score >= maxScore) {
         [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
       }
     }
@@ -249,7 +253,7 @@ static int scoreToLose = -500;
     for (int i = 0; i < [self.teams count]; ++i) {
       int score = [[r scoreForPosition:i] intValue];
       
-      if (score != scoreToLose) {
+      if (score != minScore) {
         [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
       }
     }
@@ -259,12 +263,27 @@ static int scoreToLose = -500;
 - (void) checkWithTournament:(Round*)r {
   int maxScore, minScore;
   [self scoresForRound:r min:&minScore andMax:&maxScore];
-
+  
   if ([self.rounds count] >= [self.setting.tournament intValue]) {
     for (int i = 0; i < [self.teams count]; ++i) {
       int score = [[r scoreForPosition:i] intValue];
       
       if (score == maxScore) {
+        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+      }
+    }
+  }
+}
+
+- (void) checkWithQuebec:(Round*)r {
+  int maxScore, minScore;
+  [self scoresForRound:r min:&minScore andMax:&maxScore];
+  
+  if (maxScore >= scoreToWinQuebec) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+      
+      if (score >= maxScore) {
         [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
       }
     }

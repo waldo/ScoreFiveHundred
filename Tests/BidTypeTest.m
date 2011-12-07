@@ -23,8 +23,11 @@
 
   Setting* noOneBidSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:self.moc];
   noOneBidSetting.noOneBid = [NSNumber numberWithBool:YES];
-  
-  self.settings = [NSDictionary dictionaryWithObjectsAndKeys: defaultSetting, @"default", nonBidderScoresZeroSetting, @"non bidder scores zero", noOneBidSetting, @"no one bid", nil];
+
+  Setting* quebecSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:self.moc];
+  quebecSetting.mode = @"Quebec mode";
+
+  self.settings = [NSDictionary dictionaryWithObjectsAndKeys: defaultSetting, @"default", nonBidderScoresZeroSetting, @"non bidder scores zero", noOneBidSetting, @"no one bid", quebecSetting, @"quebec mode", nil];
   
   [mom release];
   [psc release];
@@ -95,6 +98,13 @@
 
 - (void) testNonBidderScoresZero {
   [self checkWithSetting:[self.settings objectForKey:@"non bidder scores zero"] forHand:@"7D" withTeamOneTricksWon:7 teamOnePoints:180 andTeamTwoPoints:0];
+}
+
+- (void) testQuebecMode {
+  [self checkWithSetting:[self.settings objectForKey:@"quebec mode"] forHand:@"8S" withTeamOneTricksWon:8 teamOnePoints:240 andTeamTwoPoints:0];
+  [self checkWithSetting:[self.settings objectForKey:@"quebec mode"] forHand:@"7NT" withTeamOneTricksWon:6 teamOnePoints:0 andTeamTwoPoints:220];
+  [self checkWithSetting:[self.settings objectForKey:@"quebec mode"] forHand:@"CM" withTeamOneTricksWon:1 teamOnePoints:0 andTeamTwoPoints:500];
+  [self checkWithSetting:[self.settings objectForKey:@"quebec mode"] forHand:@"OM" withTeamOneTricksWon:0 teamOnePoints:1000 andTeamTwoPoints:0];
 }
 
 @end

@@ -15,7 +15,7 @@
 + (NSString*) tricksAndSymbolForHand:(NSString*)hand;
 + (NSString*) tricksAndDescriptionForHand:(NSString*)hand;
 + (NSString*) descriptionForHand:(NSString*)hand;
-+ (NSString*) pointsStringForHand:(NSString*)hand;
++ (NSString*) pointsStringForHand:(NSString*)hand withGame:(Game*)g;
 + (NSInteger) pointsForTeam:(Team*)t game:(Game*)g andTricksWon:(NSUInteger)tricksWon;
 + (BOOL) bidderWonHand:(NSString*)hand withTricksWon:(NSUInteger)tricksWon;
 + (NSString*) variation:(NSString*)hand;

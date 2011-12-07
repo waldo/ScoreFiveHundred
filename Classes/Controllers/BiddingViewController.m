@@ -97,7 +97,7 @@
   }
   
   cellBidType.description.text = [BidType descriptionForHand:key];
-  cellBidType.points.text = [BidType pointsStringForHand:key];
+  cellBidType.points.text = [BidType pointsStringForHand:key withGame:self.game];
   
   return cellBidType;
 }

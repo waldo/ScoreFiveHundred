@@ -21,7 +21,7 @@ static NSString* ssVariation = @"variation";
 static NSString* ssVariationRegular = @"regular";
 static NSString* ssVariationMisere = @"misére";
 static NSString* ssVariationNoBid = @"no bid";
-static NSString* ssVariationQuebec = @"quebec";
+static NSString* ssModeQuebec = @"Quebec mode";
 
 + (void) initialize {
   if (!allTypes) {
@@ -185,10 +185,14 @@ static NSString* ssVariationQuebec = @"quebec";
   return desc;
 }
 
-+ (NSString*) pointsStringForHand:(NSString*)hand {
++ (NSString*) pointsStringForHand:(NSString*)hand withGame:(Game*)g {
   NSDictionary* aBidType = [allTypes objectForKey:hand];
   NSString* pts = [NSString stringWithFormat:@"%@ pts", [aBidType objectForKey:ssPoints]];
   
+  if ([g.setting.mode isEqualToString:ssModeQuebec] && [[aBidType objectForKey:ssVariation] isEqualToString:ssVariationMisere]) {
+    pts = [NSString stringWithFormat:@"%d pts", [[aBidType objectForKey:ssPoints] intValue] * 2];
+  }
+
   return pts;
 }
 
@@ -213,6 +217,14 @@ static NSString* ssVariationQuebec = @"quebec";
 
   if (![BidType bidderWonHand:r.bid withTricksWon:tricksWon]) {
     biddersPoints = -bidPoints;
+    if ([g.setting.mode isEqualToString:ssModeQuebec]) {
+      biddersPoints = 0;
+    }
+  }
+  else {
+    if ([g.setting.mode isEqualToString:ssModeQuebec] && [variation isEqualToString:ssVariationMisere]) {
+      biddersPoints *= 2;
+    }
   }
   
   // if won 10 and bid points worth less than a slam (250 pts)
@@ -229,13 +241,23 @@ static NSString* ssVariationQuebec = @"quebec";
   NSDictionary* aBidType = [allTypes objectForKey:r.bid];
   
   NSString* variation = [aBidType objectForKey:ssVariation];
+  int bidPoints = [[aBidType objectForKey:ssPoints] intValue];
+  int bidderPoints = [BidType biddersPointsForGame:g andTricksWon:10 - tricksWon];
 
   // default to zero points
   int nonBiddersPoints = 0;
   
+  if ([g.setting.mode isEqualToString:ssModeQuebec]) {
+    if (bidderPoints == 0) {
+      nonBiddersPoints = bidPoints;
+    }
+    if ([variation isEqualToString:ssVariationMisere]) {
+      nonBiddersPoints *= 2;
+    }
+  }
   // if regular bid and bidders won less than ten
   // => award 10 points x number of tricks (won by the non-bidders)
-  if (![variation isEqual:ssVariationMisere] && [g.setting.nonBidderScoresTen boolValue]) {
+  else if (![variation isEqual:ssVariationMisere] && [g.setting.nonBidderScoresTen boolValue]) {
     nonBiddersPoints = 10 * tricksWon;
   }
   

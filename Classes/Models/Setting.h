@@ -22,5 +22,6 @@
 - (NSIndexPath*) indexPathOfCurrentMode;
 - (NSInteger) numberOfTeams;
 - (BOOL) isPlayOnNoOneBid;
+- (void) consistentForMode;
 
 @end
