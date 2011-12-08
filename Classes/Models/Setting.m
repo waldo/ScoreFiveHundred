@@ -24,8 +24,8 @@
 
   self.modeOptions = [NSOrderedSet orderedSetWithObjects:
                       [NSDictionary dictionaryWithObjectsAndKeys:@"2 teams", @"text", @"4 or 6 players", @"detail", nil],
-                      [NSDictionary dictionaryWithObjectsAndKeys:@"3 players", @"text", @"", @"detail", nil],
-                      [NSDictionary dictionaryWithObjectsAndKeys:@"5 players", @"text", @"", @"detail", nil],
+//                      [NSDictionary dictionaryWithObjectsAndKeys:@"3 players", @"text", @"", @"detail", nil],
+//                      [NSDictionary dictionaryWithObjectsAndKeys:@"5 players", @"text", @"", @"detail", nil],
                       [NSDictionary dictionaryWithObjectsAndKeys:@"Quebec mode", @"text", @"Play to 1000 points", @"detail", nil],
                       nil];
 }
@@ -56,7 +56,7 @@
 - (NSIndexPath*) indexPathOfCurrentMode {
   int row = [self.modeOptions indexOfObject:self.mode];
   
-  if (row == 3) {
+  if (row == 1) {
     return [NSIndexPath indexPathForRow:0 inSection:1];
   }
 

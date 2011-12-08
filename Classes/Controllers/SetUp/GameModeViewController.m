@@ -62,7 +62,7 @@
 
 - (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
   if (section == 0) {
-    return 3;
+    return 1;
   }
   
   return 1;
@@ -96,7 +96,7 @@
 
 // MARK: hidden
 - (NSUInteger) indexFromIndexPath:(NSIndexPath*)path {
-  return path.section * 3 + path.row;
+  return path.section * 1 + path.row;
 }
 
 @end
