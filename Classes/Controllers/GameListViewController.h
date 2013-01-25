@@ -16,8 +16,7 @@
   IBOutlet GameViewController* gameController;
 
   NSManagedObjectContext* managedObjectContext;
-  NSMutableArray* gamesInProgress;
-  NSMutableArray* gamesComplete;
+  NSMutableArray* games;
   Game* mostRecentGame;
 }
 
@@ -29,14 +28,17 @@
 @property (nonatomic, retain) IBOutlet GameViewController* gameController;
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) NSMutableArray* gamesInProgress;
-@property (nonatomic, retain) NSMutableArray* gamesComplete;
+@property (nonatomic, retain) NSMutableArray* games;
 @property (nonatomic, retain) Game* mostRecentGame;
 
 - (IBAction) newGame:(id)sender;
 
 - (void) loadGames;
-- (id) valueForSection:(NSInteger)section valueInProgress:(id)valueInProgress valueCompleted:(id)valueCompleted;
+- (void) fixOldGames;
+- (void) fixForVersion_1_2;
+- (NSMutableArray*) gamesInProgress;
+- (NSMutableArray*) gamesComplete;
 - (Game*) gameForIndexPath:(NSIndexPath*)index;
+- (id) valueForSection:(NSInteger)section valueInProgress:(id)valueInProgress valueCompleted:(id)valueCompleted;
 
 @end

@@ -16,8 +16,7 @@ static NSString* ssTitleCompleted     = @"Complete";
   setUpController,
   gameController,
   managedObjectContext,
-  gamesInProgress,
-  gamesComplete,
+  games,
   mostRecentGame;
 
 
@@ -29,8 +28,7 @@ static NSString* ssTitleCompleted     = @"Complete";
   [gameController release];
   
   [managedObjectContext release];
-  [gamesInProgress release];
-  [gamesComplete release];
+  [games release];
   [mostRecentGame release];
   
   [super dealloc];
@@ -49,9 +47,6 @@ static NSString* ssTitleCompleted     = @"Complete";
 }
 
 - (void) loadGames {
-  NSPredicate* inProgress = [NSPredicate predicateWithFormat:@"winningTeams.@count == 0"];
-  NSPredicate* complete = [NSPredicate predicateWithFormat:@"winningTeams.@count > 0"];
-  
   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:managedObjectContext];
   
   NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -73,13 +68,52 @@ static NSString* ssTitleCompleted     = @"Complete";
     self.mostRecentGame = nil;
   }
 
-  [self setGamesInProgress:[NSMutableArray arrayWithArray:[mutableFetchResults filteredArrayUsingPredicate:inProgress]]];
-  [self setGamesComplete:[NSMutableArray arrayWithArray:[mutableFetchResults filteredArrayUsingPredicate:complete]]];
+  [self setGames:mutableFetchResults];
 
   [mutableFetchResults release];
   [request release];
   
   [self.gameListTableView reloadData];
+}
+
+- (void) fixOldGames {
+  float oldVersion = 1.2f;
+  float bundleVersion = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue];
+  
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+
+  if (![userDefaults valueForKey:@"version"]) {
+    [userDefaults setFloat:bundleVersion forKey:@"version"];
+  }
+  else {
+    oldVersion = [userDefaults floatForKey:@"version"];
+    [userDefaults setFloat:bundleVersion forKey:@"version"];
+  }
+  
+  if (oldVersion == 1.2f) {
+    [self fixForVersion_1_2];
+  }
+
+  [self.gameListTableView reloadData];
+}
+
+- (void) fixForVersion_1_2 {
+  for (Game* game in self.games) {
+    [game checkForGameOver];
+    [game save];
+  }
+}
+
+- (NSMutableArray*) gamesInProgress {
+  NSPredicate* inProgress = [NSPredicate predicateWithFormat:@"winningTeams.@count == 0"];
+
+  return [NSMutableArray arrayWithArray:[self.games filteredArrayUsingPredicate:inProgress]];
+}
+
+- (NSMutableArray*) gamesComplete {
+  NSPredicate* complete = [NSPredicate predicateWithFormat:@"winningTeams.@count > 0"];
+  
+  return [NSMutableArray arrayWithArray:[self.games filteredArrayUsingPredicate:complete]];
 }
 
 - (Game*) gameForIndexPath:(NSIndexPath*)index {
@@ -124,6 +158,7 @@ static NSString* ssTitleCompleted     = @"Complete";
   [super viewWillAppear:animated];
 
   [self loadGames];
+  [self fixOldGames];
 }
 
 - (void) viewDidAppear:(BOOL)animated {

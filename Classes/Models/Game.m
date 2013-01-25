@@ -216,20 +216,20 @@ static int scoreToWinQuebec = 1000;
   int maxScore, minScore;
   [self scoresForRound:r min:&minScore andMax:&maxScore];
   
-  if (maxScore >= scoreToWin) {
+  if (minScore <= scoreToLose) {
     for (int i = 0; i < [self.teams count]; ++i) {
       int score = [[r scoreForPosition:i] intValue];
       
-      if (score >= scoreToWin && [r bidAchievedForPosition:i]) {
+      if (score != minScore) {
         [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
       }
     }
   }
-  else if (minScore <= scoreToLose) {
+  else if (maxScore >= scoreToWin) {
     for (int i = 0; i < [self.teams count]; ++i) {
       int score = [[r scoreForPosition:i] intValue];
       
-      if (score != scoreToLose) {
+      if (score >= scoreToWin && [r bidAchievedForPosition:i]) {
         [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
       }
     }
