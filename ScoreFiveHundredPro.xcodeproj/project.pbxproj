@@ -17,8 +17,6 @@
 		5B184AF8146D4056000EBA01 /* GameModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B184AF7146D4056000EBA01 /* GameModeViewController.m */; };
 		5B34ABC4148FE51000958ADE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B34ABC3148FE51000958ADE /* Default.png */; };
 		5B34ABC6148FE51400958ADE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B34ABC5148FE51400958ADE /* Default@2x.png */; };
-		5B4CCE73148FDED300A67DBC /* icon_pro_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4CCE72148FDED300A67DBC /* icon_pro_57.png */; };
-		5B4CCE75148FDEDB00A67DBC /* icon_pro_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4CCE74148FDEDB00A67DBC /* icon_pro_114.png */; };
 		5B777F4314684CDE00955729 /* RoundScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B777F4214684CDE00955729 /* RoundScore.m */; };
 		5B7C4F901472B67C00B95554 /* TricksWonSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C4F8F1472B67C00B95554 /* TricksWonSummaryViewController.m */; };
 		5B7C4F921472B69900B95554 /* TricksWonSummaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B7C4F911472B69900B95554 /* TricksWonSummaryView.xib */; };
@@ -60,6 +58,9 @@
 		5BD2F378145EDB8A00C7E762 /* Team.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F377145EDB8A00C7E762 /* Team.m */; };
 		5BD2F37E145EE22D00C7E762 /* Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F37D145EE22D00C7E762 /* Round.m */; };
 		5BF2F043145EC1D30067E00C /* GameModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */; };
+		5BFEC53616B29976009A6A2C /* icon_pro_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFEC53416B29976009A6A2C /* icon_pro_57.png */; };
+		5BFEC53716B29976009A6A2C /* icon_pro_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFEC53516B29976009A6A2C /* icon_pro_114.png */; };
+		5BFEC53D16B29AC1009A6A2C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFEC53C16B29AC1009A6A2C /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,8 +89,6 @@
 		5B184AF7146D4056000EBA01 /* GameModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameModeViewController.m; path = Classes/Controllers/SetUp/GameModeViewController.m; sourceTree = SOURCE_ROOT; };
 		5B34ABC3148FE51000958ADE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = SOURCE_ROOT; };
 		5B34ABC5148FE51400958ADE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = SOURCE_ROOT; };
-		5B4CCE72148FDED300A67DBC /* icon_pro_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_pro_57.png; sourceTree = "<group>"; };
-		5B4CCE74148FDEDB00A67DBC /* icon_pro_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_pro_114.png; sourceTree = "<group>"; };
 		5B777F4114684CDE00955729 /* RoundScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundScore.h; sourceTree = "<group>"; };
 		5B777F4214684CDE00955729 /* RoundScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundScore.m; sourceTree = "<group>"; };
 		5B7C4F8E1472B67C00B95554 /* TricksWonSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TricksWonSummaryViewController.h; sourceTree = "<group>"; };
@@ -146,6 +145,9 @@
 		5BD2F37C145EE22D00C7E762 /* Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Round.h; sourceTree = "<group>"; };
 		5BD2F37D145EE22D00C7E762 /* Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Round.m; sourceTree = "<group>"; };
 		5BF2F042145EC1D30067E00C /* GameModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameModel.xcdatamodel; sourceTree = "<group>"; };
+		5BFEC53416B29976009A6A2C /* icon_pro_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_pro_57.png; path = Resources/icon_pro_57.png; sourceTree = "<group>"; };
+		5BFEC53516B29976009A6A2C /* icon_pro_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_pro_114.png; path = Resources/icon_pro_114.png; sourceTree = "<group>"; };
+		5BFEC53C16B29AC1009A6A2C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,10 +220,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5BFEC53C16B29AC1009A6A2C /* Default-568h@2x.png */,
+				5BFEC53416B29976009A6A2C /* icon_pro_57.png */,
+				5BFEC53516B29976009A6A2C /* icon_pro_114.png */,
 				5B34ABC5148FE51400958ADE /* Default@2x.png */,
 				5B34ABC3148FE51000958ADE /* Default.png */,
-				5B4CCE74148FDEDB00A67DBC /* icon_pro_114.png */,
-				5B4CCE72148FDED300A67DBC /* icon_pro_57.png */,
 				5B184AF3146D3F16000EBA01 /* SetUp */,
 				5BAA5CF614569552007274F7 /* MainWindow.xib */,
 				5BAA5CF114569552007274F7 /* GameListView.xib */,
@@ -385,7 +388,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ScoreFiveHundredPro" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -423,10 +426,11 @@
 				5BCC7B211471C93D00E79120 /* GameTournamentView.xib in Resources */,
 				5B7C4F921472B69900B95554 /* TricksWonSummaryView.xib in Resources */,
 				5B7C4F941472BF7200B95554 /* ScoreMiniView.xib in Resources */,
-				5B4CCE73148FDED300A67DBC /* icon_pro_57.png in Resources */,
-				5B4CCE75148FDEDB00A67DBC /* icon_pro_114.png in Resources */,
 				5B34ABC4148FE51000958ADE /* Default.png in Resources */,
 				5B34ABC6148FE51400958ADE /* Default@2x.png in Resources */,
+				5BFEC53616B29976009A6A2C /* icon_pro_57.png in Resources */,
+				5BFEC53716B29976009A6A2C /* icon_pro_114.png in Resources */,
+				5BFEC53D16B29AC1009A6A2C /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,7 +566,7 @@
 				GCC_USE_STANDARD_INCLUDE_SEARCHING = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
@@ -572,6 +576,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -589,6 +594,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -677,7 +683,7 @@
 				GCC_USE_STANDARD_INCLUDE_SEARCHING = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -692,7 +698,7 @@
 				GCC_USE_STANDARD_INCLUDE_SEARCHING = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};

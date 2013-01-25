@@ -27,7 +27,7 @@
 }
 
 - (void) setStandardFrame {
-  [self.view setFrame:CGRectMake(0, 416, 320, 44)];
+  [self.view setFrame:CGRectMake(0, self.view.bounds.size.height - 43, 320, 44)];
 }
 
 // MARK: view
