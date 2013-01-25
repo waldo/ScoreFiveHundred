@@ -524,7 +524,7 @@
 				GCC_PREFIX_HEADER = ScoreFiveHundredPro_Prefix.pch;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "ScoreFiveHundredPro-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = ScoreFiveHundredPro;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -543,7 +543,7 @@
 				GCC_PREFIX_HEADER = ScoreFiveHundredPro_Prefix.pch;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "ScoreFiveHundredPro-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = ScoreFiveHundredPro;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -578,7 +578,7 @@
 				GCC_PREFIX_HEADER = ScoreFiveHundredPro_Prefix.pch;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "ScoreFiveHundredPro-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = ScoreFiveHundredPro;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -597,6 +597,7 @@
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				INFOPLIST_FILE = "Tests/LogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -624,6 +625,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "Tests/LogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -650,6 +652,7 @@
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				INFOPLIST_FILE = "Tests/LogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,

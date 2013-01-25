@@ -23,7 +23,7 @@
 - (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
   self.gameListController.managedObjectContext = self.managedObjectContext;
 
-  [self.window addSubview:[self.navigationController view]];
+  self.window.rootViewController = self.navigationController;
   [self.window makeKeyAndVisible];
   return YES;
 }
