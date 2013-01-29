@@ -10,15 +10,6 @@
 @synthesize scoreTeamTwo;
 
 
-- (void) dealloc {
-  [nameTeamOne release];
-  [nameTeamTwo release];
-  [scoreTeamOne release];
-  [scoreTeamTwo release];
-
-  [super dealloc];
-}
-
 - (void) initWithGame:(Game*)g {
   self.nameTeamOne.text = [g nameForPosition:0];
   self.nameTeamTwo.text = [g nameForPosition:1];

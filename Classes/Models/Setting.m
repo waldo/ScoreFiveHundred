@@ -15,8 +15,6 @@
 @synthesize modeOptions;
 
 - (void) didTurnIntoFault {  
-  [modeOptions release];
-
   [super didTurnIntoFault];
 }
 
@@ -25,10 +23,10 @@
   [super awakeFromInsert];
 
   self.modeOptions = [NSOrderedSet orderedSetWithObjects:
-                      [NSDictionary dictionaryWithObjectsAndKeys:@"2 teams", @"text", @"4 or 6 players", @"detail", nil],
+                      @{@"text": @"2 teams", @"detail": @"4 or 6 players"},
 //                      [NSDictionary dictionaryWithObjectsAndKeys:@"3 players", @"text", @"", @"detail", nil],
 //                      [NSDictionary dictionaryWithObjectsAndKeys:@"5 players", @"text", @"", @"detail", nil],
-                      [NSDictionary dictionaryWithObjectsAndKeys:@"Quebec mode", @"text", @"Play to 1000 points", @"detail", nil],
+                      @{@"text": @"Quebec mode", @"detail": @"Play to 1000 points"},
                       nil];
 }
 
@@ -82,9 +80,9 @@
 
 - (void) consistentForMode {
   if ([self.mode isEqualToString:@"Quebec mode"]) {
-    self.noOneBid = [NSNumber numberWithBool:NO];
-    self.nonBidderScoresTen = [NSNumber numberWithBool:NO];
-    self.firstToCross = [NSNumber numberWithBool:YES];
+    self.noOneBid = @NO;
+    self.nonBidderScoresTen = @NO;
+    self.firstToCross = @YES;
   }
 }
 

@@ -22,21 +22,6 @@ static int siMaximumTricks = 10;
   misereList;
 
 
-- (void) dealloc {
-  [gameController release];
-  [scoreController release];
-  [tricksWonTableView release];
-
-  [game release];
-  [round release];
-  [team release];
-  [bidVariation release];
-  [regularList release];
-  [misereList release];
-  
-  [super dealloc];
-}
-
 - (NSArray*) tricksWonList {
   NSArray* list = nil;
   
@@ -63,8 +48,7 @@ static int siMaximumTricks = 10;
 - (void) viewDidLoad {
   [super viewDidLoad];
 
-  self.regularList = [NSArray arrayWithObjects:
-                      @"10 tricks",
+  self.regularList = @[@"10 tricks",
                       @"9 tricks",
                       @"8 tricks",
                       @"7 tricks",
@@ -74,19 +58,14 @@ static int siMaximumTricks = 10;
                       @"3 tricks",
                       @"2 tricks",
                       @"1 trick",
-                      @"0 tricks", 
-                      nil
-                      ];
+                      @"0 tricks"];
   
-  self.misereList = [NSArray arrayWithObjects:
-                     @"Won by losing every trick",
-                     @"Got one or more tricks",
-                     nil
-                     ];
+  self.misereList = @[@"Won by losing every trick",
+                     @"Got one or more tricks"];
 
   [self.scoreController setStandardFrame];  
   [self.view addSubview:self.scoreController.view];
-  self.gameController = [self.navigationController.viewControllers objectAtIndex:1];
+  self.gameController = (self.navigationController.viewControllers)[1];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -115,7 +94,7 @@ static int siMaximumTricks = 10;
   UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
   }
 
   int score = 0;
@@ -131,7 +110,7 @@ static int siMaximumTricks = 10;
   score = [BidType pointsForTeam:self.team game:self.game andTricksWon:tricksWon];
     
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  cell.textLabel.text = [[self tricksWonList] objectAtIndex:indexPath.row];
+  cell.textLabel.text = [self tricksWonList][indexPath.row];
   cell.detailTextLabel.text = [NSString stringWithFormat:@"%i pts", score];
   [cell.detailTextLabel setFont:[UIFont systemFontOfSize:13.0]];
   if (score > 0) {

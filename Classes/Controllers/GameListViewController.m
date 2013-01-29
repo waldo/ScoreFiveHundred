@@ -20,20 +20,6 @@ static NSString* ssTitleCompleted     = @"Complete";
   mostRecentGame;
 
 
-- (void)dealloc {
-  [cellWrapper release];
-  [gameListTableView release];
-  [addButton release];
-  [setUpController release];
-  [gameController release];
-  
-  [managedObjectContext release];
-  [games release];
-  [mostRecentGame release];
-  
-  [super dealloc];
-}
-
 - (IBAction) newGame:(id)sender {
   [[self.managedObjectContext undoManager] beginUndoGrouping];
   [[self.managedObjectContext undoManager] setActionName:@"new game"];
@@ -54,31 +40,27 @@ static NSString* ssTitleCompleted     = @"Complete";
   [request setIncludesSubentities:YES];
   
   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastPlayed" ascending:NO];
-  NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+  NSArray *sortDescriptors = @[sortDescriptor];
   [request setSortDescriptors:sortDescriptors];
-  [sortDescriptor release];
   
   NSError *error;
   NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
   
   if ([mutableFetchResults count] > 0) {
-    self.mostRecentGame = [mutableFetchResults objectAtIndex:0];
+    self.mostRecentGame = mutableFetchResults[0];
   }
   else {
     self.mostRecentGame = nil;
   }
 
   [self setGames:mutableFetchResults];
-
-  [mutableFetchResults release];
-  [request release];
   
   [self.gameListTableView reloadData];
 }
 
 - (void) fixOldGames {
   float oldVersion = 1.2f;
-  float bundleVersion = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] floatValue];
+  float bundleVersion = [[[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"] floatValue];
   
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
@@ -118,10 +100,10 @@ static NSString* ssTitleCompleted     = @"Complete";
 
 - (Game*) gameForIndexPath:(NSIndexPath*)index {
   if (index.section == 0) {
-    return [self.gamesInProgress objectAtIndex:index.row];
+    return (self.gamesInProgress)[index.row];
   }
   else if (index.section == 1) {
-    return [self.gamesComplete objectAtIndex:index.row];
+    return (self.gamesComplete)[index.row];
   }
   
   return nil;
@@ -194,7 +176,7 @@ static NSString* ssTitleCompleted     = @"Complete";
 
 - (UITableViewCell*) tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
   if (indexPath.section == 2) {
-    UITableViewCell* cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"CellAddButton"] autorelease];
+    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"CellAddButton"];
     
     UIButton* btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     btn.frame = CGRectMake(10, 0, CGRectGetWidth(cell.contentView.bounds)-20, CGRectGetHeight(cell.contentView.bounds)+3);
@@ -236,8 +218,6 @@ static NSString* ssTitleCompleted     = @"Complete";
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     
     cellGame.dateLastPlayed.text = [formatter stringFromDate:g.lastPlayed];
-
-    [formatter release];
     
     return cellGame;
   }

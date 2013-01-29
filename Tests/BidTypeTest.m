@@ -19,24 +19,18 @@
   Setting* defaultSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:self.moc];
 
   Setting* nonBidderScoresZeroSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:self.moc];
-  nonBidderScoresZeroSetting.nonBidderScoresTen = [NSNumber numberWithBool:NO];
+  nonBidderScoresZeroSetting.nonBidderScoresTen = @NO;
 
   Setting* noOneBidSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:self.moc];
-  noOneBidSetting.noOneBid = [NSNumber numberWithBool:YES];
+  noOneBidSetting.noOneBid = @YES;
 
   Setting* quebecSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:self.moc];
   quebecSetting.mode = @"Quebec mode";
 
-  self.settings = [NSDictionary dictionaryWithObjectsAndKeys: defaultSetting, @"default", nonBidderScoresZeroSetting, @"non bidder scores zero", noOneBidSetting, @"no one bid", quebecSetting, @"quebec mode", nil];
-  
-  [mom release];
-  [psc release];
+  self.settings = @{@"default": defaultSetting, @"non bidder scores zero": nonBidderScoresZeroSetting, @"no one bid": noOneBidSetting, @"quebec mode": quebecSetting};
 }
 
 - (void) tearDown {
-  [errorOut release];
-  [moc release];
-  [settings release];
 }
 
 
@@ -74,37 +68,37 @@
 }
 
 - (void) testBiddersLose {
-  [self checkWithSetting:[self.settings objectForKey:@"default"] forHand:@"CM" withTeamOneTricksWon:1 teamOnePoints:-250 andTeamTwoPoints:0];
-  [self checkWithSetting:[self.settings objectForKey:@"default"] forHand:@"10H" withTeamOneTricksWon:7 teamOnePoints:-500 andTeamTwoPoints:30];
+  [self checkWithSetting:(self.settings)[@"default"] forHand:@"CM" withTeamOneTricksWon:1 teamOnePoints:-250 andTeamTwoPoints:0];
+  [self checkWithSetting:(self.settings)[@"default"] forHand:@"10H" withTeamOneTricksWon:7 teamOnePoints:-500 andTeamTwoPoints:30];
 }
 
 - (void) testBiddersWin {
-  [self checkWithSetting:[self.settings objectForKey:@"default"] forHand:@"6S" withTeamOneTricksWon:6 teamOnePoints:40 andTeamTwoPoints:40];
-  [self checkWithSetting:[self.settings objectForKey:@"default"] forHand:@"8NT" withTeamOneTricksWon:9 teamOnePoints:320 andTeamTwoPoints:10];
-  [self checkWithSetting:[self.settings objectForKey:@"default"] forHand:@"OM" withTeamOneTricksWon:0 teamOnePoints:500 andTeamTwoPoints:0];
+  [self checkWithSetting:(self.settings)[@"default"] forHand:@"6S" withTeamOneTricksWon:6 teamOnePoints:40 andTeamTwoPoints:40];
+  [self checkWithSetting:(self.settings)[@"default"] forHand:@"8NT" withTeamOneTricksWon:9 teamOnePoints:320 andTeamTwoPoints:10];
+  [self checkWithSetting:(self.settings)[@"default"] forHand:@"OM" withTeamOneTricksWon:0 teamOnePoints:500 andTeamTwoPoints:0];
 }
 
 - (void) testBiddersSlam {
   // when bid lower than 250 pts
-  [self checkWithSetting:[self.settings objectForKey:@"default"] forHand:@"7D" withTeamOneTricksWon:10 teamOnePoints:250 andTeamTwoPoints:0];
+  [self checkWithSetting:(self.settings)[@"default"] forHand:@"7D" withTeamOneTricksWon:10 teamOnePoints:250 andTeamTwoPoints:0];
 
   // when bid higher than 250 pts
-  [self checkWithSetting:[self.settings objectForKey:@"default"] forHand:@"9C" withTeamOneTricksWon:10 teamOnePoints:360 andTeamTwoPoints:0];
+  [self checkWithSetting:(self.settings)[@"default"] forHand:@"9C" withTeamOneTricksWon:10 teamOnePoints:360 andTeamTwoPoints:0];
 }
 
 - (void) testNoBid {
-  [self checkWithSetting:[self.settings objectForKey:@"no one bid"] forHand:@"NB" withTeamOneTricksWon:7 teamOnePoints:70 andTeamTwoPoints:30];
+  [self checkWithSetting:(self.settings)[@"no one bid"] forHand:@"NB" withTeamOneTricksWon:7 teamOnePoints:70 andTeamTwoPoints:30];
 }
 
 - (void) testNonBidderScoresZero {
-  [self checkWithSetting:[self.settings objectForKey:@"non bidder scores zero"] forHand:@"7D" withTeamOneTricksWon:7 teamOnePoints:180 andTeamTwoPoints:0];
+  [self checkWithSetting:(self.settings)[@"non bidder scores zero"] forHand:@"7D" withTeamOneTricksWon:7 teamOnePoints:180 andTeamTwoPoints:0];
 }
 
 - (void) testQuebecMode {
-  [self checkWithSetting:[self.settings objectForKey:@"quebec mode"] forHand:@"8S" withTeamOneTricksWon:8 teamOnePoints:240 andTeamTwoPoints:0];
-  [self checkWithSetting:[self.settings objectForKey:@"quebec mode"] forHand:@"7NT" withTeamOneTricksWon:6 teamOnePoints:0 andTeamTwoPoints:220];
-  [self checkWithSetting:[self.settings objectForKey:@"quebec mode"] forHand:@"CM" withTeamOneTricksWon:1 teamOnePoints:0 andTeamTwoPoints:500];
-  [self checkWithSetting:[self.settings objectForKey:@"quebec mode"] forHand:@"OM" withTeamOneTricksWon:0 teamOnePoints:1000 andTeamTwoPoints:0];
+  [self checkWithSetting:(self.settings)[@"quebec mode"] forHand:@"8S" withTeamOneTricksWon:8 teamOnePoints:240 andTeamTwoPoints:0];
+  [self checkWithSetting:(self.settings)[@"quebec mode"] forHand:@"7NT" withTeamOneTricksWon:6 teamOnePoints:0 andTeamTwoPoints:220];
+  [self checkWithSetting:(self.settings)[@"quebec mode"] forHand:@"CM" withTeamOneTricksWon:1 teamOnePoints:0 andTeamTwoPoints:500];
+  [self checkWithSetting:(self.settings)[@"quebec mode"] forHand:@"OM" withTeamOneTricksWon:0 teamOnePoints:1000 andTeamTwoPoints:0];
 }
 
 @end

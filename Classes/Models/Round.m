@@ -22,7 +22,7 @@
 - (NSString*) bidForPosition:(NSUInteger)pos {
   NSString* theBid = nil;
 
-  if ([self.biddingTeams containsObject:[self.game.teams objectAtIndex:pos]]) {
+  if ([self.biddingTeams containsObject:(self.game.teams)[pos]]) {
     theBid = self.bid;
   }
 
@@ -32,7 +32,7 @@
 - (NSString*) bidAchievedForPosition:(NSUInteger)pos {
   NSString* bidAchieved = nil;
   NSString* theBid = [self bidForPosition:pos];
-  NSUInteger tricksWon = [[[self.scores objectAtIndex:pos] tricksWon] intValue];
+  NSUInteger tricksWon = [[(self.scores)[pos] tricksWon] intValue];
 
   if (theBid) {
     bidAchieved = [NSString stringWithFormat:@"%d", [BidType bidderWonHand:theBid withTricksWon:tricksWon]];
@@ -46,7 +46,7 @@
     return nil;
   }
 
-  return [[[self.scores objectAtIndex:pos] score] stringValue];
+  return [[(self.scores)[pos] score] stringValue];
 }
 
 - (NSString*) tricksWonForPosition:(NSUInteger)pos {
@@ -54,7 +54,7 @@
     return nil;
   }
 
-  return [[[self.scores objectAtIndex:pos] tricksWon] stringValue];
+  return [[(self.scores)[pos] tricksWon] stringValue];
 }
 
 - (RoundScore*) getScoreForPosition:(NSUInteger)pos {
@@ -62,13 +62,13 @@
     return nil;
   }
 
-  return [self.scores objectAtIndex:pos];
+  return (self.scores)[pos];
 }
 
 - (void) setTricksWon:(NSUInteger)tricksWon forPosition:(NSUInteger)pos {
   RoundScore* rs = [self getScoreForPosition:pos];
-  rs.tricksWon = [NSNumber numberWithInt:tricksWon];
-  rs.score = [NSNumber numberWithInt:([BidType pointsForTeam:[self.game.teams objectAtIndex:pos] game:self.game andTricksWon:tricksWon] + [[self.game oldScoreForPosition:pos] intValue])];
+  rs.tricksWon = @(tricksWon);
+  rs.score = @([BidType pointsForTeam:(self.game.teams)[pos] game:self.game andTricksWon:tricksWon] + [[self.game oldScoreForPosition:pos] intValue]);
 }
 
 - (void) updateAndSetTricksWon:(NSUInteger)tricksWon forTeam:(Team*)t {
@@ -99,10 +99,10 @@
 // MARK: class methods
 + (NSString*) uniqueId {
   CFUUIDRef uniqueId = CFUUIDCreate(NULL);
-  NSString* sUniqueId = (NSString*)CFUUIDCreateString(NULL, uniqueId);
+  NSString* sUniqueId = (NSString*)CFBridgingRelease(CFUUIDCreateString(NULL, uniqueId));
   CFRelease(uniqueId);
   
-  return [sUniqueId autorelease];
+  return sUniqueId;
 }
 
 // MARK: override buggy coredata code

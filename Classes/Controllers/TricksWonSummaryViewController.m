@@ -13,17 +13,6 @@
   game,
   round;
 
-- (void) dealloc {
-  [gameController dealloc];
-  [tricksWonController dealloc];
-  [scoreController dealloc];
-  [table dealloc];
-  [saveButton dealloc];
-  [game dealloc];
-  [round dealloc];
-
-  [super dealloc];
-}
 
 - (void) initWithGame:(Game*)g andRound:(Round*)r {
   self.game = g;
@@ -45,7 +34,7 @@
   [self.scoreController setStandardFrame];
   [self.view addSubview:self.scoreController.view];
   [self.navigationItem setRightBarButtonItem:self.saveButton animated:NO];
-  self.gameController = [self.navigationController.viewControllers objectAtIndex:1];
+  self.gameController = (self.navigationController.viewControllers)[1];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -78,7 +67,7 @@
   UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
 
@@ -91,7 +80,7 @@
 }
 
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  [self.tricksWonController initWithGame:self.game round:self.round andTeam:[self.game.teams objectAtIndex:indexPath.row]];
+  [self.tricksWonController initWithGame:self.game round:self.round andTeam:(self.game.teams)[indexPath.row]];
 
   [self.navigationController pushViewController:self.tricksWonController animated:YES];
 }

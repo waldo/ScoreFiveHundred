@@ -27,21 +27,6 @@
   teamTwoScore,
   game;
 
-- (void) dealloc {
-  [highestBidderController release];
-  [roundsTableView release];
-  [cellWrapper release];
-  [addButton release];
-  [rematchButton release];
-  [teamOneName release];
-  [teamTwoName release];
-  [teamOneScore release];
-  [teamTwoScore release];
-  
-  [game release];
-  
-  [super dealloc];
-}
 
 - (IBAction) bid:(id)sender {
   [self setEditing:NO animated:NO];
@@ -56,7 +41,6 @@
   
   [navController popViewControllerAnimated:NO];
   [navController pushViewController:newGameView animated:YES];
-  [newGameView release];
 }
 
 - (void) initWithGame:(Game*)g {
@@ -102,7 +86,7 @@
     [self.navigationItem setRightBarButtonItem:self.rematchButton animated:NO];
     if ([[NSDate date] timeIntervalSinceDate:self.game.lastPlayed] < 2) {
       NSString* msg = [NSString stringWithFormat:@"%@ win!", winningTeamNames];
-      UIAlertView* rematchAlert = [[[UIAlertView alloc] initWithTitle:msg message:nil delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Rematch", nil] autorelease];
+      UIAlertView* rematchAlert = [[UIAlertView alloc] initWithTitle:msg message:nil delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Rematch", nil];
       [rematchAlert show];
     }
   }
@@ -171,12 +155,12 @@
       cellScoringRound = (CellScoringRound*)cellWrapper.cell;
     }
     
-    [cellScoringRound setStyleForRound:[[self.game.rounds reversedOrderedSet] objectAtIndex:indexPath.row]];
+    [cellScoringRound setStyleForRound:[self.game.rounds reversedOrderedSet][indexPath.row]];
 
     return cellScoringRound;
   }
   else {
-    UITableViewCell* cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"CellAddButton"] autorelease];
+    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"CellAddButton"];
     
     UIButton* btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     btn.frame = CGRectMake(10, 0, CGRectGetWidth(cell.contentView.bounds)-20, CGRectGetHeight(cell.contentView.bounds)+3);

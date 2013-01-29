@@ -17,19 +17,6 @@ static int tagOffset = 1000;
   game,
   teamNameTextFields;
 
-- (void) dealloc {
-  [gameController release];
-  [gameModeController release];
-  [gameTournamentController release];
-  [table release];
-  [cancel release];
-  [start release];  
-  [game release];
-  [teamNameTextFields release];
-  
-  [super dealloc];
-}
-
 - (IBAction) cancel:(id)sender {
   if ([self.game.managedObjectContext.undoManager.undoActionName isEqualToString:@"new game"]) {
     [self.game.managedObjectContext.undoManager endUndoGrouping];
@@ -41,9 +28,9 @@ static int tagOffset = 1000;
 
 - (IBAction) start:(id)sender {
   // add name and settings to game
-  NSMutableOrderedSet* names = [[[NSMutableOrderedSet alloc] initWithCapacity:[self.teamNameTextFields count]] autorelease];
+  NSMutableOrderedSet* names = [[NSMutableOrderedSet alloc] initWithCapacity:[self.teamNameTextFields count]];
   for (int i = 0; i < [self.game.setting numberOfTeams]; ++i) {
-    UITextField* field = [self.teamNameTextFields objectAtIndex:i];
+    UITextField* field = (self.teamNameTextFields)[i];
     NSString* name = [NSString stringWithFormat:@"Team %d", field.tag + 1 - tagOffset];
     if (field.text != nil && ![@"" isEqualToString:field.text]) {
       name = field.text;
@@ -89,10 +76,10 @@ static int tagOffset = 1000;
   [self.navigationItem setRightBarButtonItem:self.start animated:NO];
 
   self.teamNameTextFields = [[NSMutableOrderedSet alloc] init];
-  NSArray* teamPlaceholders = [NSArray arrayWithObjects:@"The greatest", @"The greatest tribute", @"Tribute to a tribute", @"You've gone", @"Too far", nil];
+  NSArray* teamPlaceholders = @[@"The greatest", @"The greatest tribute", @"Tribute to a tribute", @"You've gone", @"Too far"];
 
   for (int i = 0; i < 5; ++i) {
-    UITextField* playerTextField = [[[UITextField alloc] initWithFrame:CGRectMake(110, 10, 185, 30)] autorelease];
+    UITextField* playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(110, 10, 185, 30)];
     playerTextField.adjustsFontSizeToFitWidth = YES;
     playerTextField.textColor = [UIColor blackColor];
     playerTextField.keyboardType = UIKeyboardTypeDefault;
@@ -101,7 +88,7 @@ static int tagOffset = 1000;
     playerTextField.textAlignment = UITextAlignmentLeft;
     playerTextField.tag = i + tagOffset;
     playerTextField.delegate = self;
-    playerTextField.placeholder = [teamPlaceholders objectAtIndex:i];
+    playerTextField.placeholder = teamPlaceholders[i];
 
     [self.teamNameTextFields addObject:playerTextField];
   }
@@ -124,7 +111,7 @@ static int tagOffset = 1000;
 // MARK: TextField delegate
 - (BOOL) textFieldShouldReturn:(UITextField*)textField {
   int nextIndex = (textField.tag - tagOffset + 1) % [self.game.setting numberOfTeams];
-  UITextField* next = [self.teamNameTextFields objectAtIndex:nextIndex];
+  UITextField* next = (self.teamNameTextFields)[nextIndex];
 
   if (nextIndex == 0) {
     [textField endEditing:YES];
@@ -197,7 +184,7 @@ static int tagOffset = 1000;
   if (indexPath.section == 0) {
     cell = cellTeamSetting;
     if (cell == nil) {
-      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTeamSetting] autorelease];
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTeamSetting];
 
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
       cell.textLabel.text = @"Game mode";
@@ -207,23 +194,23 @@ static int tagOffset = 1000;
   else if (indexPath.section == 1) {
     cell = cellTeamName;
     if (cell == nil) {
-      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTeamName] autorelease];
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTeamName];
     }
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryView = nil;
     cell.textLabel.text = [NSString stringWithFormat:@"Name %d", indexPath.row + 1];
-    cell.accessoryView = [self.teamNameTextFields objectAtIndex:indexPath.row];
+    cell.accessoryView = (self.teamNameTextFields)[indexPath.row];
   }
   else if (indexPath.section == 2) {
     cell = cellGeneralSetting;
     if (cell == nil) {
-      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellGeneralSetting] autorelease];
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellGeneralSetting];
       cell.accessoryType = UITableViewCellAccessoryNone;
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    UISwitch* swit = [[[UISwitch alloc] initWithFrame:CGRectMake(250, 10, 35, 30)] autorelease];
+    UISwitch* swit = [[UISwitch alloc] initWithFrame:CGRectMake(250, 10, 35, 30)];
     cell.accessoryView = nil;
 
     switch (indexPath.row) {
@@ -263,7 +250,7 @@ static int tagOffset = 1000;
   else if (indexPath.section == 3) {
     cell = cellDoneButton;
     if (cell == nil) {
-      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellDoneButton] autorelease];
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellDoneButton];
 
       UIButton* doneButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
       doneButton.frame = CGRectMake(10, 0, CGRectGetWidth(cell.contentView.bounds)-20, CGRectGetHeight(cell.contentView.bounds)+3);
@@ -289,22 +276,22 @@ static int tagOffset = 1000;
 
 // MARK: UISwitch actions
 - (void) firstToCrossChanged:(id)control {
-  self.game.setting.firstToCross = [NSNumber numberWithBool:((UISwitch*)control).on];
+  self.game.setting.firstToCross = @(((UISwitch*)control).on);
 }
 
 - (void) nonBidderScoresTenChanged:(id)control {
-  self.game.setting.nonBidderScoresTen = [NSNumber numberWithBool:((UISwitch*)control).on];
+  self.game.setting.nonBidderScoresTen = @(((UISwitch*)control).on);
   if (!((UISwitch*)control).on) {
-    self.game.setting.noOneBid = [NSNumber numberWithBool:NO];
+    self.game.setting.noOneBid = @NO;
     [self.table reloadData];
   }
 
 }
 
 - (void) noOneBidChanged:(id)control {
-  self.game.setting.noOneBid = [NSNumber numberWithBool:((UISwitch*)control).on];
+  self.game.setting.noOneBid = @(((UISwitch*)control).on);
   if (((UISwitch*)control).on) {
-    self.game.setting.nonBidderScoresTen = [NSNumber numberWithBool:YES];
+    self.game.setting.nonBidderScoresTen = @YES;
     [self.table reloadData];
   }
 }

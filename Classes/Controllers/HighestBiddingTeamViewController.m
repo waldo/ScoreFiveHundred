@@ -19,19 +19,6 @@ static NSString* ssTitleNoBid     = @"No-one bid - play a no-trumps round for 10
   game,
   round;
 
-- (void)dealloc {
-  [biddingController release];
-  [tricksWonSummaryController release];
-  [tricksWonController release];
-  [teamSelectionTableView release];
-  [scoreController release];
-  [cancelButton release];
-
-  [game release];
-  [round release];
-  
-  [super dealloc];
-}
 
 - (void) initWithGame:(Game*)g {
   self.game = g;
@@ -105,7 +92,7 @@ static NSString* ssTitleNoBid     = @"No-one bid - play a no-trumps round for 10
   static NSString *TeamIdentifier = @"TeamSelection";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TeamIdentifier];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TeamIdentifier] autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TeamIdentifier];
   }
   
   if (indexPath.section == 0) {
@@ -122,7 +109,7 @@ static NSString* ssTitleNoBid     = @"No-one bid - play a no-trumps round for 10
   [self.round setBiddingTeams:nil];
 
   if (indexPath.section == 0) {
-    [self.round addBiddingTeamsObject:[self.game.teams objectAtIndex:indexPath.row]];
+    [self.round addBiddingTeamsObject:(self.game.teams)[indexPath.row]];
     [self.biddingController initWithGame:self.game andRound:self.round];
     [self.navigationController pushViewController:self.biddingController animated:YES];
   }

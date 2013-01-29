@@ -7,32 +7,24 @@
 @synthesize setting;
 @synthesize tournamentOptions;
 
-- (void) dealloc {
-  [table release];
-  [setting release];
-  [tournamentOptions release];
-
-  [super dealloc];
-}
-
 
 - (void) initWithSetting:(Setting*)s {
   self.setting = s;
   
   self.tournamentOptions = [NSOrderedSet orderedSetWithObjects:
-                            [NSNumber numberWithInt:0],
-                            [NSNumber numberWithInt:1],
-                            [NSNumber numberWithInt:2],
-                            [NSNumber numberWithInt:3],
-                            [NSNumber numberWithInt:4],
-                            [NSNumber numberWithInt:5],
-                            [NSNumber numberWithInt:6],
-                            [NSNumber numberWithInt:7],
-                            [NSNumber numberWithInt:8],
-                            [NSNumber numberWithInt:9],
-                            [NSNumber numberWithInt:10],
-                            [NSNumber numberWithInt:15],
-                            [NSNumber numberWithInt:20],
+                            @0,
+                            @1,
+                            @2,
+                            @3,
+                            @4,
+                            @5,
+                            @6,
+                            @7,
+                            @8,
+                            @9,
+                            @10,
+                            @15,
+                            @20,
                             nil];
 }
 
@@ -75,17 +67,17 @@
   UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellTournament];
   
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTournament] autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTournament];
     cell.accessoryType = UITableViewCellAccessoryNone;
   }
 
-  cell.textLabel.text = [self.setting textForTournament:[[self.tournamentOptions objectAtIndex:indexPath.row] intValue]];
+  cell.textLabel.text = [self.setting textForTournament:[(self.tournamentOptions)[indexPath.row] intValue]];
   
   return cell;
 }
 
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  self.setting.tournament = [self.tournamentOptions objectAtIndex:indexPath.row];
+  self.setting.tournament = (self.tournamentOptions)[indexPath.row];
 
   [self.navigationController popViewControllerAnimated:YES];
 }

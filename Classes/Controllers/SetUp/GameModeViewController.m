@@ -10,12 +10,6 @@
 @synthesize table,
             setting;
 
-- (void) dealloc {
-  [table release];
-  [setting release];
-  
-  [super dealloc];
-}
 
 - (void) initWithSetting:(Setting *)s {
   self.setting = s;
@@ -74,13 +68,13 @@
   UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellGameMode];
 
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellGameMode] autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellGameMode];
     cell.accessoryType = UITableViewCellAccessoryNone;
 
     int ix = [self indexFromIndexPath:indexPath];
     
-    cell.textLabel.text = [[self.setting.modeOptions objectAtIndex:ix] objectForKey:@"text"];
-    cell.detailTextLabel.text = [[self.setting.modeOptions objectAtIndex:ix] objectForKey:@"detail"];
+    cell.textLabel.text = (self.setting.modeOptions)[ix][@"text"];
+    cell.detailTextLabel.text = (self.setting.modeOptions)[ix][@"detail"];
   }
 
   return cell;
@@ -88,7 +82,7 @@
 
 - (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
   int ix = [self indexFromIndexPath:indexPath];
-  self.setting.mode = [[self.setting.modeOptions objectAtIndex:ix] objectForKey:@"text"];
+  self.setting.mode = (self.setting.modeOptions)[ix][@"text"];
   [self.setting consistentForMode];
 
   [self.navigationController popViewControllerAnimated:YES];

@@ -12,14 +12,6 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 
 
-- (void) dealloc {
-  [window release];
-  [navigationController release];
-  [gameListController release];
-  
-  [super dealloc];
-}
-
 - (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
   self.gameListController.managedObjectContext = self.managedObjectContext;
 
@@ -56,7 +48,7 @@
     [__managedObjectContext setPersistentStoreCoordinator:coordinator];
   }
   
-  NSUndoManager* undoManager = [[[NSUndoManager alloc] init] autorelease];
+  NSUndoManager* undoManager = [[NSUndoManager alloc] init];
   [__managedObjectContext setUndoManager:undoManager];
   
   return __managedObjectContext;
@@ -82,7 +74,7 @@
   
   NSError* err = nil;
   __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-  NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+  NSDictionary* options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES};
 
   if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&err]) {
 //    [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];

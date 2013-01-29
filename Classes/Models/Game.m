@@ -30,12 +30,12 @@ static int scoreToWinQuebec = 1000;
 @dynamic setting;
 
 - (NSNumber*) isComplete {
-  return [NSNumber numberWithBool:([self.winningTeams count] > 0)];
+  return @(self.winningTeams.count > 0);
 }
 
 - (NSString*) nameForPosition:(NSUInteger)pos {
   if ([self.teams count] > pos) {
-    return [[self.teams objectAtIndex:pos] name];
+    return [(self.teams)[pos] name];
   }
 
   return nil;
@@ -55,7 +55,7 @@ static int scoreToWinQuebec = 1000;
   }
   else {
     for (Team* t in self.winningTeams) {
-      if ([t isEqual:[self.teams objectAtIndex:pos]]) {
+      if ([t isEqual:(self.teams)[pos]]) {
         return true;
       }
     }
@@ -77,7 +77,7 @@ static int scoreToWinQuebec = 1000;
     [r addScoresObject:rs];
   }
 
-  [r updateAndSetTricksWon:10 forTeam:[self.teams objectAtIndex:0]];
+  [r updateAndSetTricksWon:10 forTeam:(self.teams)[0]];
   
   return r;
 }
@@ -105,7 +105,7 @@ static int scoreToWinQuebec = 1000;
   if (teams == nil || [teams count] == 0) {
     return nil;
   }
-  NSMutableArray* names = [[[NSMutableArray alloc] initWithCapacity:[teams count]] autorelease];
+  NSMutableArray* names = [[NSMutableArray alloc] initWithCapacity:[teams count]];
   for (Team* t in teams) {
     [names addObject:t.name];
   }
@@ -117,7 +117,7 @@ static int scoreToWinQuebec = 1000;
   self.winningTeams = nil;
 
   if ([self.rounds count] > 0) {
-    Round* r = [self.rounds objectAtIndex:0];
+    Round* r = (self.rounds)[0];
 
     if ([self.setting.mode isEqualToString:@"Quebec mode"]) {
       [self checkWithQuebec:r];
@@ -192,7 +192,7 @@ static int scoreToWinQuebec = 1000;
 
 - (void)removeObjectFromRoundsAtIndex:(NSUInteger)idx {
   NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.rounds];
-  Round* r = [tempSet objectAtIndex:idx];
+  Round* r = tempSet[idx];
   [tempSet removeObjectAtIndex:idx];
   self.rounds = tempSet;
   [self.managedObjectContext deleteObject:r];
@@ -209,7 +209,7 @@ static int scoreToWinQuebec = 1000;
     return nil;
   }
   
-  return [[self.rounds objectAtIndex:ix] scoreForPosition:pos];
+  return [(self.rounds)[ix] scoreForPosition:pos];
 }
 
 - (void) checkWithNormalRules:(Round*)r {
@@ -221,7 +221,7 @@ static int scoreToWinQuebec = 1000;
       int score = [[r scoreForPosition:i] intValue];
       
       if (score != minScore) {
-        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+        [self addWinningTeamsObject:(self.teams)[i]];
       }
     }
   }
@@ -230,7 +230,7 @@ static int scoreToWinQuebec = 1000;
       int score = [[r scoreForPosition:i] intValue];
       
       if (score >= scoreToWin && [r bidAchievedForPosition:i]) {
-        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+        [self addWinningTeamsObject:(self.teams)[i]];
       }
     }
   }
@@ -245,7 +245,7 @@ static int scoreToWinQuebec = 1000;
       int score = [[r scoreForPosition:i] intValue];
       
       if (score >= maxScore) {
-        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+        [self addWinningTeamsObject:(self.teams)[i]];
       }
     }
   }
@@ -254,7 +254,7 @@ static int scoreToWinQuebec = 1000;
       int score = [[r scoreForPosition:i] intValue];
       
       if (score != minScore) {
-        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+        [self addWinningTeamsObject:(self.teams)[i]];
       }
     }
   }
@@ -269,7 +269,7 @@ static int scoreToWinQuebec = 1000;
       int score = [[r scoreForPosition:i] intValue];
       
       if (score == maxScore) {
-        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+        [self addWinningTeamsObject:(self.teams)[i]];
       }
     }
   }
@@ -284,7 +284,7 @@ static int scoreToWinQuebec = 1000;
       int score = [[r scoreForPosition:i] intValue];
       
       if (score >= maxScore) {
-        [self addWinningTeamsObject:[self.teams objectAtIndex:i]];
+        [self addWinningTeamsObject:(self.teams)[i]];
       }
     }
   }

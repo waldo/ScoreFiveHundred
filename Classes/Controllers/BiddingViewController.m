@@ -15,22 +15,8 @@
   game,
   round;
 
-- (void)dealloc {
-  [tricksWonSummaryController release];
-  [tricksWonController release];
-  [bidSelectionTableView release];
-  [cellWrapper release];
-  [scoreController release];
-
-  [bidTypeHands release];
-  [game release];
-  [round release];
-
-  [super dealloc];
-}
-
 - (NSString*) hand {
-  return [self.bidTypeHands objectAtIndex:[self.bidSelectionTableView indexPathForSelectedRow].row];
+  return (self.bidTypeHands)[[self.bidSelectionTableView indexPathForSelectedRow].row];
 }
 
 - (void) initWithGame:(Game*)g andRound:(Round *)r {
@@ -83,7 +69,7 @@
     cellBidType = (CellBidType*)self.cellWrapper.cell;
   }
   
-  NSString* key = [self.bidTypeHands objectAtIndex:indexPath.row];
+  NSString* key = (self.bidTypeHands)[indexPath.row];
   
   cellBidType.symbol.text = [BidType tricksAndSymbolForHand:key];
   
