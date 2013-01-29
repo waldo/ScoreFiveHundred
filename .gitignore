@@ -9,6 +9,7 @@ build/*
 *.perspective
 *.perspectivev3
 xcuserdata/
+Pods/
 
 # osx noise
 .DS_Store

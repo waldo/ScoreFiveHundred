@@ -4,9 +4,7 @@
 
 @implementation TricksWonViewController
 
-static NSString* ssBidVariationRegular = @"regular";
 static NSString* ssBidVariationMisere = @"misére";
-static NSString* ssBidVariationNoBid = @"no bid";
 static int siMaximumTricks = 10;
 
 // MARK: synthesize

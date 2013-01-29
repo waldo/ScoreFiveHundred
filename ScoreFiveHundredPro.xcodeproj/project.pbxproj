@@ -24,7 +24,6 @@
 		5B7C4F941472BF7200B95554 /* ScoreMiniView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B7C4F931472BF7200B95554 /* ScoreMiniView.xib */; };
 		5B7C4F971472C13C00B95554 /* ScoreMiniViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C4F961472C13C00B95554 /* ScoreMiniViewController.m */; };
 		5B7C7E00146C3ED200DB4785 /* GameModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */; };
-		5B904C5810D28A2B003F5324 /* BidTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B904C5710D28A2B003F5324 /* BidTypeTest.m */; };
 		5B924BBF146C38A700CCF760 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA29366145F318500D5FAD6 /* CoreData.framework */; };
 		5B924BC0146C38E700CCF760 /* RoundScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B777F4214684CDE00955729 /* RoundScore.m */; };
 		5B924BC1146C38E700CCF760 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F374145EDB8900C7E762 /* Game.m */; };
@@ -58,10 +57,12 @@
 		5BD2F375145EDB8900C7E762 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F374145EDB8900C7E762 /* Game.m */; };
 		5BD2F378145EDB8A00C7E762 /* Team.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F377145EDB8A00C7E762 /* Team.m */; };
 		5BD2F37E145EE22D00C7E762 /* Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F37D145EE22D00C7E762 /* Round.m */; };
+		5BED78BE16B7FCD00042EBA6 /* BidTypeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BED78BD16B7FCD00042EBA6 /* BidTypeSpec.m */; };
 		5BF2F043145EC1D30067E00C /* GameModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */; };
 		5BFEC53616B29976009A6A2C /* icon_pro_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFEC53416B29976009A6A2C /* icon_pro_57.png */; };
 		5BFEC53716B29976009A6A2C /* icon_pro_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFEC53516B29976009A6A2C /* icon_pro_114.png */; };
 		5BFEC53D16B29AC1009A6A2C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFEC53C16B29AC1009A6A2C /* Default-568h@2x.png */; };
+		F7B70AE5F9D14AEA800DEBB1 /* libPods-LogicTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 822120221C014EB9B2F70850 /* libPods-LogicTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,8 +104,6 @@
 		5B7C4F961472C13C00B95554 /* ScoreMiniViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreMiniViewController.m; sourceTree = "<group>"; };
 		5B904C4010D2894A003F5324 /* LogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B904C4110D2894A003F5324 /* LogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "LogicTests-Info.plist"; path = "Tests/LogicTests-Info.plist"; sourceTree = "<group>"; };
-		5B904C5610D28A2B003F5324 /* BidTypeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BidTypeTest.h; path = Tests/BidTypeTest.h; sourceTree = "<group>"; };
-		5B904C5710D28A2B003F5324 /* BidTypeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BidTypeTest.m; path = Tests/BidTypeTest.m; sourceTree = "<group>"; };
 		5BA29366145F318500D5FAD6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5BAA5CC814569465007274F7 /* BiddingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiddingViewController.h; sourceTree = "<group>"; };
 		5BAA5CC914569465007274F7 /* BiddingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiddingViewController.m; sourceTree = "<group>"; };
@@ -148,10 +147,13 @@
 		5BD2F377145EDB8A00C7E762 /* Team.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Team.m; sourceTree = "<group>"; };
 		5BD2F37C145EE22D00C7E762 /* Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Round.h; sourceTree = "<group>"; };
 		5BD2F37D145EE22D00C7E762 /* Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Round.m; sourceTree = "<group>"; };
+		5BED78BD16B7FCD00042EBA6 /* BidTypeSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BidTypeSpec.m; path = Tests/BidTypeSpec.m; sourceTree = "<group>"; };
 		5BF2F042145EC1D30067E00C /* GameModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameModel.xcdatamodel; sourceTree = "<group>"; };
 		5BFEC53416B29976009A6A2C /* icon_pro_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_pro_57.png; path = Resources/icon_pro_57.png; sourceTree = "<group>"; };
 		5BFEC53516B29976009A6A2C /* icon_pro_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_pro_114.png; path = Resources/icon_pro_114.png; sourceTree = "<group>"; };
 		5BFEC53C16B29AC1009A6A2C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
+		822120221C014EB9B2F70850 /* libPods-LogicTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogicTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D276E74E800B419BB6DC19E3 /* Pods-LogicTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogicTests.xcconfig"; path = "Pods/Pods-LogicTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B924BBF146C38A700CCF760 /* CoreData.framework in Frameworks */,
+				F7B70AE5F9D14AEA800DEBB1 /* libPods-LogicTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +211,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				D276E74E800B419BB6DC19E3 /* Pods-LogicTests.xcconfig */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -252,6 +256,7 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				822120221C014EB9B2F70850 /* libPods-LogicTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -283,8 +288,7 @@
 		5B904C5410D28990003F5324 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				5B904C5610D28A2B003F5324 /* BidTypeTest.h */,
-				5B904C5710D28A2B003F5324 /* BidTypeTest.m */,
+				5BED78BD16B7FCD00042EBA6 /* BidTypeSpec.m */,
 				5B904C4110D2894A003F5324 /* LogicTests-Info.plist */,
 			);
 			name = Tests;
@@ -378,6 +382,7 @@
 				5B904C3C10D2894A003F5324 /* Sources */,
 				5B904C3D10D2894A003F5324 /* Frameworks */,
 				5B904C3E10D2894A003F5324 /* ShellScript */,
+				E8E08057C2B44D948541BD33 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -463,6 +468,20 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\" 1> /tmp/RunUnitTests.out";
 		};
+		E8E08057C2B44D948541BD33 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-LogicTests-resources.sh\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -507,7 +526,7 @@
 				5B924BC2146C38E700CCF760 /* Team.m in Sources */,
 				5B924BC3146C38E700CCF760 /* Round.m in Sources */,
 				5BB92ABE1456A3E1008C70CB /* BidType.m in Sources */,
-				5B904C5810D28A2B003F5324 /* BidTypeTest.m in Sources */,
+				5BED78BE16B7FCD00042EBA6 /* BidTypeSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,27 +621,18 @@
 		};
 		5B646B8E111796C800B7F8FB /* Ad-Hoc */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D276E74E800B419BB6DC19E3 /* Pods-LogicTests.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				INFOPLIST_FILE = "Tests/LogicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					SenTestingKit,
-					"-framework",
-					UIKit,
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = LogicTests;
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
@@ -631,27 +641,18 @@
 		};
 		5B904C4510D2894A003F5324 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D276E74E800B419BB6DC19E3 /* Pods-LogicTests.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "Tests/LogicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					SenTestingKit,
-					"-framework",
-					UIKit,
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = LogicTests;
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = octest;
@@ -660,26 +661,17 @@
 		};
 		5B904C4610D2894A003F5324 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D276E74E800B419BB6DC19E3 /* Pods-LogicTests.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				INFOPLIST_FILE = "Tests/LogicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					SenTestingKit,
-					"-framework",
-					UIKit,
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = LogicTests;
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;

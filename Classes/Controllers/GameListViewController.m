@@ -4,10 +4,6 @@
 
 @implementation GameListViewController
 
-// MARK: static
-static NSString* ssTitleInProgress    = @"In Progress";
-static NSString* ssTitleCompleted     = @"Complete";
-
 // MARK: synthesize
 @synthesize 
   cellWrapper,
