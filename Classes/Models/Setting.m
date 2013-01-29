@@ -3,12 +3,14 @@
 
 @implementation Setting
 
-@dynamic mode;
-@dynamic tournament;
-@dynamic firstToCross;
-@dynamic nonBidderScoresTen;
-@dynamic noOneBid;
-@dynamic game;
+@dynamic mode,
+  tournament,
+  firstToCross,
+  nonBidderScoresTen,
+  onlySuccessfulDefendersScore,
+  capDefendersScore,
+  noOneBid,
+  game;
 
 @synthesize modeOptions;
 

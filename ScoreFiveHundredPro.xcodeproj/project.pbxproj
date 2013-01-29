@@ -15,6 +15,7 @@
 		5B184AF0146D10D2000EBA01 /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B184AEF146D10D2000EBA01 /* Setting.m */; };
 		5B184AF5146D3F7A000EBA01 /* GameModeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B184AF4146D3F7A000EBA01 /* GameModeView.xib */; };
 		5B184AF8146D4056000EBA01 /* GameModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B184AF7146D4056000EBA01 /* GameModeViewController.m */; };
+		5B24364716B6815E007E0B14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B24364616B6815E007E0B14 /* Player.m */; };
 		5B34ABC4148FE51000958ADE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B34ABC3148FE51000958ADE /* Default.png */; };
 		5B34ABC6148FE51400958ADE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B34ABC5148FE51400958ADE /* Default@2x.png */; };
 		5B777F4314684CDE00955729 /* RoundScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B777F4214684CDE00955729 /* RoundScore.m */; };
@@ -87,6 +88,9 @@
 		5B184AF4146D3F7A000EBA01 /* GameModeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameModeView.xib; sourceTree = "<group>"; };
 		5B184AF6146D4056000EBA01 /* GameModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameModeViewController.h; path = Classes/Controllers/SetUp/GameModeViewController.h; sourceTree = SOURCE_ROOT; };
 		5B184AF7146D4056000EBA01 /* GameModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameModeViewController.m; path = Classes/Controllers/SetUp/GameModeViewController.m; sourceTree = SOURCE_ROOT; };
+		5B24363916B6765B007E0B14 /* GameModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "GameModel 2.xcdatamodel"; sourceTree = "<group>"; };
+		5B24364516B6815E007E0B14 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		5B24364616B6815E007E0B14 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		5B34ABC3148FE51000958ADE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = SOURCE_ROOT; };
 		5B34ABC5148FE51400958ADE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		5B777F4114684CDE00955729 /* RoundScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundScore.h; sourceTree = "<group>"; };
@@ -314,6 +318,8 @@
 				5BAA5CDB145694B0007274F7 /* BidType.h */,
 				5BAA5CDC145694B0007274F7 /* BidType.m */,
 				5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */,
+				5B24364516B6815E007E0B14 /* Player.h */,
+				5B24364616B6815E007E0B14 /* Player.m */,
 				5BD2F373145EDB8900C7E762 /* Game.h */,
 				5BD2F374145EDB8900C7E762 /* Game.m */,
 				5B184AEE146D10D2000EBA01 /* Setting.h */,
@@ -487,6 +493,7 @@
 				5BCC7B251471C9A400E79120 /* GameTournamentViewController.m in Sources */,
 				5B7C4F901472B67C00B95554 /* TricksWonSummaryViewController.m in Sources */,
 				5B7C4F971472C13C00B95554 /* ScoreMiniViewController.m in Sources */,
+				5B24364716B6815E007E0B14 /* Player.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,9 +750,10 @@
 		5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				5B24363916B6765B007E0B14 /* GameModel 2.xcdatamodel */,
 				5BF2F042145EC1D30067E00C /* GameModel.xcdatamodel */,
 			);
-			currentVersion = 5BF2F042145EC1D30067E00C /* GameModel.xcdatamodel */;
+			currentVersion = 5B24363916B6765B007E0B14 /* GameModel 2.xcdatamodel */;
 			path = GameModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
