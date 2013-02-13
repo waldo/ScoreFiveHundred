@@ -1,16 +1,11 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "Setting.h"
-@class GameSetUpViewController;
 
-@interface GameModeViewController : UIViewController {
-  IBOutlet UITableView* table;
-  Setting* setting;
-}
+@interface GameModeViewController : UITableViewController
 
-@property (nonatomic, retain) IBOutlet UITableView* table;
-@property (nonatomic, retain) Setting* setting;
+@property Setting *setting;
 
-- (void) initWithSetting:(Setting*)s;
+- (void)initWithSetting:(Setting *)s;
 
 @end

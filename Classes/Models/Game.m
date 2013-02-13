@@ -4,17 +4,19 @@
 #import "Setting.h"
 #import "Team.h"
 
-@interface Game()
-- (BOOL) guardForRoundIndex:(NSUInteger)ix;
-- (NSString*) scoreForPosition:(NSUInteger)pos andIndex:(NSUInteger)ix;
-- (void) scoresForRound:(Round*)r min:(int*)minScore andMax:(int*)maxScore;
-- (void) checkWithNormalRules:(Round*)r;
-- (void) checkWithFirstToCross:(Round*)r;
-- (void) checkWithTournament:(Round*)r;
-- (void) checkWithQuebec:(Round*)r;
+
+@interface Game ()
+
+- (void)scoresForRound:(Round *)r min:(int *)minScore andMax:(int *)maxScore;
+- (void)checkWithNormalRules:(Round *)r;
+- (void)checkWithFirstToCross:(Round *)r;
+- (void)checkWithTournament:(Round *)r;
+- (void)checkWithQuebec:(Round *)r;
+
 @end
 
 @implementation Game
+
 // MARK: static
 static int scoreToWin = 500;
 static int scoreToLose = -500;
@@ -29,11 +31,11 @@ static int scoreToWinQuebec = 1000;
 @dynamic winningTeams;
 @dynamic setting;
 
-- (NSNumber*) isComplete {
+- (NSNumber *)isComplete {
   return @(self.winningTeams.count > 0);
 }
 
-- (NSString*) nameForPosition:(NSUInteger)pos {
+- (NSString *)nameForPosition:(NSUInteger)pos {
   if ([self.teams count] > pos) {
     return [(self.teams)[pos] name];
   }
@@ -41,20 +43,21 @@ static int scoreToWinQuebec = 1000;
   return nil;
 }
 
-- (NSString*) scoreForPosition:(NSUInteger)pos {
-  return [self scoreForPosition:pos andIndex:0];
+- (NSString *)scoreForPosition:(NSUInteger)pos {
+  if ((self.rounds == nil || self.latestCompleteRound == nil)) {
+    return @"0";
+  }
+
+  return [self.latestCompleteRound scoreForPosition:pos];
 }
 
-- (NSString*) oldScoreForPosition:(NSUInteger)pos {
-  return [self scoreForPosition:pos andIndex:1];
-}
 
-- (BOOL) isVictorInPosition:(NSUInteger)pos {
+- (BOOL)isVictorInPosition:(NSUInteger)pos {
   if (self.winningTeams == nil) {
     return false;
   }
   else {
-    for (Team* t in self.winningTeams) {
+    for (Team *t in self.winningTeams) {
       if ([t isEqual:(self.teams)[pos]]) {
         return true;
       }
@@ -64,25 +67,25 @@ static int scoreToWinQuebec = 1000;
   return false;
 }
 
-- (Round*) buildRound {
+- (Round *)buildRound {
   [self.managedObjectContext.undoManager beginUndoGrouping];
   [self.managedObjectContext.undoManager setActionName:@"new round"];
-  Round* r = [NSEntityDescription insertNewObjectForEntityForName:@"Round" inManagedObjectContext:self.managedObjectContext];
+  Round *r = [NSEntityDescription insertNewObjectForEntityForName:@"Round" inManagedObjectContext:self.managedObjectContext];
   [self insertObject:r inRoundsAtIndex:0];
 
-  for (Team* t in self.teams) {
-    RoundScore* rs = [NSEntityDescription insertNewObjectForEntityForName:@"RoundScore" inManagedObjectContext:self.managedObjectContext];
+  for (Team *t in self.teams) {
+    RoundScore *rs = [NSEntityDescription insertNewObjectForEntityForName:@"RoundScore" inManagedObjectContext:self.managedObjectContext];
     rs.round = r;
     rs.team = t;
     [r addScoresObject:rs];
   }
 
-  [r updateAndSetTricksWon:10 forTeam:(self.teams)[0]];
+  [r setTricksWon:10 forTeam:(self.teams)[0]];
   
   return r;
 }
 
-- (void) finaliseRound {
+- (void)finaliseRound {
   if ([self.managedObjectContext.undoManager.undoActionName isEqualToString:@"new round"]) {
     [self.managedObjectContext.undoManager endUndoGrouping];
     [self.managedObjectContext.undoManager setActionName:@""];
@@ -93,20 +96,46 @@ static int scoreToWinQuebec = 1000;
   }
 }
 
-- (void) setTeamsByNames:(NSMutableOrderedSet*)names {
-  for (NSString* name in names) {
-    Team* t = [NSEntityDescription insertNewObjectForEntityForName:@"Team" inManagedObjectContext:self.managedObjectContext];
+- (void)undoRound {
+  if ([self.managedObjectContext.undoManager.undoActionName isEqualToString:@"new round"]) {
+    [self.managedObjectContext.undoManager endUndoGrouping];
+    [self.managedObjectContext.undoManager undo];
+  }
+}
+
+- (Round *)latestCompleteRound {
+  Round *round = nil;
+
+  if (self.rounds.count == 1) {
+    if (![self.rounds[0] isNew]) {
+      round = self.rounds[0];
+    }
+  }
+  else if (self.rounds.count > 1) {
+    round = [self.rounds[0] isNew] ? self.rounds[1] : self.rounds[0];
+  }
+
+  return round;
+}
+
+- (Round *)currentRound {
+  return self.rounds.firstObject;
+}
+
+- (void)setTeamsByNames:(NSMutableOrderedSet *)names {
+  for (NSString *name in names) {
+    Team *t = [NSEntityDescription insertNewObjectForEntityForName:@"Team" inManagedObjectContext:self.managedObjectContext];
     t.name = name;
     [self addTeamsObject:t];
   }
 }
 
-- (NSString*) teamNames:(NSSet*)teams {
+- (NSString *)teamNames:(NSSet *)teams {
   if (teams == nil || [teams count] == 0) {
     return nil;
   }
-  NSMutableArray* names = [[NSMutableArray alloc] initWithCapacity:[teams count]];
-  for (Team* t in teams) {
+  NSMutableArray *names = [[NSMutableArray alloc] initWithCapacity:[teams count]];
+  for (Team *t in teams) {
     [names addObject:t.name];
   }
 
@@ -117,7 +146,7 @@ static int scoreToWinQuebec = 1000;
   self.winningTeams = nil;
 
   if ([self.rounds count] > 0) {
-    Round* r = (self.rounds)[0];
+    Round *r = (self.rounds)[0];
 
     if ([self.setting.mode isEqualToString:@"Quebec mode"]) {
       [self checkWithQuebec:r];
@@ -134,8 +163,8 @@ static int scoreToWinQuebec = 1000;
   }
 }
 
-- (Game*) duplicate {
-  Game* clone = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
+- (Game *)duplicate {
+  Game *clone = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
   
   clone.teams = self.teams;
   clone.setting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:self.managedObjectContext];
@@ -153,46 +182,70 @@ static int scoreToWinQuebec = 1000;
   return clone;
 }
 
-- (void) save {
+- (void)save {
+  // remove undo marker before save
+  if ([self.managedObjectContext.undoManager.undoActionName isEqualToString:@"set up game"]) {
+    [self.managedObjectContext.undoManager endUndoGrouping];
+    [self.managedObjectContext.undoManager removeAllActions];
+  }
+
   NSError *err = nil;
   if (![self.managedObjectContext save:&err]) {
     NSLog(@"Unresolved error %@, %@", err, [err userInfo]);
   }
 }
 
+- (void)undo {
+  if ([self.managedObjectContext.undoManager.undoActionName isEqualToString:@"set up game"]) {
+    [self.managedObjectContext.undoManager endUndoGrouping];
+    [self.managedObjectContext.undoManager undo];
+  }
+}
+
++ (Game *)buildGameWithContext:(NSManagedObjectContext *)moc {
+  [[moc undoManager] beginUndoGrouping];
+  [[moc undoManager] setActionName:@"set up game"];
+
+  Game *g = (Game *)[NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:moc];
+  Setting *s = (Setting *)[NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:moc];
+  g.setting = s;
+
+  return g;
+}
+
 // MARK: set core data defaults
-- (void) awakeFromInsert {
+- (void)awakeFromInsert {
   [super awakeFromInsert];
   [self setValue:[Round uniqueId] forKey:@"id"];
   [self setValue:[NSDate date] forKey:@"lastPlayed"];
 }
 
-- (void) didTurnIntoFault {
+- (void)didTurnIntoFault {
   [super didTurnIntoFault];
 }
 
 // MARK: override buggy coredata code
-- (void) addTeamsObject:(Team*)value {
-  NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.teams];
+- (void)addTeamsObject:(Team *)value {
+  NSMutableOrderedSet *tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.teams];
   [tempSet addObject:value];
   self.teams = tempSet;
 }
 
-- (void) addRoundsObject:(Round*)value {
-  NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.rounds];
+- (void)addRoundsObject:(Round *)value {
+  NSMutableOrderedSet *tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.rounds];
   [tempSet addObject:value];
   self.rounds = tempSet;
 }
 
-- (void) insertObject:(Round *)value inRoundsAtIndex:(NSUInteger)idx {
-  NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.rounds];
+- (void)insertObject:(Round *)value inRoundsAtIndex:(NSUInteger)idx {
+  NSMutableOrderedSet *tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.rounds];
   [tempSet insertObject:value atIndex:idx];
   self.rounds = tempSet;
 }
 
 - (void)removeObjectFromRoundsAtIndex:(NSUInteger)idx {
-  NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.rounds];
-  Round* r = tempSet[idx];
+  NSMutableOrderedSet *tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.rounds];
+  Round *r = tempSet[idx];
   [tempSet removeObjectAtIndex:idx];
   self.rounds = tempSet;
   [self.managedObjectContext deleteObject:r];
@@ -200,19 +253,7 @@ static int scoreToWinQuebec = 1000;
 }
 
 // MARK: hidden
-- (BOOL) guardForRoundIndex:(NSUInteger)ix {
-  return (self.rounds == nil || [self.rounds count] <= ix);
-}
-
-- (NSString*) scoreForPosition:(NSUInteger)pos andIndex:(NSUInteger)ix {
-  if ([self guardForRoundIndex:ix]) {
-    return nil;
-  }
-  
-  return [(self.rounds)[ix] scoreForPosition:pos];
-}
-
-- (void) checkWithNormalRules:(Round*)r {
+- (void)checkWithNormalRules:(Round *)r {
   int maxScore, minScore;
   [self scoresForRound:r min:&minScore andMax:&maxScore];
   
@@ -236,7 +277,7 @@ static int scoreToWinQuebec = 1000;
   }
 }
 
-- (void) checkWithFirstToCross:(Round*)r {
+- (void)checkWithFirstToCross:(Round *)r {
   int maxScore, minScore;
   [self scoresForRound:r min:&minScore andMax:&maxScore];
   
@@ -260,7 +301,7 @@ static int scoreToWinQuebec = 1000;
   }
 }
 
-- (void) checkWithTournament:(Round*)r {
+- (void)checkWithTournament:(Round *)r {
   int maxScore, minScore;
   [self scoresForRound:r min:&minScore andMax:&maxScore];
   
@@ -275,7 +316,7 @@ static int scoreToWinQuebec = 1000;
   }
 }
 
-- (void) checkWithQuebec:(Round*)r {
+- (void)checkWithQuebec:(Round *)r {
   int maxScore, minScore;
   [self scoresForRound:r min:&minScore andMax:&maxScore];
   
@@ -290,7 +331,7 @@ static int scoreToWinQuebec = 1000;
   }
 }
 
-- (void) scoresForRound:(Round*)r min:(int*)minScore andMax:(int*)maxScore {
+- (void)scoresForRound:(Round *)r min:(int *)minScore andMax:(int *)maxScore {
   *maxScore = scoreToLose;
   *minScore = scoreToWin;
   

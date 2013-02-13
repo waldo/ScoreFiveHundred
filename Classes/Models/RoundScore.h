@@ -5,9 +5,9 @@
 
 @interface RoundScore : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * score;
-@property (nonatomic, retain) NSNumber * tricksWon;
-@property (nonatomic, retain) Round *round;
-@property (nonatomic, retain) Team *team;
+@property NSNumber *score;
+@property NSNumber *tricksWon;
+@property Round *round;
+@property Team *team;
 
 @end

@@ -6,16 +6,17 @@
 
 @implementation Team
 
-@dynamic id;
-@dynamic name;
-@dynamic games;
-@dynamic gameWinners;
-@dynamic roundBidder;
-@dynamic roundScores;
+@dynamic id,
+  name,
+  games,
+  gameWinners,
+  roundBidder,
+  roundScores;
 
 // MARK: set core data defaults
 - (void) awakeFromInsert {
   [super awakeFromInsert];
+
   [self setValue:[Round uniqueId] forKey:@"id"];
 }
 

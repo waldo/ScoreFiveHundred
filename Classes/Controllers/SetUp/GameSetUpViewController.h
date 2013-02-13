@@ -5,31 +5,23 @@
 #import "GameViewController.h"
 #import "GameModeViewController.h"
 #import "GameTournamentViewController.h"
+#import "SettingDelegate.h"
 
-@interface GameSetUpViewController : UIViewController <UITextFieldDelegate>{
-  IBOutlet GameViewController* gameController;
-  IBOutlet GameModeViewController* gameModeController;
-  IBOutlet GameTournamentViewController* gameTournamentController;
-  IBOutlet UITableView* table;
-  IBOutlet UIBarButtonItem* cancel;  
-  IBOutlet UIBarButtonItem* start;  
-  Game* game;
-  NSMutableOrderedSet* teamNameTextFields;
-}
+@interface GameSetUpViewController : UITableViewController <UITextFieldDelegate>
 
-@property (nonatomic, retain) IBOutlet GameViewController* gameController;
-@property (nonatomic, retain) IBOutlet GameModeViewController* gameModeController;
-@property (nonatomic, retain) IBOutlet GameTournamentViewController* gameTournamentController;
-@property (nonatomic, retain) IBOutlet UITableView* table;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem* cancel;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem* start;
-@property (nonatomic, retain) Game* game;
-@property (nonatomic, retain) NSMutableOrderedSet* teamNameTextFields;
+@property Game *game;
+@property IBOutletCollection(UITextField) NSArray *teamFields;
+@property IBOutlet UISwitch *firstToCross;
+@property IBOutlet UISwitch *nonBidderScoresTen;
+@property IBOutlet UISwitch *noOneBid;
+@property(weak) id<SettingDelegate> delegate;
 
-
-- (IBAction) cancel:(id)sender;
-- (IBAction) start:(id)sender;
-
-- (void) initWithGame:(Game*)g mostRecentSettings:(Setting*)recent;
+- (void)initWithGame:(Game *)g mostRecentSettings:(Setting *)recent;
+- (void)reloadElements;
+- (IBAction)start:(id)sender;
+- (IBAction)cancel:(id)sender;
+- (IBAction)firstToCrossChanged:(id)sender;
+- (IBAction)nonBidderScoresTenChanged:(id)sender;
+- (IBAction)noOneBidChanged:(id)sender;
 
 @end

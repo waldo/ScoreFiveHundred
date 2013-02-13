@@ -5,9 +5,9 @@
 
 @implementation RoundScore
 
-@dynamic score;
-@dynamic tricksWon;
-@dynamic round;
-@dynamic team;
+@dynamic score,
+  tricksWon,
+  round,
+  team;
 
 @end

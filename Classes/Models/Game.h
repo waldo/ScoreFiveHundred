@@ -5,25 +5,30 @@
 
 @interface Game : NSManagedObject
 
-@property (nonatomic, retain, getter = isComplete) NSNumber * complete;
-@property (nonatomic, retain) NSString * id;
-@property (nonatomic, retain) NSDate * lastPlayed;
-@property (nonatomic, retain) NSOrderedSet *rounds;
-@property (nonatomic, retain) NSOrderedSet *teams;
-@property (nonatomic, retain) NSSet *winningTeams;
-@property (nonatomic, retain) Setting *setting;
+@property (getter = isComplete) NSNumber *complete;
+@property NSString *id;
+@property NSDate *lastPlayed;
+@property NSOrderedSet *rounds;
+@property NSOrderedSet *teams;
+@property NSSet *winningTeams;
+@property Setting *setting;
 
-- (NSString*) nameForPosition:(NSUInteger)pos;
-- (NSString*) scoreForPosition:(NSUInteger)pos;
-- (NSString*) oldScoreForPosition:(NSUInteger)pos;
-- (BOOL) isVictorInPosition:(NSUInteger)pos;
-- (NSString*) teamNames:(NSSet*)teams;
-- (Round*) buildRound;
-- (void) finaliseRound;
-- (void) setTeamsByNames:(NSMutableOrderedSet*)names;
-- (void) checkForGameOver;
-- (Game*) duplicate;
-- (void) save;
+- (NSString *)nameForPosition:(NSUInteger)pos;
+- (NSString *)scoreForPosition:(NSUInteger)pos;
+- (BOOL)isVictorInPosition:(NSUInteger)pos;
+- (NSString *)teamNames:(NSSet *)teams;
+- (Round *)buildRound;
+- (void)finaliseRound;
+- (void)undoRound;
+- (Round *)latestCompleteRound;
+- (Round *)currentRound;
+- (void)setTeamsByNames:(NSMutableOrderedSet *)names;
+- (void)checkForGameOver;
+- (Game *)duplicate;
+- (void)save;
+- (void)undo;
+
++ (Game *)buildGameWithContext:(NSManagedObjectContext *)moc;
 
 @end
 
@@ -53,4 +58,5 @@
 - (void)removeWinningTeamsObject:(Team *)value;
 - (void)addWinningTeams:(NSSet *)values;
 - (void)removeWinningTeams:(NSSet *)values;
+
 @end

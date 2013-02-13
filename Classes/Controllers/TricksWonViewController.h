@@ -2,34 +2,19 @@
 #import "ScoreMiniViewController.h"
 #import "Game.h"
 #import "Round.h"
-@class GameViewController;
+#import "BidType.h"
+#import "RoundDelegate.h"
 
-@interface TricksWonViewController : UIViewController {
-  IBOutlet GameViewController* gameController;
-  IBOutlet ScoreMiniViewController* scoreController;
-  IBOutlet UITableView* tricksWonTableView;
+@interface TricksWonViewController : UITableViewController
 
-  Game* game;
-  Round* round;
-  Team* team;
-  NSString* bidVariation;
-  NSArray* regularList;
-  NSArray* misereList;
-}
+@property Game *game;
+@property Round *round;
+@property Team *team;
+@property NSString *bidVariation;
+@property NSArray *regularList;
+@property NSArray *misereList;
+@property(weak) id<RoundDelegate> delegate;
 
-@property (nonatomic, retain) IBOutlet GameViewController* gameController;
-@property (nonatomic, retain) IBOutlet ScoreMiniViewController* scoreController;
-@property (nonatomic, retain) IBOutlet UITableView* tricksWonTableView;
-
-@property (nonatomic, retain) Game* game;
-@property (nonatomic, retain) Round* round;
-@property (nonatomic, retain) Team* team;
-@property (nonatomic, retain) NSString* bidVariation;
-@property (nonatomic, retain) NSArray* regularList;
-@property (nonatomic, retain) NSArray* misereList;
-
-
-- (NSArray*) tricksWonList;
-- (void) initWithGame:(Game*)g round:(Round*)r andTeam:(Team*)t;
+- (void)initWithGame:(Game *)g andTeam:(Team *)t;
 
 @end

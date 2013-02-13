@@ -1,16 +1,11 @@
 #import <UIKit/UIKit.h>
 #import "Setting.h"
 
-@interface GameTournamentViewController : UIViewController {
-  IBOutlet UITableView* table;
-  Setting* setting;
-  NSOrderedSet* tournamentOptions;
-}
+@interface GameTournamentViewController : UITableViewController
 
-@property (nonatomic, retain) IBOutlet UITableView* table;
-@property (nonatomic, retain) Setting* setting;
-@property (nonatomic, retain) NSOrderedSet* tournamentOptions;
+@property Setting *setting;
+@property NSArray *tournamentOptions;
 
-- (void) initWithSetting:(Setting*)s;
+- (void)initWithSetting:(Setting *)s;
 
 @end

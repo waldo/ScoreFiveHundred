@@ -1,144 +1,57 @@
 #import "TricksWonViewController.h"
-#import "GameViewController.h"
 
 
 @implementation TricksWonViewController
 
-static NSString* ssBidVariationMisere = @"misére";
 static int siMaximumTricks = 10;
 
-// MARK: synthesize
-@synthesize
-  gameController,
-  scoreController,
-  tricksWonTableView,
-  game,
-  round,
-  team,
-  bidVariation,
-  regularList,
-  misereList;
+- (void)initWithGame:(Game *)g andTeam:(Team *)t {
+  self.game = g;
+  self.round = g.currentRound;
+  self.team = t;
+  self.bidVariation = [BidType variation:_round.bid];
 
-
-- (NSArray*) tricksWonList {
-  NSArray* list = nil;
-  
-  if ([self.bidVariation isEqualToString:ssBidVariationMisere]) {
-    list = self.misereList;
-  }
-  else {
-    list = self.regularList;
-  }
-
-  return list;
+  self.title = [NSString stringWithFormat:@"%@", _team.name];
 }
 
-- (void) initWithGame:(Game*)g round:(Round*)r andTeam:(Team*)t {
-  self.game = g;
-  self.round = r;
-  self.team = t;
-  self.bidVariation = [BidType variation:self.round.bid];
-
-  self.title = [NSString stringWithFormat:@"%@", self.team.name];
+// MARK: Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.identifier isEqualToString:@"ScoreSummary"]) {
+    [((ScoreMiniViewController *)segue.destinationViewController) initWithGame:_game];
+  }
 }
 
 // MARK: View
-- (void) viewDidLoad {
+- (void)viewDidLoad {
   [super viewDidLoad];
-
-  self.regularList = @[@"10 tricks",
-                      @"9 tricks",
-                      @"8 tricks",
-                      @"7 tricks",
-                      @"6 tricks",
-                      @"5 tricks",
-                      @"4 tricks",
-                      @"3 tricks",
-                      @"2 tricks",
-                      @"1 trick",
-                      @"0 tricks"];
-  
-  self.misereList = @[@"Won by losing every trick",
-                     @"Got one or more tricks"];
-
-  [self.scoreController setStandardFrame];  
-  [self.view addSubview:self.scoreController.view];
-  self.gameController = (self.navigationController.viewControllers)[1];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
-  [self.scoreController initWithGame:self.game];
-  [self.tricksWonTableView reloadData];
+  [self.tableView reloadData];
 }
 
 // MARK: tableview delegate
-- (NSInteger) numberOfSectionsInTableView:(UITableView*)tableView {	
-	return 1;
-}
-
-- (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
-  return @"";
-}
-
-- (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-  return [[self tricksWonList] count];
-}
-
-- (UITableViewCell*) tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-  static NSString* CellIdentifier = @"CellTricksWon";
-  
-  UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  
-  if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-  }
-
-  int score = 0;
-  int tricksWon = 0;
-  
-  if ([self.bidVariation isEqualToString:ssBidVariationMisere]) {
-    tricksWon = indexPath.row;
-  }
-  else {
-    tricksWon = (siMaximumTricks - indexPath.row);
-  }
-
-  score = [BidType pointsForTeam:self.team game:self.game andTricksWon:tricksWon];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+  int tricksWon = (siMaximumTricks - indexPath.row);
+  int score = [BidType pointsForTeam:self.team game:self.game andTricksWon:tricksWon];
     
-  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  cell.textLabel.text = [self tricksWonList][indexPath.row];
   cell.detailTextLabel.text = [NSString stringWithFormat:@"%i pts", score];
-  [cell.detailTextLabel setFont:[UIFont systemFontOfSize:13.0]];
-  if (score > 0) {
-    [cell.detailTextLabel setTextColor:[UIColor colorWithRed:53.0/255.0 green:102.0/255.0 blue:201.0/255.0 alpha:1.0]];
-  }
-  else {
+  if (score < 0) {
     [cell.detailTextLabel setTextColor:[UIColor redColor]];
   }
   
   return cell;
 }
 
-- (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  int tricksWon = 0;
-  
-  if (![self.bidVariation isEqual:@"misére"]) {
-    tricksWon = 10 - indexPath.row;
-  }
-  else {
-    tricksWon = indexPath.row;
-  }
-  
-  [self.round updateAndSetTricksWon:tricksWon forTeam:self.team];
-  if ([self.game.setting.mode isEqualToString:@"2 teams"] || [self.game.setting.mode isEqualToString:@"Quebec mode"] || [self.bidVariation isEqualToString:@"misére"]) {
-    [self.game finaliseRound];    
-    [self.navigationController popToViewController:self.gameController animated:YES];
-  }
-  else {
-    [self.navigationController popViewControllerAnimated:YES];
-  }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  int tricksWon = (siMaximumTricks - indexPath.row);
+
+  [self.round setTricksWon:tricksWon forTeam:self.team];
+  [self.game finaliseRound];
+  [self.delegate applyRoundForGame:self.game fromController:self];
 }
 
 @end

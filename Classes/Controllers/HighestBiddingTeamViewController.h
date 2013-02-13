@@ -3,30 +3,17 @@
 #import "Round.h"
 #import "BiddingViewController.h"
 #import "ScoreMiniViewController.h"
+#import "RoundDelegate.h"
 
-@interface HighestBiddingTeamViewController : UIViewController {
-  IBOutlet BiddingViewController* biddingController;
-  IBOutlet TricksWonSummaryViewController* tricksWonSummaryController;
-  IBOutlet TricksWonViewController* tricksWonController;
-  IBOutlet UITableView* teamSelectionTableView;
-  IBOutlet ScoreMiniViewController* scoreController;
-  IBOutlet UIBarButtonItem* cancelButton;
+@protocol RoundDelegate;
 
-  Game* game;
-  Round* round;
-}
+@interface HighestBiddingTeamViewController : UITableViewController
 
-@property (nonatomic, retain) IBOutlet BiddingViewController* biddingController;
-@property (nonatomic, retain) IBOutlet TricksWonSummaryViewController* tricksWonSummaryController;
-@property (nonatomic, retain) IBOutlet TricksWonViewController* tricksWonController;
-@property (nonatomic, retain) IBOutlet UITableView* teamSelectionTableView;
-@property (nonatomic, retain) IBOutlet ScoreMiniViewController* scoreController;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem* cancelButton;
+@property Game *game;
+@property Round *round;
+@property(weak) id<RoundDelegate> delegate;
 
-@property (nonatomic, retain) Game* game;
-@property (nonatomic, retain) Round* round;
-
-- (void) initWithGame:(Game*)g;
-- (IBAction) cancel:(id)sender;
+- (void)initWithGame:(Game *)g;
+- (IBAction)cancel:(id)sender;
 
 @end

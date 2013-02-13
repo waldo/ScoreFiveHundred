@@ -3,26 +3,13 @@
 #import "Round.h"
 #import "RoundScore.h"
 
-@interface CellScoringRound : UITableViewCell {
-  NSArray* bidAttempted;
-  NSArray* points;
-  NSArray* bidSucceeded;
-  NSArray* bidFailed;
-  NSArray* tricksWon;
+@interface CellScoringRound : UITableViewCell
 
-  Round* round;
-}
+@property IBOutletCollection(UILabel) NSArray *tickCrossLabels;
+@property IBOutletCollection(UILabel) NSArray *bidLabels;
+@property IBOutletCollection(UILabel) NSArray *pointsLabels;
+@property Round *round;
 
-@property (nonatomic, retain) IBOutletCollection(UILabel) NSArray* bidAttempted;
-@property (nonatomic, retain) IBOutletCollection(UILabel) NSArray* points;
-@property (nonatomic, retain) IBOutletCollection(UILabel) NSArray* bidSucceeded;
-@property (nonatomic, retain) IBOutletCollection(UILabel) NSArray* bidFailed;
-@property (nonatomic, retain) IBOutletCollection(UILabel) NSArray* tricksWon;
-
-@property (nonatomic, retain) Round* round;
-
-- (void) setStyleForRound:(Round*)r;
-- (void) setStyleForPosition:(int)pos;
-- (NSString*) prettyStringForHand:(NSString*)hand;
+- (void)setStyleForRound:(Round *)r;
 
 @end

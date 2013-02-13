@@ -13,22 +13,20 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		5B184AF0146D10D2000EBA01 /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B184AEF146D10D2000EBA01 /* Setting.m */; };
-		5B184AF5146D3F7A000EBA01 /* GameModeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B184AF4146D3F7A000EBA01 /* GameModeView.xib */; };
 		5B184AF8146D4056000EBA01 /* GameModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B184AF7146D4056000EBA01 /* GameModeViewController.m */; };
 		5B24364716B6815E007E0B14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B24364616B6815E007E0B14 /* Player.m */; };
 		5B34ABC4148FE51000958ADE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B34ABC3148FE51000958ADE /* Default.png */; };
 		5B34ABC6148FE51400958ADE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B34ABC5148FE51400958ADE /* Default@2x.png */; };
+		5B35CD4416C51B6E00D76E57 /* TricksWonMisereViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B35CD4316C51B6E00D76E57 /* TricksWonMisereViewController.m */; };
 		5B777F4314684CDE00955729 /* RoundScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B777F4214684CDE00955729 /* RoundScore.m */; };
 		5B7C4F901472B67C00B95554 /* TricksWonSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C4F8F1472B67C00B95554 /* TricksWonSummaryViewController.m */; };
-		5B7C4F921472B69900B95554 /* TricksWonSummaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B7C4F911472B69900B95554 /* TricksWonSummaryView.xib */; };
-		5B7C4F941472BF7200B95554 /* ScoreMiniView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B7C4F931472BF7200B95554 /* ScoreMiniView.xib */; };
-		5B7C4F971472C13C00B95554 /* ScoreMiniViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C4F961472C13C00B95554 /* ScoreMiniViewController.m */; };
 		5B7C7E00146C3ED200DB4785 /* GameModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */; };
 		5B924BBF146C38A700CCF760 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA29366145F318500D5FAD6 /* CoreData.framework */; };
 		5B924BC0146C38E700CCF760 /* RoundScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B777F4214684CDE00955729 /* RoundScore.m */; };
 		5B924BC1146C38E700CCF760 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F374145EDB8900C7E762 /* Game.m */; };
 		5B924BC2146C38E700CCF760 /* Team.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F377145EDB8A00C7E762 /* Team.m */; };
 		5B924BC3146C38E700CCF760 /* Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F37D145EE22D00C7E762 /* Round.m */; };
+		5B95229516C1576C00A715FE /* ScoreMiniViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B95229416C1576C00A715FE /* ScoreMiniViewController.m */; };
 		5BA29367145F318500D5FAD6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA29366145F318500D5FAD6 /* CoreData.framework */; };
 		5BAA5CD414569465007274F7 /* BiddingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CC914569465007274F7 /* BiddingViewController.m */; };
 		5BAA5CD514569465007274F7 /* GameListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CCB14569465007274F7 /* GameListViewController.m */; };
@@ -37,27 +35,14 @@
 		5BAA5CD814569465007274F7 /* HighestBiddingTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CD114569465007274F7 /* HighestBiddingTeamViewController.m */; };
 		5BAA5CD914569465007274F7 /* TricksWonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CD314569465007274F7 /* TricksWonViewController.m */; };
 		5BAA5CDD145694B0007274F7 /* BidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CDC145694B0007274F7 /* BidType.m */; };
-		5BAA5CE7145694B9007274F7 /* CellBidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CE0145694B9007274F7 /* CellBidType.m */; };
-		5BAA5CE8145694B9007274F7 /* CellGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CE2145694B9007274F7 /* CellGame.m */; };
 		5BAA5CE9145694B9007274F7 /* CellScoringRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CE4145694B9007274F7 /* CellScoringRound.m */; };
-		5BAA5CEA145694B9007274F7 /* CellWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CE6145694B9007274F7 /* CellWrapper.m */; };
-		5BAA5CFA14569552007274F7 /* BiddingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CEC14569552007274F7 /* BiddingView.xib */; };
-		5BAA5CFB14569552007274F7 /* CellBidType.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CED14569552007274F7 /* CellBidType.xib */; };
-		5BAA5CFC14569552007274F7 /* CellGame.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CEE14569552007274F7 /* CellGame.xib */; };
-		5BAA5CFD14569552007274F7 /* CellScoringRound.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CEF14569552007274F7 /* CellScoringRound.xib */; };
-		5BAA5CFF14569552007274F7 /* GameListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF114569552007274F7 /* GameListView.xib */; };
-		5BAA5D0014569552007274F7 /* GameSetUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF214569552007274F7 /* GameSetUpView.xib */; };
-		5BAA5D0114569552007274F7 /* GameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF314569552007274F7 /* GameView.xib */; };
-		5BAA5D0214569552007274F7 /* HighestBiddingTeamView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF414569552007274F7 /* HighestBiddingTeamView.xib */; };
-		5BAA5D0414569552007274F7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF614569552007274F7 /* MainWindow.xib */; };
-		5BAA5D0614569552007274F7 /* TricksWonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA5CF814569552007274F7 /* TricksWonView.xib */; };
 		5BB92ABE1456A3E1008C70CB /* BidType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA5CDC145694B0007274F7 /* BidType.m */; };
-		5BCC7B211471C93D00E79120 /* GameTournamentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCC7B201471C93D00E79120 /* GameTournamentView.xib */; };
 		5BCC7B251471C9A400E79120 /* GameTournamentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCC7B231471C9A400E79120 /* GameTournamentViewController.m */; };
 		5BD2F375145EDB8900C7E762 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F374145EDB8900C7E762 /* Game.m */; };
 		5BD2F378145EDB8A00C7E762 /* Team.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F377145EDB8A00C7E762 /* Team.m */; };
 		5BD2F37E145EE22D00C7E762 /* Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD2F37D145EE22D00C7E762 /* Round.m */; };
 		5BED78BE16B7FCD00042EBA6 /* BidTypeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BED78BD16B7FCD00042EBA6 /* BidTypeSpec.m */; };
+		5BED78C116B816C90042EBA6 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BED78C016B816C90042EBA6 /* MainStoryboard.storyboard */; };
 		5BF2F043145EC1D30067E00C /* GameModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */; };
 		5BFEC53616B29976009A6A2C /* icon_pro_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFEC53416B29976009A6A2C /* icon_pro_57.png */; };
 		5BFEC53716B29976009A6A2C /* icon_pro_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFEC53516B29976009A6A2C /* icon_pro_114.png */; };
@@ -86,24 +71,26 @@
 		32CA4F630368D1EE00C91783 /* ScoreFiveHundredPro_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreFiveHundredPro_Prefix.pch; sourceTree = "<group>"; };
 		5B184AEE146D10D2000EBA01 /* Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setting.h; sourceTree = "<group>"; };
 		5B184AEF146D10D2000EBA01 /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setting.m; sourceTree = "<group>"; };
-		5B184AF4146D3F7A000EBA01 /* GameModeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameModeView.xib; sourceTree = "<group>"; };
 		5B184AF6146D4056000EBA01 /* GameModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameModeViewController.h; path = Classes/Controllers/SetUp/GameModeViewController.h; sourceTree = SOURCE_ROOT; };
 		5B184AF7146D4056000EBA01 /* GameModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameModeViewController.m; path = Classes/Controllers/SetUp/GameModeViewController.m; sourceTree = SOURCE_ROOT; };
 		5B24363916B6765B007E0B14 /* GameModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "GameModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		5B24364516B6815E007E0B14 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		5B24364616B6815E007E0B14 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		5B3311B716CB99F60048A4ED /* SettingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingDelegate.h; sourceTree = "<group>"; };
+		5B3311B816CB9A120048A4ED /* RematchDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RematchDelegate.h; sourceTree = "<group>"; };
 		5B34ABC3148FE51000958ADE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = SOURCE_ROOT; };
 		5B34ABC5148FE51400958ADE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = SOURCE_ROOT; };
+		5B35CD4116C5069A00D76E57 /* RoundDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundDelegate.h; sourceTree = "<group>"; };
+		5B35CD4216C51B6E00D76E57 /* TricksWonMisereViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TricksWonMisereViewController.h; sourceTree = "<group>"; };
+		5B35CD4316C51B6E00D76E57 /* TricksWonMisereViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TricksWonMisereViewController.m; sourceTree = "<group>"; };
 		5B777F4114684CDE00955729 /* RoundScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundScore.h; sourceTree = "<group>"; };
 		5B777F4214684CDE00955729 /* RoundScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundScore.m; sourceTree = "<group>"; };
 		5B7C4F8E1472B67C00B95554 /* TricksWonSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TricksWonSummaryViewController.h; sourceTree = "<group>"; };
 		5B7C4F8F1472B67C00B95554 /* TricksWonSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TricksWonSummaryViewController.m; sourceTree = "<group>"; };
-		5B7C4F911472B69900B95554 /* TricksWonSummaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TricksWonSummaryView.xib; sourceTree = "<group>"; };
-		5B7C4F931472BF7200B95554 /* ScoreMiniView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreMiniView.xib; sourceTree = "<group>"; };
-		5B7C4F951472C13C00B95554 /* ScoreMiniViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreMiniViewController.h; sourceTree = "<group>"; };
-		5B7C4F961472C13C00B95554 /* ScoreMiniViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreMiniViewController.m; sourceTree = "<group>"; };
 		5B904C4010D2894A003F5324 /* LogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B904C4110D2894A003F5324 /* LogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "LogicTests-Info.plist"; path = "Tests/LogicTests-Info.plist"; sourceTree = "<group>"; };
+		5B95229316C1576C00A715FE /* ScoreMiniViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreMiniViewController.h; sourceTree = "<group>"; };
+		5B95229416C1576C00A715FE /* ScoreMiniViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreMiniViewController.m; sourceTree = "<group>"; };
 		5BA29366145F318500D5FAD6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5BAA5CC814569465007274F7 /* BiddingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiddingViewController.h; sourceTree = "<group>"; };
 		5BAA5CC914569465007274F7 /* BiddingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiddingViewController.m; sourceTree = "<group>"; };
@@ -119,26 +106,9 @@
 		5BAA5CD314569465007274F7 /* TricksWonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TricksWonViewController.m; sourceTree = "<group>"; };
 		5BAA5CDB145694B0007274F7 /* BidType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidType.h; sourceTree = "<group>"; };
 		5BAA5CDC145694B0007274F7 /* BidType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidType.m; sourceTree = "<group>"; };
-		5BAA5CDF145694B9007274F7 /* CellBidType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellBidType.h; sourceTree = "<group>"; };
-		5BAA5CE0145694B9007274F7 /* CellBidType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellBidType.m; sourceTree = "<group>"; };
-		5BAA5CE1145694B9007274F7 /* CellGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellGame.h; sourceTree = "<group>"; };
-		5BAA5CE2145694B9007274F7 /* CellGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellGame.m; sourceTree = "<group>"; };
 		5BAA5CE3145694B9007274F7 /* CellScoringRound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellScoringRound.h; sourceTree = "<group>"; };
 		5BAA5CE4145694B9007274F7 /* CellScoringRound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellScoringRound.m; sourceTree = "<group>"; };
-		5BAA5CE5145694B9007274F7 /* CellWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellWrapper.h; sourceTree = "<group>"; };
-		5BAA5CE6145694B9007274F7 /* CellWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellWrapper.m; sourceTree = "<group>"; };
-		5BAA5CEC14569552007274F7 /* BiddingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BiddingView.xib; path = Resources/BiddingView.xib; sourceTree = "<group>"; };
-		5BAA5CED14569552007274F7 /* CellBidType.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellBidType.xib; path = Resources/CellBidType.xib; sourceTree = "<group>"; };
-		5BAA5CEE14569552007274F7 /* CellGame.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellGame.xib; path = Resources/CellGame.xib; sourceTree = "<group>"; };
-		5BAA5CEF14569552007274F7 /* CellScoringRound.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellScoringRound.xib; path = Resources/CellScoringRound.xib; sourceTree = "<group>"; };
-		5BAA5CF114569552007274F7 /* GameListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GameListView.xib; path = Resources/GameListView.xib; sourceTree = "<group>"; };
-		5BAA5CF214569552007274F7 /* GameSetUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GameSetUpView.xib; path = Resources/SetUp/GameSetUpView.xib; sourceTree = SOURCE_ROOT; };
-		5BAA5CF314569552007274F7 /* GameView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GameView.xib; path = Resources/GameView.xib; sourceTree = "<group>"; };
-		5BAA5CF414569552007274F7 /* HighestBiddingTeamView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HighestBiddingTeamView.xib; path = Resources/HighestBiddingTeamView.xib; sourceTree = "<group>"; };
-		5BAA5CF614569552007274F7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = Resources/MainWindow.xib; sourceTree = "<group>"; };
-		5BAA5CF814569552007274F7 /* TricksWonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TricksWonView.xib; path = Resources/TricksWonView.xib; sourceTree = "<group>"; };
 		5BAA5D081456A244007274F7 /* ScoreFiveHundredPro-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ScoreFiveHundredPro-Info.plist"; sourceTree = "<group>"; };
-		5BCC7B201471C93D00E79120 /* GameTournamentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameTournamentView.xib; sourceTree = "<group>"; };
 		5BCC7B221471C9A300E79120 /* GameTournamentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameTournamentViewController.h; path = Classes/Controllers/SetUp/GameTournamentViewController.h; sourceTree = SOURCE_ROOT; };
 		5BCC7B231471C9A400E79120 /* GameTournamentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameTournamentViewController.m; path = Classes/Controllers/SetUp/GameTournamentViewController.m; sourceTree = SOURCE_ROOT; };
 		5BD2F373145EDB8900C7E762 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
@@ -148,6 +118,7 @@
 		5BD2F37C145EE22D00C7E762 /* Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Round.h; sourceTree = "<group>"; };
 		5BD2F37D145EE22D00C7E762 /* Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Round.m; sourceTree = "<group>"; };
 		5BED78BD16B7FCD00042EBA6 /* BidTypeSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BidTypeSpec.m; path = Tests/BidTypeSpec.m; sourceTree = "<group>"; };
+		5BED78C016B816C90042EBA6 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = Resources/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		5BF2F042145EC1D30067E00C /* GameModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameModel.xcdatamodel; sourceTree = "<group>"; };
 		5BFEC53416B29976009A6A2C /* icon_pro_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_pro_57.png; path = Resources/icon_pro_57.png; sourceTree = "<group>"; };
 		5BFEC53516B29976009A6A2C /* icon_pro_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_pro_114.png; path = Resources/icon_pro_114.png; sourceTree = "<group>"; };
@@ -183,6 +154,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5B35CD4016C5065100D76E57 /* Delegates */,
 				5BAA5CDE145694B9007274F7 /* Views */,
 				5BAA5CDA145694B0007274F7 /* Models */,
 				5BAA5CC714569465007274F7 /* Controllers */,
@@ -204,13 +176,13 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				5BAA5D081456A244007274F7 /* ScoreFiveHundredPro-Info.plist */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				5B904C5410D28990003F5324 /* Tests */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				5BAA5D081456A244007274F7 /* ScoreFiveHundredPro-Info.plist */,
 				D276E74E800B419BB6DC19E3 /* Pods-LogicTests.xcconfig */,
 			);
 			name = CustomTemplate;
@@ -233,18 +205,7 @@
 				5BFEC53516B29976009A6A2C /* icon_pro_114.png */,
 				5B34ABC5148FE51400958ADE /* Default@2x.png */,
 				5B34ABC3148FE51000958ADE /* Default.png */,
-				5B184AF3146D3F16000EBA01 /* SetUp */,
-				5BAA5CF614569552007274F7 /* MainWindow.xib */,
-				5BAA5CF114569552007274F7 /* GameListView.xib */,
-				5BAA5CF314569552007274F7 /* GameView.xib */,
-				5BAA5CF414569552007274F7 /* HighestBiddingTeamView.xib */,
-				5BAA5CEC14569552007274F7 /* BiddingView.xib */,
-				5B7C4F911472B69900B95554 /* TricksWonSummaryView.xib */,
-				5BAA5CF814569552007274F7 /* TricksWonView.xib */,
-				5BAA5CED14569552007274F7 /* CellBidType.xib */,
-				5BAA5CEE14569552007274F7 /* CellGame.xib */,
-				5BAA5CEF14569552007274F7 /* CellScoringRound.xib */,
-				5B7C4F931472BF7200B95554 /* ScoreMiniView.xib */,
+				5BED78C016B816C90042EBA6 /* MainStoryboard.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -261,15 +222,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5B184AF3146D3F16000EBA01 /* SetUp */ = {
+		5B35CD4016C5065100D76E57 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				5BAA5CF214569552007274F7 /* GameSetUpView.xib */,
-				5B184AF4146D3F7A000EBA01 /* GameModeView.xib */,
-				5BCC7B201471C93D00E79120 /* GameTournamentView.xib */,
+				5B35CD4116C5069A00D76E57 /* RoundDelegate.h */,
+				5B3311B716CB99F60048A4ED /* SettingDelegate.h */,
+				5B3311B816CB9A120048A4ED /* RematchDelegate.h */,
 			);
-			name = SetUp;
-			path = Resources/SetUp;
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		5B7C4F991472C1AA00B95554 /* SetUp */ = {
@@ -294,9 +254,19 @@
 			name = Tests;
 			sourceTree = "<group>";
 		};
+		5B95228F16C156B700A715FE /* Embedded */ = {
+			isa = PBXGroup;
+			children = (
+				5B95229316C1576C00A715FE /* ScoreMiniViewController.h */,
+				5B95229416C1576C00A715FE /* ScoreMiniViewController.m */,
+			);
+			path = Embedded;
+			sourceTree = "<group>";
+		};
 		5BAA5CC714569465007274F7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5B95228F16C156B700A715FE /* Embedded */,
 				5BAA5CCA14569465007274F7 /* GameListViewController.h */,
 				5BAA5CCB14569465007274F7 /* GameListViewController.m */,
 				5B7C4F991472C1AA00B95554 /* SetUp */,
@@ -310,8 +280,8 @@
 				5B7C4F8F1472B67C00B95554 /* TricksWonSummaryViewController.m */,
 				5BAA5CD214569465007274F7 /* TricksWonViewController.h */,
 				5BAA5CD314569465007274F7 /* TricksWonViewController.m */,
-				5B7C4F951472C13C00B95554 /* ScoreMiniViewController.h */,
-				5B7C4F961472C13C00B95554 /* ScoreMiniViewController.m */,
+				5B35CD4216C51B6E00D76E57 /* TricksWonMisereViewController.h */,
+				5B35CD4316C51B6E00D76E57 /* TricksWonMisereViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -341,14 +311,8 @@
 		5BAA5CDE145694B9007274F7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5BAA5CDF145694B9007274F7 /* CellBidType.h */,
-				5BAA5CE0145694B9007274F7 /* CellBidType.m */,
-				5BAA5CE1145694B9007274F7 /* CellGame.h */,
-				5BAA5CE2145694B9007274F7 /* CellGame.m */,
 				5BAA5CE3145694B9007274F7 /* CellScoringRound.h */,
 				5BAA5CE4145694B9007274F7 /* CellScoringRound.m */,
-				5BAA5CE5145694B9007274F7 /* CellWrapper.h */,
-				5BAA5CE6145694B9007274F7 /* CellWrapper.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -423,25 +387,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BAA5CFA14569552007274F7 /* BiddingView.xib in Resources */,
-				5BAA5CFB14569552007274F7 /* CellBidType.xib in Resources */,
-				5BAA5CFC14569552007274F7 /* CellGame.xib in Resources */,
-				5BAA5CFD14569552007274F7 /* CellScoringRound.xib in Resources */,
-				5BAA5CFF14569552007274F7 /* GameListView.xib in Resources */,
-				5BAA5D0014569552007274F7 /* GameSetUpView.xib in Resources */,
-				5BAA5D0114569552007274F7 /* GameView.xib in Resources */,
-				5BAA5D0214569552007274F7 /* HighestBiddingTeamView.xib in Resources */,
-				5BAA5D0414569552007274F7 /* MainWindow.xib in Resources */,
-				5BAA5D0614569552007274F7 /* TricksWonView.xib in Resources */,
-				5B184AF5146D3F7A000EBA01 /* GameModeView.xib in Resources */,
-				5BCC7B211471C93D00E79120 /* GameTournamentView.xib in Resources */,
-				5B7C4F921472B69900B95554 /* TricksWonSummaryView.xib in Resources */,
-				5B7C4F941472BF7200B95554 /* ScoreMiniView.xib in Resources */,
 				5B34ABC4148FE51000958ADE /* Default.png in Resources */,
 				5B34ABC6148FE51400958ADE /* Default@2x.png in Resources */,
 				5BFEC53616B29976009A6A2C /* icon_pro_57.png in Resources */,
 				5BFEC53716B29976009A6A2C /* icon_pro_114.png in Resources */,
 				5BFEC53D16B29AC1009A6A2C /* Default-568h@2x.png in Resources */,
+				5BED78C116B816C90042EBA6 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,10 +449,7 @@
 				5BAA5CD814569465007274F7 /* HighestBiddingTeamViewController.m in Sources */,
 				5BAA5CD914569465007274F7 /* TricksWonViewController.m in Sources */,
 				5BAA5CDD145694B0007274F7 /* BidType.m in Sources */,
-				5BAA5CE7145694B9007274F7 /* CellBidType.m in Sources */,
-				5BAA5CE8145694B9007274F7 /* CellGame.m in Sources */,
 				5BAA5CE9145694B9007274F7 /* CellScoringRound.m in Sources */,
-				5BAA5CEA145694B9007274F7 /* CellWrapper.m in Sources */,
 				5BF2F043145EC1D30067E00C /* GameModel.xcdatamodeld in Sources */,
 				5BD2F375145EDB8900C7E762 /* Game.m in Sources */,
 				5BD2F378145EDB8A00C7E762 /* Team.m in Sources */,
@@ -511,8 +459,9 @@
 				5B184AF8146D4056000EBA01 /* GameModeViewController.m in Sources */,
 				5BCC7B251471C9A400E79120 /* GameTournamentViewController.m in Sources */,
 				5B7C4F901472B67C00B95554 /* TricksWonSummaryViewController.m in Sources */,
-				5B7C4F971472C13C00B95554 /* ScoreMiniViewController.m in Sources */,
 				5B24364716B6815E007E0B14 /* Player.m in Sources */,
+				5B95229516C1576C00A715FE /* ScoreMiniViewController.m in Sources */,
+				5B35CD4416C51B6E00D76E57 /* TricksWonMisereViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

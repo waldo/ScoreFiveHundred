@@ -2,34 +2,11 @@
 #import "Game.h"
 #import "Setting.h"
 
+
 @implementation GameListViewController
 
-// MARK: synthesize
-@synthesize 
-  cellWrapper,
-  gameListTableView,
-  addButton,
-  setUpController,
-  gameController,
-  managedObjectContext,
-  games,
-  mostRecentGame;
-
-
-- (IBAction) newGame:(id)sender {
-  [[self.managedObjectContext undoManager] beginUndoGrouping];
-  [[self.managedObjectContext undoManager] setActionName:@"new game"];
-
-  Game* g = (Game*)[NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
-  Setting* s = (Setting*)[NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:self.managedObjectContext];
-  g.setting = s;
-
-  [self.setUpController initWithGame:g mostRecentSettings:self.mostRecentGame.setting];
-  [self.navigationController pushViewController:self.setUpController animated:YES];
-}
-
-- (void) loadGames {
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:managedObjectContext];
+- (void)loadGames {
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:_managedObjectContext];
   
   NSFetchRequest *request = [[NSFetchRequest alloc] init];
   [request setEntity:entity];
@@ -40,7 +17,7 @@
   [request setSortDescriptors:sortDescriptors];
   
   NSError *error;
-  NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+  NSMutableArray *mutableFetchResults = [[_managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
   
   if ([mutableFetchResults count] > 0) {
     self.mostRecentGame = mutableFetchResults[0];
@@ -50,11 +27,11 @@
   }
 
   [self setGames:mutableFetchResults];
-  
-  [self.gameListTableView reloadData];
+
+  [self.tableView reloadData];
 }
 
-- (void) fixOldGames {
+- (void)fixOldGames {
   float oldVersion = 1.2f;
   float bundleVersion = [[[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"] floatValue];
   
@@ -72,29 +49,29 @@
     [self fixForVersion_1_2];
   }
 
-  [self.gameListTableView reloadData];
+  [self.tableView reloadData];
 }
 
-- (void) fixForVersion_1_2 {
-  for (Game* game in self.games) {
+- (void)fixForVersion_1_2 {
+  for (Game *game in self.games) {
     [game checkForGameOver];
     [game save];
   }
 }
 
-- (NSMutableArray*) gamesInProgress {
-  NSPredicate* inProgress = [NSPredicate predicateWithFormat:@"winningTeams.@count == 0"];
+- (NSMutableArray *)gamesInProgress {
+  NSPredicate *inProgress = [NSPredicate predicateWithFormat:@"winningTeams.@count == 0"];
 
   return [NSMutableArray arrayWithArray:[self.games filteredArrayUsingPredicate:inProgress]];
 }
 
-- (NSMutableArray*) gamesComplete {
-  NSPredicate* complete = [NSPredicate predicateWithFormat:@"winningTeams.@count > 0"];
+- (NSMutableArray *)gamesComplete {
+  NSPredicate *complete = [NSPredicate predicateWithFormat:@"winningTeams.@count > 0"];
   
   return [NSMutableArray arrayWithArray:[self.games filteredArrayUsingPredicate:complete]];
 }
 
-- (Game*) gameForIndexPath:(NSIndexPath*)index {
+- (Game *)gameForIndexPath:(NSIndexPath *)index {
   if (index.section == 0) {
     return (self.gamesInProgress)[index.row];
   }
@@ -105,7 +82,7 @@
   return nil;
 }
 
-- (id) valueForSection:(NSInteger)section valueInProgress:(id)valueInProgress valueCompleted:(id)valueCompleted {
+- (id)valueForSection:(NSInteger)section valueInProgress:(id)valueInProgress valueCompleted:(id)valueCompleted {
   id val = nil;
   
   if ([self.gamesInProgress count] == 0 && [self.gamesComplete count] > 0) {
@@ -123,32 +100,71 @@
   return val;
 }
 
-// MARK: View
-- (void) viewDidLoad {
-  [super viewDidLoad];
-  
-  self.title = @"Game List";
-
-  [self.navigationItem setRightBarButtonItem:self.addButton animated:NO];
+// MARK: SettingDelegate
+- (void)cancelSettingsForGame:(Game *)g fromController:(UIViewController *)controller {
+  [g undo];
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)applySettingsForGame:(Game *)g fromController:(UIViewController *)controller {
+  [g save];
+  [self dismissViewControllerAnimated:NO completion:nil];
+
+  [self performSegueWithIdentifier:@"StartGame" sender:self];
+}
+
+// MARK: RematchDelegate
+- (void)rematchForGame:(Game *)g fromController:(UIViewController *)controller {
+  [self.navigationController popToViewController:self animated:NO];
+
+  [g duplicate];
+  [self loadGames];
+
+  [self performSegueWithIdentifier:@"StartGame" sender:self];
+}
+
+// MARK: Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.identifier rangeOfString:@"SetUp"].location == 0) {
+    Game *g = [Game buildGameWithContext:_managedObjectContext];
+    GameSetUpViewController *controller = [segue.destinationViewController viewControllers][0];
+    [controller initWithGame:g mostRecentSettings:self.mostRecentGame.setting];
+    controller.delegate = self;
+  }
+  else if ([segue.identifier isEqualToString:@"StartGame"]) {
+    GameViewController* controller = segue.destinationViewController;
+    [controller initWithGame:_mostRecentGame];
+    controller.delegate = self;
+  }
+  else {
+    GameViewController* controller = segue.destinationViewController;
+    [controller initWithGame:[self gameForIndexPath:self.tableView.indexPathForSelectedRow]];
+    controller.delegate = self;
+  }
+}
+
+// MARK: View
+- (void)viewDidLoad {
+  [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
   [self loadGames];
   [self fixOldGames];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
 }
 
 // MARK: tableview delegate
-- (NSInteger) numberOfSectionsInTableView:(UITableView*)tableView {	
-	return 3;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	return 2;
 }
 
-- (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
   if (section == 0 && [self.gamesInProgress count] > 0) {
     return @"In progress";
   }
@@ -159,86 +175,44 @@
   return nil;
 }
 
-- (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   if (section == 0) {
-    return [self.gamesInProgress count];
+    return self.gamesInProgress.count;
   }
   else if (section == 1) {
-    return [self.gamesComplete count];
+    return self.gamesComplete.count;
   }
   
-  return 1;
+  return 0;
 }
 
-- (UITableViewCell*) tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-  if (indexPath.section == 2) {
-    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"CellAddButton"];
-    
-    UIButton* btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    btn.frame = CGRectMake(10, 0, CGRectGetWidth(cell.contentView.bounds)-20, CGRectGetHeight(cell.contentView.bounds)+3);
-    [btn setTitle:@"New game" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(newGame:) forControlEvents:UIControlEventTouchUpInside];
-    [cell addSubview:btn];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Game"];
+  Game *g = [self gameForIndexPath:indexPath];
 
-    return cell;
-  }
-  else {
-    static NSString* CellIdentifier = @"CellGame";
-    CellGame* cellGame = (CellGame*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cellGame == nil) {
-      [self.cellWrapper loadMyNibFile:CellIdentifier];
-      cellGame = (CellGame*)self.cellWrapper.cell;
-    }
+  cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@) to %@ (%@)", [g nameForPosition:0], [g scoreForPosition:0], [g nameForPosition:1], [g scoreForPosition:1]];
 
-    Game* g = [self gameForIndexPath:indexPath];
-    
-    cellGame.nameTeamOne.text = [g nameForPosition:0];
-    cellGame.nameTeamTwo.text = [g nameForPosition:1];
-    cellGame.pointsTeamOne.text = [g scoreForPosition:0];
-    cellGame.pointsTeamTwo.text = [g scoreForPosition:1];
-    
-    // show icon for winning team
-    if (!g.isComplete) {
-      cellGame.symbolResultTeamOne.hidden = YES;
-      cellGame.symbolResultTeamTwo.hidden = YES;
-    }
-    if ([g isVictorInPosition:0]) {
-      cellGame.symbolResultTeamOne.hidden = NO;
-    }
-    if ([g isVictorInPosition:1]) {
-      cellGame.symbolResultTeamTwo.hidden = NO;
-    }
-    
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateStyle:NSDateFormatterMediumStyle];
-    
-    cellGame.dateLastPlayed.text = [formatter stringFromDate:g.lastPlayed];
-    
-    return cellGame;
-  }
+  return cell;
 }
 
-- (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   [self setEditing:NO animated:NO];
-  [self.gameController initWithGame:[self gameForIndexPath:indexPath]];
-  [self.navigationController pushViewController:self.gameController animated:YES];
 }
 
-- (BOOL)tableView:(UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath*)indexPath {
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
   return YES;
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView*)tableView editingStyleForRowAtIndexPath:(NSIndexPath*)indexPath {
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
   return UITableViewCellEditingStyleDelete;
 }
 
-- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-    [managedObjectContext deleteObject:[self gameForIndexPath:indexPath]];
-    NSError* err = nil;
+    [_managedObjectContext deleteObject:[self gameForIndexPath:indexPath]];
+    NSError *err = nil;
 
-    if (![managedObjectContext save:&err]) {
+    if (![_managedObjectContext save:&err]) {
       NSLog(@"Unresolved error %@, %@", err, [err userInfo]);
     }
 

@@ -4,38 +4,20 @@
 #import "Game.h"
 #import "Round.h"
 #import "BidType.h"
-#import "CellWrapper.h"
 #import "CellScoringRound.h"
+#import "RematchDelegate.h"
 
-@interface GameViewController : UIViewController {
-  IBOutlet HighestBiddingTeamViewController* highestBidderController;
-  IBOutlet UITableView* roundsTableView;
-  IBOutlet CellWrapper* cellWrapper;
-  IBOutlet UIBarButtonItem* addButton;
-  IBOutlet UIBarButtonItem* rematchButton;
-  IBOutlet UITextField* teamOneName;
-  IBOutlet UITextField* teamTwoName;
-  IBOutlet UITextField* teamOneScore;
-  IBOutlet UITextField* teamTwoScore;
-  
-  Game* game;
-}
+@interface GameViewController : UITableViewController <RoundDelegate>
 
-@property (nonatomic, retain) IBOutlet HighestBiddingTeamViewController* highestBidderController;
-@property (nonatomic, retain) IBOutlet UITableView* roundsTableView;
-@property (nonatomic, retain) IBOutlet CellWrapper* cellWrapper;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem* addButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem* rematchButton;
-@property (nonatomic, retain) IBOutlet UITextField* teamOneName;
-@property (nonatomic, retain) IBOutlet UITextField* teamTwoName;
-@property (nonatomic, retain) IBOutlet UITextField* teamOneScore;
-@property (nonatomic, retain) IBOutlet UITextField* teamTwoScore;
+@property IBOutlet UIBarButtonItem *addBarButton;
+@property IBOutlet UIBarButtonItem *rematchBarButton;
+@property IBOutlet UIButton *addButton;
+@property IBOutlet UIButton *rematchButton;
+@property ScoreMiniViewController *scoreSummary;
+@property Game *game;
+@property(weak) id<RematchDelegate> delegate;
 
-@property (nonatomic, retain) Game* game;
-
-- (IBAction) bid:(id)sender;
-- (IBAction) rematch:(id)sender;
-
-- (void) initWithGame:(Game*)g;
+- (void)initWithGame:(Game *)g;
+- (IBAction)rematch:(id)sender;
 
 @end

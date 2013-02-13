@@ -5,9 +5,10 @@
 
 @interface Player : NSManagedObject
 
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) Team *team;
-@property (nonatomic, retain) NSSet *initialDealerForGame;
+@property NSString *name;
+@property Team *team;
+@property NSSet *initialDealerForGame;
+
 @end
 
 @interface Player (CoreDataGeneratedAccessors)

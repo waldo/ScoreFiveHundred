@@ -5,12 +5,13 @@
 
 @interface Team : NSManagedObject
 
-@property (nonatomic, retain) NSString * id;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSOrderedSet *games;
-@property (nonatomic, retain) NSSet *gameWinners;
-@property (nonatomic, retain) Round *roundBidder;
-@property (nonatomic, retain) RoundScore *roundScores;
+@property NSString *id;
+@property NSString *name;
+@property NSOrderedSet *games;
+@property NSSet *gameWinners;
+@property Round *roundBidder;
+@property RoundScore *roundScores;
+
 @end
 
 @interface Team (CoreDataGeneratedAccessors)

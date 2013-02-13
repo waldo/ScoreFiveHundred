@@ -4,15 +4,15 @@
 SPEC_BEGIN(BidTypeSpec)
 
 describe(@"BidType", ^{
-  __block NSManagedObjectContext* _moc = nil;
-  __block NSDictionary* _settings = nil;
-  __block Setting* _currentSetting = nil;
+  __block NSManagedObjectContext *_moc = nil;
+  __block NSDictionary *_settings = nil;
+  __block Setting *_currentSetting = nil;
 
-  void (^checkScores) (Setting*, NSString*, int, int, int) = ^void (Setting* setting, NSString* hand, int tricksWon, int bidderExpectedPoints, int nonBidderExpectedPoints) {
-    Game* g = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:_moc];
-    Round* r = [NSEntityDescription insertNewObjectForEntityForName:@"Round" inManagedObjectContext:_moc];
-    Team* bidder = [NSEntityDescription insertNewObjectForEntityForName:@"Team" inManagedObjectContext:_moc];
-    Team* nonBidder = [NSEntityDescription insertNewObjectForEntityForName:@"Team" inManagedObjectContext:_moc];
+  void (^checkScores) (Setting *, NSString *, int, int, int) = ^void (Setting *setting, NSString *hand, int tricksWon, int bidderExpectedPoints, int nonBidderExpectedPoints) {
+    Game *g = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:_moc];
+    Round *r = [NSEntityDescription insertNewObjectForEntityForName:@"Round" inManagedObjectContext:_moc];
+    Team *bidder = [NSEntityDescription insertNewObjectForEntityForName:@"Team" inManagedObjectContext:_moc];
+    Team *nonBidder = [NSEntityDescription insertNewObjectForEntityForName:@"Team" inManagedObjectContext:_moc];
     
     g.setting = setting;
     r.bid = hand;
@@ -34,21 +34,21 @@ describe(@"BidType", ^{
   };
   
   beforeAll(^{
-    NSManagedObjectModel* mom = [NSManagedObjectModel mergedModelFromBundles:[NSBundle allBundles]];
-    NSPersistentStoreCoordinator* psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
+    NSManagedObjectModel *mom = [NSManagedObjectModel mergedModelFromBundles:[NSBundle allBundles]];
+    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
     [psc addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:nil];
     _moc = [[NSManagedObjectContext alloc] init];
     _moc.persistentStoreCoordinator = psc;
     
-    Setting* defaultSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:_moc];
+    Setting *defaultSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:_moc];
     
-    Setting* nonBidderScoresZeroSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:_moc];
+    Setting *nonBidderScoresZeroSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:_moc];
     nonBidderScoresZeroSetting.nonBidderScoresTen = @NO;
     
-    Setting* noOneBidSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:_moc];
+    Setting *noOneBidSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:_moc];
     noOneBidSetting.noOneBid = @YES;
     
-    Setting* quebecSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:_moc];
+    Setting *quebecSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:_moc];
     quebecSetting.mode = @"Quebec mode";
     
     _settings = @{@"default": defaultSetting, @"non bidder scores zero": nonBidderScoresZeroSetting, @"no one bid": noOneBidSetting, @"quebec mode": quebecSetting};
