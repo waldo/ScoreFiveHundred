@@ -3,30 +3,34 @@
 #import "Setting.h"
 
 
+@interface GameListViewController ()
+
+@property NSArray *games;
+@property Game *mostRecentGame;
+
+- (void)loadGames;
+- (void)fixOldGames;
+- (void)fixForVersion_1_2;
+- (NSArray *)gamesInProgress;
+- (NSArray *)gamesComplete;
+- (Game *)gameForIndexPath:(NSIndexPath *)index;
+- (id)valueForSection:(NSInteger)section valueInProgress:(id)valueInProgress valueCompleted:(id)valueCompleted;
+
+@end
+
 @implementation GameListViewController
 
+#pragma mark Private
+
 - (void)loadGames {
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:_managedObjectContext];
-  
-  NSFetchRequest *request = [[NSFetchRequest alloc] init];
-  [request setEntity:entity];
-  [request setIncludesSubentities:YES];
-  
-  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastPlayed" ascending:NO];
-  NSArray *sortDescriptors = @[sortDescriptor];
-  [request setSortDescriptors:sortDescriptors];
-  
-  NSError *error;
-  NSMutableArray *mutableFetchResults = [[_managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-  
-  if ([mutableFetchResults count] > 0) {
-    self.mostRecentGame = mutableFetchResults[0];
+  self.games = [Game getAll];
+
+  if ([_games count] > 0) {
+    self.mostRecentGame = _games[0];
   }
   else {
     self.mostRecentGame = nil;
   }
-
-  [self setGames:mutableFetchResults];
 
   [self.tableView reloadData];
 }
@@ -59,16 +63,16 @@
   }
 }
 
-- (NSMutableArray *)gamesInProgress {
+- (NSArray *)gamesInProgress {
   NSPredicate *inProgress = [NSPredicate predicateWithFormat:@"winningTeams.@count == 0"];
 
-  return [NSMutableArray arrayWithArray:[self.games filteredArrayUsingPredicate:inProgress]];
+  return [self.games filteredArrayUsingPredicate:inProgress];
 }
 
-- (NSMutableArray *)gamesComplete {
+- (NSArray *)gamesComplete {
   NSPredicate *complete = [NSPredicate predicateWithFormat:@"winningTeams.@count > 0"];
   
-  return [NSMutableArray arrayWithArray:[self.games filteredArrayUsingPredicate:complete]];
+  return [self.games filteredArrayUsingPredicate:complete];
 }
 
 - (Game *)gameForIndexPath:(NSIndexPath *)index {
@@ -100,7 +104,8 @@
   return val;
 }
 
-// MARK: SettingDelegate
+#pragma mark Setting delegate
+
 - (void)cancelSettingsForGame:(Game *)g fromController:(UIViewController *)controller {
   [g undo];
   [self dismissViewControllerAnimated:YES completion:nil];
@@ -113,7 +118,8 @@
   [self performSegueWithIdentifier:@"StartGame" sender:self];
 }
 
-// MARK: RematchDelegate
+#pragma mark Rematch delegate
+
 - (void)rematchForGame:(Game *)g fromController:(UIViewController *)controller {
   [self.navigationController popToViewController:self animated:NO];
 
@@ -123,10 +129,11 @@
   [self performSegueWithIdentifier:@"StartGame" sender:self];
 }
 
-// MARK: Segue
+#pragma mark Segue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([segue.identifier rangeOfString:@"SetUp"].location == 0) {
-    Game *g = [Game buildGameWithContext:_managedObjectContext];
+    Game *g = [Game buildGame];
     GameSetUpViewController *controller = [segue.destinationViewController viewControllers][0];
     [controller initWithGame:g mostRecentSettings:self.mostRecentGame.setting];
     controller.delegate = self;
@@ -143,7 +150,8 @@
   }
 }
 
-// MARK: View
+#pragma mark View
+
 - (void)viewDidLoad {
   [super viewDidLoad];
 }
@@ -159,7 +167,8 @@
   [super viewDidAppear:animated];
 }
 
-// MARK: tableview delegate
+#pragma mark Tableview delegate
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 2;
 }
@@ -209,12 +218,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-    [_managedObjectContext deleteObject:[self gameForIndexPath:indexPath]];
-    NSError *err = nil;
-
-    if (![_managedObjectContext save:&err]) {
-      NSLog(@"Unresolved error %@, %@", err, [err userInfo]);
-    }
+    [Game deleteGame:[self gameForIndexPath:indexPath]];
 
     [self loadGames];
   }

@@ -14,12 +14,16 @@
 
 @implementation Round
 
+#pragma mark Dynamic
+
 @dynamic bid,
   id,
   ordinal,
   biddingTeams,
   game,
   scores;
+
+#pragma mark Public
 
 - (NSString *)bidForPosition:(NSUInteger)pos {
   NSString *theBid = nil;
@@ -67,12 +71,6 @@
   return (self.scores)[pos];
 }
 
-- (void)setTricksWon:(NSUInteger)tricksWon forPosition:(NSUInteger)pos {
-  RoundScore *rs = [self getScoreForPosition:pos];
-  rs.tricksWon = @(tricksWon);
-  rs.score = @([BidType pointsForTeam:(self.game.teams)[pos] game:self.game andTricksWon:tricksWon] + [[self.game scoreForPosition:pos] intValue]);
-}
-
 - (void)setTricksWon:(NSUInteger)tricksWon forTeam:(Team *)t {
   int pos = [self.game.teams indexOfObject:t];
   [self setTricksWon:tricksWon forPosition:pos];
@@ -97,22 +95,32 @@
   return (vals.count == 0);
 }
 
-// MARK: set core data defaults
++ (NSString *)uniqueId {
+  CFUUIDRef uniqueId = CFUUIDCreate(NULL);
+  NSString *sUniqueId = (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, uniqueId));
+  CFRelease(uniqueId);
+
+  return sUniqueId;
+}
+
+#pragma mark Private
+- (BOOL)guardForScoresOnPosition:(NSUInteger)pos {
+  return (self.scores == nil || [self.scores count] <= pos);
+}
+
+- (void)setTricksWon:(NSUInteger)tricksWon forPosition:(NSUInteger)pos {
+  RoundScore *rs = [self getScoreForPosition:pos];
+  rs.tricksWon = @(tricksWon);
+  rs.score = @([BidType pointsForTeam:(self.game.teams)[pos] game:self.game andTricksWon:tricksWon] + [[self.game scoreForPosition:pos] intValue]);
+}
+
+#pragma mark Core data
 - (void)awakeFromInsert {
   [super awakeFromInsert];
   [self setValue:[Round uniqueId] forKey:@"id"];
 }
 
-// MARK: class methods
-+ (NSString *)uniqueId {
-  CFUUIDRef uniqueId = CFUUIDCreate(NULL);
-  NSString *sUniqueId = (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, uniqueId));
-  CFRelease(uniqueId);
-  
-  return sUniqueId;
-}
-
-// MARK: override buggy coredata code
+#pragma mark Override buggy coredata code
 - (void)addScoresObject:(RoundScore *)value {
   NSMutableOrderedSet *tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.scores];
   [tempSet addObject:value];
@@ -123,11 +131,6 @@
   NSMutableSet *tempSet = [NSMutableSet setWithSet:self.biddingTeams];
   [tempSet addObject:value];
   self.biddingTeams = tempSet;
-}
-
-// MARK: hidden
-- (BOOL)guardForScoresOnPosition:(NSUInteger)pos {
-  return (self.scores == nil || [self.scores count] <= pos);
 }
 
 @end

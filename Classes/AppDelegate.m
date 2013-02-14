@@ -1,7 +1,18 @@
-#import "ScoreFiveHundredAppDelegate.h"
+#import "AppDelegate.h"
 
 
-@implementation ScoreFiveHundredAppDelegate
+@interface AppDelegate ()
+
+@property (readonly) NSManagedObjectContext *managedObjectContext;
+@property (readonly) NSManagedObjectModel *managedObjectModel;
+@property (readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+- (NSURL *)applicationDocumentsDirectory;
+- (void)saveContext;
+
+@end
+
+@implementation AppDelegate
 
 @synthesize
   managedObjectContext=_managedObjectContext,
@@ -9,9 +20,7 @@
   persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  UINavigationController *rootNavigationController = (UINavigationController *)_window.rootViewController;
-  GameListViewController *gameListController = (GameListViewController *)[rootNavigationController topViewController];
-  gameListController.managedObjectContext = self.managedObjectContext;
+  [Game setManagedObjectContext:self.managedObjectContext];
 
   return YES;
 }
@@ -31,7 +40,7 @@
   }
 }
 
-// MARK: Core Data stack
+#pragma mark Core Data stack
 - (NSManagedObjectContext *)managedObjectContext {
   if (_managedObjectContext != nil) {
     return _managedObjectContext;
@@ -80,7 +89,7 @@
   return _persistentStoreCoordinator;
 }
 
-// MARK: Application's Documents directory
+#pragma mark Application's Documents directory
 - (NSURL *)applicationDocumentsDirectory {
   return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }

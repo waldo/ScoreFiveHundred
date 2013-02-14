@@ -1,28 +1,38 @@
 #import "GameViewController.h"
 #import "Game.h"
 #import "Round.h"
-#import "ScoreFiveHundredAppDelegate.h"
 
 
 @interface GameViewController ()
 
+@property IBOutlet UIBarButtonItem *addBarButton;
+@property IBOutlet UIBarButtonItem *rematchBarButton;
+@property IBOutlet UIButton *addButton;
+@property IBOutlet UIButton *rematchButton;
+@property ScoreMiniViewController *scoreSummary;
+@property Game *game;
+
+- (IBAction)rematch:(id)sender;
 - (NSString *)nonBlankFirst:(NSString *)first otherwiseSecond:(NSString *)second;
-- (void)refreshView;
+- (void)refresh;
 - (void)gameComplete;
 
 @end
 
 @implementation GameViewController
 
+#pragma mark Public
+
 - (void)initWithGame:(Game *)g {
   self.game = g;
 }
+
+#pragma mark Private
 
 - (IBAction)rematch:(id)sender {
   [_delegate rematchForGame:_game fromController:self];
 }
 
-// MARK: Hidden functions
 - (NSString *)nonBlankFirst:(NSString *)first otherwiseSecond:(NSString *)second {
   if (first == nil || [@"" isEqual:first]) {
     return second;
@@ -31,7 +41,7 @@
   return first;
 }
 
-- (void)refreshView {
+- (void)refresh {
   [self.scoreSummary initWithGame:_game];
 
   [self.tableView reloadData];
@@ -59,7 +69,8 @@
   }
 }
 
-// MARK: RoundDelegate
+#pragma mark Round delegate
+
 - (void)cancelRoundForGame:(Game *)g fromController:(UIViewController *)controller {
   [g undoRound];
 
@@ -70,7 +81,8 @@
   [self.navigationController popToViewController:self animated:YES];
 }
 
-// MARK: Segue
+#pragma mark Segue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([segue.identifier isEqualToString:@"ScoreSummary"]) {
     self.scoreSummary = segue.destinationViewController;
@@ -84,7 +96,8 @@
   }
 }
 
-// MARK: View
+#pragma mark View
+
 - (void)viewDidLoad {
   [super viewDidLoad];
 }
@@ -92,7 +105,7 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   
-  [self refreshView];
+  [self refresh];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -103,14 +116,16 @@
   [super viewWillDisappear:animated];
 }
 
-// MARK: AlertView delegate
+#pragma mark Alertview delegate
+
 - (void)alertView:(UIAlertView *)alert didDismissWithButtonIndex:(NSInteger)index {
   if (index == 1) {
     [self rematch:@"alertView"];
   }
 }
 
-// MARK: tableview delegate
+#pragma mark Tableview delegate
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
 }
@@ -154,7 +169,7 @@
     [self.game removeObjectFromRoundsAtIndex:0];
     [self.game save];
 
-    [self refreshView];
+    [self refresh];
   }
 }
 

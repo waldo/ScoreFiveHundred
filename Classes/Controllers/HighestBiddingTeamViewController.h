@@ -9,11 +9,8 @@
 
 @interface HighestBiddingTeamViewController : UITableViewController
 
-@property Game *game;
-@property Round *round;
 @property(weak) id<RoundDelegate> delegate;
 
 - (void)initWithGame:(Game *)g;
-- (IBAction)cancel:(id)sender;
 
 @end

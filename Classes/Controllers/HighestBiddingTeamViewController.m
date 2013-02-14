@@ -1,18 +1,32 @@
 #import "HighestBiddingTeamViewController.h"
 
 
+@interface HighestBiddingTeamViewController ()
+
+@property Game *game;
+@property Round *round;
+
+- (IBAction)cancel:(id)sender;
+
+@end
+
 @implementation HighestBiddingTeamViewController
+
+#pragma mark Public
 
 - (void)initWithGame:(Game *)g {
   self.game = g;
   self.round = [_game buildRound];
 }
 
+#pragma mark Private
+
 - (IBAction)cancel:(id)sender {
   [_delegate cancelRoundForGame:_game fromController:self];
 }
 
-// MARK: Segue
+#pragma mark Segue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([segue.identifier isEqualToString:@"ScoreSummary"]) {
     [((ScoreMiniViewController *)segue.destinationViewController) initWithGame:_game];
@@ -34,7 +48,8 @@
   }
 }
 
-// MARK: View
+#pragma mark View
+
 - (void)viewDidLoad {
   [super viewDidLoad];
 }
@@ -49,7 +64,8 @@
   [super viewWillDisappear:animated];
 }
 
-// MARK: tableview delegate
+#pragma mark Tableview delegate
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   if ([_game.setting isPlayOnNoOneBid]) {
     return 2;    
@@ -79,9 +95,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.section == 0) {
     [self performSegueWithIdentifier:@"HighestBidder" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
-  }
-  else {
-    [self performSegueWithIdentifier:@"NoBidder" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
   }
 }
 

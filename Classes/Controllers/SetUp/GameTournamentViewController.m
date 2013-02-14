@@ -1,14 +1,24 @@
 #import "GameTournamentViewController.h"
 
 
+@interface GameTournamentViewController ()
+
+@property Setting *setting;
+@property NSArray *tournamentOptions;
+
+@end
+
 @implementation GameTournamentViewController
+
+#pragma mark Public
 
 - (void)initWithSetting:(Setting *)s {
   self.setting = s;
   self.tournamentOptions = @[@0, @1, @2, @3, @4, @5, @10, @15, @20];
 }
 
-// MARK: view
+#pragma mark View
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
 }
@@ -25,7 +35,8 @@
   return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-// MARK: tableview delegate
+#pragma mark Tableview delegate
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
 

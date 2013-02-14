@@ -6,6 +6,8 @@
 
 @implementation Team
 
+#pragma mark Dynamic
+
 @dynamic id,
   name,
   games,
@@ -13,7 +15,7 @@
   roundBidder,
   roundScores;
 
-// MARK: set core data defaults
+#pragma mark Core data
 - (void) awakeFromInsert {
   [super awakeFromInsert];
 

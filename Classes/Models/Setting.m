@@ -4,6 +4,8 @@
 
 @implementation Setting
 
+#pragma mark Dynamic
+
 @dynamic mode,
   tournament,
   firstToCross,
@@ -13,25 +15,35 @@
   noOneBid,
   game;
 
+#pragma mark Synthesize
+
 @synthesize modeOptions=_modeOptions;
 
-- (void)didTurnIntoFault {
-  [super didTurnIntoFault];
-}
-
-
-- (void)awakeFromInsert {
-  [super awakeFromInsert];
-
-  self.modeOptions = @[@"2 teams", @"Quebec mode"];
-}
+#pragma mark Public
 
 - (void)setToMatch:(Setting *)recent {
   self.mode = recent.mode;
   self.tournament = recent.tournament;
   self.firstToCross = recent.firstToCross;
   self.nonBidderScoresTen = recent.nonBidderScoresTen;
+  self.onlySuccessfulDefendersScore = recent.onlySuccessfulDefendersScore;
+  self.capDefendersScore = recent.capDefendersScore;
   self.noOneBid = recent.noOneBid;
+}
+
+- (NSString *)textForDefendersScoring {
+  NSString *text = @"Off";
+  if (self.nonBidderScoresTen.boolValue) {
+    text = @"10 per trick";
+    if (self.onlySuccessfulDefendersScore.boolValue) {
+      text = [text stringByAppendingString:@" if bid fails"];
+    }
+    if (self.capDefendersScore.intValue > 0) {
+      text = [NSString stringWithFormat:@"%@ (capped at %@)", text, self.capDefendersScore];
+    }
+  }
+
+  return text;
 }
 
 - (NSString *)textForCurrentTournament {
@@ -70,6 +82,19 @@
     self.nonBidderScoresTen = @NO;
     self.firstToCross = @YES;
   }
+}
+
+#pragma mark Core data
+
+- (void)didTurnIntoFault {
+  [super didTurnIntoFault];
+}
+
+
+- (void)awakeFromInsert {
+  [super awakeFromInsert];
+
+  self.modeOptions = @[@"2 teams", @"Quebec mode"];
 }
 
 @end

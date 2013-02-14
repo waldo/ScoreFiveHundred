@@ -3,6 +3,11 @@
 
 @interface CellScoringRound ()
 
+@property IBOutletCollection(UILabel) NSArray *tickCrossLabels;
+@property IBOutletCollection(UILabel) NSArray *bidLabels;
+@property IBOutletCollection(UILabel) NSArray *pointsLabels;
+@property Round *round;
+
 - (void)setStyleForPosition:(int)pos;
 - (NSString *)formattedTricksWonForPosition:(int)pos;
 - (NSString *)prettyStringForHand:(NSString *)hand;
@@ -11,11 +16,15 @@
 
 @implementation CellScoringRound
 
+#pragma mark Public
+
 - (void)setStyleForRound:(Round *)r {
   self.round = r;
   [self setStyleForPosition:0];
   [self setStyleForPosition:1];
 }
+
+#pragma mark Private
 
 - (void)setStyleForPosition:(int)pos {
   UILabel *tickCrossLabel = _tickCrossLabels[pos];

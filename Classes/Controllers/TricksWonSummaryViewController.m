@@ -2,7 +2,23 @@
 #import "GameViewController.h"
 
 
+@interface TricksWonSummaryViewController ()
+
+@property IBOutlet GameViewController *gameController;
+@property IBOutlet TricksWonViewController *tricksWonController;
+@property IBOutlet ScoreMiniViewController *scoreController;
+@property IBOutlet UITableView *table;
+@property IBOutlet UIBarButtonItem *saveButton;
+@property Game *game;
+@property Round *round;
+
+- (IBAction)save:(id)sender;
+
+@end
+
 @implementation TricksWonSummaryViewController
+
+#pragma mark Public
 
 - (void)initWithGame:(Game *)g andRound:(Round *)r {
   self.game = g;
@@ -11,13 +27,16 @@
   self.title = @"Tricks won";
 }
 
+#pragma mark Private
+
 - (IBAction)save:(id)sender {
   [self.game finaliseRound];
   
   [self.navigationController popToViewController:self.gameController animated:YES];
 }
 
-// MARK: view
+#pragma mark View
+
 - (void)viewDidLoad {
   [super viewDidLoad];
 
@@ -32,7 +51,8 @@
   [self.table reloadData];
 }
 
-// MARK: tableview delegate
+#pragma mark Tableview delegate
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
 }

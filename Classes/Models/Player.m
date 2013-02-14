@@ -5,8 +5,10 @@
 
 @implementation Player
 
-@dynamic name;
-@dynamic team;
-@dynamic initialDealerForGame;
+#pragma mark Dynamic
+
+@dynamic name,
+  team,
+  initialDealerForGame;
 
 @end

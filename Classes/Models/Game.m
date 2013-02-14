@@ -17,20 +17,23 @@
 
 @implementation Game
 
-// MARK: static
+#pragma mark Static
+
 static int scoreToWin = 500;
 static int scoreToLose = -500;
 static int scoreToWinQuebec = 1000;
+static NSManagedObjectContext *staticManagedObjectContext;
 
-// MARK: dynamic
-@dynamic complete;
-@dynamic id;
-@dynamic lastPlayed;
-@dynamic rounds;
-@dynamic teams;
-@dynamic winningTeams;
-@dynamic setting;
+#pragma mark Dynamic
+@dynamic complete,
+  id,
+  lastPlayed,
+  rounds,
+  teams,
+  winningTeams,
+  setting;
 
+#pragma mark Public
 - (NSNumber *)isComplete {
   return @(self.winningTeams.count > 0);
 }
@@ -41,6 +44,10 @@ static int scoreToWinQuebec = 1000;
   }
 
   return nil;
+}
+
+- (NSString *)scoreForTeam:(Team *)team {
+  return [self scoreForPosition:[self.teams indexOfObject:team]];
 }
 
 - (NSString *)scoreForPosition:(NSUInteger)pos {
@@ -202,18 +209,140 @@ static int scoreToWinQuebec = 1000;
   }
 }
 
-+ (Game *)buildGameWithContext:(NSManagedObjectContext *)moc {
-  [[moc undoManager] beginUndoGrouping];
-  [[moc undoManager] setActionName:@"set up game"];
++ (void)setManagedObjectContext:(NSManagedObjectContext *)moc {
+  staticManagedObjectContext = moc;
+}
 
-  Game *g = (Game *)[NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:moc];
-  Setting *s = (Setting *)[NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:moc];
++ (NSArray *)getAll {
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:staticManagedObjectContext];
+
+  NSFetchRequest *request = [[NSFetchRequest alloc] init];
+  [request setEntity:entity];
+  [request setIncludesSubentities:YES];
+
+  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastPlayed" ascending:NO];
+  NSArray *sortDescriptors = @[sortDescriptor];
+  [request setSortDescriptors:sortDescriptors];
+
+  NSError *error;
+  return [staticManagedObjectContext executeFetchRequest:request error:&error];
+}
+
++ (Game *)buildGame {
+  [[staticManagedObjectContext undoManager] beginUndoGrouping];
+  [[staticManagedObjectContext undoManager] setActionName:@"set up game"];
+
+  Game *g = (Game *)[NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:staticManagedObjectContext];
+  Setting *s = (Setting *)[NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:staticManagedObjectContext];
   g.setting = s;
 
   return g;
 }
 
-// MARK: set core data defaults
++ (void)deleteGame:(Game *)game {
+  [staticManagedObjectContext deleteObject:game];
+  NSError *err = nil;
+
+  if (![staticManagedObjectContext save:&err]) {
+    NSLog(@"Unresolved error %@, %@", err, [err userInfo]);
+  }
+}
+
+#pragma mark Private
+- (void)checkWithNormalRules:(Round *)r {
+  int maxScore, minScore;
+  [self scoresForRound:r min:&minScore andMax:&maxScore];
+
+  if (minScore <= scoreToLose) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+
+      if (score != minScore) {
+        [self addWinningTeamsObject:(self.teams)[i]];
+      }
+    }
+  }
+  else if (maxScore >= scoreToWin) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+
+      if (score >= scoreToWin && [r bidAchievedForPosition:i]) {
+        [self addWinningTeamsObject:(self.teams)[i]];
+      }
+    }
+  }
+}
+
+- (void)checkWithFirstToCross:(Round *)r {
+  int maxScore, minScore;
+  [self scoresForRound:r min:&minScore andMax:&maxScore];
+
+  if (maxScore >= scoreToWin) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+
+      if (score >= maxScore) {
+        [self addWinningTeamsObject:(self.teams)[i]];
+      }
+    }
+  }
+  else if (minScore <= scoreToLose) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+
+      if (score != minScore) {
+        [self addWinningTeamsObject:(self.teams)[i]];
+      }
+    }
+  }
+}
+
+- (void)checkWithTournament:(Round *)r {
+  int maxScore, minScore;
+  [self scoresForRound:r min:&minScore andMax:&maxScore];
+
+  if ([self.rounds count] >= [self.setting.tournament intValue]) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+
+      if (score == maxScore) {
+        [self addWinningTeamsObject:(self.teams)[i]];
+      }
+    }
+  }
+}
+
+- (void)checkWithQuebec:(Round *)r {
+  int maxScore, minScore;
+  [self scoresForRound:r min:&minScore andMax:&maxScore];
+
+  if (maxScore >= scoreToWinQuebec) {
+    for (int i = 0; i < [self.teams count]; ++i) {
+      int score = [[r scoreForPosition:i] intValue];
+
+      if (score >= maxScore) {
+        [self addWinningTeamsObject:(self.teams)[i]];
+      }
+    }
+  }
+}
+
+- (void)scoresForRound:(Round *)r min:(int *)minScore andMax:(int *)maxScore {
+  *maxScore = scoreToLose;
+  *minScore = scoreToWin;
+
+  for (int i = 0; i < [self.teams count]; ++i) {
+    int score = [[r scoreForPosition:i] intValue];
+    if (score > *maxScore) {
+      *maxScore = score;
+    }
+    else if (score < *minScore) {
+      *minScore = score;
+    }
+  }
+}
+
+#pragma mark Core data defaults
 - (void)awakeFromInsert {
   [super awakeFromInsert];
   [self setValue:[Round uniqueId] forKey:@"id"];
@@ -224,7 +353,7 @@ static int scoreToWinQuebec = 1000;
   [super didTurnIntoFault];
 }
 
-// MARK: override buggy coredata code
+#pragma mark Override buggy coredata code
 - (void)addTeamsObject:(Team *)value {
   NSMutableOrderedSet *tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.teams];
   [tempSet addObject:value];
@@ -250,100 +379,6 @@ static int scoreToWinQuebec = 1000;
   self.rounds = tempSet;
   [self.managedObjectContext deleteObject:r];
   [self checkForGameOver];
-}
-
-// MARK: hidden
-- (void)checkWithNormalRules:(Round *)r {
-  int maxScore, minScore;
-  [self scoresForRound:r min:&minScore andMax:&maxScore];
-  
-  if (minScore <= scoreToLose) {
-    for (int i = 0; i < [self.teams count]; ++i) {
-      int score = [[r scoreForPosition:i] intValue];
-      
-      if (score != minScore) {
-        [self addWinningTeamsObject:(self.teams)[i]];
-      }
-    }
-  }
-  else if (maxScore >= scoreToWin) {
-    for (int i = 0; i < [self.teams count]; ++i) {
-      int score = [[r scoreForPosition:i] intValue];
-      
-      if (score >= scoreToWin && [r bidAchievedForPosition:i]) {
-        [self addWinningTeamsObject:(self.teams)[i]];
-      }
-    }
-  }
-}
-
-- (void)checkWithFirstToCross:(Round *)r {
-  int maxScore, minScore;
-  [self scoresForRound:r min:&minScore andMax:&maxScore];
-  
-  if (maxScore >= scoreToWin) {
-    for (int i = 0; i < [self.teams count]; ++i) {
-      int score = [[r scoreForPosition:i] intValue];
-      
-      if (score >= maxScore) {
-        [self addWinningTeamsObject:(self.teams)[i]];
-      }
-    }
-  }
-  else if (minScore <= scoreToLose) {
-    for (int i = 0; i < [self.teams count]; ++i) {
-      int score = [[r scoreForPosition:i] intValue];
-      
-      if (score != minScore) {
-        [self addWinningTeamsObject:(self.teams)[i]];
-      }
-    }
-  }
-}
-
-- (void)checkWithTournament:(Round *)r {
-  int maxScore, minScore;
-  [self scoresForRound:r min:&minScore andMax:&maxScore];
-  
-  if ([self.rounds count] >= [self.setting.tournament intValue]) {
-    for (int i = 0; i < [self.teams count]; ++i) {
-      int score = [[r scoreForPosition:i] intValue];
-      
-      if (score == maxScore) {
-        [self addWinningTeamsObject:(self.teams)[i]];
-      }
-    }
-  }
-}
-
-- (void)checkWithQuebec:(Round *)r {
-  int maxScore, minScore;
-  [self scoresForRound:r min:&minScore andMax:&maxScore];
-  
-  if (maxScore >= scoreToWinQuebec) {
-    for (int i = 0; i < [self.teams count]; ++i) {
-      int score = [[r scoreForPosition:i] intValue];
-      
-      if (score >= maxScore) {
-        [self addWinningTeamsObject:(self.teams)[i]];
-      }
-    }
-  }
-}
-
-- (void)scoresForRound:(Round *)r min:(int *)minScore andMax:(int *)maxScore {
-  *maxScore = scoreToLose;
-  *minScore = scoreToWin;
-  
-  for (int i = 0; i < [self.teams count]; ++i) {
-    int score = [[r scoreForPosition:i] intValue];
-    if (score > *maxScore) {
-      *maxScore = score;
-    }
-    else if (score < *minScore) {
-      *minScore = score;
-    }
-  }
 }
 
 @end

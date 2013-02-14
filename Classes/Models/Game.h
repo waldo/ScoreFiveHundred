@@ -14,6 +14,7 @@
 @property Setting *setting;
 
 - (NSString *)nameForPosition:(NSUInteger)pos;
+- (NSString *)scoreForTeam:(Team *)team;
 - (NSString *)scoreForPosition:(NSUInteger)pos;
 - (BOOL)isVictorInPosition:(NSUInteger)pos;
 - (NSString *)teamNames:(NSSet *)teams;
@@ -28,7 +29,10 @@
 - (void)save;
 - (void)undo;
 
-+ (Game *)buildGameWithContext:(NSManagedObjectContext *)moc;
++ (void)setManagedObjectContext:(NSManagedObjectContext *)moc;
++ (NSArray *)getAll;
++ (Game *)buildGame;
++ (void)deleteGame:(Game *)game;
 
 @end
 

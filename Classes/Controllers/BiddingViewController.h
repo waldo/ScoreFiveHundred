@@ -10,9 +10,6 @@
 
 @interface BiddingViewController : UITableViewController
 
-@property NSArray* bidTypeHands;
-@property Game* game;
-@property Round* round;
 @property(weak) id<RoundDelegate> delegate;
 
 - (void)initWithGame:(Game *)g;

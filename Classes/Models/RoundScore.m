@@ -5,6 +5,8 @@
 
 @implementation RoundScore
 
+#pragma mark Dynamic
+
 @dynamic score,
   tricksWon,
   round,

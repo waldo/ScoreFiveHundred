@@ -50,8 +50,15 @@ describe(@"BidType", ^{
     
     Setting *quebecSetting = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:_moc];
     quebecSetting.mode = @"Quebec mode";
-    
-    _settings = @{@"default": defaultSetting, @"non bidder scores zero": nonBidderScoresZeroSetting, @"no one bid": noOneBidSetting, @"quebec mode": quebecSetting};
+
+    Setting *capDefendersScore = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:_moc];
+    capDefendersScore.capDefendersScore = @50;
+
+    Setting *onlySuccessfulDefendersScore = [NSEntityDescription insertNewObjectForEntityForName:@"Setting" inManagedObjectContext:_moc];
+    onlySuccessfulDefendersScore.onlySuccessfulDefendersScore = @YES;
+    onlySuccessfulDefendersScore.noOneBid = @YES;
+
+    _settings = @{@"default": defaultSetting, @"non bidder scores zero": nonBidderScoresZeroSetting, @"no one bid": noOneBidSetting, @"quebec mode": quebecSetting, @"cap defenders score": capDefendersScore, @"only successful defenders score": onlySuccessfulDefendersScore};
     
   });
   
@@ -116,6 +123,38 @@ describe(@"BidType", ^{
 
     it(@"unsuccessful defending team wins zero points", ^{
       checkScores(_currentSetting, @"8S", 8, 240, 0);
+    });
+  });
+
+  context(@"cap defenders score", ^{
+    beforeAll(^{
+      _currentSetting = _settings[@"cap defenders score"];
+    });
+
+    it(@"should score defenders normally below the cap", ^{
+      checkScores(_currentSetting, @"8S", 8, 240, 20);
+    });
+
+    it(@"should cap defenders score at the cap", ^{
+      checkScores(_currentSetting, @"8S", 4, -240, 50);
+    });
+  });
+
+  context(@"only successful defenders score", ^{
+    beforeAll(^{
+      _currentSetting = _settings[@"only successful defenders score"];
+    });
+
+    it(@"should score 0 when the bid succeeds", ^{
+      checkScores(_currentSetting, @"8S", 8, 240, 0);
+    });
+
+    it(@"should score 10 per trick when bid fails", ^{
+      checkScores(_currentSetting, @"8S", 4, -240, 60);
+    });
+
+    it(@"should score 10 per trick when no one bids", ^{
+      checkScores(_currentSetting, @"NB", 4, 40, 60);
     });
   });
 });

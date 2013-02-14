@@ -4,11 +4,13 @@
 @interface BidType ()
 
 + (NSInteger)biddersPointsForGame:(Game *)g andTricksWon:(NSUInteger)tricksWon;
-+ (NSInteger)nonBiddersPointsForGame:(Game *)g andTricksWon:(NSUInteger)tricksWon;
++ (NSInteger)nonBiddersPointsForGame:(Game *)g team:(Team *)team andTricksWon:(NSUInteger)tricksWon;
 
 @end
 
 @implementation BidType
+
+#pragma mark Static
 
 static NSMutableDictionary *allTypes;
 static NSArray *orderedHands;
@@ -23,6 +25,8 @@ static NSString *ssVariationRegular = @"regular";
 static NSString *ssVariationMisere = @"misére";
 static NSString *ssVariationNoBid = @"no bid";
 static NSString *ssModeQuebec = @"Quebec mode";
+
+#pragma mark Public
 
 + (void)initialize {
   if (!allTypes) {
@@ -182,7 +186,7 @@ static NSString *ssModeQuebec = @"Quebec mode";
     return [BidType biddersPointsForGame:g andTricksWon:tricksWon];
   }
 
-  return [BidType nonBiddersPointsForGame:g andTricksWon:tricksWon];
+  return [BidType nonBiddersPointsForGame:g team:t andTricksWon:tricksWon];
 }
 
 + (NSInteger)biddersPointsForGame:(Game *)g andTricksWon:(NSUInteger)tricksWon {
@@ -216,7 +220,7 @@ static NSString *ssModeQuebec = @"Quebec mode";
   return biddersPoints;
 }
 
-+ (NSInteger)nonBiddersPointsForGame:(Game *)g andTricksWon:(NSUInteger)tricksWon {
++ (NSInteger)nonBiddersPointsForGame:(Game *)g team:(Team *)team andTricksWon:(NSUInteger)tricksWon {
   Round *r = [g.rounds firstObject];
   NSDictionary *aBidType = allTypes[r.bid];
   
@@ -235,10 +239,17 @@ static NSString *ssModeQuebec = @"Quebec mode";
       nonBiddersPoints *= 2;
     }
   }
-  // if regular bid and bidders won less than ten
-  // => award 10 points x number of tricks (won by the non-bidders)
-  else if (![variation isEqual:ssVariationMisere] && [g.setting.nonBidderScoresTen boolValue]) {
+  // if regular bid and bidders won less than ten => award 10 points x number of tricks (won by the non-bidders)
+  else if ([variation isEqualToString:ssVariationNoBid] || (![variation isEqualToString:ssVariationMisere] && g.setting.nonBidderScoresTen.boolValue && (!g.setting.onlySuccessfulDefendersScore.boolValue || (g.setting.onlySuccessfulDefendersScore.boolValue && ![BidType bidderWonHand:r.bid withTricksWon:10 - tricksWon])))) {
     nonBiddersPoints = 10 * tricksWon;
+  }
+
+  // cap defenders score
+  if (![variation isEqualToString:ssVariationNoBid] && g.setting.capDefendersScore.boolValue && ([g scoreForTeam:team].intValue + nonBiddersPoints > g.setting.capDefendersScore.intValue)) {
+    nonBiddersPoints = g.setting.capDefendersScore.intValue - [g scoreForTeam:team].intValue;
+    if (nonBiddersPoints < 0) {
+      nonBiddersPoints = 0;
+    }
   }
   
   return nonBiddersPoints;

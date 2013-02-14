@@ -3,7 +3,8 @@
 
 @implementation TricksWonMisereViewController
 
-// MARK: tableview delegate
+#pragma mark Tableview delegate
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
   int score = 0;

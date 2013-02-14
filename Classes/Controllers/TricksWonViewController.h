@@ -10,9 +10,6 @@
 @property Game *game;
 @property Round *round;
 @property Team *team;
-@property NSString *bidVariation;
-@property NSArray *regularList;
-@property NSArray *misereList;
 @property(weak) id<RoundDelegate> delegate;
 
 - (void)initWithGame:(Game *)g andTeam:(Team *)t;

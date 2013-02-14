@@ -9,11 +9,20 @@
 
 @implementation GameModeViewController
 
+#pragma mark Public
+
 - (void)initWithSetting:(Setting *)s {
   self.setting = s;
 }
 
-// MARK: View
+#pragma mark Private
+
+- (NSUInteger)indexFromIndexPath:(NSIndexPath *)path {
+  return path.section * 1 + path.row;
+}
+
+#pragma mark View
+
 - (void)viewDidLoad {
   [super viewDidLoad];
 }
@@ -32,7 +41,8 @@
   [super viewWillDisappear:animated];
 }
 
-// MARK: tableview delegate
+#pragma mark Tableview delegate
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
 
@@ -49,11 +59,6 @@
   [_setting consistentForMode];
 
   [self.navigationController popViewControllerAnimated:YES];
-}
-
-// MARK: hidden
-- (NSUInteger)indexFromIndexPath:(NSIndexPath *)path {
-  return path.section * 1 + path.row;
 }
 
 @end

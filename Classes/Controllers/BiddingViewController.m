@@ -3,6 +3,10 @@
 
 @interface BiddingViewController ()
 
+@property NSArray *bidTypeHands;
+@property Game *game;
+@property Round *round;
+
 - (NSString *)hand;
 - (void)setBidAndSegueToController:(TricksWonViewController *)controller;
 
@@ -10,7 +14,9 @@
 
 @implementation BiddingViewController
 
-- (void) initWithGame:(Game*)g {
+#pragma mark Public
+
+- (void)initWithGame:(Game *)g {
   self.game = g;
   self.round = g.currentRound;
   
@@ -19,7 +25,25 @@
   self.title = [NSString stringWithFormat:@"%@ Bid", teamName];
 }
 
-// MARK: Segue
+#pragma mark Private
+
+- (NSString *)hand {
+  // consider whether misére and nullo are included or excluded
+  return _bidTypeHands[self.tableView.indexPathForSelectedRow.row];
+}
+
+- (void)setBidAndSegueToController:(TricksWonViewController *)controller {
+  Team *biddingTeam = [_round.biddingTeams anyObject];
+
+  _round.bid = self.hand;
+  [_round setTricksWon:[[BidType tricksForHand:self.hand] intValue] forTeam:biddingTeam];
+
+  [controller initWithGame:_game andTeam:biddingTeam];
+  controller.delegate = self.delegate;
+}
+
+#pragma mark Segue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([segue.identifier isEqualToString:@"ScoreSummary"]) {
     [((ScoreMiniViewController *)segue.destinationViewController) initWithGame:_game];
@@ -32,7 +56,8 @@
   }
 }
 
-// MARK: View
+#pragma mark View
+
 - (void)viewDidLoad {
   [super viewDidLoad];
 
@@ -45,7 +70,8 @@
   [self.tableView reloadData];
 }
 
-// MARK: tableview delegate
+#pragma mark Tableview delegate
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   // consider whether misére and nullo are included or excluded
   return self.bidTypeHands.count;
@@ -69,22 +95,6 @@
   else {
     [self performSegueWithIdentifier:@"RegularBid" sender:cell];
   }
-}
-
-// MARK: hidden
-- (NSString *)hand {
-  // consider whether misére and nullo are included or excluded
-  return _bidTypeHands[self.tableView.indexPathForSelectedRow.row];
-}
-
-- (void)setBidAndSegueToController:(TricksWonViewController *)controller {
-  Team *biddingTeam = [_round.biddingTeams anyObject];
-
-  _round.bid = self.hand;
-  [_round setTricksWon:[[BidType tricksForHand:self.hand] intValue] forTeam:biddingTeam];
-
-  [controller initWithGame:_game andTeam:biddingTeam];
-  controller.delegate = self.delegate;
 }
 
 @end

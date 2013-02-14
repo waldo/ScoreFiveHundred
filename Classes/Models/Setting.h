@@ -16,6 +16,7 @@
 @property NSArray *modeOptions;
 
 - (void)setToMatch:(Setting *)recent;
+- (NSString *)textForDefendersScoring;
 - (NSString *)textForCurrentTournament;
 - (NSString *)textForTournament:(NSUInteger)ix;
 - (NSInteger)numberOfTeams;

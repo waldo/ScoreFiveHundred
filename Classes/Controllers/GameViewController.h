@@ -9,15 +9,8 @@
 
 @interface GameViewController : UITableViewController <RoundDelegate>
 
-@property IBOutlet UIBarButtonItem *addBarButton;
-@property IBOutlet UIBarButtonItem *rematchBarButton;
-@property IBOutlet UIButton *addButton;
-@property IBOutlet UIButton *rematchButton;
-@property ScoreMiniViewController *scoreSummary;
-@property Game *game;
 @property(weak) id<RematchDelegate> delegate;
 
 - (void)initWithGame:(Game *)g;
-- (IBAction)rematch:(id)sender;
 
 @end
