@@ -4,9 +4,12 @@
 @interface DefendersScoringViewController ()
 
 @property IBOutlet UISwitch *nonBidderScoresTen;
+@property IBOutlet UISwitch *onlySuccessfulDefendersScore;
 @property NSArray *capOptions;
 
 - (IBAction)nonBidderScoresTen:(id)sender;
+- (IBAction)onlySuccessfulDefendersScore:(id)sender;
+
 - (void)refresh;
 
 @end
@@ -28,8 +31,15 @@
   [self refresh];
 }
 
+- (IBAction)onlySuccessfulDefendersScore:(id)sender {
+  _setting.onlySuccessfulDefendersScore = @(((UISwitch *)sender).on);
+
+  [self refresh];
+}
+
 - (void)refresh {
   [_nonBidderScoresTen setOn:_setting.nonBidderScoresTen.boolValue];
+  [_onlySuccessfulDefendersScore setOn:_setting.onlySuccessfulDefendersScore.boolValue];
 
   [self.tableView reloadData];
 }
@@ -56,56 +66,27 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
 
-  switch (indexPath.section) {
-    case 1:
-      cell.accessoryType = UITableViewCellAccessoryNone;
+  if (indexPath.section == 2) {
+    cell.accessoryType = UITableViewCellAccessoryNone;
 
-      if (indexPath.row == 0) {
-        if (_setting.onlySuccessfulDefendersScore.boolValue) {
-          cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
+    if (indexPath.row == 0) {
+      if (_setting.capDefendersScore.intValue == 0) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
       }
-      else if (indexPath.row == 1) {
-        if (!_setting.onlySuccessfulDefendersScore.boolValue) {
-          cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
+    }
+    else {
+      if ([[NSString stringWithFormat:@"%@ points", _setting.capDefendersScore] isEqualToString:cell.textLabel.text]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
       }
-      break;
-
-    case 2:
-      cell.accessoryType = UITableViewCellAccessoryNone;
-
-      if (indexPath.row == 0) {
-        if (_setting.capDefendersScore.intValue == 0) {
-          cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-      }
-      else {
-        if ([[NSString stringWithFormat:@"%@ points", _setting.capDefendersScore] isEqualToString:cell.textLabel.text]) {
-          cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-      }
-      break;
-
-    default:
-      break;
+    }
   }
 
   return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  switch (indexPath.section) {
-    case 1:
-      _setting.onlySuccessfulDefendersScore = @(!indexPath.row);
-      break;
-
-    case 2:
-      _setting.capDefendersScore = _capOptions[indexPath.row];
-      break;
-
-    default:
-      break;
+  if (indexPath.section == 2) {
+    _setting.capDefendersScore = _capOptions[indexPath.row];
   }
 
   [tableView deselectRowAtIndexPath:indexPath animated:YES];

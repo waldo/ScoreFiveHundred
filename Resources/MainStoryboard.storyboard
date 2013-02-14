@@ -118,40 +118,29 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Points per trick that defenders receive in rounds where the bidding team is successful" id="Xcb-FR-4db">
+                            <tableViewSection headerTitle="Defenders receive points only when the bidding team loses a round" id="Xcb-FR-4db">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="tOQ-56-50o" style="IBUITableViewCellStyleDefault" id="bju-Qg-0WB">
-                                        <rect key="frame" x="0.0" y="144" width="320" height="45"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="VYV-JQ-3Vt">
+                                        <rect key="frame" x="0.0" y="144" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="0 points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tOQ-56-50o">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Only if bidders lose" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FFt-sm-PZf">
+                                                    <rect key="frame" x="10" y="11" width="168" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="lNc-vN-V54" style="IBUITableViewCellStyleDefault" id="JH6-lt-5er">
-                                        <rect key="frame" x="0.0" y="189" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="10 points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lNc-vN-V54">
-                                                    <rect key="frame" x="10" y="0.0" width="260" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="qg3-ma-pet">
+                                                    <rect key="frame" x="213" y="9" width="79" height="27"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="onlySuccessfulDefendersScore:" destination="zCQ-gT-V7S" eventType="valueChanged" id="y9M-sF-quN"/>
+                                                    </connections>
+                                                </switch>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -161,7 +150,7 @@
                             <tableViewSection headerTitle="Cap defending score at" id="SZN-AA-5qK">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Ihn-ix-jeR" style="IBUITableViewCellStyleDefault" id="xVu-P0-uef">
-                                        <rect key="frame" x="0.0" y="280" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="236" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="280" height="43"/>
@@ -179,7 +168,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="NK9-8g-czq" style="IBUITableViewCellStyleDefault" id="6Iq-AX-ogj">
-                                        <rect key="frame" x="0.0" y="325" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="281" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -197,7 +186,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="kby-M9-YM1" style="IBUITableViewCellStyleDefault" id="mHN-iJ-4hM">
-                                        <rect key="frame" x="0.0" y="369" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="325" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -215,7 +204,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Tfo-Z2-TxP" style="IBUITableViewCellStyleDefault" id="r2b-wm-VNG">
-                                        <rect key="frame" x="0.0" y="413" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="369" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -243,6 +232,7 @@
                     <navigationItem key="navigationItem" title="Defenders Scoring" id="ifj-tt-E9L"/>
                     <connections>
                         <outlet property="nonBidderScoresTen" destination="K82-Py-cgZ" id="3w2-oy-2fo"/>
+                        <outlet property="onlySuccessfulDefendersScore" destination="qg3-ma-pet" id="mhH-uu-3Af"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cvk-76-eiC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2542,7 +2532,9 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DefendersScoringViewController.h"/>
             <relationships>
                 <relationship kind="action" name="nonBidderScoresTen:"/>
+                <relationship kind="action" name="onlySuccessfulDefendersScore:"/>
                 <relationship kind="outlet" name="nonBidderScoresTen" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="onlySuccessfulDefendersScore" candidateClass="UISwitch"/>
             </relationships>
         </class>
         <class className="GameListViewController" superclassName="UITableViewController">
@@ -2598,10 +2590,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="CDB-9L-XTc"/>
-        <segue reference="v99-PG-vff"/>
         <segue reference="bst-0i-Rvq"/>
-        <segue reference="rRd-Hl-0uv"/>
-        <segue reference="lHE-p4-5k4"/>
+        <segue reference="WHy-Bb-NZW"/>
+        <segue reference="YDc-Uf-j5q"/>
+        <segue reference="YML-qh-6pA"/>
+        <segue reference="04Y-JH-p8P"/>
     </inferredMetricsTieBreakers>
 </document>
