@@ -7,13 +7,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-  int score = 0;
-  int tricksWon = 0;
+  long score = 0;
+  long tricksWon = 0;
 
   tricksWon = indexPath.row;
   score = [BidType pointsForTeam:self.team game:self.game andTricksWon:tricksWon];
 
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"%i pts", score];
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"%li pts", score];
   if (score < 0) {
     cell.detailTextLabel.textColor = [UIColor redColor];
   }
@@ -25,7 +25,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  int tricksWon = indexPath.row;
+  long tricksWon = indexPath.row;
 
   [self.round setTricksWon:tricksWon forTeam:self.team];
   [self.game finaliseRound];

@@ -58,7 +58,7 @@
     return @"1 round";
   }
   
-  return [NSString stringWithFormat:@"%d rounds", rounds];
+  return [NSString stringWithFormat:@"%lu rounds", (unsigned long)rounds];
 }
 
 - (NSInteger)numberOfTeams {

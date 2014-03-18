@@ -170,7 +170,7 @@
 #pragma mark Tableview delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 2;
+	return 3;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -191,16 +191,25 @@
   else if (section == 1) {
     return self.gamesComplete.count;
   }
+  else if (section == 2) {
+    return 1;
+  }
   
   return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Game"];
-  Game *g = [self gameForIndexPath:indexPath];
+  UITableViewCell *cell = nil;
 
-  cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@) to %@ (%@)", [g nameForPosition:0], [g scoreForPosition:0], [g nameForPosition:1], [g scoreForPosition:1]];
+  if (indexPath.section == 2) {
+    cell = [tableView dequeueReusableCellWithIdentifier:@"NewGame"];
+  }
+  else {
+    cell = [tableView dequeueReusableCellWithIdentifier:@"Game"];
+    Game *g = [self gameForIndexPath:indexPath];
 
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@) to %@ (%@)", [g nameForPosition:0], [g scoreForPosition:0], [g nameForPosition:1], [g scoreForPosition:1]];
+  }
   return cell;
 }
 
@@ -209,6 +218,10 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.section == 2) {
+    return NO;
+  }
+
   return YES;
 }
 

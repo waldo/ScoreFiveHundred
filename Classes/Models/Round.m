@@ -72,7 +72,7 @@
 }
 
 - (void)setTricksWon:(NSUInteger)tricksWon forTeam:(Team *)t {
-  int pos = [self.game.teams indexOfObject:t];
+  long pos = [self.game.teams indexOfObject:t];
   [self setTricksWon:tricksWon forPosition:pos];
 
   // update others

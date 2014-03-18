@@ -7,8 +7,6 @@
 
 @property IBOutlet UIBarButtonItem *addBarButton;
 @property IBOutlet UIBarButtonItem *rematchBarButton;
-@property IBOutlet UIButton *addButton;
-@property IBOutlet UIButton *rematchButton;
 @property ScoreMiniViewController *scoreSummary;
 @property Game *game;
 
@@ -51,15 +49,10 @@
 
 - (void)gameComplete {
   [self.navigationItem setRightBarButtonItem:self.addBarButton animated:NO];
-  _addButton.hidden = NO;
-  _rematchButton.hidden = YES;
 
   if (self.game.isComplete.boolValue) {
     NSString *winningTeamNames = [self.game teamNames:self.game.winningTeams];
     [self.navigationItem setRightBarButtonItem:self.rematchBarButton animated:NO];
-    _addButton.hidden = YES;
-    _rematchButton.hidden = NO;
-    _rematchButton.titleLabel.text = [NSString stringWithFormat:@"%@ win! Rematch?", winningTeamNames];
 
     if ([[NSDate date] timeIntervalSinceDate:self.game.lastPlayed] < 2) {
       NSString *msg = [NSString stringWithFormat:@"%@ win!", winningTeamNames];
@@ -127,22 +120,47 @@
 #pragma mark Tableview delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 1;
+	return 2;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-  return @"Rounds";
+  if (section == 1) {
+    return nil;
+  }
+  else {
+    return @"Rounds";
+  }
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return _game.rounds.count;
+  if (section == 0) {
+    return _game.rounds.count;
+  }
+  else {
+    return 1;
+  }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  CellScoringRound *cell = [tableView dequeueReusableCellWithIdentifier:@"Round"];
+  UITableViewCell *cell = nil;
 
-  [cell setStyleForRound:[_game.rounds reversedOrderedSet][indexPath.row]];
+  if (indexPath.section == 0) {
+    cell = [tableView dequeueReusableCellWithIdentifier:@"Round"];
+
+    [((CellScoringRound *)cell) setStyleForRound:[_game.rounds reversedOrderedSet][indexPath.row]];
+  }
+  else {
+    if (self.game.isComplete.boolValue) {
+      cell = [tableView dequeueReusableCellWithIdentifier:@"Rematch"];
+      NSString *winningTeamNames = [self.game teamNames:self.game.winningTeams];
+      UIButton *rematchButton = cell.contentView.subviews.firstObject;
+      rematchButton.titleLabel.text = [NSString stringWithFormat:@"%@ win! Rematch?", winningTeamNames];
+    }
+    else {
+      cell = [tableView dequeueReusableCellWithIdentifier:@"NewRound"];
+    }
+  }
 
   return cell;
 }

@@ -41,10 +41,10 @@ static int siMaximumTricks = 10;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-  int tricksWon = (siMaximumTricks - indexPath.row);
-  int score = [BidType pointsForTeam:_team game:_game andTricksWon:tricksWon];
+  long tricksWon = siMaximumTricks - indexPath.row;
+  long score = [BidType pointsForTeam:_team game:_game andTricksWon:tricksWon];
     
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"%i pts", score];
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"%li pts", score];
   if (score < 0) {
     [cell.detailTextLabel setTextColor:[UIColor redColor]];
   }
@@ -53,7 +53,7 @@ static int siMaximumTricks = 10;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  int tricksWon = (siMaximumTricks - indexPath.row);
+  long tricksWon = siMaximumTricks - indexPath.row;
 
   [self.round setTricksWon:tricksWon forTeam:_team];
   [self.game finaliseRound];

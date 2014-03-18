@@ -108,7 +108,7 @@ static int tagOffset = 1000;
 #pragma mark TextField delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField*)textField {
-  int nextIndex = (textField.tag - tagOffset + 1) % [self.game.setting numberOfTeams];
+  long nextIndex = (textField.tag - tagOffset + 1) % [self.game.setting numberOfTeams];
   UITextField* next = _teamFields[nextIndex];
 
   if (nextIndex == 0) {

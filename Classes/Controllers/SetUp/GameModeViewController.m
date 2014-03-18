@@ -54,7 +54,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  int ix = [self indexFromIndexPath:indexPath];
+  long ix = [self indexFromIndexPath:indexPath];
   _setting.mode = _setting.modeOptions[ix];
   [_setting consistentForMode];
 

@@ -226,10 +226,10 @@ static NSString *ssModeQuebec = @"Quebec mode";
   
   NSString *variation = aBidType[ssVariation];
   int bidPoints = [aBidType[ssPoints] intValue];
-  int bidderPoints = [BidType biddersPointsForGame:g andTricksWon:10 - tricksWon];
+  long bidderPoints = [BidType biddersPointsForGame:g andTricksWon:10 - tricksWon];
 
   // default to zero points
-  int nonBiddersPoints = 0;
+  long nonBiddersPoints = 0;
   
   if ([g.setting.mode isEqualToString:ssModeQuebec]) {
     if (bidderPoints == 0) {
