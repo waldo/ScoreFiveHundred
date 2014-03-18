@@ -26,8 +26,8 @@ describe(@"BidType", ^{
     int bidderTricksWon = tricksWon;
     int nonBidderTricksWon = 10 - tricksWon;
     
-    int bidderResult = [BidType pointsForTeam:bidder game:g andTricksWon:bidderTricksWon];
-    int nonBidderResult = [BidType pointsForTeam:nonBidder game:g andTricksWon:nonBidderTricksWon];
+    long bidderResult = [BidType pointsForTeam:bidder game:g andTricksWon:bidderTricksWon];
+    long nonBidderResult = [BidType pointsForTeam:nonBidder game:g andTricksWon:nonBidderTricksWon];
     
     [[theValue(bidderResult) should] equal:theValue(bidderExpectedPoints)];
     [[theValue(nonBidderResult) should] equal:theValue(nonBidderExpectedPoints)];

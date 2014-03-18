@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E6B2042E-6139-4A55-82F2-966993CB26A7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ScoreFiveHundredPro</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>69ABE804-1354-46B5-959B-70FD4FA7F40C</key>
+		<string>ssh://github.com/waldo/ScoreFiveHundred.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ScoreFiveHundredPro.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>69ABE804-1354-46B5-959B-70FD4FA7F40C</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/waldo/ScoreFiveHundred.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>69ABE804-1354-46B5-959B-70FD4FA7F40C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>69ABE804-1354-46B5-959B-70FD4FA7F40C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ScoreFiveHundred</string>
+		</dict>
+	</array>
+</dict>
+</plist>
