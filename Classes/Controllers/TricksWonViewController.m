@@ -56,6 +56,7 @@ static int siMaximumTricks = 10;
   long tricksWon = siMaximumTricks - indexPath.row;
 
   [self.round setTricksWon:tricksWon forTeam:_team];
+  self.round.complete = [NSNumber numberWithBool:YES];
   [self.game finaliseRound];
   [self.delegate applyRoundForGame:_game fromController:self];
 }

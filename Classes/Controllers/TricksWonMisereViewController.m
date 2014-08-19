@@ -28,6 +28,7 @@
   long tricksWon = indexPath.row;
 
   [self.round setTricksWon:tricksWon forTeam:self.team];
+  self.round.complete = [NSNumber numberWithBool:YES];
   [self.game finaliseRound];
   [self.delegate applyRoundForGame:self.game fromController:self];
 }

@@ -78,6 +78,7 @@ static NSManagedObjectContext *staticManagedObjectContext;
   [self.managedObjectContext.undoManager beginUndoGrouping];
   [self.managedObjectContext.undoManager setActionName:@"new round"];
   Round *r = [NSEntityDescription insertNewObjectForEntityForName:@"Round" inManagedObjectContext:self.managedObjectContext];
+  r.complete = NO;
   [self insertObject:r inRoundsAtIndex:0];
 
   for (Team *t in self.teams) {
@@ -88,7 +89,7 @@ static NSManagedObjectContext *staticManagedObjectContext;
   }
 
   [r setTricksWon:10 forTeam:(self.teams)[0]];
-  
+
   return r;
 }
 
@@ -114,12 +115,12 @@ static NSManagedObjectContext *staticManagedObjectContext;
   Round *round = nil;
 
   if (self.rounds.count == 1) {
-    if (![self.rounds[0] isNew]) {
+    if ([((Round *)self.rounds[0]) complete]) {
       round = self.rounds[0];
     }
   }
   else if (self.rounds.count > 1) {
-    round = [self.rounds[0] isNew] ? self.rounds[1] : self.rounds[0];
+    round = [((Round*)self.rounds[0]) complete] ? self.rounds[0] : self.rounds[1];
   }
 
   return round;

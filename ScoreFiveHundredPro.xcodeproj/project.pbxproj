@@ -85,6 +85,7 @@
 		5B35CD4116C5069A00D76E57 /* RoundDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundDelegate.h; sourceTree = "<group>"; };
 		5B35CD4216C51B6E00D76E57 /* TricksWonMisereViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TricksWonMisereViewController.h; sourceTree = "<group>"; };
 		5B35CD4316C51B6E00D76E57 /* TricksWonMisereViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TricksWonMisereViewController.m; sourceTree = "<group>"; };
+		5B58060819A332170043062B /* GameModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "GameModel 3.xcdatamodel"; sourceTree = "<group>"; };
 		5B75BFBE16CCE95600FB000A /* DefendersScoringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefendersScoringViewController.h; sourceTree = "<group>"; };
 		5B75BFBF16CCE95600FB000A /* DefendersScoringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefendersScoringViewController.m; sourceTree = "<group>"; };
 		5B777F4114684CDE00955729 /* RoundScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundScore.h; sourceTree = "<group>"; };
@@ -363,7 +364,7 @@
 			name = LogicTests;
 			productName = LogicTests;
 			productReference = 5B904C4010D2894A003F5324 /* LogicTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -712,10 +713,11 @@
 		5BF2F041145EC1D30067E00C /* GameModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				5B58060819A332170043062B /* GameModel 3.xcdatamodel */,
 				5B24363916B6765B007E0B14 /* GameModel 2.xcdatamodel */,
 				5BF2F042145EC1D30067E00C /* GameModel.xcdatamodel */,
 			);
-			currentVersion = 5B24363916B6765B007E0B14 /* GameModel 2.xcdatamodel */;
+			currentVersion = 5B58060819A332170043062B /* GameModel 3.xcdatamodel */;
 			path = GameModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

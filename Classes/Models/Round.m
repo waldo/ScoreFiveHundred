@@ -21,7 +21,8 @@
   ordinal,
   biddingTeams,
   game,
-  scores;
+  scores,
+  complete;
 
 #pragma mark Public
 
@@ -90,11 +91,6 @@
   }
 }
 
-- (BOOL)isNew {
-  NSDictionary *vals = [self committedValuesForKeys:nil];
-  return (vals.count == 0);
-}
-
 + (NSString *)uniqueId {
   CFUUIDRef uniqueId = CFUUIDCreate(NULL);
   NSString *sUniqueId = (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, uniqueId));
@@ -104,6 +100,15 @@
 }
 
 #pragma mark Private
+
+-(id)init {
+  if ((self = [super init])) {
+    [self setComplete:[NSNumber numberWithBool:NO]];
+  }
+
+  return self;
+}
+
 - (BOOL)guardForScoresOnPosition:(NSUInteger)pos {
   return (self.scores == nil || [self.scores count] <= pos);
 }

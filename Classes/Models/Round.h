@@ -11,6 +11,7 @@
 @property NSSet *biddingTeams;
 @property Game *game;
 @property NSOrderedSet *scores;
+@property NSNumber *complete;
 
 - (NSString *)bidForPosition:(NSUInteger)pos;
 - (NSNumber *)bidAchievedForPosition:(NSUInteger)pos;
@@ -18,7 +19,6 @@
 - (NSString *)tricksWonForPosition:(NSUInteger)pos;
 - (RoundScore *)getScoreForPosition:(NSUInteger)pos;
 - (void)setTricksWon:(NSUInteger)tricksWon forTeam:(Team *)t;
-- (BOOL)isNew;
 
 + (NSString *)uniqueId;
 
