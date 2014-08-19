@@ -364,7 +364,7 @@
 			name = LogicTests;
 			productName = LogicTests;
 			productReference = 5B904C4010D2894A003F5324 /* LogicTests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 

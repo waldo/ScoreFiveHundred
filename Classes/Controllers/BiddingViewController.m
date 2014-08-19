@@ -28,7 +28,7 @@
 #pragma mark Private
 
 - (NSString *)hand {
-  // consider whether misére and nullo are included or excluded
+  // consider whether misère and nullo are included or excluded
   return _bidTypeHands[self.tableView.indexPathForSelectedRow.row];
 }
 
@@ -51,7 +51,7 @@
   else if ([segue.identifier isEqualToString:@"RegularBid"]) {
     [self setBidAndSegueToController:segue.destinationViewController];
   }
-  else if ([segue.identifier isEqualToString:@"MiséreBid"]) {
+  else if ([segue.identifier isEqualToString:@"MisèreBid"]) {
     [self setBidAndSegueToController:segue.destinationViewController];
   }
 }
@@ -73,7 +73,7 @@
 #pragma mark Tableview delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  // consider whether misére and nullo are included or excluded
+  // consider whether misère and nullo are included or excluded
   return self.bidTypeHands.count;
 }
 
@@ -81,7 +81,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
 
-  // show or hide misére and nullo bids
+  // show or hide misère and nullo bids
 
   return cell;
 }
@@ -89,8 +89,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
 
-  if ([cell.reuseIdentifier isEqualToString:@"MiséreBidType"]) {
-    [self performSegueWithIdentifier:@"MiséreBid" sender:cell];
+  if ([cell.reuseIdentifier isEqualToString:@"MisèreBidType"]) {
+    [self performSegueWithIdentifier:@"MisèreBid" sender:cell];
   }
   else {
     [self performSegueWithIdentifier:@"RegularBid" sender:cell];

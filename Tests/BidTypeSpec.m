@@ -112,7 +112,7 @@ describe(@"BidType", ^{
       _currentSetting = _settings[@"quebec mode"];
     });
     
-    it(@"scores double for misére", ^{
+    it(@"scores double for misère", ^{
       checkScores(_currentSetting, @"OM", 0, 1000, 0);
     });
 

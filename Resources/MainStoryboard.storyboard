@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="gCZ-lp-Hpe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="gCZ-lp-Hpe">
     <dependencies>
-        <deployment version="1536" defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment version="1536" defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <scenes>
         <!--Game Mode View Controller - Game Mode-->
@@ -1474,7 +1474,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MiséreBidType" id="Oor-lA-oVy">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MisèreBidType" id="Oor-lA-oVy">
                                         <rect key="frame" x="0.0" y="564" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Oor-lA-oVy" id="Aft-he-CwG">
@@ -1489,7 +1489,7 @@
                                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Closed Misére" lineBreakMode="tailTruncation" minimumFontSize="10" id="VKO-zJ-EmU">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Closed Misère" lineBreakMode="tailTruncation" minimumFontSize="10" id="VKO-zJ-EmU">
                                                     <rect key="frame" x="81" y="7" width="134" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1984,7 +1984,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MiséreBidType" id="JXZ-O8-QLC">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MisèreBidType" id="JXZ-O8-QLC">
                                         <rect key="frame" x="0.0" y="1224" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JXZ-O8-QLC" id="4uk-iC-pAW">
@@ -1999,7 +1999,7 @@
                                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Open Misére" lineBreakMode="tailTruncation" minimumFontSize="10" id="FrA-02-zxE">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Open Misère" lineBreakMode="tailTruncation" minimumFontSize="10" id="FrA-02-zxE">
                                                     <rect key="frame" x="81" y="7" width="134" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2063,7 +2063,7 @@
                     <navigationItem key="navigationItem" title="[Player X] Bid" id="i1X-WA-y8D"/>
                     <connections>
                         <segue destination="8Zr-FC-0hk" kind="push" identifier="RegularBid" id="YML-qh-6pA"/>
-                        <segue destination="RL0-O9-Z2O" kind="push" identifier="MiséreBid" id="9eA-f9-ndx"/>
+                        <segue destination="RL0-O9-Z2O" kind="push" identifier="MisèreBid" id="9eA-f9-ndx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhX-qz-cQx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2384,7 +2384,7 @@
                         <sections>
                             <tableViewSection id="wVx-yV-F8E">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MiséreTricksWon" textLabel="shS-nv-g8p" detailTextLabel="9T5-eT-8h4" style="IBUITableViewCellStyleValue1" id="8S1-gV-Fnt">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MisèreTricksWon" textLabel="shS-nv-g8p" detailTextLabel="9T5-eT-8h4" style="IBUITableViewCellStyleValue1" id="8S1-gV-Fnt">
                                         <rect key="frame" x="0.0" y="124" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8S1-gV-Fnt" id="cC3-4N-euj">
@@ -2408,7 +2408,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MiséreTricksWon" textLabel="pus-EV-hdo" detailTextLabel="fBg-sM-j32" style="IBUITableViewCellStyleValue1" id="suS-a2-KEW">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MisèreTricksWon" textLabel="pus-EV-hdo" detailTextLabel="fBg-sM-j32" style="IBUITableViewCellStyleValue1" id="suS-a2-KEW">
                                         <rect key="frame" x="0.0" y="168" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="suS-a2-KEW" id="wp3-th-Iyw">

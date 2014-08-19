@@ -22,7 +22,7 @@ static NSString *ssSuitColour = @"suitColour";
 static NSString *ssPoints = @"points";
 static NSString *ssVariation = @"variation";
 static NSString *ssVariationRegular = @"regular";
-static NSString *ssVariationMisere = @"misére";
+static NSString *ssVariationMisere = @"misère";
 static NSString *ssVariationNoBid = @"no bid";
 static NSString *ssModeQuebec = @"Quebec mode";
 
@@ -66,7 +66,7 @@ static NSString *ssModeQuebec = @"Quebec mode";
     }
     
     [allTypes setValue:
-     @{ssSuit: @"Closed Misére",
+     @{ssSuit: @"Closed Misère",
       ssSuitSymbol: @"CM",
       ssPoints: @250,
       ssVariation: ssVariationMisere}
@@ -74,7 +74,7 @@ static NSString *ssModeQuebec = @"Quebec mode";
      ];
 
     [allTypes setValue:
-     @{ssSuit: @"Open Misére",
+     @{ssSuit: @"Open Misère",
       ssSuitSymbol: @"OM",
       ssPoints: @500,
       ssVariation: ssVariationMisere}
@@ -261,7 +261,7 @@ static NSString *ssModeQuebec = @"Quebec mode";
   NSString *variation = aBidType[ssVariation];
   int bidTricks = [aBidType[ssTrick] intValue];
   
-  // if regular bid and didn't win enough, or misére bid and won any
+  // if regular bid and didn't win enough, or misère bid and won any
   // => loss
   if (
       ([variation isEqual:ssVariationRegular] && tricksWon < bidTricks) ||
