@@ -56,8 +56,16 @@
 
     if ([[NSDate date] timeIntervalSinceDate:self.game.lastPlayed] < 2) {
       NSString *msg = [NSString stringWithFormat:@"%@ win!", winningTeamNames];
-      UIAlertView *rematchAlert = [[UIAlertView alloc] initWithTitle:msg message:nil delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Rematch", nil];
-      [rematchAlert show];
+
+      UIAlertController *alert = [UIAlertController alertControllerWithTitle:msg message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+      UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Rematch" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self rematch:@"alertView"];
+      }];
+      UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"No more" style:UIAlertActionStyleCancel handler:nil];
+      [alert addAction:cancel];
+      [alert addAction:ok];
+      [self presentViewController:alert animated:YES completion:nil];
     }
   }
 }
@@ -109,14 +117,6 @@
   [super viewWillDisappear:animated];
 }
 
-#pragma mark Alertview delegate
-
-- (void)alertView:(UIAlertView *)alert didDismissWithButtonIndex:(NSInteger)index {
-  if (index == 1) {
-    [self rematch:@"alertView"];
-  }
-}
-
 #pragma mark Tableview delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -131,7 +131,6 @@
     return @"Rounds";
   }
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   if (section == 0) {

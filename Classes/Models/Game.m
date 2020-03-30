@@ -78,7 +78,7 @@ static NSManagedObjectContext *staticManagedObjectContext;
   [self.managedObjectContext.undoManager beginUndoGrouping];
   [self.managedObjectContext.undoManager setActionName:@"new round"];
   Round *r = [NSEntityDescription insertNewObjectForEntityForName:@"Round" inManagedObjectContext:self.managedObjectContext];
-  r.complete = NO;
+  r.complete = [NSNumber numberWithBool:NO];
   [self insertObject:r inRoundsAtIndex:0];
 
   for (Team *t in self.teams) {
